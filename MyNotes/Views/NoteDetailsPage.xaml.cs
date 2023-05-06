@@ -8,6 +8,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI;
 using MyNotes.Helpers;
+using Windows.System;
 
 namespace MyNotes.Views;
 
@@ -95,8 +96,13 @@ public sealed partial class NoteDetailsPage : Page
         var selectedtext = NoteEditor.Document.Selection.Text;
         if (selectedtext.Length > 0)
         {
-            findBox.Text = selectedtext;
-            findBox.Focus(FocusState.Programmatic);
+            var key1 = args.Modifiers;
+            var key2 = args.Key;
+            if (key1==VirtualKeyModifiers.Control && key2==VirtualKey.F)
+            {
+                findBox.Text = selectedtext;
+                findBox.Focus(FocusState.Programmatic);
+            }
         }
     }
     private void FindBoxHighlightMatches()
