@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="MyNotes.Views.NotesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea" Width="auto">
+        <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
+            <ListView Width="auto" Name="LstNotes" DoubleTapped="LstNotes_DoubleTapped"
+                 CornerRadius="2"
+                 RelativePanel.AlignLeftWithPanel="True"
+                 RelativePanel.AlignRightWithPanel="True"
+                 RelativePanel.AlignTopWithPanel="True"
+                 RelativePanel.AlignBottomWithPanel="True"
+                 BorderThickness="1"
+                 BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                 Margin="0,0,0,64">
+                <ListView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition/>
+                    </TransitionCollection>
+                </ListView.ItemContainerTransitions>
+            </ListView>
+                <Button 
+                    Name="newNote"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.LeftOf="deleteNote"
+                    MinWidth="250"
+                    Width="auto"
+                    ToolTipService.ToolTip="Add Note"
+                    Height="32"
+                    Margin="0,0,0,16"
+                    Click="NewNote_Click"
+                    Style="{StaticResource AccentButtonStyle}">
+                <FontIcon Glyph="&#xF8AA;" />
+            </Button>
+            <Button 
+                    Name="deleteNote"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Width="auto"
+                    ToolTipService.ToolTip="Delete Note"
+                    FocusVisualPrimaryBrush="Red"
+                    Margin="16,0,0,16"
+                >
+                <FontIcon Glyph="&#xE74D;" />
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel>
+                            <TextBlock Name="deleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
+                            <Button Name="deleteNoteFly" Click="DeleteNote_Click"/>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+
+            </Button>
+        </RelativePanel>
+        
+    </Grid>
+</Page>
