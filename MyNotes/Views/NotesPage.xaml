@@ -29,7 +29,6 @@
                     RelativePanel.LeftOf="deleteNote"
                     MinWidth="250"
                     Width="auto"
-                    Height="32"
                     Margin="0,0,0,16"
                     Click="NewNote_Click"
                     Style="{StaticResource AccentButtonStyle}">
@@ -46,7 +45,7 @@
                 <FontIcon Glyph="&#xE74D;" />
                 <Button.Flyout>
                     <Flyout>
-                        <StackPanel>
+                        <StackPanel MaxWidth="420">
                             <TextBlock Name="deleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
                             <Button Name="deleteNoteFly" Click="DeleteNote_Click"/>
                         </StackPanel>
