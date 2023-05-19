@@ -215,4 +215,10 @@
   <data name="NoteNameFlyoutTitle" xml:space="preserve">
     <value>Note Name:</value>
   </data>
+  <data name="AddNote" xml:space="preserve">
+    <value>Add Note</value>
+  </data>
+  <data name="DeleteNote" xml:space="preserve">
+    <value>Delete Note</value>
+  </data>
 </root>

@@ -20,6 +20,8 @@ public sealed partial class NotesPage : Page
         ListFiles();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
+        ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
+        ToolTipService.SetToolTip(newNote, "AddNote".GetLocalized());
     }
     private async void CreateFolder()
     {

@@ -29,7 +29,6 @@
                     RelativePanel.LeftOf="deleteNote"
                     MinWidth="250"
                     Width="auto"
-                    ToolTipService.ToolTip="Add Note"
                     Height="32"
                     Margin="0,0,0,16"
                     Click="NewNote_Click"
@@ -41,7 +40,6 @@
                     RelativePanel.AlignBottomWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
                     Width="auto"
-                    ToolTipService.ToolTip="Delete Note"
                     FocusVisualPrimaryBrush="Red"
                     Margin="16,0,0,16"
                 >
