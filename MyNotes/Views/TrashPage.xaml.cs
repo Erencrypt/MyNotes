@@ -17,8 +17,10 @@ public sealed partial class TrashPage : Page
         ViewModel = App.GetService<TrashViewModel>();
         InitializeComponent();
         ListFiles();
-        deleteFlyout.Text = "DeleteFlyout".GetLocalized();
+        deleteFlyout.Text = "DeleteFlyout2".GetLocalized();
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
+        ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
+        ToolTipService.SetToolTip(restoreNote, "RestoreNote".GetLocalized());
     }
     private void ListFiles()
     {
@@ -61,17 +63,14 @@ public sealed partial class TrashPage : Page
             await noWifiDialog.ShowAsync();
         }
     }
-    private void LstNotes_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-    {
-        if (LstNotes.SelectedItem != null)
-        {
-            ShellPage.NoteName = LstNotes.SelectedItem.ToString();
-            Frame.Navigate(typeof(NoteDetailsPage));
-        }
-    }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
         DeleteNote();
         deleteNote.Flyout.Hide();
+    }
+
+    private void restoreNote_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

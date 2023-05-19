@@ -221,4 +221,10 @@
   <data name="DeleteNote" xml:space="preserve">
     <value>Delete Note</value>
   </data>
+  <data name="DeleteFlyout2" xml:space="preserve">
+    <value>Selected note will be deleted permanently. Do you want to continue?</value>
+  </data>
+  <data name="RestoreNote" xml:space="preserve">
+    <value>Restore Note</value>
+  </data>
 </root>

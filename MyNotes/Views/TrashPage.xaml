@@ -8,7 +8,7 @@
 
     <Grid x:Name="ContentArea">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
-            <ListView Width="auto" Name="LstNotes" DoubleTapped="LstNotes_DoubleTapped"
+            <ListView Width="auto" Name="LstNotes"
                  CornerRadius="2"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True"
@@ -24,18 +24,28 @@
                 </ListView.ItemContainerTransitions>
             </ListView>
             <Button 
+                    Name="restoreNote"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.LeftOf="deleteNote"
+                    MinWidth="250"
+                    Width="auto"
+                    Margin="0,0,0,16"
+                    Click="restoreNote_Click"
+                    Style="{StaticResource AccentButtonStyle}">
+                <FontIcon Glyph="&#xE845;"/>
+            </Button>
+            <Button 
                     Name="deleteNote"
                     RelativePanel.AlignBottomWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
                     Width="auto"
-                    MinWidth="264"
-                    Style="{StaticResource AccentButtonStyle}"
                     FocusVisualPrimaryBrush="Red"
-                    Margin="16,0,0,16">
+                    Margin="16,0,0,16"
+                >
                 <FontIcon Glyph="&#xE74D;" />
                 <Button.Flyout>
                     <Flyout>
-                        <StackPanel>
+                        <StackPanel MaxWidth="420">
                             <TextBlock Name="deleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
                             <Button Name="deleteNoteFly" Click="DeleteNote_Click"/>
                         </StackPanel>
