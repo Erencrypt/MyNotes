@@ -32,10 +32,10 @@
             </InfoBar>
             <InfoBar Name="noteName"
                      Margin="0,-64,0,0"
-                     MinWidth="200"
+                     MinWidth="220"
+                     MaxWidth="1280"
                      Visibility="Visible"
                      IsOpen="True"
-                     IsClosable="False"
                      Opacity="0.8"
                      IsIconVisible="False"
                      RelativePanel.AlignTopWithPanel="True"
