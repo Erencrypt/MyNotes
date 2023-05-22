@@ -41,6 +41,7 @@ public sealed partial class NoteDetailsPage : Page
                 using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.Read);
                 NoteEditor.Document.LoadFromStream(TextSetOptions.FormatRtf, randAccStream);
                 noteName.Message = ShellPage.NoteName;
+                //TODO: Add an option to not show name flyout when note details opened in options page
             }
         }
     }
