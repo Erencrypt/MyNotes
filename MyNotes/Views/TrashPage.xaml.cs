@@ -71,6 +71,6 @@ public sealed partial class TrashPage : Page
 
     private void restoreNote_Click(object sender, RoutedEventArgs e)
     {
-
+        //TODO: add functionality to restore note button
     }
 }

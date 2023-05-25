@@ -27,8 +27,8 @@ public sealed partial class RemindersPage : Page
     }
     public class Reminder
     {
-        public string ReminderHeader { get; set; }
+        public string ?ReminderHeader { get; set; }
 
-        public string ReminderText { get; set; }
+        public string ?ReminderText { get; set; }
     }
 }
