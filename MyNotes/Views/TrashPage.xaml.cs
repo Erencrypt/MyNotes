@@ -63,6 +63,36 @@ public sealed partial class TrashPage : Page
             await noWifiDialog.ShowAsync();
         }
     }
+    private async void RestoreNote()
+    {
+        try
+        {
+            var selectedItem = LstNotes.SelectedItem;
+            if (selectedItem != null)
+            {
+
+                var directory = notesFolder.Path.ToString() + @"\Trash\" + LstNotes.SelectedItem.ToString() + ".rtf";
+                var dir = notesFolder.Path.ToString() + @"\Notes\";
+                var folder = await StorageFolder.GetFolderFromPathAsync(dir);
+                var file = await StorageFile.GetFileFromPathAsync(directory);
+                await file.CopyAsync(folder, selectedItem.ToString() + ".rtf", NameCollisionOption.GenerateUniqueName);
+                await file.DeleteAsync();
+                LstNotes.Items.Remove(selectedItem);
+            }
+            else
+            {
+                ContentDialog noWifiDialog = new ContentDialog()
+                { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
+                await noWifiDialog.ShowAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            ContentDialog noWifiDialog = new ContentDialog()
+            { XamlRoot = XamlRoot, Title = "Error".GetLocalized(), Content = "Error_Meesage2".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
+            await noWifiDialog.ShowAsync();
+        }
+    }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
         DeleteNote();
@@ -71,6 +101,6 @@ public sealed partial class TrashPage : Page
 
     private void restoreNote_Click(object sender, RoutedEventArgs e)
     {
-        //TODO: add functionality to restore note button
+        RestoreNote();
     }
 }
