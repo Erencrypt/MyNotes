@@ -27,6 +27,7 @@ public sealed partial class NotesPage : Page
     {
         await notesFolder.CreateFolderAsync("Notes", CreationCollisionOption.OpenIfExists);
         await notesFolder.CreateFolderAsync("Trash", CreationCollisionOption.OpenIfExists);
+        await notesFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
     }
     private void ListFiles()
     {
@@ -95,6 +96,5 @@ public sealed partial class NotesPage : Page
     {
         deleteNote.Flyout.Hide();
         DeleteNote();
-        ListFiles();
     }
 }
