@@ -16,18 +16,11 @@ public sealed partial class NotesPage : Page
     {
         ViewModel = App.GetService<NotesViewModel>();
         InitializeComponent();
-        CreateFolder();
         ListFiles();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
         ToolTipService.SetToolTip(newNote, "AddNote".GetLocalized());
-    }
-    private async void CreateFolder()
-    {
-        await notesFolder.CreateFolderAsync("Notes", CreationCollisionOption.OpenIfExists);
-        await notesFolder.CreateFolderAsync("Trash", CreationCollisionOption.OpenIfExists);
-        await notesFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
     }
     private void ListFiles()
     {
@@ -45,36 +38,6 @@ public sealed partial class NotesPage : Page
         {
             ShellPage.NoteName = LstNotes.SelectedItem.ToString();
             Frame.Navigate(typeof(NoteDetailsPage));
-        }
-    }
-    private async void DeleteNote()
-    {
-        try
-        {
-            var selectedItem = LstNotes.SelectedItem;
-            if (selectedItem != null)
-            {
-                
-                var directory = notesFolder.Path.ToString() + @"\Notes\" + LstNotes.SelectedItem.ToString() + ".rtf";
-                var dir = notesFolder.Path.ToString() + @"\Trash\";
-                var folder = await StorageFolder.GetFolderFromPathAsync(dir);
-                var file = await StorageFile.GetFileFromPathAsync(directory);
-                await file.CopyAsync(folder, selectedItem.ToString() + ".rtf", NameCollisionOption.GenerateUniqueName);
-                await file.DeleteAsync();
-                LstNotes.Items.Remove(selectedItem);
-            }
-            else
-            {
-                ContentDialog noWifiDialog = new ContentDialog()
-                {XamlRoot = XamlRoot,Title = "Info".GetLocalized(),Content = "NoSelection".GetLocalized(),CloseButtonText = "Ok".GetLocalized()};
-                await noWifiDialog.ShowAsync();
-            }
-        }
-        catch (Exception ex)
-        {
-            ContentDialog noWifiDialog = new ContentDialog()
-            {XamlRoot = XamlRoot,Title = "Error".GetLocalized(),Content = "Error_Meesage2".GetLocalized() + ex.Message,CloseButtonText = "Ok".GetLocalized()};
-            await noWifiDialog.ShowAsync();
         }
     }
     private async void AddNote()
@@ -95,6 +58,7 @@ public sealed partial class NotesPage : Page
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
         deleteNote.Flyout.Hide();
-        DeleteNote();
+        MoveFile moveFile = new MoveFile();
+        moveFile.Move("Notes", "Trash", LstNotes, XamlRoot);
     }
 }
