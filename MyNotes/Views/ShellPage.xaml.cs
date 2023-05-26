@@ -8,13 +8,14 @@ using Microsoft.UI.Xaml.Media;
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
-
+using Windows.Storage;
 using Windows.System;
 
 namespace MyNotes.Views;
 
 public sealed partial class ShellPage : Page
 {
+    private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
     public ShellViewModel ViewModel
     {
         get;
@@ -41,6 +42,13 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+        CreateFolders();
+    }
+    private async void CreateFolders()
+    {
+        await notesFolder.CreateFolderAsync("Notes", CreationCollisionOption.OpenIfExists);
+        await notesFolder.CreateFolderAsync("Trash", CreationCollisionOption.OpenIfExists);
+        await notesFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
     }
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
