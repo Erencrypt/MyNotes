@@ -28,9 +28,7 @@ public sealed partial class RemindersPage : Page
     public class Reminder
     {
         public string ?ReminderHeader { get; set; }
-
         public string ?ReminderText { get; set; }
-
         public DateTime? Date { get; set; }
         public string? Repeat { get; set; }
     }
