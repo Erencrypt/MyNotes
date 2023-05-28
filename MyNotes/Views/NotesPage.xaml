@@ -9,6 +9,7 @@
     <Grid x:Name="ContentArea" Width="auto">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
             <ListView Width="auto" Name="LstNotes" DoubleTapped="LstNotes_DoubleTapped"
+                 SelectionChanged="LstNotes_SelectionChanged"
                  CornerRadius="2"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True"
@@ -35,6 +36,7 @@
                 <FontIcon Glyph="&#xF8AA;" />
             </Button>
             <Button 
+                    IsEnabled="False"
                     Name="deleteNote"
                     RelativePanel.AlignBottomWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
