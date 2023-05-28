@@ -207,7 +207,7 @@
     <value>Trash</value>
   </data>
   <data name="DeleteFlyout" xml:space="preserve">
-    <value>Selected note will be deleted. Do you want to continue?</value>
+    <value>Selected item will be deleted. Do you want to continue?</value>
   </data>
   <data name="DeleteNote_Button" xml:space="preserve">
     <value>Yes, delete this note</value>
@@ -222,9 +222,18 @@
     <value>Delete Note</value>
   </data>
   <data name="DeleteFlyout2" xml:space="preserve">
-    <value>Selected note will be deleted permanently. Do you want to continue?</value>
+    <value>Selected item will be deleted permanently. Do you want to continue?</value>
   </data>
   <data name="RestoreNote" xml:space="preserve">
     <value>Restore Note</value>
+  </data>
+  <data name="AddReminder" xml:space="preserve">
+    <value>Add Reminder</value>
+  </data>
+  <data name="DeleteReminder" xml:space="preserve">
+    <value>Delete Reminder</value>
+  </data>
+  <data name="DeleteReminder_Button" xml:space="preserve">
+    <value>Yes, delete this reminder</value>
   </data>
 </root>
