@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     CornerRadius="10"
-    Title="New Reminder"
     PrimaryButtonText="Create Reminder"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
     CloseButtonStyle="{StaticResource DefaultButtonStyle}"
@@ -18,7 +17,7 @@
         <DataTemplate>
             <StackPanel Orientation="Horizontal">
                 <FontIcon Glyph="&#xEC92;" Margin="0,0,10,0"/>
-                <TextBlock Text="New Reminder" FontWeight="Medium"/>
+                <TextBlock Text="{Binding}" FontWeight="Medium"/>
             </StackPanel>
         </DataTemplate>
     </ContentDialog.TitleTemplate>
