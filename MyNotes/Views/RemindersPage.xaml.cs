@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using MyNotes.Helpers;
 using MyNotes.ViewModels;
 
 namespace MyNotes.Views;
@@ -14,6 +15,10 @@ public sealed partial class RemindersPage : Page
     {
         ViewModel = App.GetService<RemindersViewModel>();
         InitializeComponent();
+        deleteFlyout.Text = "DeleteFlyout".GetLocalized();
+        deleteReminderFly.Content = "DeleteReminder_Button".GetLocalized();
+        ToolTipService.SetToolTip(deleteReminder, "DeleteReminder".GetLocalized());
+        ToolTipService.SetToolTip(newReminder, "AddReminder".GetLocalized());
 
         List<Reminder> items = new List<Reminder>();
         for (int i = 0; i < 4; i++)
@@ -35,10 +40,24 @@ public sealed partial class RemindersPage : Page
     {
         CreateReminderDialog AddReminderDialog = new CreateReminderDialog();
         AddReminderDialog.XamlRoot = XamlRoot;
+        AddReminderDialog.Title = "New Reminder";
         await AddReminderDialog.ShowAsync();
     }
     private void LstReminders_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
     {
+        
+    }
+    private void newReminder_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
         AddReminder();
+    }
+    private void deleteReminder_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+
+    }
+
+    private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        deleteReminder.IsEnabled = true;
     }
 }

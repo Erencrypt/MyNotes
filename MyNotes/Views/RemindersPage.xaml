@@ -9,11 +9,12 @@
     <Grid x:Name="ContentArea">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
             <ListView Name="LstReminders" Width="auto"
+                 SelectionChanged="LstReminders_SelectionChanged"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True"
                  RelativePanel.AlignTopWithPanel="True"
                  RelativePanel.AlignBottomWithPanel="True"
-                 Margin="0,0,0,16" Padding="0"
+                 Margin="0,0,0,64" Padding="0"
                  DoubleTapped="LstReminders_DoubleTapped">
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>
@@ -73,6 +74,37 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button 
+                    Name="newReminder"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.LeftOf="deleteReminder"
+                    MinWidth="250"
+                    Width="auto"
+                    Margin="0,0,0,16"
+                    Click="newReminder_Click"
+                    Style="{StaticResource AccentButtonStyle}">
+                <FontIcon Glyph="&#xF8AA;" />
+            </Button>
+            <Button 
+                    IsEnabled="False"
+                    Name="deleteReminder"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Width="auto"
+                    FocusVisualPrimaryBrush="Red"
+                    Margin="16,0,0,16"
+                >
+                <FontIcon Glyph="&#xE74D;" />
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel MaxWidth="420">
+                            <TextBlock Name="deleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
+                            <Button Name="deleteReminderFly" Click="deleteReminder_Click"/>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+
+            </Button>
         </RelativePanel>
     </Grid>
 </Page>
