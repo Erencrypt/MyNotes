@@ -74,4 +74,9 @@ public sealed partial class TrashPage : Page
         MoveFile moveFile = new MoveFile();
         moveFile.Move("Trash", "Notes", LstNotes, XamlRoot);
     }
+
+    private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        deleteNote.IsEnabled = true;
+    }
 }
