@@ -1,7 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-
 using MyNotes.ViewModels;
-using Windows.System;
 
 namespace MyNotes.Views;
 
@@ -16,6 +14,7 @@ public sealed partial class RemindersPage : Page
     {
         ViewModel = App.GetService<RemindersViewModel>();
         InitializeComponent();
+
         List<Reminder> items = new List<Reminder>();
         for (int i = 0; i < 4; i++)
         {
@@ -31,5 +30,15 @@ public sealed partial class RemindersPage : Page
         public string ?ReminderText { get; set; }
         public DateTime? Date { get; set; }
         public string? Repeat { get; set; }
+    }
+    private async void AddReminder()
+    {
+        CreateReminderDialog AddReminderDialog = new CreateReminderDialog();
+        AddReminderDialog.XamlRoot = XamlRoot;
+        await AddReminderDialog.ShowAsync();
+    }
+    private void LstReminders_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+    {
+        AddReminder();
     }
 }
