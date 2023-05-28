@@ -10,6 +10,7 @@
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
             <ListView Width="auto" Name="LstNotes"
                  CornerRadius="2"
+                 SelectionChanged="LstNotes_SelectionChanged"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True"
                  RelativePanel.AlignTopWithPanel="True"
@@ -35,6 +36,7 @@
                 <FontIcon Glyph="&#xE845;"/>
             </Button>
             <Button 
+                    IsEnabled="False"
                     Name="deleteNote"
                     RelativePanel.AlignBottomWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
