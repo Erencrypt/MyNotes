@@ -1,0 +1,32 @@
+<ContentDialog
+    x:Class="MyNotes.Views.CreateReminderDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyNotes.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    CornerRadius="10"
+    Title="New Reminder"
+    PrimaryButtonText="Create Reminder"
+    PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
+    CloseButtonStyle="{StaticResource DefaultButtonStyle}"
+    CloseButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    CloseButtonClick="ContentDialog_CloseButtonClick">
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xEC92;" Margin="0,0,10,0"/>
+                <TextBlock Text="New Reminder" FontWeight="Medium"/>
+            </StackPanel>
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBox Name="reminderNameTextBox" Header="Name"/>
+        <TextBox Name="reminderTextTextBox" Header="Text"/>
+        <DatePicker Name="datePicker" DayFormat="{}{day.integer} ({dayofweek.abbreviated})" Header="Date" Width="300"/>
+        <TimePicker Name="timePicker" Header="Time" Width="300"/>
+        <TextBlock x:Name="errorTextBlock"/>
+    </StackPanel>
+</ContentDialog>
