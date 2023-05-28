@@ -21,6 +21,7 @@ public sealed partial class NotesPage : Page
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
         ToolTipService.SetToolTip(newNote, "AddNote".GetLocalized());
+        
     }
     private void ListFiles()
     {
@@ -54,11 +55,14 @@ public sealed partial class NotesPage : Page
     {
         AddNote();
     }
-
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
         deleteNote.Flyout.Hide();
         MoveFile moveFile = new MoveFile();
         moveFile.Move("Notes", "Trash", LstNotes, XamlRoot);
+    }
+    private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        deleteNote.IsEnabled = true;
     }
 }
