@@ -236,4 +236,7 @@
   <data name="DeleteReminder_Button" xml:space="preserve">
     <value>Yes, delete this reminder</value>
   </data>
+  <data name="Repeated" xml:space="preserve">
+    <value>Repeated</value>
+  </data>
 </root>
