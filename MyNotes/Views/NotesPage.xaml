@@ -16,7 +16,7 @@
                  RelativePanel.AlignTopWithPanel="True"
                  RelativePanel.AlignBottomWithPanel="True"
                  BorderThickness="1"
-                 BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                 BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
                  Margin="0,0,0,64">
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>

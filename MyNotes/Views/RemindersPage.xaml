@@ -53,7 +53,7 @@
                             <TextBlock Grid.Column="2"
                                 Opacity="0.8"
                                 HorizontalAlignment="Right"
-                                Text="{Binding Date}"
+                                Text="{Binding DateTime}"
                                 Style="{ThemeResource BaseTextBlockStyle}"
                                 Margin="12,6,0,0"/>
                             <TextBlock  Grid.Column="2"
@@ -81,7 +81,7 @@
                     MinWidth="250"
                     Width="auto"
                     Margin="0,0,0,16"
-                    Click="newReminder_Click"
+                    Click="NewReminder_Click"
                     Style="{StaticResource AccentButtonStyle}">
                 <FontIcon Glyph="&#xF8AA;" />
             </Button>
@@ -99,7 +99,7 @@
                     <Flyout>
                         <StackPanel MaxWidth="420">
                             <TextBlock Name="deleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
-                            <Button Name="deleteReminderFly" Click="deleteReminder_Click"/>
+                            <Button Name="deleteReminderFly" Click="DeleteReminder_Click"/>
                         </StackPanel>
                     </Flyout>
                 </Button.Flyout>
