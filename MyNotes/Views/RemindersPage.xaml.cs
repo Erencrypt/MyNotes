@@ -1,6 +1,8 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Input;
 
 namespace MyNotes.Views;
 
@@ -55,15 +57,15 @@ public sealed partial class RemindersPage : Page
         };
         await EditReminderDialog.ShowAsync();
     }
-    private void LstReminders_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+    private void LstReminders_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         EditReminder();
     }
-    private void NewReminder_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void NewReminder_Click(object sender,RoutedEventArgs e)
     {
         AddReminder();
     }
-    private void DeleteReminder_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void DeleteReminder_Click(object sender, RoutedEventArgs e)
     {
 
     }
