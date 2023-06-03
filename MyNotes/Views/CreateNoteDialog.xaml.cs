@@ -22,12 +22,13 @@ public sealed partial class CreateNoteDialog : ContentDialog
     {
         this.InitializeComponent();
     }
-    private async void CreateNote()
+    private async void CreateNote(ContentDialogButtonClickEventArgs args)
     {
         try
         {
             if (string.IsNullOrEmpty(noteNameTextBox.Text))
             {
+                args.Cancel = true;
                 errorTextBlock.Text = "Required_Message".GetLocalized();
             }
             else
@@ -41,8 +42,9 @@ public sealed partial class CreateNoteDialog : ContentDialog
         }
         catch (Exception ex)
         {
-            errorTextBlock.Text = ex.Message;
             Result = NoteCreateResult.NoteCreationFail;
+            args.Cancel = true;
+            errorTextBlock.Text = "An error occured. Error message:"+ex.Message;
         }
     }
     private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -54,7 +56,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
         }
         else
         {
-            CreateNote();
+            CreateNote(args);
         }
     }
     private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
