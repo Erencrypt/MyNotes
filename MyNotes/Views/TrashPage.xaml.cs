@@ -24,7 +24,7 @@ public sealed partial class TrashPage : Page
     }
     private void ListFiles()
     {
-        DirectoryInfo dinfo = new DirectoryInfo(notesFolder.Path.ToString() + "\\Trash");
+        DirectoryInfo dinfo = new(notesFolder.Path.ToString() + "\\Trash");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         LstNotes.Items.Clear();
         foreach (FileInfo file in Files)
@@ -46,14 +46,14 @@ public sealed partial class TrashPage : Page
             }
             else
             {
-                ContentDialog noWifiDialog = new ContentDialog()
+                ContentDialog noWifiDialog = new()
                 {XamlRoot = XamlRoot,Title = "Info".GetLocalized(),Content = "NoSelection".GetLocalized(),CloseButtonText = "Ok".GetLocalized()};
                 await noWifiDialog.ShowAsync();
             }
         }
         catch (Exception ex)
         {
-            ContentDialog noWifiDialog = new ContentDialog()
+            ContentDialog noWifiDialog = new()
             {
                 XamlRoot = XamlRoot,
                 Title = "Error".GetLocalized(),
@@ -69,9 +69,9 @@ public sealed partial class TrashPage : Page
         deleteNote.Flyout.Hide();
     }
 
-    private void restoreNote_Click(object sender, RoutedEventArgs e)
+    private void RestoreNote_Click(object sender, RoutedEventArgs e)
     {
-        MoveFile moveFile = new MoveFile();
+        MoveFile moveFile = new();
         moveFile.Move("Trash", "Notes", LstNotes, XamlRoot);
     }
 

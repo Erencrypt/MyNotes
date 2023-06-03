@@ -54,7 +54,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
             else
             {
                 using StreamWriter writer = new(filelocation);
-                selectedDate = datePicker.SelectedDate.Value.DateTime;
+                selectedDate = datePicker.SelectedDate!.Value.DateTime;
                 writer.WriteLine(isRepeated.ToString());
                 writer.WriteLine(reminderTextTextBox.Text);
                 if (!isRepeated)
@@ -88,7 +88,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
                 }
                 else if (!string.IsNullOrEmpty(reminderNameTextBox.Text) && !string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
-                    tmsp = (TimeSpan)timePicker.SelectedTime;
+                    tmsp = (TimeSpan)timePicker.SelectedTime!;
                     time = Convert.ToDateTime(tmsp.ToString());
                     ofsetDate=DateTime.Now.AddHours(1);
                     if (isRepeated)

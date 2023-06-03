@@ -31,7 +31,7 @@
                     MinWidth="250"
                     Width="auto"
                     Margin="0,0,0,16"
-                    Click="restoreNote_Click"
+                    Click="RestoreNote_Click"
                     Style="{StaticResource AccentButtonStyle}">
                 <FontIcon Glyph="&#xE845;"/>
             </Button>
