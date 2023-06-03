@@ -11,7 +11,7 @@
   IgnorableNamespaces="uap rescap genTemplate">
 
   <Identity
-    Name="166337ec-0558-4cfa-b8ae-e0bc55492db9"
+    Name="Erencrypt.MyNotes.App"
     Publisher="CN=Eren"
     Version="1.0.0.0" />
     
@@ -19,7 +19,7 @@
     
   <Properties>
     <DisplayName>MyNotes</DisplayName>
-    <PublisherDisplayName>Eren</PublisherDisplayName>
+    <PublisherDisplayName>Erencrypt</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
