@@ -11,7 +11,9 @@ public sealed partial class NotesPage : Page
 {
     private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
     public NotesViewModel ViewModel
-    {get;}
+    {
+        get;
+    }
     public NotesPage()
     {
         ViewModel = App.GetService<NotesViewModel>();
@@ -25,12 +27,12 @@ public sealed partial class NotesPage : Page
     }
     private void ListFiles()
     {
-        DirectoryInfo dinfo = new DirectoryInfo(notesFolder.Path.ToString() + "\\Notes");
+        DirectoryInfo dinfo = new(notesFolder.Path.ToString() + "\\Notes");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         LstNotes.Items.Clear();
         foreach (FileInfo file in Files)
         {
-            LstNotes.Items.Add(file.Name.Substring(0, file.Name.Length - 4));
+            LstNotes.Items.Add(file.Name[..^4]);
         }
     }
     private void LstNotes_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -43,8 +45,10 @@ public sealed partial class NotesPage : Page
     }
     private async void AddNote()
     {
-        CreateNoteDialog AddNoteDialog = new CreateNoteDialog();
-        AddNoteDialog.XamlRoot = XamlRoot;
+        CreateNoteDialog AddNoteDialog = new()
+        {
+            XamlRoot = XamlRoot
+        };
         await AddNoteDialog.ShowAsync();
         if (AddNoteDialog.Result== NoteCreateResult.NoteCreationOK)
         {
@@ -58,7 +62,7 @@ public sealed partial class NotesPage : Page
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
         deleteNote.Flyout.Hide();
-        MoveFile moveFile = new MoveFile();
+        MoveFile moveFile = new();
         moveFile.Move("Notes", "Trash", LstNotes, XamlRoot);
     }
     private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
