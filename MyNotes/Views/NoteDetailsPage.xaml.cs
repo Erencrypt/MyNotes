@@ -27,6 +27,7 @@ public sealed partial class NoteDetailsPage : Page
         InitializeComponent();
         LoadDocument();
         noteName.Title = "NoteNameFlyoutTitle".GetLocalized();
+        //TODO: ask for file saving when nawigating away from this page
     }
     private async void LoadDocument()
     {
