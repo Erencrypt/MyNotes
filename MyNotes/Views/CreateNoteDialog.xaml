@@ -24,6 +24,6 @@
     </ContentDialog.TitleTemplate>
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <TextBox Name="noteNameTextBox" Header="Note name" Width="300"/>
-        <TextBlock x:Name="errorTextBlock"/>
+        <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" Width="300" Height="auto"/>
     </StackPanel>
 </ContentDialog>

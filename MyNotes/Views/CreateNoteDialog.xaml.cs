@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using MyNotes.Helpers;
+using Microsoft.UI.Xaml;
 
 namespace MyNotes.Views;
 
@@ -26,24 +27,18 @@ public sealed partial class CreateNoteDialog : ContentDialog
     {
         try
         {
-            if (string.IsNullOrEmpty(noteNameTextBox.Text))
-            {
-                args.Cancel = true;
-                errorTextBlock.Text = "Required_Message".GetLocalized();
-            }
-            else
-            {
-                var directory = notesFolder.Path.ToString() + @"\Notes\";
-                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(directory);
-                await(_ = folder.CreateFileAsync(noteNameTextBox.Text + ".rtf", CreationCollisionOption.OpenIfExists));
-                ShellPage.NoteName = noteNameTextBox.Text;
-                Result = NoteCreateResult.NoteCreationOK;
-            }
+            var directory = notesFolder.Path.ToString() + @"\Notes\";
+            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(directory);
+            await (_ = folder.CreateFileAsync(noteNameTextBox.Text + ".rtf", CreationCollisionOption.OpenIfExists));
+            ShellPage.NoteName = noteNameTextBox.Text;
+            Result = NoteCreateResult.NoteCreationOK;
+            //TODO: check if there is a note with the same name
         }
         catch (Exception ex)
         {
             Result = NoteCreateResult.NoteCreationFail;
             args.Cancel = true;
+            errorTextBlock.Visibility = Visibility.Visible;
             errorTextBlock.Text = "An error occured. Error message:"+ex.Message;
         }
     }
@@ -52,6 +47,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
         if (string.IsNullOrEmpty(noteNameTextBox.Text))
         {
             args.Cancel = true;
+            errorTextBlock.Visibility = Visibility.Visible;
             errorTextBlock.Text = "Required_Message".GetLocalized();
         }
         else
