@@ -19,6 +19,14 @@ public sealed partial class NotesPage : Page
         ViewModel = App.GetService<NotesViewModel>();
         InitializeComponent();
         ListFiles();
+        if (LstNotes.Items.Count<1)
+        {
+            EmptyText.Visibility = Visibility.Visible;
+        }
+        else
+        { 
+            EmptyText.Visibility = Visibility.Collapsed;
+        }
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
@@ -61,6 +69,10 @@ public sealed partial class NotesPage : Page
     }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
+        if (LstNotes.Items.Count <= 1)
+        {
+            EmptyText.Visibility = Visibility.Visible;
+        }
         deleteNote.Flyout.Hide();
         MoveFile moveFile = new();
         moveFile.Move("Notes", "Trash", LstNotes, XamlRoot);

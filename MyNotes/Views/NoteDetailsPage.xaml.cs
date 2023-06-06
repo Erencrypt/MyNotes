@@ -66,11 +66,18 @@ public sealed partial class NoteDetailsPage : Page
     }
     private void DispatcherTimer_Tick(object sender, object e)
     {
-        //hide the contentdialog
-        infobar.IsOpen = false;
-        // release the timer
-        dispatcherTimer.Stop();
-        dispatcherTimer = null;
+        try
+        {
+            //hide the contentdialog
+            infobar.IsOpen = false;
+            // release the timer
+            dispatcherTimer.Stop();
+            dispatcherTimer = null;
+        }
+        catch (Exception)
+        {
+            //TODO: handle exceptions
+        }
     }
     private void InfoBar(string title, InfoBarSeverity type, string message)
     {
