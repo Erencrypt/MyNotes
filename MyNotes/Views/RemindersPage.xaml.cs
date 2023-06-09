@@ -3,11 +3,17 @@ using MyNotes.Helpers;
 using MyNotes.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
+using Windows.Storage;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 
 namespace MyNotes.Views;
 
 public sealed partial class RemindersPage : Page
 {
+    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    private ObservableCollection<Reminder> items = new();
     public RemindersViewModel ViewModel
     {
         get;
@@ -21,20 +27,14 @@ public sealed partial class RemindersPage : Page
         deleteReminderFly.Content = "DeleteReminder_Button".GetLocalized();
         ToolTipService.SetToolTip(deleteReminder, "DeleteReminder".GetLocalized());
         ToolTipService.SetToolTip(newReminder, "AddReminder".GetLocalized());
-        List<Reminder> items = new();
-        for (int i = 0; i < 4; i++)
-        {
-            items.Add(new Reminder() { ReminderHeader = "test Reminder 1", ReminderText = "this is the thing i want to remember", DateTime = DateTime.Now, Repeat="true" });
-            items.Add(new Reminder() { ReminderHeader = "reminder test", ReminderText = "this is another thing to remember", DateTime = DateTime.Now, Repeat = "false" });
-            items.Add(new Reminder() { ReminderHeader = "test 123", ReminderText = "this one... im not sure", DateTime = DateTime.Now, Repeat = "false" });
-        }
         LstReminders.ItemsSource = items;
+        ListFiles();
     }
     public class Reminder
     {
-        public string ?ReminderHeader { get; set; }
-        public string ?ReminderText { get; set; }
-        public DateTime? DateTime { get; set; }
+        public string? ReminderHeader { get; set; }
+        public string? ReminderText { get; set; }
+        public string? DateTime { get; set; }
         public string? Repeat { get; set; }
     }
     private async void AddReminder()
@@ -45,6 +45,10 @@ public sealed partial class RemindersPage : Page
             XamlRoot = XamlRoot
         };
         await AddReminderDialog.ShowAsync();
+        if (AddReminderDialog.Result==ReminderCreateResult.ReminderCreationOK)
+        {
+            items.Insert(0,AddReminderDialog.rmnd);
+        }
     }
     private async void EditReminder()
     {
@@ -57,21 +61,55 @@ public sealed partial class RemindersPage : Page
         };
         await EditReminderDialog.ShowAsync();
     }
+    private void ListFiles()
+    {
+        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
+        FileInfo[] Files = dinfo.GetFiles("*.txt");
+        string fullPath;
+        items.Clear();
+        foreach (FileInfo file in Files)
+        {
+            fullPath = dinfo.ToString() +"\\"+ file.Name;
+            string readText = File.ReadAllText(fullPath, Encoding.UTF8);
+            string [] lines = readText.Split("\r\n");
+            Regex regex = new(@"\s");
+            string[] s;
+            DateTime t;
+            string [] tt;
+            if (lines.Length == 3)
+            {
+                t= Convert.ToDateTime(lines[2]);
+                s = regex.Split(t.ToString());
+                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = s[1][..^3] + " " + s[2], Repeat = lines[0] });
+            }
+            else if (lines.Length == 4)
+            {
+                t = Convert.ToDateTime(lines[3] +" "+ lines[2]);
+                tt = regex.Split(t.ToString());
+                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = tt[0] + " " + tt[1][..^3] + " " + tt[2], Repeat = lines[0] });
+            }
+        }
+        LstReminders.ItemsSource = items;
+        LstReminders.UpdateLayout();
+    }
     private void LstReminders_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         EditReminder();
     }
-    private void NewReminder_Click(object sender,RoutedEventArgs e)
+    private void NewReminder_Click(object sender, RoutedEventArgs e)
     {
         AddReminder();
     }
     private void DeleteReminder_Click(object sender, RoutedEventArgs e)
     {
-
+        deleteReminder.Flyout.Hide();
     }
 
     private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        deleteReminder.IsEnabled = true;
+        if (!deleteReminder.IsEnabled)
+        {
+            deleteReminder.IsEnabled = true;
+        }
     }
 }
