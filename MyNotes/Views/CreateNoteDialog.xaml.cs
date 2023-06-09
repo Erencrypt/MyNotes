@@ -28,11 +28,20 @@ public sealed partial class CreateNoteDialog : ContentDialog
         try
         {
             var directory = notesFolder.Path.ToString() + @"\Notes\";
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(directory);
-            await (_ = folder.CreateFileAsync(noteNameTextBox.Text + ".rtf", CreationCollisionOption.OpenIfExists));
-            ShellPage.NoteName = noteNameTextBox.Text;
-            Result = NoteCreateResult.NoteCreationOK;
-            //TODO: check if there is a note with the same name
+            var filelocation = directory + noteNameTextBox.Text + ".rtf";
+            if (File.Exists(filelocation))
+            {
+                args.Cancel = true;
+                errorTextBlock.Visibility = Visibility.Visible;
+                errorTextBlock.Text = "There is a note with the same name\nalready exist. Please use another name.";
+            }
+            else
+            {
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(directory);
+                await (_ = folder.CreateFileAsync(noteNameTextBox.Text + ".rtf", CreationCollisionOption.OpenIfExists));
+                ShellPage.NoteName = noteNameTextBox.Text;
+                Result = NoteCreateResult.NoteCreationOK;
+            }
         }
         catch (Exception ex)
         {
