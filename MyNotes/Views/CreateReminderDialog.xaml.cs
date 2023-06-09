@@ -35,7 +35,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         datePicker.MinYear = DateTimeOffset.Now;
         datePicker.MaxYear = DateTimeOffset.Now.AddYears(3);
         timePicker.SelectedTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-        isNewNote = RemindersPage.isNewNote;
+        isNewNote = RemindersPage.IsNewNote;
     }
     private void CreateReminder(ContentDialogButtonClickEventArgs args)
     {
@@ -55,7 +55,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
                 selectedDate = datePicker.SelectedDate!.Value.DateTime;
                 writer.WriteLine(isRepeated.ToString());
                 writer.WriteLine(reminderTextTextBox.Text);
-                Regex regex = new(@"\s");
+                Regex regex = MyRegex();
                 string[] s;
                 DateTime t;
                 string[] tt;
@@ -107,21 +107,26 @@ public sealed partial class CreateReminderDialog : ContentDialog
                     {
                         CreateReminder(args);
                     }
-                    else if (time.Hour < ofsetDate.Hour)
-                    {
-                        args.Cancel = true;
-                        errorTextBlock.Visibility = Visibility.Visible;
-                        errorTextBlock.Text = "Please select a time that at least 1 hour later \nthan the current time.";
-                    }
                     else if (datePicker.SelectedDate!.Value.Date < DateTime.Now.Date)
                     {
                         args.Cancel = true;
                         errorTextBlock.Visibility = Visibility.Visible;
                         errorTextBlock.Text = "Please select a date that later \nthan (or equal to) the current date.";
                     }
-                    else if (time.Hour >= ofsetDate.Hour && datePicker.SelectedDate.Value.Date >= DateTime.Now.Date)
+                    else if (datePicker.SelectedDate!.Value.Date == DateTime.Now.Date && time.Hour < ofsetDate.Hour)
+                    {
+                        args.Cancel = true;
+                        errorTextBlock.Visibility = Visibility.Visible;
+                        errorTextBlock.Text = "Please select a time that at least 1 hour later \nthan the current time.";
+                    }
+                    else if ((datePicker.SelectedDate.Value.Date == DateTime.Now.Date && time.Hour >= ofsetDate.Hour) || (datePicker.SelectedDate.Value.Date > DateTime.Now.Date))
                     {
                         CreateReminder(args);
+                    }
+                    else
+                    {
+                        args.Cancel = true;
+                        throw new Exception();
                     }
                 }
             }
@@ -153,4 +158,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         datePicker.Visibility = Visibility.Visible;
         isRepeated = false;
     }
+
+    [GeneratedRegex("\\s")]
+    private static partial Regex MyRegex();
 }
