@@ -56,10 +56,9 @@ public sealed partial class RemindersPage : Page
             XamlRoot = XamlRoot
         };
         await AddReminderDialog.ShowAsync();
-        if (AddReminderDialog.Result==ReminderCreateResult.ReminderCreationOK)
+        if (AddReminderDialog.Result == ReminderCreateResult.ReminderCreationOK)
         {
-            items.Insert(0,AddReminderDialog.rmnd);
-            
+            items.Insert(0, AddReminderDialog.rmnd);
         }
     }
     private async void EditReminder()
@@ -82,22 +81,22 @@ public sealed partial class RemindersPage : Page
         items.Clear();
         foreach (FileInfo file in orderedList)
         {
-            fullPath = dinfo.ToString() +"\\"+ file.Name;
+            fullPath = dinfo.ToString() + "\\" + file.Name;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-            string [] lines = readText.Split("\r\n");
+            string[] lines = readText.Split("\r\n");
             Regex regex = MyRegex();
             string[] s;
             DateTime t;
-            string [] tt;
+            string[] tt;
             if (lines.Length == 3)
             {
-                t= Convert.ToDateTime(lines[2]);
+                t = Convert.ToDateTime(lines[2]);
                 s = regex.Split(t.ToString());
                 items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = s[1][..^3] + " " + s[2], Repeat = lines[0] });
             }
             else if (lines.Length == 4)
             {
-                t = Convert.ToDateTime(lines[3] +" "+ lines[2]);
+                t = Convert.ToDateTime(lines[3] + " " + lines[2]);
                 tt = regex.Split(t.ToString());
                 items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = tt[0] + " " + tt[1][..^3] + " " + tt[2], Repeat = lines[0] });
             }
@@ -116,8 +115,13 @@ public sealed partial class RemindersPage : Page
     private void DeleteReminder_Click(object sender, RoutedEventArgs e)
     {
         deleteReminder.Flyout.Hide();
+        if (LstReminders.SelectedItem != null)
+        {
+            Reminder? rm = LstReminders.SelectedItem as Reminder;
+            MoveFile moveFile = new();
+            moveFile.Move("Reminders", "Trash", LstReminders, XamlRoot, rm!, items);
+        }
     }
-
     private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (!deleteReminder.IsEnabled)
