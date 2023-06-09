@@ -18,7 +18,18 @@ public sealed partial class RemindersPage : Page
     {
         get;
     }
-    public static bool isNewNote = false;
+    public static bool IsNewNote
+    {
+        get
+        {
+            return isNewNote;
+        }
+        set
+        {
+            isNewNote = value;
+        }
+    }
+    private static bool isNewNote = false;
     public RemindersPage()
     {
         ViewModel = App.GetService<RemindersViewModel>();
@@ -39,7 +50,7 @@ public sealed partial class RemindersPage : Page
     }
     private async void AddReminder()
     {
-        isNewNote = true;
+        IsNewNote = true;
         CreateReminderDialog AddReminderDialog = new()
         {
             XamlRoot = XamlRoot
@@ -48,11 +59,12 @@ public sealed partial class RemindersPage : Page
         if (AddReminderDialog.Result==ReminderCreateResult.ReminderCreationOK)
         {
             items.Insert(0,AddReminderDialog.rmnd);
+            
         }
     }
     private async void EditReminder()
     {
-        isNewNote = false;
+        IsNewNote = false;
         CreateReminderDialog EditReminderDialog = new()
         {
             XamlRoot = XamlRoot,
@@ -65,14 +77,15 @@ public sealed partial class RemindersPage : Page
     {
         DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
         FileInfo[] Files = dinfo.GetFiles("*.txt");
+        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         string fullPath;
         items.Clear();
-        foreach (FileInfo file in Files)
+        foreach (FileInfo file in orderedList)
         {
             fullPath = dinfo.ToString() +"\\"+ file.Name;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
             string [] lines = readText.Split("\r\n");
-            Regex regex = new(@"\s");
+            Regex regex = MyRegex();
             string[] s;
             DateTime t;
             string [] tt;
@@ -112,4 +125,7 @@ public sealed partial class RemindersPage : Page
             deleteReminder.IsEnabled = true;
         }
     }
+
+    [GeneratedRegex("\\s")]
+    private static partial Regex MyRegex();
 }
