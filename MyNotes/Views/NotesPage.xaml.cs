@@ -9,7 +9,7 @@ namespace MyNotes.Views;
 
 public sealed partial class NotesPage : Page
 {
-    private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     public NotesViewModel ViewModel
     {
         get;
@@ -35,7 +35,7 @@ public sealed partial class NotesPage : Page
     }
     private void ListFiles()
     {
-        DirectoryInfo dinfo = new(notesFolder.Path.ToString() + "\\Notes");
+        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Notes");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         LstNotes.Items.Clear();
         foreach (FileInfo file in Files)
@@ -79,6 +79,9 @@ public sealed partial class NotesPage : Page
     }
     private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        deleteNote.IsEnabled = true;
+        if (!deleteNote.IsEnabled)
+        {
+            deleteNote.IsEnabled = true;
+        }
     }
 }
