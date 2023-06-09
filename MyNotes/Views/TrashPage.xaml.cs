@@ -9,7 +9,7 @@ namespace MyNotes.Views;
 
 public sealed partial class TrashPage : Page
 {
-    private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     public TrashViewModel ViewModel
     {get;}
     public TrashPage()
@@ -17,6 +17,14 @@ public sealed partial class TrashPage : Page
         ViewModel = App.GetService<TrashViewModel>();
         InitializeComponent();
         ListFiles();
+        if (LstNotes.Items.Count < 1)
+        {
+            EmptyText.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            EmptyText.Visibility = Visibility.Collapsed;
+        }
         deleteFlyout.Text = "DeleteFlyout2".GetLocalized();
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
@@ -24,12 +32,12 @@ public sealed partial class TrashPage : Page
     }
     private void ListFiles()
     {
-        DirectoryInfo dinfo = new(notesFolder.Path.ToString() + "\\Trash");
+        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Trash");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         LstNotes.Items.Clear();
         foreach (FileInfo file in Files)
         {
-            LstNotes.Items.Add(file.Name.Substring(0, file.Name.Length - 4));
+            LstNotes.Items.Add(file.Name[..^4]);
         }
     }
     private async void DeleteNote()
@@ -39,7 +47,7 @@ public sealed partial class TrashPage : Page
             var selectedItem = LstNotes.SelectedItem;
             if (selectedItem != null)
             {
-                var directory = notesFolder.Path.ToString() + @"\Trash\" + LstNotes.SelectedItem.ToString() + ".rtf";
+                var directory = storageFolder.Path.ToString() + @"\Trash\" + LstNotes.SelectedItem.ToString() + ".rtf";
                 var file = await StorageFile.GetFileFromPathAsync(directory);
                 await file.DeleteAsync();
                 LstNotes.Items.Remove(selectedItem);
@@ -65,18 +73,29 @@ public sealed partial class TrashPage : Page
     }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
+        if (LstNotes.Items.Count <= 1)
+        {
+            EmptyText.Visibility = Visibility.Visible;
+        }
         DeleteNote();
         deleteNote.Flyout.Hide();
     }
 
     private void RestoreNote_Click(object sender, RoutedEventArgs e)
     {
+        if (LstNotes.Items.Count <= 1)
+        {
+            EmptyText.Visibility = Visibility.Visible;
+        }
         MoveFile moveFile = new();
         moveFile.Move("Trash", "Notes", LstNotes, XamlRoot);
     }
 
     private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        deleteNote.IsEnabled = true;
+        if (!deleteNote.IsEnabled)
+        {
+            deleteNote.IsEnabled = true;
+        }
     }
 }

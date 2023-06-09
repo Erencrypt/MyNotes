@@ -28,8 +28,8 @@
                 <RepositionThemeTransition/>
             </TransitionCollection>
         </StackPanel.ChildrenTransitions>
-        <TextBox Name="reminderNameTextBox" Header="Name"/>
-        <TextBox Name="reminderTextTextBox" Header="Text"/>
+        <TextBox Name="reminderNameTextBox" Width="300" Header="Name"/>
+        <TextBox Name="reminderTextTextBox" Width="300" Header="Text"/>
         <CheckBox Name="ReminderRepeatCheck" Checked="ReminderRepeatCheck_Checked" Unchecked="ReminderRepeatCheck_Unchecked"/>
         <DatePicker Name="datePicker" DayFormat="{}{day.integer} ({dayofweek.abbreviated})" Header="Date" Width="300"/>
         <TimePicker Name="timePicker" Header="Time" Width="300"/>
