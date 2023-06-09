@@ -11,7 +11,7 @@ public sealed partial class TrashPage : Page
 {
     private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     public TrashViewModel ViewModel
-    {get;}
+    { get; }
     public TrashPage()
     {
         ViewModel = App.GetService<TrashViewModel>();
@@ -56,7 +56,7 @@ public sealed partial class TrashPage : Page
             else
             {
                 ContentDialog noWifiDialog = new()
-                {XamlRoot = XamlRoot,Title = "Info".GetLocalized(),Content = "NoSelection".GetLocalized(),CloseButtonText = "Ok".GetLocalized()};
+                { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
                 await noWifiDialog.ShowAsync();
             }
         }
