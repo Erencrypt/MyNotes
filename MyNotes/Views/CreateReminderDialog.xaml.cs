@@ -1,11 +1,9 @@
 using Microsoft.UI.Xaml.Controls;
 using Windows.Storage;
 using MyNotes.Helpers;
-using Windows.Foundation;
-using CommunityToolkit.WinUI.UI;
-using MyNotes.Views;
 using Microsoft.UI.Xaml;
-using Windows.Globalization.DateTimeFormatting;
+using System.Text.RegularExpressions;
+using static MyNotes.Views.RemindersPage;
 
 namespace MyNotes.Views;
 public enum ReminderCreateResult
@@ -17,7 +15,8 @@ public enum ReminderCreateResult
 }
 public sealed partial class CreateReminderDialog : ContentDialog
 {
-    private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+    public Reminder rmnd = new();
+    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     public ReminderCreateResult Result
     {
         get; private set;
@@ -37,13 +36,12 @@ public sealed partial class CreateReminderDialog : ContentDialog
         datePicker.MaxYear = DateTimeOffset.Now.AddYears(3);
         timePicker.SelectedTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
         isNewNote = RemindersPage.isNewNote;
-
     }
     private void CreateReminder(ContentDialogButtonClickEventArgs args)
     {
         try
         {
-            var directory = notesFolder.Path.ToString() + @"\Reminders\";
+            var directory = storageFolder.Path.ToString() + @"\Reminders\";
             var filelocation = directory + reminderNameTextBox.Text + ".txt";
             if (File.Exists(filelocation))
             {
@@ -57,12 +55,26 @@ public sealed partial class CreateReminderDialog : ContentDialog
                 selectedDate = datePicker.SelectedDate!.Value.DateTime;
                 writer.WriteLine(isRepeated.ToString());
                 writer.WriteLine(reminderTextTextBox.Text);
+                Regex regex = new(@"\s");
+                string[] s;
+                DateTime t;
+                string[] tt;
                 if (!isRepeated)
                 {
-                    writer.WriteLine(selectedDate.Day + "/" + selectedDate.Month + "/" + selectedDate.Year);
+                    t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
+                    tt = regex.Split(t.ToString());
+                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = tt[0] + " " + tt[1][..^3] + " " + tt[2], Repeat = isRepeated.ToString() };
+                    writer.WriteLine(timePicker.SelectedTime);
+                    writer.Write(selectedDate.Day + "/" + selectedDate.Month + "/" + selectedDate.Year);
                 }
-                writer.WriteLine(timePicker.SelectedTime);
-
+                else
+                {
+                    t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
+                    s = regex.Split(t.ToString());
+                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = s[1][..^3] + " " + s[2], Repeat = isRepeated.ToString() };
+                    writer.Write(timePicker.SelectedTime);
+                }
+                writer.Close();
                 Result = ReminderCreateResult.ReminderCreationOK;
             }
         }
@@ -101,7 +113,13 @@ public sealed partial class CreateReminderDialog : ContentDialog
                         errorTextBlock.Visibility = Visibility.Visible;
                         errorTextBlock.Text = "Please select a time that at least 1 hour later \nthan the current time.";
                     }
-                    else if (!isRepeated && time.Hour >= ofsetDate.Hour)
+                    else if (datePicker.SelectedDate!.Value.Date < DateTime.Now.Date)
+                    {
+                        args.Cancel = true;
+                        errorTextBlock.Visibility = Visibility.Visible;
+                        errorTextBlock.Text = "Please select a date that later \nthan (or equal to) the current date.";
+                    }
+                    else if (time.Hour >= ofsetDate.Hour && datePicker.SelectedDate.Value.Date >= DateTime.Now.Date)
                     {
                         CreateReminder(args);
                     }
