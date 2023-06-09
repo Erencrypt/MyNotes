@@ -34,8 +34,9 @@ public sealed partial class TrashPage : Page
     {
         DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Trash");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
+        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         LstNotes.Items.Clear();
-        foreach (FileInfo file in Files)
+        foreach (FileInfo file in orderedList)
         {
             LstNotes.Items.Add(file.Name[..^4]);
         }

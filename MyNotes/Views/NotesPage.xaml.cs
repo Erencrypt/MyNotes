@@ -31,14 +31,14 @@ public sealed partial class NotesPage : Page
         deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
         ToolTipService.SetToolTip(newNote, "AddNote".GetLocalized());
-        
     }
     private void ListFiles()
     {
         DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Notes");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
+        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         LstNotes.Items.Clear();
-        foreach (FileInfo file in Files)
+        foreach (FileInfo file in orderedList)
         {
             LstNotes.Items.Add(file.Name[..^4]);
         }
