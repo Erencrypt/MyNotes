@@ -28,9 +28,9 @@ public sealed partial class NotesPage : Page
             EmptyText.Visibility = Visibility.Collapsed;
         }
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
-        deleteNoteFly.Content = "DeleteNote_Button".GetLocalized();
-        ToolTipService.SetToolTip(deleteNote, "DeleteNote".GetLocalized());
-        ToolTipService.SetToolTip(newNote, "AddNote".GetLocalized());
+        deleteNoteFly.Content = "DeleteConfirm".GetLocalized();
+        ToolTipService.SetToolTip(deleteNote, "Delete".GetLocalized());
+        ToolTipService.SetToolTip(newNote, "Add".GetLocalized());
     }
     private void ListFiles()
     {
