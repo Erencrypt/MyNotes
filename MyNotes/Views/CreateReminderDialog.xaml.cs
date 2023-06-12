@@ -3,6 +3,7 @@ using Windows.Storage;
 using MyNotes.Helpers;
 using Microsoft.UI.Xaml;
 using System.Text.RegularExpressions;
+using MyNotes.Models;
 using static MyNotes.Views.RemindersPage;
 
 namespace MyNotes.Views;
