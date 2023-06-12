@@ -5,66 +5,182 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid x:Name="ContentArea">
+    <Grid x:Name="ContentArea" Padding="0">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
-            <ListView Width="auto" Name="LstNotes"
-                 CornerRadius="2"
-                 SelectionChanged="LstNotes_SelectionChanged"
-                 RelativePanel.AlignLeftWithPanel="True"
-                 RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.AlignTopWithPanel="True"
-                 RelativePanel.AlignBottomWithPanel="True"
-                 BorderThickness="1"
-                 BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
-                 Margin="0,0,0,64">
-                <ListView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <AddDeleteThemeTransition/>
-                    </TransitionCollection>
-                </ListView.ItemContainerTransitions>
-            </ListView>
-            <TextBlock Text="Your trash is empty." 
-                       Name="EmptyText"
-                       FontWeight="Light"
-                       Visibility="Collapsed"
-                       Margin="0,32,0,0"
-                       FontSize="16"
-                       HorizontalAlignment="Center"
-                       RelativePanel.AlignLeftWithPanel="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                           />
-            <Button 
-                    Name="restoreNote"
-                    RelativePanel.AlignBottomWithPanel="True"
-                    RelativePanel.LeftOf="deleteNote"
-                    MinWidth="250"
-                    Width="auto"
-                    Margin="0,0,0,16"
-                    Click="RestoreNote_Click"
-                    Style="{StaticResource AccentButtonStyle}">
-                <FontIcon Glyph="&#xE845;"/>
-            </Button>
-            <Button 
-                    IsEnabled="False"
-                    Name="deleteNote"
-                    RelativePanel.AlignBottomWithPanel="True"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Width="auto"
-                    FocusVisualPrimaryBrush="Red"
-                    Margin="16,0,0,16"
-                >
-                <FontIcon Glyph="&#xE74D;" />
-                <Button.Flyout>
-                    <Flyout>
-                        <StackPanel MaxWidth="420">
-                            <TextBlock Name="deleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
-                            <Button Name="deleteNoteFly" Click="DeleteNote_Click"/>
-                        </StackPanel>
-                    </Flyout>
-                </Button.Flyout>
+            <Pivot Width="auto"
+                   Margin="-12,0"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignBottomWithPanel="True">
+                <PivotItem Header="Notes">
+                    <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
+                        <ListView Width="auto" Name="LstNotes"
+                                  CornerRadius="2"
+                                  SelectionChanged="LstNotes_SelectionChanged"
+                                  RelativePanel.AlignLeftWithPanel="True"
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignTopWithPanel="True"
+                                  RelativePanel.AlignBottomWithPanel="True"
+                                  BorderThickness="1"
+                                  BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
+                                  Margin="0,0,0,64">
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition/>
+                                </TransitionCollection>
+                            </ListView.ItemContainerTransitions>
+                        </ListView>
+                        <TextBlock Text="Your trash is empty." 
+                                   Name="EmptyText"
+                                   FontWeight="Light"
+                                   Visibility="Collapsed"
+                                   Margin="0,32,0,0"
+                                   FontSize="16"
+                                   HorizontalAlignment="Center"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"/>
+                        <Button 
+                                Name="restoreNote"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.LeftOf="deleteNote"
+                                MinWidth="250"
+                                Width="auto"
+                                Margin="0,0,0,16"
+                                Click="RestoreNote_Click"
+                                Style="{StaticResource AccentButtonStyle}">
+                            <FontIcon Glyph="&#xE845;"/>
+                        </Button>
+                        <Button 
+                                IsEnabled="False"
+                                Name="deleteNote"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True"
+                                Width="auto"
+                                FocusVisualPrimaryBrush="Red"
+                                Margin="16,0,0,16">
+                            <FontIcon Glyph="&#xE74D;" />
+                            <Button.Flyout>
+                                <Flyout>
+                                    <StackPanel MaxWidth="420">
+                                        <TextBlock Name="deleteFlyoutNoteText" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
+                                        <Button Name="deleteNoteFly" Click="DeleteNote_Click"/>
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </RelativePanel>
+                </PivotItem>
+                <PivotItem Header="Reminders">
+                    <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
+                        <ListView Width="auto" Name="LstReminders"
+                                 SelectionChanged="LstReminders_SelectionChanged"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.AlignTopWithPanel="True"
+                                 RelativePanel.AlignBottomWithPanel="True"
+                                 Margin="-8,0,0,64" Padding="0">
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition/>
+                                </TransitionCollection>
+                            </ListView.ItemContainerTransitions>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Glyph="&#xEC92;" 
+                                Grid.RowSpan="2"
+                                Width ="32"
+                                Height="32"
+                                Margin="0,6,0,6"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1"
+                                Text="{Binding ReminderHeader}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Margin="12,6,0,0"/>
+                                        <TextBlock  Grid.Column="1"
+                                Grid.Row="1"
+                                Opacity="0.8"
+                                Text="{Binding ReminderText}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Height="18"
+                                Margin="12,0,0,6"/>
+                                        <TextBlock Grid.Column="2"
+                                Opacity="0.8"
+                                HorizontalAlignment="Right"
+                                Text="{Binding DateTime}"
+                                Style="{ThemeResource BaseTextBlockStyle}"
+                                Margin="12,6,0,0"/>
+                                        <TextBlock  Grid.Column="2"
+                                Grid.Row="1"
+                                Opacity="0.8"
+                                HorizontalAlignment="Right"
+                                Text="Repeated:"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Margin="12,0,32,6"/>
+                                        <TextBlock  Grid.Column="2"
+                                Grid.Row="1"
+                                Opacity="0.8"
+                                HorizontalAlignment="Right"
+                                Text="{Binding Repeat}"
+                                Style="{ThemeResource BodyTextBlockStyle}"
+                                Margin="12,0,0,6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBlock Text="Your trash is empty." 
+                                   Name="EmptyText2"
+                                   FontWeight="Light"
+                                   Visibility="Collapsed"
+                                   Margin="0,32,0,0"
+                                   FontSize="16"
+                                   HorizontalAlignment="Center"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"/>
+                        <Button 
+                                Name="restoreReminder"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.LeftOf="deleteReminder"
+                                MinWidth="250"
+                                Width="auto"
+                                Margin="0,0,0,16"
+                                Click="RestoreReminder_Click"
+                                Style="{StaticResource AccentButtonStyle}">
+                            <FontIcon Glyph="&#xE845;"/>
+                        </Button>
+                        <Button 
+                                IsEnabled="False"
+                                Name="deleteReminder"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True"
+                                Width="auto"
+                                FocusVisualPrimaryBrush="Red"
+                                Margin="16,0,0,16">
+                            <FontIcon Glyph="&#xE74D;" />
+                            <Button.Flyout>
+                                <Flyout>
+                                    <StackPanel MaxWidth="420">
+                                        <TextBlock Name="deleteFlyoutReminderText" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
+                                        <Button Name="deleteReminderFly" Click="DeleteReminder_Click"/>
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </RelativePanel>
+                </PivotItem>
+            </Pivot>
 
-            </Button>
         </RelativePanel>
     </Grid>
 </Page>
