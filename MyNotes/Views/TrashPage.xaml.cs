@@ -132,13 +132,13 @@ public sealed partial class TrashPage : Page
     {
         try
         {
-            var selectedItem = LstReminders.SelectedItem;
+            Reminder? selectedItem = LstReminders.SelectedItem as Reminder;
             if (selectedItem != null)
             {
-                var directory = storageFolder.Path.ToString() + @"\Trash\" + LstReminders.SelectedItem.ToString() + ".txt";
+                var directory = storageFolder.Path.ToString() + @"\Trash\" + selectedItem.ReminderHeader + ".txt";
                 var file = await StorageFile.GetFileFromPathAsync(directory);
                 await file.DeleteAsync();
-                LstReminders.Items.Remove(selectedItem);
+                items.Remove(selectedItem);
             }
             else
             {
