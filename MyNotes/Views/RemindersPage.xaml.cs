@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
+using MyNotes.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using Windows.Storage;
@@ -35,18 +36,11 @@ public sealed partial class RemindersPage : Page
         ViewModel = App.GetService<RemindersViewModel>();
         InitializeComponent();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
-        deleteReminderFly.Content = "DeleteReminder_Button".GetLocalized();
-        ToolTipService.SetToolTip(deleteReminder, "DeleteReminder".GetLocalized());
-        ToolTipService.SetToolTip(newReminder, "AddReminder".GetLocalized());
+        deleteReminderFly.Content = "DeleteConfirm".GetLocalized();
+        ToolTipService.SetToolTip(deleteReminder, "Delete".GetLocalized());
+        ToolTipService.SetToolTip(newReminder, "Add".GetLocalized());
         LstReminders.ItemsSource = items;
-        ListFiles();
-    }
-    public class Reminder
-    {
-        public string? ReminderHeader { get; set; }
-        public string? ReminderText { get; set; }
-        public string? DateTime { get; set; }
-        public string? Repeat { get; set; }
+        ListReminders();
     }
     private async void AddReminder()
     {
@@ -72,7 +66,7 @@ public sealed partial class RemindersPage : Page
         };
         await EditReminderDialog.ShowAsync();
     }
-    private void ListFiles()
+    private void ListReminders()
     {
         DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
         FileInfo[] Files = dinfo.GetFiles("*.txt");
