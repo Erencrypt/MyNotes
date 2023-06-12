@@ -2,7 +2,8 @@
 using Microsoft.UI.Xaml;
 using Windows.Storage;
 using System.Collections.ObjectModel;
-using static MyNotes.Views.RemindersPage;
+using MyNotes.Views;
+using MyNotes.Models;
 
 namespace MyNotes.Helpers
 {
@@ -38,7 +39,7 @@ namespace MyNotes.Helpers
                 await noWifiDialog.ShowAsync();
             }
         }
-        public async void Move(string from, string to, ListView list, XamlRoot root, Reminder reminder, ObservableCollection<Reminder> items)
+        public async void Move(string from, string to, ListView list, XamlRoot root,Reminder reminder, ObservableCollection<Reminder> items)
         {
             try
             {
