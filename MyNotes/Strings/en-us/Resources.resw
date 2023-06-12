@@ -209,34 +209,31 @@
   <data name="DeleteFlyout" xml:space="preserve">
     <value>Selected item will be deleted. Do you want to continue?</value>
   </data>
-  <data name="DeleteNote_Button" xml:space="preserve">
-    <value>Yes, delete this note</value>
-  </data>
   <data name="NoteNameFlyoutTitle" xml:space="preserve">
     <value>Note Name:</value>
   </data>
   <data name="AddNote" xml:space="preserve">
     <value>Add Note</value>
   </data>
-  <data name="DeleteNote" xml:space="preserve">
-    <value>Delete Note</value>
-  </data>
   <data name="DeleteFlyout2" xml:space="preserve">
     <value>Selected item will be deleted permanently. Do you want to continue?</value>
-  </data>
-  <data name="RestoreNote" xml:space="preserve">
-    <value>Restore Note</value>
   </data>
   <data name="AddReminder" xml:space="preserve">
     <value>Add Reminder</value>
   </data>
-  <data name="DeleteReminder" xml:space="preserve">
-    <value>Delete Reminder</value>
-  </data>
-  <data name="DeleteReminder_Button" xml:space="preserve">
-    <value>Yes, delete this reminder</value>
-  </data>
   <data name="Repeated" xml:space="preserve">
     <value>Repeated</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Yes, delete this</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
   </data>
 </root>
