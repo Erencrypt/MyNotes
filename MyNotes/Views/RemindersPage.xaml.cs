@@ -30,7 +30,19 @@ public sealed partial class RemindersPage : Page
             isNewNote = value;
         }
     }
+    public static string NoteName
+    {
+        get
+        {
+            return noteName;
+        }
+        set
+        {
+            noteName = value;
+        }
+    }
     private static bool isNewNote = false;
+    private static string noteName=string.Empty;
     public RemindersPage()
     {
         ViewModel = App.GetService<RemindersViewModel>();
@@ -57,14 +69,31 @@ public sealed partial class RemindersPage : Page
     }
     private async void EditReminder()
     {
-        IsNewNote = false;
-        CreateReminderDialog EditReminderDialog = new()
+        if (LstReminders.SelectedItem is Reminder selectedItem)
         {
-            XamlRoot = XamlRoot,
-            Title = "Edit Reminder",
-            PrimaryButtonText = "Save Reminder"
-        };
-        await EditReminderDialog.ShowAsync();
+            int index = LstReminders.SelectedIndex;
+            IsNewNote = false;
+            noteName = selectedItem.ReminderHeader!;
+            CreateReminderDialog EditReminderDialog = new()
+            {
+                XamlRoot = XamlRoot,
+                Title = "Edit Reminder",
+                PrimaryButtonText = "Save Reminder"
+            };
+            await EditReminderDialog.ShowAsync();
+            if (EditReminderDialog.Result==ReminderCreateResult.ReminderCreationOK)
+            {
+                Reminder rm = EditReminderDialog.rmnd;
+                items.Remove(selectedItem);
+                items.Insert(index, rm);
+            }
+        }
+        else
+        {
+            ContentDialog noWifiDialog = new()
+            { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
+            await noWifiDialog.ShowAsync();
+        }
     }
     private void ListReminders()
     {
