@@ -240,10 +240,8 @@ public sealed partial class CreateReminderDialog : ContentDialog
     {
         datePicker.Visibility = Visibility.Visible;
         isRepeated = false;
-        if (datePicker.SelectedDate==null)
-        {
-            datePicker.SelectedDate = DateTime.Now;
-        }
+        datePicker.SelectedDate = DateTime.Now;
+
     }
 
     [GeneratedRegex("\\s")]
