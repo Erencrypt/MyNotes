@@ -95,7 +95,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="150"/>
                                         </Grid.ColumnDefinitions>
                                         <FontIcon Glyph="&#xEC92;" 
                                 Grid.RowSpan="2"
