@@ -47,13 +47,13 @@
       </uap:VisualElements>
       <Extensions>
           <desktop:Extension Category="windows.toastNotificationActivation">
-              <desktop:ToastNotificationActivation ToastActivatorCLSID="8f3235ad-0c67-408b-ae0a-5d35f5c092d5" />
+              <desktop:ToastNotificationActivation ToastActivatorCLSID="4195D164-074C-493F-A758-B4876055251E" />
           </desktop:Extension>
 
           <com:Extension Category="windows.comServer">
               <com:ComServer>
-                  <com:ExeServer Executable="MyNotes.exe" Arguments="----AppNotificationActivated:" DisplayName="Toast activator">
-                      <com:Class Id="8f3235ad-0c67-408b-ae0a-5d35f5c092d5" DisplayName="Toast activator"/>
+                  <com:ExeServer Executable="MyNotes.exe" Arguments="----AppNotificationActivated:" DisplayName="My Notes">
+                      <com:Class Id="4195D164-074C-493F-A758-B4876055251E"/>
                   </com:ExeServer>
               </com:ComServer>
           </com:Extension>
