@@ -2,7 +2,6 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
@@ -26,7 +25,6 @@ public sealed partial class ShellPage : Page
     private static string? noteName;
     public ShellPage(ShellViewModel viewModel)
     {
-        
         ViewModel = viewModel;
         InitializeComponent();
 
@@ -34,8 +32,6 @@ public sealed partial class ShellPage : Page
         ViewModel.NavigationViewService.Initialize(NavigationViewControl);
 
         // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.
-        // A custom title bar is required for full window theme and Mica support.
-        // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
