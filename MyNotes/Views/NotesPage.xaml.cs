@@ -4,12 +4,17 @@ using Microsoft.UI.Xaml.Input;
 using Windows.Storage;
 using Microsoft.UI.Xaml;
 using MyNotes.Helpers;
+using MyNotes.Contracts.Services;
+using Windows.UI.Notifications;
+using Microsoft.Windows.AppNotifications;
+using Windows.Foundation.Metadata;
 
 namespace MyNotes.Views;
 
 public sealed partial class NotesPage : Page
 {
     private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    private readonly INavigationService navigationService;
     public NotesViewModel ViewModel
     {
         get;
@@ -17,6 +22,8 @@ public sealed partial class NotesPage : Page
     public NotesPage()
     {
         ViewModel = App.GetService<NotesViewModel>();
+        navigationService = App.GetService<INavigationService>();
+
         InitializeComponent();
         ListFiles();
         if (LstNotes.Items.Count<1)
@@ -48,7 +55,7 @@ public sealed partial class NotesPage : Page
         if (LstNotes.SelectedItem != null)
         {
             ShellPage.NoteName = LstNotes.SelectedItem.ToString();
-            Frame.Navigate(typeof(NoteDetailsPage));
+            navigationService.NavigateTo(typeof(NoteDetailsViewModel).FullName!);
         }
     }
     private async void AddNote()
@@ -60,7 +67,7 @@ public sealed partial class NotesPage : Page
         await AddNoteDialog.ShowAsync();
         if (AddNoteDialog.Result== NoteCreateResult.NoteCreationOK)
         {
-            Frame.Navigate(typeof(NoteDetailsPage));
+            navigationService.NavigateTo(typeof(NoteDetailsViewModel).FullName!);
         }
     }
     private void NewNote_Click(object sender, RoutedEventArgs e)
@@ -78,7 +85,7 @@ public sealed partial class NotesPage : Page
         moveFile.Move("Notes", "Trash", LstNotes, XamlRoot);
     }
     private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
+    {   
         if (!deleteNote.IsEnabled)
         {
             deleteNote.IsEnabled = true;
