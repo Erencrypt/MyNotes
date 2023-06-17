@@ -26,7 +26,6 @@ public partial class App : Application
     {
         get;
     }
-
     public static T GetService<T>()
         where T : class
     {
@@ -37,7 +36,6 @@ public partial class App : Application
 
         return service;
     }
-
     public static WindowEx MainWindow { get; } = new MainWindow();
 
     public App()
@@ -83,6 +81,8 @@ public partial class App : Application
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
+
+
         }).
         Build();
 
@@ -103,6 +103,5 @@ public partial class App : Application
         await App.GetService<IActivationService>().ActivateAsync(args);
         //TODO: notification examplle
         //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
-
     }
 }
