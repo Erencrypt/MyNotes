@@ -101,7 +101,6 @@ public partial class App : Application
     {
         base.OnLaunched(args);
         await App.GetService<IActivationService>().ActivateAsync(args);
-
         //TODO: notification examplle
         //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
 

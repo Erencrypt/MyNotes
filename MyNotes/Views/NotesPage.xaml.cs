@@ -5,9 +5,6 @@ using Windows.Storage;
 using Microsoft.UI.Xaml;
 using MyNotes.Helpers;
 using MyNotes.Contracts.Services;
-using Windows.UI.Notifications;
-using Microsoft.Windows.AppNotifications;
-using Windows.Foundation.Metadata;
 
 namespace MyNotes.Views;
 
@@ -23,15 +20,14 @@ public sealed partial class NotesPage : Page
     {
         ViewModel = App.GetService<NotesViewModel>();
         navigationService = App.GetService<INavigationService>();
-
         InitializeComponent();
         ListFiles();
-        if (LstNotes.Items.Count<1)
+        if (LstNotes.Items.Count < 1)
         {
             EmptyText.Visibility = Visibility.Visible;
         }
         else
-        { 
+        {
             EmptyText.Visibility = Visibility.Collapsed;
         }
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
@@ -65,7 +61,7 @@ public sealed partial class NotesPage : Page
             XamlRoot = XamlRoot
         };
         await AddNoteDialog.ShowAsync();
-        if (AddNoteDialog.Result== NoteCreateResult.NoteCreationOK)
+        if (AddNoteDialog.Result == NoteCreateResult.NoteCreationOK)
         {
             navigationService.NavigateTo(typeof(NoteDetailsViewModel).FullName!);
         }
@@ -85,7 +81,7 @@ public sealed partial class NotesPage : Page
         moveFile.Move("Notes", "Trash", LstNotes, XamlRoot);
     }
     private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {   
+    {
         if (!deleteNote.IsEnabled)
         {
             deleteNote.IsEnabled = true;
