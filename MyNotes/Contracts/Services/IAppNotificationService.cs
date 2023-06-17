@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using Microsoft.Windows.AppNotifications;
+using System.Collections.Specialized;
 
 namespace MyNotes.Contracts.Services;
 
@@ -6,9 +7,10 @@ public interface IAppNotificationService
 {
     void Initialize();
 
-    bool Show(string payload);
+    bool Show(string title, string message, string time);
 
     NameValueCollection ParseArguments(string arguments);
 
     void Unregister();
+    void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args);
 }

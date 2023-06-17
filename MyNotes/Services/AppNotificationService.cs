@@ -1,10 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Web;
-
 using Microsoft.Windows.AppNotifications;
-
 using MyNotes.Contracts.Services;
-using MyNotes.ViewModels;
 
 namespace MyNotes.Notifications;
 
@@ -42,23 +39,64 @@ public class AppNotificationService : IAppNotificationService
         ////    });
         //// }
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+        IDictionary<string,string> userInput = args.UserInput;
+        string ar = args.Argument; 
+        if (ar == "snooze")
         {
-            App.MainWindow.ShowMessageDialogAsync("TODO: Handle notification invocations when your app is already running.", "Notification Invoked");
-
-            App.MainWindow.BringToFront();
-        });
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                App.MainWindow.ShowMessageDialogAsync("Snooze time :" + userInput["snoozeTime"], "Notification Invoked");
+                App.MainWindow.BringToFront();
+            });
+        }
+        else if (ar == "dismiss")
+        {
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                App.MainWindow.ShowMessageDialogAsync("Notification dismissed", "Notification Invoked");
+                App.MainWindow.BringToFront();
+            });
+        }
+        else
+        {
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                App.MainWindow.ShowMessageDialogAsync("Notification notification itself clicked", "Notification Invoked");
+                App.MainWindow.BringToFront();
+            });
+        }
     }
 
-    public bool Show(string payload)
+    public bool Show(string title,string message, string time)
     {
-        var appNotification = new AppNotification(payload);
-
+        string payload = new(@$"
+            <toast scenario='reminder'>
+              <visual>
+                <binding template='ToastGeneric'>
+                  <text>{title}</text>
+                  <text>{message}</text>
+                  <text>{time}</text>
+                   <image src='ms-appx:///Assets/WindowIcon.ico' placement='appLogoOverride' hint-crop='circle'/>
+                </binding>
+              </visual>
+              <actions>
+                <input id='snoozeTime' type='selection' defaultInput='15'>
+                  <selection id='1' content='1 minute'/>
+                  <selection id='15' content='15 minutes'/>
+                  <selection id='60' content='1 hour'/>
+                  <selection id='240' content='4 hours'/>
+                  <selection id='1440' content='1 day'/>
+                </input>
+                <action arguments='snooze' hint-inputId='snoozeTime' content='Snooze'/>
+                <action arguments='dismiss' content='Dismiss'/>
+              </actions>
+            </toast>");
+        AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory));
+        appNotification.Expiration = DateTime.Now.AddDays(1);
+        appNotification.Priority = AppNotificationPriority.High;
         AppNotificationManager.Default.Show(appNotification);
-
         return appNotification.Id != 0;
     }
-
     public NameValueCollection ParseArguments(string arguments)
     {
         return HttpUtility.ParseQueryString(arguments);
