@@ -186,7 +186,7 @@ public sealed partial class TrashPage : Page
     }
     private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!deleteNote.IsEnabled)
+        if (!deleteReminder.IsEnabled)
         {
             deleteReminder.IsEnabled = true;
         }
