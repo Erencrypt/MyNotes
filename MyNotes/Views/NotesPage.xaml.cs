@@ -72,7 +72,7 @@ public sealed partial class NotesPage : Page
     private void NewNote_Click(object sender, RoutedEventArgs e)
     {
         //AddNote();
-        notificationService.Show("header text", "this is reminder text.","time section");
+        notificationService.ShowReminder("header text", "this is reminder text.","time section");
     }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {

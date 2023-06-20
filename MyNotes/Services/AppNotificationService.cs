@@ -67,7 +67,7 @@ public class AppNotificationService : IAppNotificationService
         }
     }
 
-    public bool Show(string title,string message, string time)
+    public bool ShowReminder(string title,string message, string time)
     {
         string payload = new(@$"
             <toast scenario='reminder'>
@@ -76,7 +76,7 @@ public class AppNotificationService : IAppNotificationService
                   <text>{title}</text>
                   <text>{message}</text>
                   <text>{time}</text>
-                   <image src='ms-appx:///Assets/WindowIcon.ico' placement='appLogoOverride' hint-crop='circle'/>
+                   <image src='ms-appx:///Assets/NoteIcon.png' placement='appLogoOverride' hint-crop='circle'/>
                 </binding>
               </visual>
               <actions>

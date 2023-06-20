@@ -7,7 +7,7 @@ public interface IAppNotificationService
 {
     void Initialize();
 
-    bool Show(string title, string message, string time);
+    bool ShowReminder(string title, string message, string time);
 
     NameValueCollection ParseArguments(string arguments);
 
