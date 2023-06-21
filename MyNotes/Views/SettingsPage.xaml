@@ -50,9 +50,9 @@
                 </StackPanel>
             </StackPanel>
             <TextBlock x:Uid="Settings_Startup" Style="{ThemeResource SubtitleTextBlockStyle}" />
-            <ToggleSwitch OffContent="Don't open on startup" OnContent="Open on startup"/>
-            
-            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <CheckBox Name="StartupCheck" Content="Open on startup" Checked="StartupCheck_Checked" Unchecked="StartupCheck_Unchecked" />
+
+            <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,16,0,0"/>
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
                 <TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" Style="{ThemeResource BodyTextBlockStyle}" />
 
