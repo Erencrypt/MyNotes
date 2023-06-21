@@ -138,6 +138,9 @@
   <data name="Settings_Personalization.Text" xml:space="preserve">
     <value>Personalization</value>
   </data>
+  <data name="Settings_Startup.Text" xml:space="preserve">
+    <value>Startup</value>
+  </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Theme</value>
   </data>
