@@ -12,7 +12,6 @@ public sealed partial class NotesPage : Page
 {
     private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     private readonly INavigationService navigationService;
-    private readonly IAppNotificationService notificationService;
 
     public NotesViewModel ViewModel
     {
@@ -22,7 +21,6 @@ public sealed partial class NotesPage : Page
     {
         ViewModel = App.GetService<NotesViewModel>();
         navigationService = App.GetService<INavigationService>();
-        notificationService = App.GetService<IAppNotificationService>();
         InitializeComponent();
         ListFiles();
         if (LstNotes.Items.Count < 1)
@@ -71,8 +69,7 @@ public sealed partial class NotesPage : Page
     }
     private void NewNote_Click(object sender, RoutedEventArgs e)
     {
-        //AddNote();
-        notificationService.ShowReminder("header text", "this is reminder text.","time section");
+        AddNote();
     }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
