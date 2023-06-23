@@ -96,11 +96,31 @@ public partial class App : Application
         // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.
     }
 
-    protected async override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
-        base.OnLaunched(args);
-        await App.GetService<IActivationService>().ActivateAsync(args);
+        MainWindow.Closed += MainWindow_Closed;
+        SingleInstanceService singleInstanceService = new();
+
+        if (singleInstanceService.IsFirstInstance())
+        {
+            singleInstanceService.OnArgumentsReceived += OnArgumentsReceived;
+
+            base.OnLaunched(args);
+            await App.GetService<IActivationService>().ActivateAsync(args);
+        }
+
         //TODO: notification examplle
+        //notificationService.ShowReminder("header text", "this is reminder text.", "time section");
         //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
+    }
+    private void OnArgumentsReceived(string[] obj)
+    {
+        MainWindow.Show();
+        MainWindow.BringToFront();
+    }
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        args.Handled = true;
+        App.MainWindow.Hide();
     }
 }
