@@ -10,6 +10,39 @@ namespace MyNotes.Helpers
     public class MoveFile
     {
         private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+        public async void Move(string from, string to, string filename, XamlRoot root)
+        {
+            try
+            {
+                if (filename != null)
+                {
+                    var directory = notesFolder.Path.ToString() + "\\" + from + "\\" + filename + ".txt";
+                    var dir = notesFolder.Path.ToString() + "\\" + to + "\\";
+                    var folder = await StorageFolder.GetFolderFromPathAsync(dir);
+                    var file = await StorageFile.GetFileFromPathAsync(directory);
+                    await file.CopyAsync(folder, filename + ".txt", NameCollisionOption.GenerateUniqueName);
+                    await file.DeleteAsync();
+                }
+                else
+                {
+                    if (root!=null)
+                    {
+                        ContentDialog noWifiDialog = new()
+                        { XamlRoot = root, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
+                        await noWifiDialog.ShowAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (root != null)
+                {
+                    ContentDialog noWifiDialog = new()
+                    { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage2".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
+                    await noWifiDialog.ShowAsync();
+                }
+            }
+        }
         public async void Move(string from, string to, ListView list, XamlRoot root)
         {
             try
