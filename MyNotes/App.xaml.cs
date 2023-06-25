@@ -12,6 +12,9 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
+using System.Text.RegularExpressions;
+using System.Text;
+using Windows.Storage;
 
 namespace MyNotes;
 
@@ -33,11 +36,10 @@ public partial class App : Application
         {
             throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.");
         }
-
         return service;
     }
     public static WindowEx MainWindow { get; } = new MainWindow();
-
+    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     public App()
     {
         InitializeComponent();
@@ -104,12 +106,12 @@ public partial class App : Application
         if (singleInstanceService.IsFirstInstance())
         {
             singleInstanceService.OnArgumentsReceived += OnArgumentsReceived;
-
+            ReminderCleanup();
             base.OnLaunched(args);
             await App.GetService<IActivationService>().ActivateAsync(args);
         }
 
-        //TODO: notification examplle
+        //TODO: notification example
         //notificationService.ShowReminder("header text", "this is reminder text.", "time section");
         //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
     }
@@ -122,5 +124,35 @@ public partial class App : Application
     {
         args.Handled = true;
         App.MainWindow.Hide();
+    }
+    private void ReminderCleanup()
+    {
+        //TODO: Send app notification about expired reminders
+        int count = 0;
+        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
+        FileInfo[] Files = dinfo.GetFiles("*.txt");
+        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
+        string fullPath;
+        foreach (FileInfo file in orderedList)
+        {
+            fullPath = dinfo.ToString() + "\\" + file.Name;
+            string readText = File.ReadAllText(fullPath, Encoding.UTF8);
+            string[] lines = readText.Split("\r\n");
+            DateTime t;
+            if (lines.Length == 4)
+            {
+                t = Convert.ToDateTime(lines[3] + " " + lines[2]);
+                if (t.Date < DateTime.Now.Date)
+                {
+                    MoveFile moveFile = new();
+                    moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
+                    count++;
+                }
+            }
+        }
+        if (count > 0)
+        {
+            App.GetService<IAppNotificationService>().ShowInfoMessage("Info",count.ToString()+" Reminder(s) moved to trash due to expiration, you can check out trash page to see them.");
+        }
     }
 }
