@@ -7,7 +7,7 @@
     mc:Ignorable="d">
     <Grid x:Name="ContentArea" Padding="0">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
-            <Pivot Width="auto"
+            <Pivot Name="TrashPivot" Width="auto" 
                    Margin="-12,0"
                    RelativePanel.AlignLeftWithPanel="True"
                    RelativePanel.AlignRightWithPanel="True"
@@ -41,6 +41,7 @@
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"/>
                         <Button 
+                                IsEnabled="False"
                                 Name="restoreNote"
                                 RelativePanel.AlignBottomWithPanel="True"
                                 RelativePanel.LeftOf="deleteNote"
@@ -149,6 +150,7 @@
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"/>
                         <Button 
+                                IsEnabled="False"
                                 Name="restoreReminder"
                                 RelativePanel.AlignBottomWithPanel="True"
                                 RelativePanel.LeftOf="deleteReminder"

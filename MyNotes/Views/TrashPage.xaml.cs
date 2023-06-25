@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
 using MyNotes.Models;
@@ -8,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Text;
 using Windows.Storage;
-using static MyNotes.Views.RemindersPage;
 
 namespace MyNotes.Views;
 
@@ -20,6 +18,12 @@ public sealed partial class TrashPage : Page
     {
         get;
     }
+    public static bool? NtfInvoke
+    {
+        get => ntfInvoke;
+        set => ntfInvoke = value;
+    }
+    private static bool? ntfInvoke;
     public TrashPage()
     {
         ViewModel = App.GetService<TrashViewModel>();
@@ -53,6 +57,15 @@ public sealed partial class TrashPage : Page
         {
             EmptyText.Visibility = Visibility.Collapsed;
         }
+        if (ntfInvoke==true)
+        {
+            PivotChange();
+        }
+    }
+    private void PivotChange()
+    {
+        TrashPivot.SelectedItem = TrashPivot.Items[1];
+        TrashPivot.UpdateLayout();
     }
     private void ListNotes()
     {
@@ -132,8 +145,7 @@ public sealed partial class TrashPage : Page
     {
         try
         {
-            Reminder? selectedItem = LstReminders.SelectedItem as Reminder;
-            if (selectedItem != null)
+            if (LstReminders.SelectedItem is Reminder selectedItem)
             {
                 var directory = storageFolder.Path.ToString() + @"\Trash\" + selectedItem.ReminderHeader + ".txt";
                 var file = await StorageFile.GetFileFromPathAsync(directory);
@@ -165,23 +177,33 @@ public sealed partial class TrashPage : Page
         {
             deleteNote.IsEnabled = true;
         }
+        if (!restoreNote.IsEnabled)
+        {
+            restoreNote.IsEnabled = true;
+        }
     }
     private void RestoreNote_Click(object sender, RoutedEventArgs e)
     {
-        if (LstNotes.Items.Count <= 1)
+        if (LstNotes.SelectedItem != null)
         {
-            EmptyText.Visibility = Visibility.Visible;
+            if (LstNotes.Items.Count <= 1)
+            {
+                EmptyText.Visibility = Visibility.Visible;
+            }
+            MoveFile moveFile = new();
+            moveFile.Move("Trash", "Notes", LstNotes, XamlRoot);
         }
-        MoveFile moveFile = new();
-        moveFile.Move("Trash", "Notes", LstNotes, XamlRoot);
     }
     private void DeleteNote_Click(object sender, RoutedEventArgs e)
     {
-        if (LstNotes.Items.Count <= 1)
+        if (LstNotes.SelectedItem != null)
         {
-            EmptyText.Visibility = Visibility.Visible;
+            if (LstNotes.Items.Count <= 1)
+            {
+                EmptyText.Visibility = Visibility.Visible;
+            }
+            DeleteNote();
         }
-        DeleteNote();
         deleteNote.Flyout.Hide();
     }
     private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -190,28 +212,34 @@ public sealed partial class TrashPage : Page
         {
             deleteReminder.IsEnabled = true;
         }
+        if (!restoreReminder.IsEnabled)
+        {
+            restoreReminder.IsEnabled = true;
+        }
     }
     private void RestoreReminder_Click(object sender, RoutedEventArgs e)
     {
-        if (LstReminders.Items.Count <= 1)
-        {
-            EmptyText2.Visibility = Visibility.Visible;
-        }
         if (LstReminders.SelectedItem != null)
         {
+            if (LstReminders.Items.Count <= 1)
+            {
+                EmptyText2.Visibility = Visibility.Visible;
+            }
             Reminder? rm = LstReminders.SelectedItem as Reminder;
             MoveFile moveFile = new();
             moveFile.Move("Trash", "Reminders", LstReminders, XamlRoot, rm!, items);
         }
-        
     }
     private void DeleteReminder_Click(object sender, RoutedEventArgs e)
     {
-        if (LstReminders.Items.Count <= 1)
+        if (LstReminders.SelectedItem != null)
         {
-            EmptyText2.Visibility = Visibility.Visible;
+            if (LstReminders.Items.Count <= 1)
+            {
+                EmptyText2.Visibility = Visibility.Visible;
+            }
+            DeleteReminder();
         }
-        DeleteReminder();
         deleteReminder.Flyout.Hide();
     }
     [GeneratedRegex("\\s")]

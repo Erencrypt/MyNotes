@@ -30,7 +30,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
     public CreateReminderDialog()
     {
         //TODO: localize strings
-        //TODO simplify and clean code blocks
+        //TODO: simplify and clean code blocks
         this.InitializeComponent();
         ReminderRepeatCheck.Content = "Repeated".GetLocalized();
         isNewNote = RemindersPage.IsNewNote;
