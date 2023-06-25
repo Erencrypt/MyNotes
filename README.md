@@ -1,2 +1,188 @@
-# MyNotes
-WinUI 3 based multipurpose notes and reminders app for windows.
+<a name="readme-top"></a>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![GPL-3.0 License][license-shield]][license-url]
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/ErenCanUtku/MyNotes/">
+    <img src="MyNotes/Assets/NoteIcon.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h2 align="center">My Notes</h2>
+
+  <p align="center">
+    An easy to use notes and reminders app. Created with WinUI 3 and C#
+    <br /><!--
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />-->
+    <a href="https://github.com/ErenCanUtku/MyNotes/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/ErenCanUtku/MyNotes/issues">Request Feature</a>
+  </p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <!--<li><a href="#prerequisites">Prerequisites</a></li>-->
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+There are many note and reminder apps available on GitHub and other platforms; however, I didn't find one that combines both  of these while using a modern UI, so I created this enhanced one. I want to create a "Note App" so amazing that it'll be the last one you ever need.
+
+Here's why:
+* Sometimes life can be overwhelming, and I often forget tasks that I want to do later, now with reminders feature it's not a problem
+* If you need more detailed notes than .txt file, but not too much decorated and simple enough, with notes feature it's simple but effective
+* It's easier to manage all your notes and reminders in one organized place.
+
+Of course, no one "Note App" will meet everyone's needs, since your needs may be different. So I'll be adding more functionalities in the future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to creating this great app!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+This is the list of major frameworks/libraries I used to create this project. Any add-ons/plugins that I use are mentioned in the  acknowledgments section.
+
+* [![csharp][csharp]][csharp-url]
+* [![wasdk][wasdk]][wasdk-url]
+* [![win3][win3]][win3-url]
+* [![tsw][tsw]][tsw-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
+Your Windows version should be higher than **Windows 10 version 1809** because minimum Windows version supported by Windows App SDK is Windows 10 version 1809 (this app is self-contained, so it may work on older versions of Windows 10 but **NOT Tested** and even if it works, **NOT Recommended**.)
+
+### Installation
+
+_This part will be added after first release_
+<!--
+1. 
+2. 
+3.  
+4.  
+-->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+## Usage
+_This part will be added after first release_
+<!--
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+-->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+## Roadmap
+- [x] Add Notes
+- [x] Add Note details page and made it functional
+- [x] Add Reminders
+- [x] Add Trash page to manage deleted notes and reminders
+- [x] Create App notifications
+- [x] Change assets
+- [x] Open on windows startup
+- [ ] Edit README file
+- [ ] Implement localization and add every possible string to Resources.resw
+- [ ] Multi-language Support
+    - [x] English
+    - [ ] Turkish (I will make it after finishing the implementation of localization)
+
+See the [open issues](https://github.com/ErenCanUtku/MyNotes/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the **GNU General Public License v3.0** License. See `LICENSE` file for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Eren Can Utku - [@eren_can_utku](https://www.instagram.com/eren_can_utku/)
+
+Project Link: [https://github.com/ErenCanUtku/MyNotes](https://github.com/your_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+These are the list of resources I find helpful and would like to give credit to. 
+
+* For some reason, I can't make app lifecycle API work, so I used [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) on stack overflow for  single instancing. I think it's a good workaround, but I will try using app lifecycle API in the future and make it work.
+* [Choose an Open Source License](https://choosealicense.com)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template) (This template is so useful).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/ErenCanUtku/MyNotes.svg?style=for-the-badge
+[contributors-url]: https://github.com/ErenCanUtku/MyNotes/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ErenCanUtku/MyNotes.svg?style=for-the-badge
+[forks-url]: https://github.com/ErenCanUtku/MyNotes/network/members
+[stars-shield]: https://img.shields.io/github/stars/ErenCanUtku/MyNotes.svg?style=for-the-badge
+[stars-url]: https://github.com/ErenCanUtku/MyNotes/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ErenCanUtku/MyNotes.svg?style=for-the-badge
+[issues-url]: https://github.com/ErenCanUtku/MyNotes/issues
+[license-shield]: https://img.shields.io/github/license/ErenCanUtku/MyNotes.svg?style=for-the-badge
+[license-url]: https://github.com/ErenCanUtku/MyNotes/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/eren-can-utku/
+[product-screenshot]: ReadmeResources/AppImage.png
+[csharp]: https://img.shields.io/badge/C_Sharp-239120?style=for-the-badge&logo=csharp&logoColor=white
+[csharp-url]: https://learn.microsoft.com/en-us/dotnet/csharp/
+[wasdk]: https://img.shields.io/badge/Windows_App_SDK-0078D4?style=for-the-badge&logo=windows11&logoColor=white
+[wasdk-url]: https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/
+[win3]: https://img.shields.io/badge/WinUI_3-ffb900?style=for-the-badge&logo=windows11&logoColor=white
+[win3-url]: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
+[tsw]: https://img.shields.io/badge/Template_Studio_for_WinUI-0078D4?style=for-the-badge&logo=windows11&logoColor=white
+[tsw-url]: https://marketplace.visualstudio.com/items?itemName=TemplateStudio.TemplateStudioForWinUICs
