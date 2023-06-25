@@ -48,17 +48,15 @@ namespace MyNotes.Services
         {
             try
             {
-                using (NetworkStream networkStream = tcpClient?.GetStream()!)
+                using NetworkStream networkStream = tcpClient?.GetStream()!;
+                string? data = null;
+                byte[] bytes = new byte[256];
+                int bytesCount;
+                while ((bytesCount = networkStream.Read(bytes, 0, bytes.Length)) != 0)
                 {
-                    string? data = null;
-                    byte[] bytes = new byte[256];
-                    int bytesCount;
-                    while ((bytesCount = networkStream.Read(bytes, 0, bytes.Length)) != 0)
-                    {
-                        data += Encoding.UTF8.GetString(bytes, 0, bytesCount);
-                    }
-                    OnArgumentsReceived(data.Split(' '));
+                    data += Encoding.UTF8.GetString(bytes, 0, bytesCount);
                 }
+                OnArgumentsReceived(data.Split(' '));
             }
             catch (Exception)
             {
@@ -70,14 +68,10 @@ namespace MyNotes.Services
         {
             try
             {
-                using (TcpClient tcpClient = new(localHost, localPort))
-                {
-                    using (NetworkStream networkStream = tcpClient.GetStream())
-                    {
-                        byte[] data = Encoding.UTF8.GetBytes(string.Join(" ", Environment.GetCommandLineArgs()));
-                        networkStream.Write(data, 0, data.Length);
-                    }
-                }
+                using TcpClient tcpClient = new(localHost, localPort);
+                using NetworkStream networkStream = tcpClient.GetStream();
+                byte[] data = Encoding.UTF8.GetBytes(string.Join(" ", Environment.GetCommandLineArgs()));
+                networkStream.Write(data, 0, data.Length);
             }
             catch (Exception)
             {
@@ -85,7 +79,9 @@ namespace MyNotes.Services
             }
         }
 
+        #pragma warning disable IDE0052 // Remove unread private members
         private Semaphore? semaphore;
+        #pragma warning restore IDE0052 // Remove unread private members
         private readonly string semaphoreName = $"Global\\{Environment.MachineName}-myAppName{Assembly.GetExecutingAssembly().GetName().Version}-sid{Process.GetCurrentProcess().SessionId}";
         private readonly string localHost = "127.0.0.1";
         private readonly int localPort = 19191;
