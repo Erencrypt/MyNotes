@@ -2,6 +2,8 @@
 using System.Web;
 using Microsoft.Windows.AppNotifications;
 using MyNotes.Contracts.Services;
+using MyNotes.ViewModels;
+using MyNotes.Views;
 
 namespace MyNotes.Notifications;
 
@@ -57,6 +59,14 @@ public class AppNotificationService : IAppNotificationService
                 App.MainWindow.BringToFront();
             });
         }
+        else if (ar== "trash")
+        {
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                TrashPage.NtfInvoke = true;
+                _navigationService.NavigateTo(typeof(TrashViewModel).FullName!);
+            });
+        }
         else
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
@@ -76,7 +86,6 @@ public class AppNotificationService : IAppNotificationService
                   <text>{title}</text>
                   <text>{message}</text>
                   <text>{time}</text>
-                   <image src='ms-appx:///Assets/NoteIcon.png' placement='appLogoOverride' hint-crop='circle'/>
                 </binding>
               </visual>
               <actions>
@@ -91,9 +100,34 @@ public class AppNotificationService : IAppNotificationService
                 <action arguments='dismiss' content='Dismiss'/>
               </actions>
             </toast>");
-        AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory));
-        appNotification.Expiration = DateTime.Now.AddDays(1);
-        appNotification.Priority = AppNotificationPriority.High;
+        AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
+        {
+            Expiration = DateTime.Now.AddDays(1),
+            Priority = AppNotificationPriority.High
+        };
+        AppNotificationManager.Default.Show(appNotification);
+        return appNotification.Id != 0;
+    }
+    public bool ShowInfoMessage(string title, string message)
+    {
+        string payload = new(@$"
+            <toast>
+              <visual>
+                <binding template='ToastGeneric'>
+                  <text>{title}</text>
+                  <text>{message}</text>
+                </binding>
+              </visual>
+              <actions>
+                <action arguments='trash' content='See deleted reminders'/>
+              </actions>
+            </toast>");
+        AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
+        {
+            ExpiresOnReboot = true,
+            Expiration = DateTime.Now.AddHours(1),
+            Priority = AppNotificationPriority.High
+        };
         AppNotificationManager.Default.Show(appNotification);
         return appNotification.Id != 0;
     }

@@ -13,4 +13,5 @@ public interface IAppNotificationService
 
     void Unregister();
     void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args);
+    bool ShowInfoMessage(string title, string message);
 }
