@@ -1,11 +1,11 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using MyNotes.Helpers;
-using MyNotes.ViewModels;
 using MyNotes.Models;
+using MyNotes.ViewModels;
 using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using Windows.Storage;
 
 namespace MyNotes.Views;
@@ -51,13 +51,13 @@ public sealed partial class TrashPage : Page
         }
         if (LstReminders.Items.Count < 1)
         {
-            EmptyText.Visibility = Visibility.Visible;
+            EmptyText2.Visibility = Visibility.Visible;
         }
         else
         {
-            EmptyText.Visibility = Visibility.Collapsed;
+            EmptyText2.Visibility = Visibility.Collapsed;
         }
-        if (ntfInvoke==true)
+        if (ntfInvoke == true)
         {
             PivotChange();
         }

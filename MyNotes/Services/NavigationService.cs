@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-
 using MyNotes.Contracts.Services;
 using MyNotes.Contracts.ViewModels;
 using MyNotes.Helpers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MyNotes.Services;
 

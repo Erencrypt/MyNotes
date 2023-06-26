@@ -1,10 +1,10 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using MyNotes.ViewModels;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Windows.Storage;
-using Microsoft.UI.Xaml;
-using MyNotes.Helpers;
 using MyNotes.Contracts.Services;
+using MyNotes.Helpers;
+using MyNotes.ViewModels;
+using Windows.Storage;
 
 namespace MyNotes.Views;
 

@@ -1,7 +1,7 @@
-using Microsoft.UI.Xaml.Controls;
-using Windows.Storage;
-using MyNotes.Helpers;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using MyNotes.Helpers;
+using Windows.Storage;
 
 namespace MyNotes.Views;
 
@@ -48,7 +48,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
             Result = NoteCreateResult.NoteCreationFail;
             args.Cancel = true;
             errorTextBlock.Visibility = Visibility.Visible;
-            errorTextBlock.Text = "An error occured. Error message:"+ex.Message;
+            errorTextBlock.Text = "An error occured. Error message:" + ex.Message;
         }
     }
     private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

@@ -1,9 +1,9 @@
-﻿using System.Collections.Specialized;
-using System.Web;
-using Microsoft.Windows.AppNotifications;
+﻿using Microsoft.Windows.AppNotifications;
 using MyNotes.Contracts.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
+using System.Collections.Specialized;
+using System.Web;
 
 namespace MyNotes.Notifications;
 
@@ -30,7 +30,7 @@ public class AppNotificationService : IAppNotificationService
 
     public void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
     {
-        IDictionary<string,string> userInput = args.UserInput;
+        IDictionary<string, string> userInput = args.UserInput;
         string ar = args.Argument;
         int input = Convert.ToInt32(userInput["snoozeTime"]);
         if (ar == "snooze")
@@ -38,7 +38,7 @@ public class AppNotificationService : IAppNotificationService
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
                 DateTime dt = Convert.ToDateTime(App.InvokedReminders[0].DateTime);
-                App.InvokedReminders[0].DateTime=dt.AddMinutes(input).ToString();
+                App.InvokedReminders[0].DateTime = dt.AddMinutes(input).ToString();
                 App.ReminderSnoozed();
             });
         }
@@ -51,7 +51,7 @@ public class AppNotificationService : IAppNotificationService
                 App.ReminderDismissed();
             });
         }
-        else if (ar== "trash")
+        else if (ar == "trash")
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
@@ -69,7 +69,7 @@ public class AppNotificationService : IAppNotificationService
         }
     }
 
-    public bool ShowReminder(string title,string message, string time)
+    public bool ShowReminder(string title, string message, string time)
     {
         string payload = new(@$"
             <toast scenario='reminder'>

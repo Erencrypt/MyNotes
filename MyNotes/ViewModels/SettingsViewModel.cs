@@ -1,14 +1,10 @@
-﻿using System.Reflection;
-using System.Windows.Input;
-
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
 using Microsoft.UI.Xaml;
-
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
-
+using System.Reflection;
+using System.Windows.Input;
 using Windows.ApplicationModel;
 
 namespace MyNotes.ViewModels;

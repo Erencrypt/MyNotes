@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 
@@ -79,9 +79,9 @@ namespace MyNotes.Services
             }
         }
 
-        #pragma warning disable IDE0052 // Remove unread private members
+#pragma warning disable IDE0052 // Remove unread private members
         private Semaphore? semaphore;
-        #pragma warning restore IDE0052 // Remove unread private members
+#pragma warning restore IDE0052 // Remove unread private members
         private readonly string semaphoreName = $"Global\\{Environment.MachineName}-myAppName{Assembly.GetExecutingAssembly().GetName().Version}-sid{Process.GetCurrentProcess().SessionId}";
         private readonly string localHost = "127.0.0.1";
         private readonly int localPort = 19191;

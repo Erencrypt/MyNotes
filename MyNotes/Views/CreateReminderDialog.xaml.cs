@@ -1,10 +1,10 @@
-using Microsoft.UI.Xaml.Controls;
-using Windows.Storage;
-using MyNotes.Helpers;
 using Microsoft.UI.Xaml;
-using System.Text.RegularExpressions;
+using Microsoft.UI.Xaml.Controls;
+using MyNotes.Helpers;
 using MyNotes.Models;
 using System.Text;
+using System.Text.RegularExpressions;
+using Windows.Storage;
 
 namespace MyNotes.Views;
 public enum ReminderCreateResult
@@ -31,6 +31,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
     {
         //TODO: localize strings
         //TODO: simplify and clean code blocks
+        //TODO: change reminder tex texbox to rich edit box
         this.InitializeComponent();
         ReminderRepeatCheck.Content = "Repeated".GetLocalized();
         isNewNote = RemindersPage.IsNewNote;

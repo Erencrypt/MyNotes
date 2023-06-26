@@ -1,13 +1,13 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using MyNotes.Helpers;
-using MyNotes.ViewModels;
-using MyNotes.Models;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Windows.Storage;
+using MyNotes.Helpers;
+using MyNotes.Models;
+using MyNotes.ViewModels;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections.ObjectModel;
+using Windows.Storage;
 
 namespace MyNotes.Views;
 
@@ -42,7 +42,7 @@ public sealed partial class RemindersPage : Page
         }
     }
     private static bool isNewNote = false;
-    private static string noteName=string.Empty;
+    private static string noteName = string.Empty;
     public RemindersPage()
     {
         ViewModel = App.GetService<RemindersViewModel>();
@@ -53,6 +53,14 @@ public sealed partial class RemindersPage : Page
         ToolTipService.SetToolTip(newReminder, "Add".GetLocalized());
         LstReminders.ItemsSource = items;
         ListReminders();
+        if (LstReminders.Items.Count < 1)
+        {
+            EmptyText.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            EmptyText.Visibility = Visibility.Collapsed;
+        }
     }
     private async void AddReminder()
     {
@@ -82,7 +90,7 @@ public sealed partial class RemindersPage : Page
                 PrimaryButtonText = "Save Reminder"
             };
             await EditReminderDialog.ShowAsync();
-            if (EditReminderDialog.Result==ReminderCreateResult.ReminderCreationOK)
+            if (EditReminderDialog.Result == ReminderCreateResult.ReminderCreationOK)
             {
                 Reminder rm = EditReminderDialog.rmnd;
                 items.Remove(selectedItem);

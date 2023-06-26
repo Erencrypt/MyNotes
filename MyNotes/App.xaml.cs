@@ -133,7 +133,7 @@ public partial class App : Application
             singleInstanceService.OnArgumentsReceived += OnArgumentsReceived;
             CreateFolders();
             ReminderCleanup();
-            
+
             base.OnLaunched(args);
             await App.GetService<IActivationService>().ActivateAsync(args);
             timer.Interval = TimeSpan.FromSeconds(15);
@@ -155,7 +155,7 @@ public partial class App : Application
     {
         for (int i = 0; i < reminders.Count; i++)
         {
-            Reminder reminder= reminders[i];
+            Reminder reminder = reminders[i];
             bool rep = Convert.ToBoolean(reminder.Repeat);
             DateTime tm = Convert.ToDateTime(reminder.DateTime);
             DateTime now = DateTime.Now;
@@ -251,7 +251,7 @@ public partial class App : Application
         }
         if (DeletedCount > 0 && AddedCount > 0)
         {
-            GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration and you have "+AddedCount.ToString()+ " active reminder(s).\nYou can check out trash page to see deleted reminders.");
+            GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration and you have " + AddedCount.ToString() + " active reminder(s).\nYou can check out trash page to see deleted reminders.");
         }
         else if (DeletedCount > 0 && AddedCount == 0)
         {
@@ -259,7 +259,7 @@ public partial class App : Application
         }
         else if (DeletedCount == 0 && AddedCount > 0)
         {
-            GetService<IAppNotificationService>().ShowInfoMessage("Info","You have " + AddedCount.ToString() + " active reminder(s).");
+            GetService<IAppNotificationService>().ShowInfoMessage("Info", "You have " + AddedCount.ToString() + " active reminder(s).");
         }
     }
 }

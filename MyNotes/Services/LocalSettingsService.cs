@@ -5,8 +5,6 @@ using MyNotes.Core.Contracts.Services;
 using MyNotes.Core.Helpers;
 using MyNotes.Helpers;
 using MyNotes.Models;
-
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace MyNotes.Services;

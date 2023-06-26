@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Media;
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
-using Windows.Storage;
 using Windows.System;
 
 namespace MyNotes.Views;
@@ -36,7 +35,7 @@ public sealed partial class ShellPage : Page
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
     }
-    
+
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));

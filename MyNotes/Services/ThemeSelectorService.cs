@@ -1,8 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
 using MyNotes.Contracts.Services;
-using MyNotes.Helpers;
-using MyNotes.Views;
 
 namespace MyNotes.Services;
 

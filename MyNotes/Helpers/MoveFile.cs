@@ -1,9 +1,8 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml;
-using Windows.Storage;
-using System.Collections.ObjectModel;
-using MyNotes.Views;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using MyNotes.Models;
+using System.Collections.ObjectModel;
+using Windows.Storage;
 
 namespace MyNotes.Helpers
 {
@@ -25,7 +24,7 @@ namespace MyNotes.Helpers
                 }
                 else
                 {
-                    if (root!=null)
+                    if (root != null)
                     {
                         ContentDialog noWifiDialog = new()
                         { XamlRoot = root, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
@@ -50,7 +49,7 @@ namespace MyNotes.Helpers
                 var selectedItem = list.SelectedItem;
                 if (selectedItem != null)
                 {
-                    var directory = notesFolder.Path.ToString() + "\\"+from+"\\" + list.SelectedItem.ToString() + ".rtf";
+                    var directory = notesFolder.Path.ToString() + "\\" + from + "\\" + list.SelectedItem.ToString() + ".rtf";
                     var dir = notesFolder.Path.ToString() + "\\" + to + "\\";
                     var folder = await StorageFolder.GetFolderFromPathAsync(dir);
                     var file = await StorageFile.GetFileFromPathAsync(directory);
@@ -72,7 +71,7 @@ namespace MyNotes.Helpers
                 await noWifiDialog.ShowAsync();
             }
         }
-        public async void Move(string from, string to, ListView list, XamlRoot root,Reminder reminder, ObservableCollection<Reminder> items)
+        public async void Move(string from, string to, ListView list, XamlRoot root, Reminder reminder, ObservableCollection<Reminder> items)
         {
             try
             {

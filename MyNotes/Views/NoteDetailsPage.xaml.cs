@@ -3,12 +3,12 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using MyNotes.Helpers;
 using MyNotes.ViewModels;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.UI;
-using MyNotes.Helpers;
 using Windows.System;
+using Windows.UI;
 
 namespace MyNotes.Views;
 
@@ -107,7 +107,7 @@ public sealed partial class NoteDetailsPage : Page
         {
             var key1 = args.Modifiers;
             var key2 = args.Key;
-            if (key1==VirtualKeyModifiers.Control && key2==VirtualKey.F)
+            if (key1 == VirtualKeyModifiers.Control && key2 == VirtualKey.F)
             {
                 findBox.Text = selectedtext;
                 findBox.Focus(FocusState.Programmatic);
