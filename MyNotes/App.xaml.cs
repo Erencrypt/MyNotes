@@ -62,7 +62,6 @@ public partial class App : Application
             reminders = value;
         }
     }
-
     private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
     private readonly DispatcherTimer timer = new();
     private static List<Reminder> reminders = new();
@@ -132,7 +131,9 @@ public partial class App : Application
         if (singleInstanceService.IsFirstInstance())
         {
             singleInstanceService.OnArgumentsReceived += OnArgumentsReceived;
+            CreateFolders();
             ReminderCleanup();
+            
             base.OnLaunched(args);
             await App.GetService<IActivationService>().ActivateAsync(args);
             timer.Interval = TimeSpan.FromSeconds(15);
@@ -194,10 +195,17 @@ public partial class App : Application
         moveFile.Move("Reminders", "Trash", reminder.ReminderHeader!, root: null!);
         InvokedReminders.Remove(reminder);
     }
-    private void ReminderCleanup()
+    private async void CreateFolders()
+    {
+        await storageFolder.CreateFolderAsync("Notes", CreationCollisionOption.OpenIfExists);
+        await storageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
+        await storageFolder.CreateFolderAsync("Trash", CreationCollisionOption.OpenIfExists);
+    }
+    private async void ReminderCleanup()
     {
         int DeletedCount = 0;
         int AddedCount = 0;
+        await storageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
         DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
         FileInfo[] Files = dinfo.GetFiles("*.txt");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
