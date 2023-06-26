@@ -65,6 +65,7 @@ public sealed partial class RemindersPage : Page
         if (AddReminderDialog.Result == ReminderCreateResult.ReminderCreationOK)
         {
             items.Insert(0, AddReminderDialog.rmnd);
+            App.Reminders.Add(AddReminderDialog.rmnd);
         }
     }
     private async void EditReminder()
@@ -137,6 +138,7 @@ public sealed partial class RemindersPage : Page
     }
     private void DeleteReminder_Click(object sender, RoutedEventArgs e)
     {
+        //TODO: if deleted reminder is an active one and not notificated yet, delete it from App.reminders
         deleteReminder.Flyout.Hide();
         if (LstReminders.SelectedItem != null)
         {

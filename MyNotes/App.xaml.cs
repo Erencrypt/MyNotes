@@ -12,7 +12,6 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
-using System.Text.RegularExpressions;
 using System.Text;
 using Windows.Storage;
 
@@ -39,11 +38,38 @@ public partial class App : Application
         return service;
     }
     public static WindowEx MainWindow { get; } = new MainWindow();
+
+    public static List<Reminder> InvokedReminders
+    {
+        get
+        {
+            return invokedReminders;
+        }
+        set
+        {
+            invokedReminders = value;
+        }
+    }
+
+    public static List<Reminder> Reminders
+    {
+        get
+        {
+            return reminders;
+        }
+        set
+        {
+            reminders = value;
+        }
+    }
+
     private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    private readonly DispatcherTimer timer = new();
+    private static List<Reminder> reminders = new();
+    private static List<Reminder> invokedReminders = new();
     public App()
     {
         InitializeComponent();
-
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -87,7 +113,7 @@ public partial class App : Application
         }).
         Build();
 
-        App.GetService<IAppNotificationService>().Initialize();
+        GetService<IAppNotificationService>().Initialize();
 
         UnhandledException += App_UnhandledException;
     }
@@ -109,11 +135,10 @@ public partial class App : Application
             ReminderCleanup();
             base.OnLaunched(args);
             await App.GetService<IActivationService>().ActivateAsync(args);
+            timer.Interval = TimeSpan.FromSeconds(15);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
-
-        //TODO: notification example
-        //notificationService.ShowReminder("header text", "this is reminder text.", "time section");
-        //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
     }
     private void OnArgumentsReceived(string[] obj)
     {
@@ -125,34 +150,108 @@ public partial class App : Application
         args.Handled = true;
         App.MainWindow.Hide();
     }
+    private void Timer_Tick(object? sender, object e)
+    {
+        for (int i = 0; i < reminders.Count; i++)
+        {
+            Reminder reminder= reminders[i];
+            bool rep = Convert.ToBoolean(reminder.Repeat);
+            DateTime tm = Convert.ToDateTime(reminder.DateTime);
+            DateTime now = DateTime.Now;
+            if (rep == true)
+            {
+                if (tm.Hour == now.Hour && tm.Minute == now.Minute)
+                {
+                    GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("d/MM/yyyy\nh:mm tt"));
+                    InvokedReminders.Add(reminder);
+                    reminders.Remove(reminder);
+                }
+            }
+            else if (rep == false)
+            {
+                if (tm.Date == now.Date)
+                {
+                    if (tm.Hour == now.Hour && tm.Minute == now.Minute)
+                    {
+                        GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("d/MM/yyyy\nh:mm tt"));
+                        InvokedReminders.Add(reminder);
+                        reminders.Remove(reminder);
+                    }
+                }
+            }
+        }
+    }
+    public static void ReminderSnoozed()
+    {
+        Reminder reminder = InvokedReminders[0];
+        reminders.Add(reminder);
+        InvokedReminders.Remove(reminder);
+    }
+    public static void ReminderDismissed()
+    {
+        Reminder reminder = InvokedReminders[0];
+        MoveFile moveFile = new();
+        moveFile.Move("Reminders", "Trash", reminder.ReminderHeader!, root: null!);
+        InvokedReminders.Remove(reminder);
+    }
     private void ReminderCleanup()
     {
-        //TODO: Send app notification about expired reminders
-        int count = 0;
+        int DeletedCount = 0;
+        int AddedCount = 0;
         DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
         FileInfo[] Files = dinfo.GetFiles("*.txt");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         string fullPath;
+        MoveFile moveFile = new();
         foreach (FileInfo file in orderedList)
         {
             fullPath = dinfo.ToString() + "\\" + file.Name;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
             string[] lines = readText.Split("\r\n");
             DateTime t;
+            if (lines.Length == 3)
+            {
+                t = Convert.ToDateTime(lines[2]);
+                if (t.TimeOfDay > DateTime.Now.TimeOfDay)
+                {
+                    reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
+                    AddedCount++;
+                }
+            }
             if (lines.Length == 4)
             {
                 t = Convert.ToDateTime(lines[3] + " " + lines[2]);
                 if (t.Date < DateTime.Now.Date)
                 {
-                    MoveFile moveFile = new();
                     moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                    count++;
+                    DeletedCount++;
+                }
+                else if (t.Date == DateTime.Now.Date)
+                {
+                    if (t.TimeOfDay < DateTime.Now.TimeOfDay)
+                    {
+                        moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
+                        DeletedCount++;
+                    }
+                }
+                else
+                {
+                    reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
+                    AddedCount++;
                 }
             }
         }
-        if (count > 0)
+        if (DeletedCount > 0 && AddedCount > 0)
         {
-            App.GetService<IAppNotificationService>().ShowInfoMessage("Info",count.ToString()+" Reminder(s) moved to trash due to expiration, you can check out trash page to see them.");
+            GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration and you have "+AddedCount.ToString()+ " active reminder(s).\nYou can check out trash page to see deleted reminders.");
+        }
+        else if (DeletedCount > 0 && AddedCount == 0)
+        {
+            GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration.You can check out trash page to see deleted reminders.");
+        }
+        else if (DeletedCount == 0 && AddedCount > 0)
+        {
+            GetService<IAppNotificationService>().ShowInfoMessage("Info","You have " + AddedCount.ToString() + " active reminder(s).");
         }
     }
 }
