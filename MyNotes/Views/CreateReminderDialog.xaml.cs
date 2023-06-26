@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using MyNotes.Helpers;
 using MyNotes.Models;
 using System.Text;
-using System.Text.RegularExpressions;
 using Windows.Storage;
 
 namespace MyNotes.Views;
@@ -23,7 +22,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         get; private set;
     }
     readonly private bool isNewNote;
-    private string noteName;
+    private readonly string noteName;
     private bool isRepeated = false;
     TimeSpan tmsp;
     DateTime time, selectedDate, ofsetDate;
@@ -90,24 +89,20 @@ public sealed partial class CreateReminderDialog : ContentDialog
                 selectedDate = datePicker.SelectedDate!.Value.DateTime;
                 writer.WriteLine(isRepeated.ToString());
                 writer.WriteLine(reminderTextTextBox.Text);
-                Regex regex = MyRegex();
-                string[] s;
                 DateTime t;
-                string[] tt;
                 if (!isRepeated)
                 {
                     t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                    tt = regex.Split(t.ToString());
-                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = tt[0] + " " + tt[1][..^3] + " " + tt[2], Repeat = isRepeated.ToString() };
                     writer.WriteLine(timePicker.SelectedTime);
                     writer.Write(selectedDate.Day + "/" + selectedDate.Month + "/" + selectedDate.Year);
+                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("dd/MM/yyyy hh:mm tt"), Repeat = isRepeated.ToString() };
                 }
                 else
                 {
                     t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                    s = regex.Split(t.ToString());
-                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = s[1][..^3] + " " + s[2], Repeat = isRepeated.ToString() };
                     writer.Write(timePicker.SelectedTime);
+                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("hh:mm tt"), Repeat = isRepeated.ToString() };
+                    
                 }
                 writer.Close();
                 Result = ReminderCreateResult.ReminderCreationOK;
@@ -131,23 +126,18 @@ public sealed partial class CreateReminderDialog : ContentDialog
             selectedDate = datePicker.SelectedDate!.Value.DateTime;
             writer.WriteLine(isRepeated.ToString());
             writer.WriteLine(reminderTextTextBox.Text);
-            Regex regex = MyRegex();
-            string[] s;
             DateTime t;
-            string[] tt;
             if (!isRepeated)
             {
                 t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                tt = regex.Split(t.ToString());
-                rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = tt[0] + " " + tt[1][..^3] + " " + tt[2], Repeat = isRepeated.ToString() };
+                rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("dd/MM/yyyy hh:mm tt"), Repeat = isRepeated.ToString() };
                 writer.WriteLine(timePicker.SelectedTime);
                 writer.Write(selectedDate.Day + "/" + selectedDate.Month + "/" + selectedDate.Year);
             }
             else
             {
                 t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                s = regex.Split(t.ToString());
-                rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = s[1][..^3] + " " + s[2], Repeat = isRepeated.ToString() };
+                rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("hh:mm tt"), Repeat = isRepeated.ToString() };
                 writer.Write(timePicker.SelectedTime);
             }
             writer.Close();
@@ -244,7 +234,4 @@ public sealed partial class CreateReminderDialog : ContentDialog
         datePicker.SelectedDate = DateTime.Now;
 
     }
-
-    [GeneratedRegex("\\s")]
-    private static partial Regex MyRegex();
 }

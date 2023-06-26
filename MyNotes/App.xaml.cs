@@ -203,63 +203,78 @@ public partial class App : Application
     }
     private async void ReminderCleanup()
     {
-        int DeletedCount = 0;
-        int AddedCount = 0;
-        await storageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
-        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
-        FileInfo[] Files = dinfo.GetFiles("*.txt");
-        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
-        string fullPath;
-        MoveFile moveFile = new();
-        foreach (FileInfo file in orderedList)
+        try
         {
-            fullPath = dinfo.ToString() + "\\" + file.Name;
-            string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-            string[] lines = readText.Split("\r\n");
-            DateTime t;
-            if (lines.Length == 3)
+            int DeletedCount = 0;
+            int AddedCount = 0;
+            await storageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
+            DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
+            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
+            string fullPath;
+            MoveFile moveFile = new();
+            foreach (FileInfo file in orderedList)
             {
-                t = Convert.ToDateTime(lines[2]);
-                if (t.TimeOfDay > DateTime.Now.TimeOfDay)
+                fullPath = dinfo.ToString() + "\\" + file.Name;
+                string readText = File.ReadAllText(fullPath, Encoding.UTF8);
+                string[] lines = readText.Split("\r\n");
+                if (lines.Length < 3)
                 {
-                    reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
-                    AddedCount++;
-                }
-            }
-            if (lines.Length == 4)
-            {
-                t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                if (t.Date < DateTime.Now.Date)
-                {
-                    moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                    DeletedCount++;
-                }
-                else if (t.Date == DateTime.Now.Date)
-                {
-                    if (t.TimeOfDay < DateTime.Now.TimeOfDay)
-                    {
-                        moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                        DeletedCount++;
-                    }
+                    continue;
                 }
                 else
                 {
-                    reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
-                    AddedCount++;
+                    DateTime t;
+                    if (lines.Length == 3)
+                    {
+                        t = Convert.ToDateTime(lines[2]);
+                        if (t.TimeOfDay > DateTime.Now.TimeOfDay)
+                        {
+                            reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
+                            AddedCount++;
+                        }
+                    }
+                    if (lines.Length == 4)
+                    {
+                        t = Convert.ToDateTime(lines[3] + " " + lines[2]);
+                        if (t.Date < DateTime.Now.Date)
+                        {
+                            moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
+                            DeletedCount++;
+                        }
+                        else if (t.Date == DateTime.Now.Date)
+                        {
+                            if (t.TimeOfDay < DateTime.Now.TimeOfDay)
+                            {
+                                moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
+                                DeletedCount++;
+                            }
+                        }
+                        else
+                        {
+                            reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
+                            AddedCount++;
+                        }
+                    }
                 }
             }
+            if (DeletedCount > 0 && AddedCount > 0)
+            {
+                GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration and you have " + AddedCount.ToString() + " active reminder(s).\nYou can check out trash page to see deleted reminders.");
+            }
+            else if (DeletedCount > 0 && AddedCount == 0)
+            {
+                GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration.You can check out trash page to see deleted reminders.");
+            }
+            else if (DeletedCount == 0 && AddedCount > 0)
+            {
+                GetService<IAppNotificationService>().ShowInfoMessage("Info", "You have " + AddedCount.ToString() + " active reminder(s).");
+            }
         }
-        if (DeletedCount > 0 && AddedCount > 0)
+        catch (Exception)
         {
-            GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration and you have " + AddedCount.ToString() + " active reminder(s).\nYou can check out trash page to see deleted reminders.");
-        }
-        else if (DeletedCount > 0 && AddedCount == 0)
-        {
-            GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration.You can check out trash page to see deleted reminders.");
-        }
-        else if (DeletedCount == 0 && AddedCount > 0)
-        {
-            GetService<IAppNotificationService>().ShowInfoMessage("Info", "You have " + AddedCount.ToString() + " active reminder(s).");
+
+            throw;
         }
     }
 }
