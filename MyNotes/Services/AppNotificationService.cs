@@ -30,33 +30,25 @@ public class AppNotificationService : IAppNotificationService
 
     public void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
     {
-        // TODO: Handle notification invocations when your app is already running.
-
-        //// // Navigate to a specific page based on the notification arguments.
-        //// if (ParseArguments(args.Argument)["action"] == "Settings")
-        //// {
-        ////    App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-        ////    {
-        ////        _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
-        ////    });
-        //// }
-
         IDictionary<string,string> userInput = args.UserInput;
-        string ar = args.Argument; 
+        string ar = args.Argument;
+        int input = Convert.ToInt32(userInput["snoozeTime"]);
         if (ar == "snooze")
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
-                App.MainWindow.ShowMessageDialogAsync("Snooze time :" + userInput["snoozeTime"], "Notification Invoked");
-                App.MainWindow.BringToFront();
+                DateTime dt = Convert.ToDateTime(App.InvokedReminders[0].DateTime);
+                App.InvokedReminders[0].DateTime=dt.AddMinutes(input).ToString();
+                App.ReminderSnoozed();
             });
         }
         else if (ar == "dismiss")
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
-                App.MainWindow.ShowMessageDialogAsync("Notification dismissed", "Notification Invoked");
-                App.MainWindow.BringToFront();
+                //App.MainWindow.ShowMessageDialogAsync("Notification dismissed", "Notification Invoked");
+                //App.MainWindow.BringToFront();
+                App.ReminderDismissed();
             });
         }
         else if (ar== "trash")
@@ -69,11 +61,11 @@ public class AppNotificationService : IAppNotificationService
         }
         else
         {
-            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            /*App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
                 App.MainWindow.ShowMessageDialogAsync("Notification notification itself clicked", "Notification Invoked");
                 App.MainWindow.BringToFront();
-            });
+            });*/
         }
     }
 
@@ -102,7 +94,29 @@ public class AppNotificationService : IAppNotificationService
             </toast>");
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
         {
-            Expiration = DateTime.Now.AddDays(1),
+            Priority = AppNotificationPriority.High
+        };
+        AppNotificationManager.Default.Show(appNotification);
+        return appNotification.Id != 0;
+    }
+    public bool ShowDeletedMessage(string title, string message)
+    {
+        string payload = new(@$"
+            <toast>
+              <visual>
+                <binding template='ToastGeneric'>
+                  <text>{title}</text>
+                  <text>{message}</text>
+                </binding>
+              </visual>
+              <actions>
+                <action arguments='trash' content='See deleted reminders'/>
+              </actions>
+            </toast>");
+        AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
+        {
+            ExpiresOnReboot = true,
+            Expiration = DateTime.Now.AddHours(1),
             Priority = AppNotificationPriority.High
         };
         AppNotificationManager.Default.Show(appNotification);
@@ -118,9 +132,6 @@ public class AppNotificationService : IAppNotificationService
                   <text>{message}</text>
                 </binding>
               </visual>
-              <actions>
-                <action arguments='trash' content='See deleted reminders'/>
-              </actions>
             </toast>");
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
         {
