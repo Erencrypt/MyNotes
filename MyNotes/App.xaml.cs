@@ -175,9 +175,17 @@ public partial class App : Application
     public static void ReminderDismissed()
     {
         Reminder reminder = InvokedReminders[0];
-        MoveFile moveFile = new();
-        moveFile.Move("Reminders", "Trash", reminder.ReminderHeader!, root: null!);
-        InvokedReminders.Remove(reminder);
+        bool repeat= Convert.ToBoolean(reminder.Repeat);
+        if (repeat)
+        {
+            InvokedReminders.Remove(reminder);
+        }
+        else
+        {
+            MoveFile moveFile = new();
+            moveFile.Move("Reminders", "Trash", reminder.ReminderHeader!, root: null!);
+            InvokedReminders.Remove(reminder);
+        }
     }
     private void Timer_Tick(object? sender, object e)
     {

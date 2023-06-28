@@ -73,6 +73,10 @@ public sealed partial class RemindersPage : Page
         {
             items.Insert(0, AddReminderDialog.rmnd);
             App.Reminders.Add(AddReminderDialog.rmnd);
+            if (EmptyText.Visibility==Visibility.Visible)
+            {
+                EmptyText.Visibility = Visibility.Collapsed;
+            }
         }
     }
     private async void EditReminder()
