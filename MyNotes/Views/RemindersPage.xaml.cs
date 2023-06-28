@@ -12,7 +12,7 @@ namespace MyNotes.Views;
 
 public sealed partial class RemindersPage : Page
 {
-    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder storageFolder = App.StorageFolder;
     private readonly ObservableCollection<Reminder> items = new();
     public RemindersViewModel ViewModel
     {
@@ -140,13 +140,16 @@ public sealed partial class RemindersPage : Page
     }
     private void DeleteReminder_Click(object sender, RoutedEventArgs e)
     {
-        //TODO: if deleted reminder is an active one and not notificated yet, delete it from App.reminders
         deleteReminder.Flyout.Hide();
         if (LstReminders.SelectedItem != null)
         {
             Reminder? rm = LstReminders.SelectedItem as Reminder;
             MoveFile moveFile = new();
             moveFile.Move("Reminders", "Trash", LstReminders, XamlRoot, rm!, items);
+            if (App.Reminders.Contains(rm!))
+            {
+                App.Reminders.Remove(rm!);
+            }
         }
     }
     private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)

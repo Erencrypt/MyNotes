@@ -50,7 +50,6 @@ public partial class App : Application
             invokedReminders = value;
         }
     }
-
     public static List<Reminder> Reminders
     {
         get
@@ -62,10 +61,23 @@ public partial class App : Application
             reminders = value;
         }
     }
-    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    public static StorageFolder StorageFolder
+    {
+        get
+        {
+            return sFolder!;
+        }
+        set
+        {
+            sFolder = value;
+        }
+    }
+    private static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\MyNotes";
+    private static StorageFolder? sFolder;
     private readonly DispatcherTimer timer = new();
     private static List<Reminder> reminders = new();
     private static List<Reminder> invokedReminders = new();
+
     public App()
     {
         InitializeComponent();
@@ -131,6 +143,9 @@ public partial class App : Application
         if (singleInstanceService.IsFirstInstance())
         {
             singleInstanceService.OnArgumentsReceived += OnArgumentsReceived;
+            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+            await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
+            sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             CreateFolders();
             ReminderCleanup();
 
@@ -150,6 +165,19 @@ public partial class App : Application
     {
         args.Handled = true;
         App.MainWindow.Hide();
+    }
+    public static void ReminderSnoozed()
+    {
+        Reminder reminder = InvokedReminders[0];
+        reminders.Add(reminder);
+        InvokedReminders.Remove(reminder);
+    }
+    public static void ReminderDismissed()
+    {
+        Reminder reminder = InvokedReminders[0];
+        MoveFile moveFile = new();
+        moveFile.Move("Reminders", "Trash", reminder.ReminderHeader!, root: null!);
+        InvokedReminders.Remove(reminder);
     }
     private void Timer_Tick(object? sender, object e)
     {
@@ -182,33 +210,22 @@ public partial class App : Application
             }
         }
     }
-    public static void ReminderSnoozed()
+    private static async void CreateFolders()
     {
-        Reminder reminder = InvokedReminders[0];
-        reminders.Add(reminder);
-        InvokedReminders.Remove(reminder);
+        List<string> folders = new() {"Notes", "Reminders", "Trash" };
+        foreach (string folder in folders)
+        {
+            await StorageFolder.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);
+        }
     }
-    public static void ReminderDismissed()
-    {
-        Reminder reminder = InvokedReminders[0];
-        MoveFile moveFile = new();
-        moveFile.Move("Reminders", "Trash", reminder.ReminderHeader!, root: null!);
-        InvokedReminders.Remove(reminder);
-    }
-    private async void CreateFolders()
-    {
-        await storageFolder.CreateFolderAsync("Notes", CreationCollisionOption.OpenIfExists);
-        await storageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
-        await storageFolder.CreateFolderAsync("Trash", CreationCollisionOption.OpenIfExists);
-    }
-    private async void ReminderCleanup()
+    private static async void ReminderCleanup()
     {
         try
         {
             int DeletedCount = 0;
             int AddedCount = 0;
-            await storageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
-            DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
+            await StorageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
+            DirectoryInfo dinfo = new(StorageFolder.Path + "\\Reminders");
             FileInfo[] Files = dinfo.GetFiles("*.txt");
             List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
             string fullPath;

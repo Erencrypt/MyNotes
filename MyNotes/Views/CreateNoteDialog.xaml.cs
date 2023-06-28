@@ -18,7 +18,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
     {
         get; private set;
     }
-    private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder notesFolder = App.StorageFolder;
     public CreateNoteDialog()
     {
         this.InitializeComponent();

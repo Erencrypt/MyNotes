@@ -16,7 +16,7 @@ public enum ReminderCreateResult
 public sealed partial class CreateReminderDialog : ContentDialog
 {
     public Reminder rmnd = new();
-    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder storageFolder = App.StorageFolder;
     public ReminderCreateResult Result
     {
         get; private set;

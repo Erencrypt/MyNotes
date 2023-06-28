@@ -14,7 +14,7 @@ namespace MyNotes.Views;
 
 public sealed partial class NoteDetailsPage : Page
 {
-    private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder notesFolder = App.StorageFolder;
     private DispatcherTimer? dispatcherTimer;
 
     public NoteDetailsViewModel ViewModel

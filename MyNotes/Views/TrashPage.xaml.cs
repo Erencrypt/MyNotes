@@ -5,15 +5,14 @@ using MyNotes.Models;
 using MyNotes.ViewModels;
 using System.Collections.ObjectModel;
 using System.Text;
-using System.Text.RegularExpressions;
 using Windows.Storage;
 
 namespace MyNotes.Views;
 
 public sealed partial class TrashPage : Page
 {
-    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-    private ObservableCollection<Reminder> items = new();
+    private readonly StorageFolder storageFolder = App.StorageFolder;
+    private readonly ObservableCollection<Reminder> items = new();
     public TrashViewModel ViewModel
     {
         get;
@@ -90,21 +89,16 @@ public sealed partial class TrashPage : Page
             fullPath = dinfo.ToString() + "\\" + file.Name;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
             string[] lines = readText.Split("\r\n");
-            Regex regex = MyRegex();
-            string[] s;
             DateTime t;
-            string[] tt;
             if (lines.Length == 3)
             {
                 t = Convert.ToDateTime(lines[2]);
-                s = regex.Split(t.ToString());
-                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = s[1][..^3] + " " + s[2], Repeat = lines[0] });
+                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString("hh:mm tt"), Repeat = lines[0] });
             }
             else if (lines.Length == 4)
             {
                 t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                tt = regex.Split(t.ToString());
-                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = tt[0] + " " + tt[1][..^3] + " " + tt[2], Repeat = lines[0] });
+                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString("dd/MM/yyyy hh:mm tt"), Repeat = lines[0] });
             }
         }
         LstReminders.ItemsSource = items;
@@ -242,6 +236,4 @@ public sealed partial class TrashPage : Page
         }
         deleteReminder.Flyout.Hide();
     }
-    [GeneratedRegex("\\s")]
-    private static partial Regex MyRegex();
 }

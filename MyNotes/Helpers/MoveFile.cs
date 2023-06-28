@@ -8,19 +8,15 @@ namespace MyNotes.Helpers
 {
     public class MoveFile
     {
-        private readonly StorageFolder notesFolder = ApplicationData.Current.LocalFolder;
+        private readonly StorageFolder storageFolder= App.StorageFolder;
         public async void Move(string from, string to, string filename, XamlRoot root)
         {
+            
             try
             {
                 if (filename != null)
                 {
-                    var directory = notesFolder.Path.ToString() + "\\" + from + "\\" + filename + ".txt";
-                    var dir = notesFolder.Path.ToString() + "\\" + to + "\\";
-                    var folder = await StorageFolder.GetFolderFromPathAsync(dir);
-                    var file = await StorageFile.GetFileFromPathAsync(directory);
-                    await file.CopyAsync(folder, filename + ".txt", NameCollisionOption.GenerateUniqueName);
-                    await file.DeleteAsync();
+                    Mover(from, to, filename,".txt");
                 }
                 else
                 {
@@ -49,12 +45,7 @@ namespace MyNotes.Helpers
                 var selectedItem = list.SelectedItem;
                 if (selectedItem != null)
                 {
-                    var directory = notesFolder.Path.ToString() + "\\" + from + "\\" + list.SelectedItem.ToString() + ".rtf";
-                    var dir = notesFolder.Path.ToString() + "\\" + to + "\\";
-                    var folder = await StorageFolder.GetFolderFromPathAsync(dir);
-                    var file = await StorageFile.GetFileFromPathAsync(directory);
-                    await file.CopyAsync(folder, selectedItem.ToString() + ".rtf", NameCollisionOption.GenerateUniqueName);
-                    await file.DeleteAsync();
+                    Mover(from, to, selectedItem.ToString()!, ".rtf");
                     list.Items.Remove(selectedItem);
                 }
                 else
@@ -78,12 +69,7 @@ namespace MyNotes.Helpers
                 var selectedItem = list.SelectedItem;
                 if (selectedItem != null)
                 {
-                    var directory = notesFolder.Path.ToString() + "\\" + from + "\\" + reminder.ReminderHeader.ToString() + ".txt";
-                    var dir = notesFolder.Path.ToString() + "\\" + to + "\\";
-                    var folder = await StorageFolder.GetFolderFromPathAsync(dir);
-                    var file = await StorageFile.GetFileFromPathAsync(directory);
-                    await file.CopyAsync(folder, reminder.ReminderHeader.ToString() + ".txt", NameCollisionOption.GenerateUniqueName);
-                    await file.DeleteAsync();
+                    Mover(from, to, selectedItem.ToString()!, ".rtf");
                     items.Remove(reminder);
                 }
                 else
@@ -99,6 +85,15 @@ namespace MyNotes.Helpers
                 { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage2".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
                 await noWifiDialog.ShowAsync();
             }
+        }
+        private async void Mover(string from, string to, string filename, string extention)
+        {
+            var directory = storageFolder.Path.ToString() + "\\" + from + "\\" + filename + extention;
+            var dir = storageFolder.Path.ToString() + "\\" + to + "\\";
+            var folder = await StorageFolder.GetFolderFromPathAsync(dir);
+            var file = await StorageFile.GetFileFromPathAsync(directory);
+            await file.CopyAsync(folder, filename + extention, NameCollisionOption.GenerateUniqueName);
+            await file.DeleteAsync();
         }
     }
 }

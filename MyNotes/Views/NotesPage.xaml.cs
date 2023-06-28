@@ -10,7 +10,7 @@ namespace MyNotes.Views;
 
 public sealed partial class NotesPage : Page
 {
-    private readonly StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+    private readonly StorageFolder storageFolder = App.StorageFolder;
     private readonly INavigationService navigationService;
 
     public NotesViewModel ViewModel
