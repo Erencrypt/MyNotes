@@ -116,7 +116,9 @@ Creating a **note** is much more simpler;
 
 
 **Note:**"Open on startup" option will add MyNotes to startup apps, and it can be seen from task manager. If you want to change this setting, use in app setting page to change it instead of task manager.
+
 When app opened, it will check for expired reminders and send a notification about them, you can click the button on the notification to check deleted notifications.
+
 *I will add images in the future to support this section*
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
