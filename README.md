@@ -64,7 +64,7 @@ Here's why:
 * If you need more detailed notes than .txt file, but not too much decorated and simple enough, with notes feature it's simple but effective
 * It's easier to manage all your notes and reminders in one organized place.
 
-Of course, no one "Note App" will meet everyone's needs, since your needs may be different. So I'll be adding more functionalities in the future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to creating this great app!
+Of course, no one "Note App" will meet everyone's needs, since your needs may be different. So I'll be adding more features in the future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to creating this great app!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
