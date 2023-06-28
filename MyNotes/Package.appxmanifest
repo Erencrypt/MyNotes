@@ -64,7 +64,7 @@
             Executable="MyNotes.exe"
             EntryPoint="Windows.FullTrustApplication">
           <uap5:StartupTask
-            TaskId="8163264128"
+            TaskId="8163264128256"
             Enabled="true"
             DisplayName="My Notes" />
         </uap5:Extension>
