@@ -157,7 +157,7 @@
     <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>TODO: Replace with your app description.</value>
+    <value>This application is created by Erencrypt as an opensource project under GNU General Public License v3.0. For more Detailed information, check: https://github.com/ErenCanUtku/MyNotes/</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
     <value>Privacy Statement</value>

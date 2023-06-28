@@ -46,8 +46,6 @@ public class AppNotificationService : IAppNotificationService
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
-                //App.MainWindow.ShowMessageDialogAsync("Notification dismissed", "Notification Invoked");
-                //App.MainWindow.BringToFront();
                 App.ReminderDismissed();
             });
         }
