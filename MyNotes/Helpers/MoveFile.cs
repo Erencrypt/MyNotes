@@ -66,10 +66,10 @@ namespace MyNotes.Helpers
         {
             try
             {
-                var selectedItem = list.SelectedItem;
+                Reminder selectedItem = (Reminder)list.SelectedItem;
                 if (selectedItem != null)
                 {
-                    Mover(from, to, selectedItem.ToString()!, ".rtf");
+                    Mover(from, to, selectedItem.ReminderHeader!, ".txt");
                     items.Remove(reminder);
                 }
                 else
@@ -88,8 +88,8 @@ namespace MyNotes.Helpers
         }
         private async void Mover(string from, string to, string filename, string extention)
         {
-            var directory = storageFolder.Path.ToString() + "\\" + from + "\\" + filename + extention;
-            var dir = storageFolder.Path.ToString() + "\\" + to + "\\";
+            var directory = storageFolder.Path + "\\" + from + "\\" + filename + extention;
+            var dir = storageFolder.Path + "\\" + to + "\\";
             var folder = await StorageFolder.GetFolderFromPathAsync(dir);
             var file = await StorageFile.GetFileFromPathAsync(directory);
             await file.CopyAsync(folder, filename + extention, NameCollisionOption.GenerateUniqueName);
