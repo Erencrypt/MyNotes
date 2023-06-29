@@ -2,6 +2,7 @@
 using MyNotes.Contracts.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
+using MyNotes.Helpers;
 using System.Collections.Specialized;
 using System.Web;
 
@@ -69,6 +70,8 @@ public class AppNotificationService : IAppNotificationService
 
     public bool ShowReminder(string title, string message, string time)
     {
+        string snooze = "AppNotification_Snooze".GetLocalized();
+        string dismiss = "AppNotification_Dismiss".GetLocalized();
         string payload = new(@$"
             <toast scenario='reminder'>
               <visual>
@@ -86,8 +89,8 @@ public class AppNotificationService : IAppNotificationService
                   <selection id='240' content='4 hours'/>
                   <selection id='1440' content='1 day'/>
                 </input>
-                <action arguments='snooze' hint-inputId='snoozeTime' content='Snooze'/>
-                <action arguments='dismiss' content='Dismiss'/>
+                <action arguments='snooze' hint-inputId='snoozeTime' content='{snooze}'/>
+                <action arguments='dismiss' content='{dismiss}'/>
               </actions>
             </toast>");
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
@@ -99,6 +102,7 @@ public class AppNotificationService : IAppNotificationService
     }
     public bool ShowDeletedMessage(string title, string message)
     {
+        string buttonText = "AppNotification_SeeDeletedReminders".GetLocalized();
         string payload = new(@$"
             <toast>
               <visual>
@@ -108,7 +112,7 @@ public class AppNotificationService : IAppNotificationService
                 </binding>
               </visual>
               <actions>
-                <action arguments='trash' content='See deleted reminders'/>
+                <action arguments='trash' content='{buttonText}'/>
               </actions>
             </toast>");
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))

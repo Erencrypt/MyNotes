@@ -13,7 +13,7 @@
                    RelativePanel.AlignRightWithPanel="True"
                    RelativePanel.AlignTopWithPanel="True"
                    RelativePanel.AlignBottomWithPanel="True">
-                <PivotItem Header="Notes">
+                <PivotItem>
                     <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
                         <ListView Width="auto" Name="LstNotes"
                                   CornerRadius="2"
@@ -31,8 +31,7 @@
                                 </TransitionCollection>
                             </ListView.ItemContainerTransitions>
                         </ListView>
-                        <TextBlock Text="Your trash is empty." 
-                                   Name="EmptyText"
+                        <TextBlock Name="EmptyText"
                                    FontWeight="Light"
                                    Visibility="Collapsed"
                                    Margin="0,32,0,0"
@@ -72,7 +71,7 @@
                         </Button>
                     </RelativePanel>
                 </PivotItem>
-                <PivotItem Header="Reminders">
+                <PivotItem>
                     <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
                         <ListView Width="auto" Name="LstReminders"
                                  SelectionChanged="LstReminders_SelectionChanged"
@@ -140,8 +139,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <TextBlock Text="Your trash is empty." 
-                                   Name="EmptyText2"
+                        <TextBlock Name="EmptyText2"
                                    FontWeight="Light"
                                    Visibility="Collapsed"
                                    Margin="0,32,0,0"

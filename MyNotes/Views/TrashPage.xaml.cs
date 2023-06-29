@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using MyNotes.Helpers;
 using MyNotes.Models;
 using MyNotes.ViewModels;
@@ -27,16 +28,23 @@ public sealed partial class TrashPage : Page
     {
         ViewModel = App.GetService<TrashViewModel>();
         InitializeComponent();
+        PivotItem pivotItem;
         //Localizatinos
-        deleteFlyoutNoteText.Text = "DeleteFlyout2".GetLocalized();
+        deleteFlyoutNoteText.Text = "Trash_DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteConfirm".GetLocalized();
+        EmptyText.Text = "Trash_TrashEmpty".GetLocalized();
+        pivotItem = (PivotItem)TrashPivot.Items[0];
+        pivotItem.Header = "Trash_NotePivotHeader".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "Delete".GetLocalized());
         ToolTipService.SetToolTip(restoreNote, "Restore".GetLocalized());
-        deleteFlyoutReminderText.Text = "DeleteFlyout2".GetLocalized();
+        deleteFlyoutReminderText.Text = "Trash_DeleteFlyout".GetLocalized();
         deleteReminderFly.Content = "DeleteConfirm".GetLocalized();
+        EmptyText2.Text = "Trash_TrashEmpty".GetLocalized();
+        pivotItem = (PivotItem)TrashPivot.Items[1];
+        pivotItem.Header = "Trash_ReminderPivotHeader".GetLocalized();
         ToolTipService.SetToolTip(deleteReminder, "Delete".GetLocalized());
         ToolTipService.SetToolTip(restoreReminder, "Restore".GetLocalized());
-
+        
         LstReminders.ItemsSource = items;
         ListNotes();
         ListReminders();
@@ -68,7 +76,7 @@ public sealed partial class TrashPage : Page
     }
     private void ListNotes()
     {
-        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Trash");
+        DirectoryInfo dinfo = new(storageFolder.Path + "\\Trash");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         LstNotes.Items.Clear();
@@ -79,7 +87,7 @@ public sealed partial class TrashPage : Page
     }
     private void ListReminders()
     {
-        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Trash");
+        DirectoryInfo dinfo = new(storageFolder.Path + "\\Trash");
         FileInfo[] Files = dinfo.GetFiles("*.txt");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         string fullPath;
@@ -111,7 +119,7 @@ public sealed partial class TrashPage : Page
             var selectedItem = LstNotes.SelectedItem;
             if (selectedItem != null)
             {
-                var directory = storageFolder.Path.ToString() + @"\Trash\" + LstNotes.SelectedItem.ToString() + ".rtf";
+                var directory = storageFolder.Path + @"\Trash\" + LstNotes.SelectedItem.ToString() + ".rtf";
                 var file = await StorageFile.GetFileFromPathAsync(directory);
                 await file.DeleteAsync();
                 LstNotes.Items.Remove(selectedItem);
@@ -141,7 +149,7 @@ public sealed partial class TrashPage : Page
         {
             if (LstReminders.SelectedItem is Reminder selectedItem)
             {
-                var directory = storageFolder.Path.ToString() + @"\Trash\" + selectedItem.ReminderHeader + ".txt";
+                var directory = storageFolder.Path + @"\Trash\" + selectedItem.ReminderHeader + ".txt";
                 var file = await StorageFile.GetFileFromPathAsync(directory);
                 await file.DeleteAsync();
                 items.Remove(selectedItem);
