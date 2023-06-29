@@ -1,3 +1,4 @@
+
 <a name="readme-top"></a>
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -83,24 +84,42 @@ This is the list of major frameworks/libraries I used to create this project. An
 Your Windows version should be higher than **Windows 10 version 1809** because minimum Windows version supported by Windows App SDK is Windows 10 version 1809 (this app is self-contained, so it may work on older versions of Windows 10 but **NOT Tested** and even if it works, **NOT Recommended**.)
 
 ### Installation
+Installation process is pretty straight forward, 
 
-_This part will be added after first release_
-<!--
-1. 
-2. 
-3.  
-4.  
--->
+ 1. Download MyNotes_x64.msi from [Releases](https://github.com/ErenCanUtku/MyNotes/releases)
+ 2. Follow the setup wizard instructions
+ 3. Open MyNotes from the shortcut that installation wizard created on your desktop
+ 4. (Optional but recommended) For reminders feature to work properly, open settings and select "Open on startup".
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-_This part will be added after first release_
-<!--
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+After installation, you can use the app easily without any problem, it's self-explanatory and easy to understand. Most of the UI is supported by tooltips and graphics.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
--->
+You can add/edit/delete notes and reminders, if you delete something you're not intended to delete, don't worry, they will go to the "Trash" and you can restore them or delete completely. When creating reminders, a popup appears, on this popup there are 5 inputs you need to fill;
+
+ 1. **Name:** Reminders name (*Required*)
+ 2. **Text:** Reminders Text (*Required*)
+ 3. **Repeated:** if you check tihs, it will set reminder to work every day at selected time (*optional, default is non repeated*)
+ 4. **Date:** set the reminder date (*for non repeated reminders*)
+ 5. **Time:** set reminder time (*if not selected, uses current time*)
+
+After reminder created, you can see and edit it from "Reminders" page. Reminder will send a notification on selected date and time. You can snooze or dismiss it. if reminder is non repeated, dismissing it will sent reminder to trash.
+
+Creating a **note** is much more simpler;
+ 1. On "Notes" page, click "Add" button (highlighted big one)
+ 2. A popup will appear, write your notes name
+ 3. You will be redirected to "Note Details" page, write your note and edit with tools
+ 4. After you finish writing your note, **don't forget to save it**.
+ 5. Congrats, you have a new note, you can check it whenever you want in "Notes" page
+
+
+**Note:**"Open on startup" option will add MyNotes to startup apps, and it can be seen from task manager. If you want to change this setting, use in app setting page to change it instead of task manager.
+
+When app opened, it will check for expired reminders and send a notification about them, you can click the button on the notification to check deleted notifications.
+
+*I will add images in the future to support this section*
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
