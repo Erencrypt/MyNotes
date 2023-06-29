@@ -27,7 +27,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
     {
         try
         {
-            var directory = notesFolder.Path.ToString() + @"\Notes\";
+            var directory = notesFolder.Path + @"\Notes\";
             var filelocation = directory + noteNameTextBox.Text + ".rtf";
             if (File.Exists(filelocation))
             {

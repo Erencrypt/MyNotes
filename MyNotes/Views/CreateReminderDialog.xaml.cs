@@ -38,7 +38,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         if (!isNewNote)
         {
             reminderNameTextBox.IsEnabled = false;
-            DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
+            DirectoryInfo dinfo = new(storageFolder.Path + "\\Reminders");
             FileInfo fileInfo = new(noteName + ".txt");
             string fullPath = dinfo.ToString() + "\\" + fileInfo;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
@@ -75,7 +75,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
     {
         try
         {
-            var directory = storageFolder.Path.ToString() + @"\Reminders\";
+            var directory = storageFolder.Path + @"\Reminders\";
             var filelocation = directory + reminderNameTextBox.Text + ".txt";
             if (File.Exists(filelocation))
             {
@@ -120,7 +120,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
     {
         try
         {
-            var directory = storageFolder.Path.ToString() + @"\Reminders\";
+            var directory = storageFolder.Path + @"\Reminders\";
             var filelocation = directory + reminderNameTextBox.Text + ".txt";
             using StreamWriter writer = new(filelocation);
             selectedDate = datePicker.SelectedDate!.Value.DateTime;

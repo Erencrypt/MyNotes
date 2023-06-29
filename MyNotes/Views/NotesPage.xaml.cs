@@ -38,7 +38,7 @@ public sealed partial class NotesPage : Page
     }
     private void ListFiles()
     {
-        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Notes");
+        DirectoryInfo dinfo = new(storageFolder.Path + "\\Notes");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         LstNotes.Items.Clear();

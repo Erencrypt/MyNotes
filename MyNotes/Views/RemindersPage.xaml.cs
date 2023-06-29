@@ -109,7 +109,7 @@ public sealed partial class RemindersPage : Page
     }
     private void ListReminders()
     {
-        DirectoryInfo dinfo = new(storageFolder.Path.ToString() + "\\Reminders");
+        DirectoryInfo dinfo = new(storageFolder.Path + "\\Reminders");
         FileInfo[] Files = dinfo.GetFiles("*.txt");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         string fullPath;
