@@ -34,7 +34,7 @@ public sealed partial class NoteDetailsPage : Page
         // Open a text file.
         if (ShellPage.NoteName != null)
         {
-            var directory = notesFolder.Path.ToString() + @"\Notes\" + ShellPage.NoteName + ".rtf";
+            var directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
             StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
 
             if (file != null)
@@ -48,7 +48,7 @@ public sealed partial class NoteDetailsPage : Page
     }
     private async void SaveFile()
     {
-        var directory = notesFolder.Path.ToString() + @"\Notes\" + ShellPage.NoteName + ".rtf";
+        var directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
         StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
         if (file != null)
         {
@@ -71,8 +71,9 @@ public sealed partial class NoteDetailsPage : Page
             //hide the contentdialog
             infobar.IsOpen = false;
             // release the timer
-            dispatcherTimer.Stop();
+            dispatcherTimer?.Stop();
             dispatcherTimer = null;
+            BtnSaveFile.IsEnabled = true;
         }
         catch (Exception)
         {
@@ -93,12 +94,13 @@ public sealed partial class NoteDetailsPage : Page
         // get a timer to close the ContentDialog after 4s
         dispatcherTimer = new DispatcherTimer();
         dispatcherTimer.Tick += DispatcherTimer_Tick;
-        dispatcherTimer.Interval = new TimeSpan(0, 0, 4);
+        dispatcherTimer.Interval = TimeSpan.FromSeconds(3);
         dispatcherTimer.Start();
     }
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
         SaveFile();
+        BtnSaveFile.IsEnabled = false;
     }
     private void NoteEditor_ProcessKeyboardAccelerators(UIElement sender, ProcessKeyboardAcceleratorEventArgs args)
     {
