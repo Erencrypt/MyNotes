@@ -33,7 +33,7 @@ namespace MyNotes.Helpers
                 if (root != null)
                 {
                     ContentDialog noWifiDialog = new()
-                    { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage2".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
+                    { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
                     await noWifiDialog.ShowAsync();
                 }
             }
@@ -58,7 +58,7 @@ namespace MyNotes.Helpers
             catch (Exception ex)
             {
                 ContentDialog noWifiDialog = new()
-                { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage2".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
+                { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
                 await noWifiDialog.ShowAsync();
             }
         }
@@ -82,7 +82,7 @@ namespace MyNotes.Helpers
             catch (Exception ex)
             {
                 ContentDialog noWifiDialog = new()
-                { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage2".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
+                { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
                 await noWifiDialog.ShowAsync();
             }
         }

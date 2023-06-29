@@ -51,7 +51,7 @@
                     </StackPanel>
                 </StackPanel>
                 <TextBlock x:Uid="Settings_Startup" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <CheckBox Name="StartupCheck" Content="Open on startup" Checked="StartupCheck_Checked" Unchecked="StartupCheck_Unchecked" Margin="0,8,0,0"/>
+                <CheckBox x:Uid="Settings_StartupCheck" Name="StartupCheck" Checked="StartupCheck_Checked" Unchecked="StartupCheck_Unchecked" Margin="0,8,0,0"/>
 
                 <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,16,0,0"/>
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
@@ -61,7 +61,7 @@
                     x:Uid="Settings_AboutDescription"
                     Margin="{StaticResource XSmallTopMargin}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
-                    <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+                    <HyperlinkButton x:Uid="SettingsPage_GitHubPage" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

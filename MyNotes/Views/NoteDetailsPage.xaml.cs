@@ -56,11 +56,11 @@ public sealed partial class NoteDetailsPage : Page
             {
                 using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
                 NoteEditor.Document.SaveToStream(TextGetOptions.FormatRtf, randAccStream);
-                InfoBar("Success".GetLocalized(), InfoBarSeverity.Success, "Success_Message".GetLocalized());
+                InfoBar("Success".GetLocalized(), InfoBarSeverity.Success, "NoteDetails_SuccessMessage".GetLocalized());
             }
             catch (Exception ex)
             {
-                InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "Error_Message".GetLocalized() + ex.Message);
+                InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "NoteDetails_ErrorMessage".GetLocalized() + ex.Message);
             }
         }
     }

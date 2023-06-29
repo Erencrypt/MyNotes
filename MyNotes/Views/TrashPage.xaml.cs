@@ -129,7 +129,7 @@ public sealed partial class TrashPage : Page
             {
                 XamlRoot = XamlRoot,
                 Title = "Error".GetLocalized(),
-                Content = "Error_Meesage2".GetLocalized() + ex.Message,
+                Content = "Error_Meesage".GetLocalized() + ex.Message,
                 CloseButtonText = "Ok".GetLocalized()
             };
             await noWifiDialog.ShowAsync();
@@ -159,7 +159,7 @@ public sealed partial class TrashPage : Page
             {
                 XamlRoot = XamlRoot,
                 Title = "Error".GetLocalized(),
-                Content = "Error_Meesage2".GetLocalized() + ex.Message,
+                Content = "Error_Meesage".GetLocalized() + ex.Message,
                 CloseButtonText = "Ok".GetLocalized()
             };
             await noWifiDialog.ShowAsync();
