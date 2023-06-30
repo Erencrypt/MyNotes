@@ -48,6 +48,7 @@ public sealed partial class RemindersPage : Page
         InitializeComponent();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteReminderFly.Content = "DeleteConfirm".GetLocalized();
+        EmptyText.Text = "Reminders_EmptyText".GetLocalized();
         ToolTipService.SetToolTip(deleteReminder, "Delete".GetLocalized());
         ToolTipService.SetToolTip(newReminder, "Add".GetLocalized());
         LstReminders.ItemsSource = items;
@@ -89,8 +90,8 @@ public sealed partial class RemindersPage : Page
             CreateReminderDialog EditReminderDialog = new()
             {
                 XamlRoot = XamlRoot,
-                Title = "Edit Reminder",
-                PrimaryButtonText = "Save Reminder"
+                Title = "Reminders_EditReminder".GetLocalized(),
+                PrimaryButtonText = "Reminders_SaveReminder".GetLocalized()
             };
             await EditReminderDialog.ShowAsync();
             if (EditReminderDialog.Result == ReminderCreateResult.ReminderCreationOK)

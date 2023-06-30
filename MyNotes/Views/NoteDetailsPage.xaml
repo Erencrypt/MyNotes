@@ -46,7 +46,7 @@
                     Height="48"
                     Width="48"
                     VerticalAlignment="Center"
-                    Click="SaveButton_Click" ToolTipService.ToolTip="Save (Ctrl+S)" >
+                    Click="SaveButton_Click" >
                 <Button.Content>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"/>
                 </Button.Content>
@@ -62,7 +62,6 @@
                                   >
             </controls:TextToolbar>
             <RichEditBox x:Name="NoteEditor"
-                PlaceholderText="Enter text"
                 ProcessKeyboardAccelerators="NoteEditor_ProcessKeyboardAccelerators"
                 KeyboardAcceleratorPlacementMode="Hidden"
                 Width="auto" Height="auto"
@@ -81,8 +80,8 @@
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignBottomWithPanel="True"
                 Margin="0,0,0,8">
-                <TextBlock x:Name="findBoxLabel" Text="Find:" Height="20"/>
-                <TextBox x:Name="findBox" Width="250" PlaceholderText="Enter search text" Margin="10,0,0,0"
+                <TextBlock x:Name="findBoxLabel" Height="20"/>
+                <TextBox x:Name="findBox" Width="250" Margin="10,0,0,0"
                 TextChanged="{x:Bind FindBoxHighlightMatches}"
                 GotFocus="{x:Bind FindBoxHighlightMatches}"
                 LostFocus="{x:Bind FindBoxRemoveHighlights}"/>

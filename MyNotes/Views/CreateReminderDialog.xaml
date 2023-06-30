@@ -6,12 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="New Reminder"
     CornerRadius="10"
-    PrimaryButtonText="Create Reminder"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
     CloseButtonStyle="{StaticResource DefaultButtonStyle}"
-    CloseButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     CloseButtonClick="ContentDialog_CloseButtonClick">
     <ContentDialog.TitleTemplate>
@@ -28,11 +25,11 @@
                 <RepositionThemeTransition/>
             </TransitionCollection>
         </StackPanel.ChildrenTransitions>
-        <TextBox Name="reminderNameTextBox" Width="300" Header="Name"/>
-        <TextBox Name="reminderTextTextBox" Width="300" Header="Text"/>
+        <TextBox Name="reminderNameTextBox" Width="300"/>
+        <TextBox Name="reminderTextTextBox" Width="300"/>
         <CheckBox Name="ReminderRepeatCheck" Checked="ReminderRepeatCheck_Checked" Unchecked="ReminderRepeatCheck_Unchecked"/>
-        <DatePicker Name="datePicker" DayFormat="{}{day.integer} ({dayofweek.abbreviated})" Header="Date" Width="300"/>
-        <TimePicker Name="timePicker" Header="Time" Width="300"/>
+        <DatePicker Name="datePicker" DayFormat="{}{day.integer} ({dayofweek.abbreviated})" Width="300"/>
+        <TimePicker Name="timePicker" Width="300"/>
         <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" Width="300" Height="auto"/>
     </StackPanel>
 </ContentDialog>

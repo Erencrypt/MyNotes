@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Text;
+﻿using CommunityToolkit.WinUI.UI.Controls.TextToolbarButtons;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -26,8 +27,12 @@ public sealed partial class NoteDetailsPage : Page
         ViewModel = App.GetService<NoteDetailsViewModel>();
         InitializeComponent();
         LoadDocument();
-        noteName.Title = "NoteNameFlyoutTitle".GetLocalized();
-        //TODO: ask for file saving when nawigating away from this page
+        noteName.Title = "NoteDetails_NoteNameTitle".GetLocalized();
+        NoteEditor.PlaceholderText = "NoteDetails_EditorPlaceholder".GetLocalized();
+        findBox.PlaceholderText = "NoteDetails_FindPlaceholder".GetLocalized();
+        findBoxLabel.Text = "NoteDetails_FindText".GetLocalized();
+        ToolTipService.SetToolTip(BtnSaveFile, "NoteDetails_SaveTooltip".GetLocalized());
+        //TODO: ask for file saving when navigating away from this page
     }
     private async void LoadDocument()
     {

@@ -9,7 +9,6 @@ using MyNotes.Helpers;
 
 namespace MyNotes.Views;
 
-// TODO: Set the URL for your privacy policy by updating SettingsPage_PrivacyTermsLink.NavigateUri in Resources.resw.
 public sealed partial class SettingsPage : Page
 {
     readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
@@ -48,11 +47,7 @@ public sealed partial class SettingsPage : Page
                 break;
             case StartupTaskState.DisabledByUser:
                 // Task is disabled and user must enable it manually.
-                MessageDialog dialog = new(
-                     "You have disabled this app's ability to run " +
-                     "as soon as you sign in, but if you change your mind, " +
-                     "you can enable this in the Startup tab in Task Manager.",
-                     "My Notes");
+                MessageDialog dialog = new("Settings_DisabledByUser".GetLocalized());
                 await dialog.ShowAsync();
                 StartupCheck.IsChecked = false;
                 break;
@@ -75,19 +70,14 @@ public sealed partial class SettingsPage : Page
                 case StartupTaskState.Disabled:
                     StartupTaskState newState = await startupTask.RequestEnableAsync();
                     Debug.WriteLine("Request to enable startup, result = {0}", newState);
-
                     break;
                 case StartupTaskState.DisabledByUser:
                     // Task is disabled and user must enable it manually.
-                    MessageDialog dialog = new(
-                        "You have disabled this app's ability to run " +
-                        "as soon as you sign in, but if you change your mind, " +
-                        "you can enable this in the Startup tab in Task Manager.",
-                        "My Notes");
+                    MessageDialog dialog = new("Settings_DisabledByUser".GetLocalized());
                     await dialog.ShowAsync();
                     break;
                 case StartupTaskState.DisabledByPolicy:
-                    Debug.WriteLine("Startup disabled by group policy, or not supported on this device");
+                    Debug.WriteLine("Settings_DisabledByPolicy".GetLocalized());
                     break;
             }
         }
@@ -107,11 +97,10 @@ public sealed partial class SettingsPage : Page
             {
                 case StartupTaskState.Enabled:
                     startupTask.Disable();
-
                     Debug.WriteLine("Request to disable startup, result = {0}", startupTask.State);
                     break;
                 case StartupTaskState.EnabledByPolicy:
-                    Debug.WriteLine("Startup enabled by group policy");
+                    Debug.WriteLine("Settings_EnabledByPolicy".GetLocalized());
                     break;
             }
         }

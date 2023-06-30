@@ -32,7 +32,14 @@ public sealed partial class CreateReminderDialog : ContentDialog
         //TODO: simplify and clean code blocks
         //TODO: change reminder tex texbox to rich edit box
         this.InitializeComponent();
-        ReminderRepeatCheck.Content = "Repeated".GetLocalized();
+        reminderNameTextBox.Header = "CreateReminder_NameBoxHeader".GetLocalized();
+        reminderTextTextBox.Header = "CreateReminder_TextBoxHeader".GetLocalized();
+        ReminderRepeatCheck.Content = "CreateReminder_Repeated".GetLocalized();
+        datePicker.Header = "CreateReminder_DateHeader".GetLocalized();
+        timePicker.Header = "CreateReminder_TimeHeader".GetLocalized();
+        Title = "CreateReminder_Title".GetLocalized();
+        PrimaryButtonText = "CreateReminder_ButtonText".GetLocalized();
+        CloseButtonText = "Cancel".GetLocalized();
         isNewNote = RemindersPage.IsNewNote;
         noteName = RemindersPage.NoteName;
         if (!isNewNote)
@@ -81,7 +88,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
             {
                 args.Cancel = true;
                 errorTextBlock.Visibility = Visibility.Visible;
-                errorTextBlock.Text = "There is a reminder with the same name\nalready exist. Please use another name.";
+                errorTextBlock.Text = "CreateReminder_ErrorExistingFile".GetLocalized();
             }
             else
             {
@@ -161,7 +168,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
                 {
                     args.Cancel = true;
                     errorTextBlock.Visibility = Visibility.Visible;
-                    errorTextBlock.Text = "Reminder name and text is required.";
+                    errorTextBlock.Text = "CreateReminder_ErrorRequired".GetLocalized();
                 }
                 else if (!string.IsNullOrEmpty(reminderNameTextBox.Text) && !string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
@@ -176,13 +183,13 @@ public sealed partial class CreateReminderDialog : ContentDialog
                     {
                         args.Cancel = true;
                         errorTextBlock.Visibility = Visibility.Visible;
-                        errorTextBlock.Text = "Please select a date that later \nthan (or equal to) the current date.";
+                        errorTextBlock.Text = "CreateReminder_ErrorLaterDate".GetLocalized();
                     }
                     else if (datePicker.SelectedDate!.Value.Date == DateTime.Now.Date && time.Hour < ofsetDate.Hour)
                     {
                         args.Cancel = true;
                         errorTextBlock.Visibility = Visibility.Visible;
-                        errorTextBlock.Text = "Please select a time that at least 1 hour later \nthan the current time.";
+                        errorTextBlock.Text = "CreateReminder_ErrorLaterTime".GetLocalized();
                     }
                     else if ((datePicker.SelectedDate.Value.Date == DateTime.Now.Date && time.Hour >= ofsetDate.Hour) || (datePicker.SelectedDate.Value.Date > DateTime.Now.Date))
                     {
@@ -201,7 +208,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
                 {
                     args.Cancel = true;
                     errorTextBlock.Visibility = Visibility.Visible;
-                    errorTextBlock.Text = "Reminder name and text is required.";
+                    errorTextBlock.Text = "CreateReminder_ErrorRequired".GetLocalized();
                 }
                 else if (!string.IsNullOrEmpty(reminderNameTextBox.Text) && !string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
@@ -212,7 +219,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         catch (Exception ex)
         {
             errorTextBlock.Visibility = Visibility.Visible;
-            errorTextBlock.Text = "An error occured. Error message:" + ex.Message;
+            errorTextBlock.Text = "Error_Meesage".GetLocalized() + ex.Message;
         }
     }
 

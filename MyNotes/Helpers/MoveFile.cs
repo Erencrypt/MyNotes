@@ -11,7 +11,6 @@ namespace MyNotes.Helpers
         private readonly StorageFolder storageFolder= App.StorageFolder;
         public async void Move(string from, string to, string filename, XamlRoot root)
         {
-            
             try
             {
                 if (filename != null)

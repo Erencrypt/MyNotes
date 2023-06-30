@@ -74,8 +74,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBlock Text="Your reminders is empty, you can add one." 
-                       Name="EmptyText"
+            <TextBlock Name="EmptyText"
                        FontWeight="Light"
                        Visibility="Collapsed"
                        Margin="0,32,0,0"
@@ -113,7 +112,6 @@
                         </StackPanel>
                     </Flyout>
                 </Button.Flyout>
-
             </Button>
         </RelativePanel>
     </Grid>
