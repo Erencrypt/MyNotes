@@ -138,6 +138,18 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CreateNote_ButtonText" xml:space="preserve">
+    <value>Create Note</value>
+  </data>
+  <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
+    <value>There is a note with the same name\nalready exist. Please use another name.</value>
+  </data>
+  <data name="CreateNote_NameBoxHeader" xml:space="preserve">
+    <value>Note Name</value>
+  </data>
+  <data name="CreateNote_Title" xml:space="preserve">
+    <value>New Note</value>
+  </data>
   <data name="CreateReminder_ButtonText" xml:space="preserve">
     <value>Create Reminder</value>
   </data>
@@ -193,13 +205,13 @@
     <value>There is no item selected.</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
-    <value>Enter text</value>
+    <value>Enter Text</value>
   </data>
   <data name="NoteDetails_ErrorMessage" xml:space="preserve">
     <value>File couldn't be saved.\nError Message:</value>
   </data>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
-    <value>Enter search text</value>
+    <value>Enter Search Text</value>
   </data>
   <data name="NoteDetails_FindText" xml:space="preserve">
     <value>Find:</value>
@@ -211,7 +223,7 @@
     <value>Save (Ctrl+S)</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
-    <value>Changes saved.</value>
+    <value>Changes Saved</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Your notes is empty, you can add one.</value>

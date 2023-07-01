@@ -22,6 +22,10 @@ public sealed partial class CreateNoteDialog : ContentDialog
     public CreateNoteDialog()
     {
         this.InitializeComponent();
+        noteNameTextBox.Header = "CreateNote_NameBoxHeader".GetLocalized();
+        Title = "CreateNote_Title".GetLocalized();
+        PrimaryButtonText = "CreateNote_ButtonText".GetLocalized();
+        CloseButtonText = "Cancel".GetLocalized();
     }
     private async void CreateNote(ContentDialogButtonClickEventArgs args)
     {
@@ -33,7 +37,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
             {
                 args.Cancel = true;
                 errorTextBlock.Visibility = Visibility.Visible;
-                errorTextBlock.Text = "There is a note with the same name\nalready exist. Please use another name.";
+                errorTextBlock.Text = "CreateNote_ErrorExistingFile".GetLocalized();
             }
             else
             {
@@ -48,7 +52,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
             Result = NoteCreateResult.NoteCreationFail;
             args.Cancel = true;
             errorTextBlock.Visibility = Visibility.Visible;
-            errorTextBlock.Text = "An error occured. Error message:" + ex.Message;
+            errorTextBlock.Text = "Error_Meesage".GetLocalized() + ex.Message;
         }
     }
     private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

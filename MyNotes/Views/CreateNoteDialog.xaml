@@ -7,23 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     CornerRadius="10"
-    Title="New Note"
-    PrimaryButtonText="Create Note"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
     CloseButtonStyle="{StaticResource DefaultButtonStyle}"
-    CloseButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     CloseButtonClick="ContentDialog_CloseButtonClick">
     <ContentDialog.TitleTemplate>
         <DataTemplate>
             <StackPanel Orientation="Horizontal">
                 <FontIcon Glyph="&#xE7C3;" Margin="0,0,10,0"/>
-                <TextBlock Text="New Note" FontWeight="Medium"/>
+                <TextBlock Text="{Binding}" FontWeight="Medium"/>
             </StackPanel>
         </DataTemplate>
     </ContentDialog.TitleTemplate>
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <TextBox Name="noteNameTextBox" Header="Note name" Width="300"/>
+        <TextBox Name="noteNameTextBox" Width="300"/>
         <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" Width="300" Height="auto"/>
     </StackPanel>
 </ContentDialog>
