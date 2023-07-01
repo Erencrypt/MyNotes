@@ -33,11 +33,11 @@ public class AppNotificationService : IAppNotificationService
     {
         IDictionary<string, string> userInput = args.UserInput;
         string ar = args.Argument;
-        int input = Convert.ToInt32(userInput["snoozeTime"]);
         if (ar == "snooze")
         {
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
+                int input = Convert.ToInt32(userInput["snoozeTime"]);
                 DateTime dt = Convert.ToDateTime(App.InvokedReminders[0].DateTime);
                 App.InvokedReminders[0].DateTime = dt.AddMinutes(input).ToString();
                 App.ReminderSnoozed();
