@@ -126,8 +126,14 @@
   <data name="AppDisplayName" xml:space="preserve">
     <value>MyNotes</value>
   </data>
+  <data name="AppNotification_ActiveReminder" xml:space="preserve">
+    <value>You have {0} active reminder.</value>
+  </data>
   <data name="AppNotification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
+  </data>
+  <data name="AppNotification_Expired" xml:space="preserve">
+    <value>"{0} Reminder moved to trash due to expiration. You can check out trash page to see deleted reminders."</value>
   </data>
   <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
     <value>See deleted reminders</value>

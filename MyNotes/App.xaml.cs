@@ -285,15 +285,15 @@ public partial class App : Application
             }
             if (DeletedCount > 0 && AddedCount > 0)
             {
-                GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration and you have " + AddedCount.ToString() + " active reminder(s).\nYou can check out trash page to see deleted reminders.");
+                GetService<IAppNotificationService>().ShowDeletedMessage("Info".GetLocalized(), string.Format("AppNotification_ActiveReminder".GetLocalized(), AddedCount.ToString()) + "\n"+ string.Format("AppNotification_Expired".GetLocalized(), DeletedCount.ToString()));
             }
             else if (DeletedCount > 0 && AddedCount == 0)
             {
-                GetService<IAppNotificationService>().ShowDeletedMessage("Info", DeletedCount.ToString() + " Reminder(s) moved to trash due to expiration.You can check out trash page to see deleted reminders.");
+                GetService<IAppNotificationService>().ShowDeletedMessage("Info".GetLocalized(), string.Format("AppNotification_Expired".GetLocalized(), DeletedCount.ToString()));
             }
             else if (DeletedCount == 0 && AddedCount > 0)
             {
-                GetService<IAppNotificationService>().ShowInfoMessage("Info", "You have " + AddedCount.ToString() + " active reminder(s).");
+                GetService<IAppNotificationService>().ShowInfoMessage("Info".GetLocalized(), string.Format("AppNotification_ActiveReminder".GetLocalized(),AddedCount.ToString()));
             }
         }
         catch (Exception)
