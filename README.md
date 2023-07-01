@@ -56,7 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]]()
 
 There are many note and reminder apps available on GitHub and other platforms; however, I didn't find one that combines both  of these while using a modern UI, so I created this enhanced one. I want to create a "Note App" so amazing that it'll be the last one you ever need.
 
