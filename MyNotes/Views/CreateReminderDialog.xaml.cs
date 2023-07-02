@@ -31,7 +31,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         //TODO: localize strings
         //TODO: simplify and clean code blocks
         //TODO: change reminder tex texbox to rich edit box
-        this.InitializeComponent();
+        InitializeComponent();
         reminderNameTextBox.Header = "CreateReminder_NameBoxHeader".GetLocalized();
         reminderTextTextBox.Header = "CreateReminder_TextBoxHeader".GetLocalized();
         ReminderRepeatCheck.Content = "CreateReminder_Repeated".GetLocalized();
@@ -86,9 +86,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
             var filelocation = directory + reminderNameTextBox.Text + ".txt";
             if (File.Exists(filelocation))
             {
-                args.Cancel = true;
-                errorTextBlock.Visibility = Visibility.Visible;
-                errorTextBlock.Text = "CreateReminder_ErrorExistingFile".GetLocalized();
+                Error("CreateReminder_ErrorExistingFile", args);
             }
             else
             {
@@ -109,7 +107,6 @@ public sealed partial class CreateReminderDialog : ContentDialog
                     t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
                     writer.Write(timePicker.SelectedTime);
                     rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("hh:mm tt"), Repeat = isRepeated.ToString() };
-                    
                 }
                 writer.Close();
                 Result = ReminderCreateResult.ReminderCreationOK;
@@ -166,32 +163,38 @@ public sealed partial class CreateReminderDialog : ContentDialog
             {
                 if (string.IsNullOrEmpty(reminderNameTextBox.Text) || string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
-                    args.Cancel = true;
-                    errorTextBlock.Visibility = Visibility.Visible;
-                    errorTextBlock.Text = "CreateReminder_ErrorRequired".GetLocalized();
+                    Error("CreateReminder_ErrorRequired", args);
                 }
                 else if (!string.IsNullOrEmpty(reminderNameTextBox.Text) && !string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
                     tmsp = (TimeSpan)timePicker.SelectedTime!;
                     time = Convert.ToDateTime(tmsp.ToString());
-                    ofsetDate = DateTime.Now.AddHours(1);
+                    ofsetDate = DateTime.Now.AddMinutes(5);
                     if (isRepeated)
+                    {
+                        CreateReminder(args);
+                    }
+                    else if (datePicker.SelectedDate!.Value.Date > DateTime.Now.Date)
                     {
                         CreateReminder(args);
                     }
                     else if (datePicker.SelectedDate!.Value.Date < DateTime.Now.Date)
                     {
-                        args.Cancel = true;
-                        errorTextBlock.Visibility = Visibility.Visible;
-                        errorTextBlock.Text = "CreateReminder_ErrorLaterDate".GetLocalized();
+                        Error("CreateReminder_ErrorLaterDate", args);
                     }
-                    else if (datePicker.SelectedDate!.Value.Date == DateTime.Now.Date && time.Hour < ofsetDate.Hour)
+                    else if (time.Hour==23 && ofsetDate.Hour==0)
                     {
-                        args.Cancel = true;
-                        errorTextBlock.Visibility = Visibility.Visible;
-                        errorTextBlock.Text = "CreateReminder_ErrorLaterTime".GetLocalized();
+                        Error("CreateReminder_ErrorLaterTime", args);
                     }
-                    else if ((datePicker.SelectedDate.Value.Date == DateTime.Now.Date && time.Hour >= ofsetDate.Hour) || (datePicker.SelectedDate.Value.Date > DateTime.Now.Date))
+                    else if (time.Hour < ofsetDate.Hour)
+                    {
+                        Error("CreateReminder_ErrorLaterTime", args);
+                    }
+                    else if (time.Minute < ofsetDate.Minute)
+                    {
+                        Error("CreateReminder_ErrorLaterTime", args);
+                    }
+                    else if (time.Minute >= ofsetDate.Minute)
                     {
                         CreateReminder(args);
                     }
@@ -206,13 +209,46 @@ public sealed partial class CreateReminderDialog : ContentDialog
             {
                 if (string.IsNullOrEmpty(reminderNameTextBox.Text) || string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
-                    args.Cancel = true;
-                    errorTextBlock.Visibility = Visibility.Visible;
-                    errorTextBlock.Text = "CreateReminder_ErrorRequired".GetLocalized();
+                    Error("CreateReminder_ErrorRequired", args);
                 }
                 else if (!string.IsNullOrEmpty(reminderNameTextBox.Text) && !string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
-                    EditReminder(args);
+                    tmsp = (TimeSpan)timePicker.SelectedTime!;
+                    time = Convert.ToDateTime(tmsp.ToString());
+                    ofsetDate = DateTime.Now.AddMinutes(5);
+                    if (isRepeated)
+                    {
+                        EditReminder(args);
+                    }
+                    else if (datePicker.SelectedDate!.Value.Date > DateTime.Now.Date)
+                    {
+                        EditReminder(args);
+                    }
+                    else if (datePicker.SelectedDate!.Value.Date < DateTime.Now.Date)
+                    {
+                        Error("CreateReminder_ErrorLaterDate", args);
+                    }
+                    else if (time.Hour == 23 && ofsetDate.Hour == 0)
+                    {
+                        Error("CreateReminder_ErrorLaterTime", args);
+                    }
+                    else if (time.Hour < ofsetDate.Hour)
+                    {
+                        Error("CreateReminder_ErrorLaterTime", args);
+                    }
+                    else if (time.Minute < ofsetDate.Minute)
+                    {
+                        Error("CreateReminder_ErrorLaterTime", args);
+                    }
+                    else if ( time.Minute >= ofsetDate.Minute)
+                    {
+                        EditReminder(args);
+                    }
+                    else
+                    {
+                        args.Cancel = true;
+                        throw new Exception();
+                    }
                 }
             }
         }
@@ -239,6 +275,12 @@ public sealed partial class CreateReminderDialog : ContentDialog
         datePicker.Visibility = Visibility.Visible;
         isRepeated = false;
         datePicker.SelectedDate = DateTime.Now;
-
+    }
+    private void Error(string errorText, ContentDialogButtonClickEventArgs args)
+    {
+        args.Cancel = true;
+        errorTextBlock.Visibility = Visibility.Visible;
+        errorTextBlock.Text = errorText.GetLocalized();
+        return;
     }
 }
