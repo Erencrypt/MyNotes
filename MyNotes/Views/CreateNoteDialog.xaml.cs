@@ -21,7 +21,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
     private readonly StorageFolder notesFolder = App.StorageFolder;
     public CreateNoteDialog()
     {
-        this.InitializeComponent();
+        InitializeComponent();
         noteNameTextBox.Header = "CreateNote_NameBoxHeader".GetLocalized();
         Title = "CreateNote_Title".GetLocalized();
         PrimaryButtonText = "CreateNote_ButtonText".GetLocalized();
