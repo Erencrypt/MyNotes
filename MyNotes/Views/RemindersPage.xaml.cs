@@ -14,6 +14,7 @@ public sealed partial class RemindersPage : Page
 {
     private readonly StorageFolder storageFolder = App.StorageFolder;
     private readonly ObservableCollection<Reminder> items = new();
+    readonly ReminderCleanup reminderCleanup = new();
     public RemindersViewModel ViewModel
     {
         get;
@@ -73,8 +74,11 @@ public sealed partial class RemindersPage : Page
         if (AddReminderDialog.Result == ReminderCreateResult.ReminderCreationOK)
         {
             items.Insert(0, AddReminderDialog.rmnd);
-            App.Reminders.Add(AddReminderDialog.rmnd);
-            if (EmptyText.Visibility==Visibility.Visible)
+            if (Convert.ToDateTime(AddReminderDialog.rmnd.DateTime) > DateTime.Now)
+            {
+                reminderCleanup.Clean(false);
+            }
+            if (EmptyText.Visibility == Visibility.Visible)
             {
                 EmptyText.Visibility = Visibility.Collapsed;
             }
@@ -99,6 +103,11 @@ public sealed partial class RemindersPage : Page
                 Reminder rm = EditReminderDialog.rmnd;
                 items.Remove(selectedItem);
                 items.Insert(index, rm);
+                DateTime rmndDate = Convert.ToDateTime(EditReminderDialog.rmnd.DateTime);
+                if ( rmndDate > DateTime.Now && rmndDate< DateTime.Now.AddDays(1))
+                {
+                    reminderCleanup.Clean(false);
+                }
             }
         }
         else

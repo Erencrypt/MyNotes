@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.WinUI.UI.Controls.TextToolbarButtons;
-using Microsoft.UI.Text;
+﻿using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -73,9 +72,7 @@ public sealed partial class NoteDetailsPage : Page
     {
         try
         {
-            //hide the contentdialog
             infobar.IsOpen = false;
-            // release the timer
             dispatcherTimer?.Stop();
             dispatcherTimer = null;
             BtnSaveFile.IsEnabled = true;
@@ -96,7 +93,6 @@ public sealed partial class NoteDetailsPage : Page
     }
     private void CreateTimer()
     {
-        // get a timer to close the ContentDialog after 4s
         dispatcherTimer = new DispatcherTimer();
         dispatcherTimer.Tick += DispatcherTimer_Tick;
         dispatcherTimer.Interval = TimeSpan.FromSeconds(3);
