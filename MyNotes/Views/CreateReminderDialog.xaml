@@ -30,6 +30,6 @@
         <CheckBox Name="ReminderRepeatCheck" Checked="ReminderRepeatCheck_Checked" Unchecked="ReminderRepeatCheck_Unchecked"/>
         <DatePicker Name="datePicker" DayFormat="{}{day.integer} ({dayofweek.abbreviated})" Width="300"/>
         <TimePicker Name="timePicker" Width="300"/>
-        <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" Width="300" Height="auto"/>
+        <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" Width="300" TextWrapping="Wrap"  Height="auto"/>
     </StackPanel>
 </ContentDialog>
