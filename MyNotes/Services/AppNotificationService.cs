@@ -118,7 +118,7 @@ public class AppNotificationService : IAppNotificationService
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
         {
             ExpiresOnReboot = true,
-            Expiration = DateTime.Now.AddHours(1),
+            Expiration = DateTime.Now.AddMinutes(10),
             Priority = AppNotificationPriority.High
         };
         AppNotificationManager.Default.Show(appNotification);
