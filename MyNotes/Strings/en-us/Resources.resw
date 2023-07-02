@@ -133,7 +133,7 @@
     <value>Dismiss</value>
   </data>
   <data name="AppNotification_Expired" xml:space="preserve">
-    <value>"{0} Reminder moved to trash due to expiration. You can check out trash page to see deleted reminders."</value>
+    <value>{0} Reminder moved to trash due to expiration. You can check out trash page to see deleted reminders.</value>
   </data>
   <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
     <value>See deleted reminders</value>
@@ -148,7 +148,8 @@
     <value>Create Note</value>
   </data>
   <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>There is a note with the same name\nalready exist. Please use another name.</value>
+    <value>There is a note with the same name
+already exist. Please use another name.</value>
   </data>
   <data name="CreateNote_NameBoxHeader" xml:space="preserve">
     <value>Note Name</value>
@@ -163,13 +164,13 @@
     <value>Date</value>
   </data>
   <data name="CreateReminder_ErrorExistingFile" xml:space="preserve">
-    <value>There is a reminder with the same name\nalready exist. Please use another name.</value>
+    <value>There is a reminder with the same name already exist. Please use another name.</value>
   </data>
   <data name="CreateReminder_ErrorLaterDate" xml:space="preserve">
-    <value>Please select a date that later \nthan (or equal to) the current date.</value>
+    <value>Please select a date that later than (or equal to) the current date.</value>
   </data>
   <data name="CreateReminder_ErrorLaterTime" xml:space="preserve">
-    <value>Please select a time that at least 1 hour later \nthan the current time.</value>
+    <value>Please select a time that at least 5 minutes later than the current time.</value>
   </data>
   <data name="CreateReminder_ErrorRequired" xml:space="preserve">
     <value>Reminder name and text is required.</value>
@@ -214,7 +215,8 @@
     <value>Enter Text</value>
   </data>
   <data name="NoteDetails_ErrorMessage" xml:space="preserve">
-    <value>File couldn't be saved.\nError Message:</value>
+    <value>File couldn't be saved.
+Error Message:</value>
   </data>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
     <value>Enter Search Text</value>
