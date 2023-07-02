@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using Microsoft.Windows.AppLifecycle;
+using Windows.Storage;
 
 using MyNotes.Activation;
 using MyNotes.Contracts.Services;
@@ -12,8 +14,6 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
-using System.Text;
-using Windows.Storage;
 
 namespace MyNotes;
 
@@ -137,17 +137,17 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
+        var mainInstance = AppInstance.FindOrRegisterForKey("MyNotes");
         MainWindow.Closed += MainWindow_Closed;
-        SingleInstanceService singleInstanceService = new();
-
-        if (singleInstanceService.IsFirstInstance())
+        mainInstance.Activated += MainInstance_Activated;
+        if (mainInstance.IsCurrent)
         {
-            singleInstanceService.OnArgumentsReceived += OnArgumentsReceived;
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+            ReminderCleanup reminderCleanup = new();
             await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
             sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+            reminderCleanup.Clean(true);
             CreateFolders();
-            ReminderCleanup();
 
             base.OnLaunched(args);
             await App.GetService<IActivationService>().ActivateAsync(args);
@@ -155,8 +155,16 @@ public partial class App : Application
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+        if (!mainInstance.IsCurrent)
+        {
+            var activatedEventArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
+            await mainInstance.RedirectActivationToAsync(activatedEventArgs);
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            return;
+        }
     }
-    private void OnArgumentsReceived(string[] obj)
+
+    private void MainInstance_Activated(object? sender, AppActivationArguments e)
     {
         MainWindow.Show();
         MainWindow.BringToFront();
@@ -164,7 +172,7 @@ public partial class App : Application
     private void MainWindow_Closed(object sender, WindowEventArgs args)
     {
         args.Handled = true;
-        App.MainWindow.Hide();
+        MainWindow.Hide();
     }
     public static void ReminderSnoozed()
     {
@@ -224,82 +232,6 @@ public partial class App : Application
         foreach (string folder in folders)
         {
             await StorageFolder.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);
-        }
-    }
-    private static async void ReminderCleanup()
-    {
-        try
-        {
-            int DeletedCount = 0;
-            int AddedCount = 0;
-            await StorageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
-            DirectoryInfo dinfo = new(StorageFolder.Path + "\\Reminders");
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
-            List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
-            string fullPath;
-            MoveFile moveFile = new();
-            foreach (FileInfo file in orderedList)
-            {
-                fullPath = dinfo.ToString() + "\\" + file.Name;
-                string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-                string[] lines = readText.Split("\r\n");
-                if (lines.Length < 3)
-                {
-                    continue;
-                }
-                else
-                {
-                    DateTime t;
-                    if (lines.Length == 3)
-                    {
-                        t = Convert.ToDateTime(lines[2]);
-                        if (t.TimeOfDay > DateTime.Now.TimeOfDay)
-                        {
-                            reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
-                            AddedCount++;
-                        }
-                    }
-                    if (lines.Length == 4)
-                    {
-                        t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                        if (t.Date < DateTime.Now.Date)
-                        {
-                            moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                            DeletedCount++;
-                        }
-                        else if (t.Date == DateTime.Now.Date)
-                        {
-                            if (t.TimeOfDay < DateTime.Now.TimeOfDay)
-                            {
-                                moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                                DeletedCount++;
-                            }
-                        }
-                        else
-                        {
-                            reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
-                            AddedCount++;
-                        }
-                    }
-                }
-            }
-            if (DeletedCount > 0 && AddedCount > 0)
-            {
-                GetService<IAppNotificationService>().ShowDeletedMessage("Info".GetLocalized(), string.Format("AppNotification_ActiveReminder".GetLocalized(), AddedCount.ToString()) + "\n"+ string.Format("AppNotification_Expired".GetLocalized(), DeletedCount.ToString()));
-            }
-            else if (DeletedCount > 0 && AddedCount == 0)
-            {
-                GetService<IAppNotificationService>().ShowDeletedMessage("Info".GetLocalized(), string.Format("AppNotification_Expired".GetLocalized(), DeletedCount.ToString()));
-            }
-            else if (DeletedCount == 0 && AddedCount > 0)
-            {
-                GetService<IAppNotificationService>().ShowInfoMessage("Info".GetLocalized(), string.Format("AppNotification_ActiveReminder".GetLocalized(),AddedCount.ToString()));
-            }
-        }
-        catch (Exception)
-        {
-
-            throw;
         }
     }
 }
