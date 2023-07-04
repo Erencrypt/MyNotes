@@ -87,6 +87,14 @@
                 LostFocus="{x:Bind FindBoxRemoveHighlights}"/>
             </StackPanel>
 
+            <CheckBox x:Uid="NoteDetails_SpellCheck"
+                      Name="SpellCheck"
+                      Checked="SpellCheck_Checked"
+                      Unchecked="SpellCheck_Unchecked"
+                      RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      Margin="0,0,0,8"/>
+
         </RelativePanel>
     </Grid>
 </Page>
