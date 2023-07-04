@@ -70,6 +70,7 @@ public class AppNotificationService : IAppNotificationService
 
     public bool ShowReminder(string title, string message, string time)
     {
+        //TODO:Add Scnerio Selection To Settings as Notification Type
         string snooze = "AppNotification_Snooze".GetLocalized();
         string dismiss = "AppNotification_Dismiss".GetLocalized();
         string payload = new(@$"
