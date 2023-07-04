@@ -6,13 +6,18 @@ using Windows.ApplicationModel;
 using Windows.UI.Popups;
 using Microsoft.Win32;
 using MyNotes.Helpers;
+using MyNotes.Contracts.Services;
+using Microsoft.UI.Composition.SystemBackdrops;
+using Microsoft.UI.Xaml.Media;
 
 namespace MyNotes.Views;
 
 public sealed partial class SettingsPage : Page
 {
     readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
+    private readonly ILocalSettingsService localSettingsService;
     StartupTask? startupTask;
+    private readonly string BackDropKey = "BackDrop";
     public SettingsViewModel ViewModel
     {
         get;
@@ -21,6 +26,8 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
+        localSettingsService = App.GetService<ILocalSettingsService>();
+        BackDropState();
         if (RuntimeHelper.IsMSIX)
         {
             GetTask();
@@ -32,6 +39,26 @@ public sealed partial class SettingsPage : Page
         else 
         { 
             StartupCheck.IsChecked = false;
+        }
+    }
+    private async void BackDropState()
+    {
+        var backdrop = await localSettingsService.ReadSettingAsync<MicaKind>(BackDropKey);
+        if (backdrop.ToString() != null)
+        {
+            if (backdrop == MicaKind.Base)
+            {
+                Settings_BackDrop_Base.IsChecked = true;
+            }
+            else if (backdrop == MicaKind.BaseAlt)
+            {
+                Settings_BackDrop_BaseAlt.IsChecked = true;
+            }
+        }
+        else if (backdrop.ToString()==null)
+        {
+            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            Settings_BackDrop_Base.IsChecked= true;
         }
     }
     private async void GetTask()
@@ -117,5 +144,25 @@ public sealed partial class SettingsPage : Page
     private void StartupCheck_Unchecked(object sender, RoutedEventArgs e)
     {
         DisableStartup();
+    }
+    private void HandleCheck(object sender, RoutedEventArgs e)
+    {
+        MicaBackdrop micaBackdrop = new();
+        RadioButton? rb = sender as RadioButton;
+        if (rb.Name == "Settings_BackDrop_Base")
+        {
+            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            micaBackdrop.Kind = MicaKind.Base;
+        }
+        else if (rb.Name == "Settings_BackDrop_BaseAlt")
+        {
+            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
+            micaBackdrop.Kind = MicaKind.BaseAlt;
+        }
+        MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
+        if (knd != micaBackdrop.Kind)
+        {
+            App.MainWindow.SystemBackdrop = micaBackdrop;
+        }
     }
 }
