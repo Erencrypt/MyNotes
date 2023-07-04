@@ -230,6 +230,9 @@ Error Message:</value>
   <data name="NoteDetails_SaveTooltip" xml:space="preserve">
     <value>Save (Ctrl+S)</value>
   </data>
+  <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
+    <value>Use spellcheck</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Changes Saved</value>
   </data>
@@ -259,6 +262,15 @@ Error Message:</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>This application is created by Erencrypt as an opensource project under GNU General Public License v3.0. For more Detailed information, visit our GitHub page.</value>
+  </data>
+  <data name="Settings_BackDrop.Text" xml:space="preserve">
+    <value>Window Backdrop</value>
+  </data>
+  <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Settings_BackDrop_BaseAlt.Content" xml:space="preserve">
+    <value>Mica Alt</value>
   </data>
   <data name="Settings_DisabledByPolicy" xml:space="preserve">
     <value>Startup disabled by group policy, or not supported on this device</value>
