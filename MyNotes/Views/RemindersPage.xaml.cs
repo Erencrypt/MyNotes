@@ -45,6 +45,7 @@ public sealed partial class RemindersPage : Page
     private static string noteName = string.Empty;
     public RemindersPage()
     {
+        //TODO:Add ReminderDetails page
         ViewModel = App.GetService<RemindersViewModel>();
         InitializeComponent();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
