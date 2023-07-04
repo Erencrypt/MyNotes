@@ -176,8 +176,8 @@ Project Link: [https://github.com/ErenCanUtku/MyNotes](https://github.com/your_u
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 These are the list of resources I find helpful and would like to give credit to. 
-
-* For some reason, I can't make app lifecycle API work, so I used [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) on stack overflow for  single instancing. I think it's a good workaround, but I will try using app lifecycle API in the future and make it work.
+* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D)(especially Dan)
+* I fixed life cycle API and removed old solution to this problem, but i will left [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) here, maybe it will be useful to someone.
 * [Choose an Open Source License](https://choosealicense.com)
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template) (This template is so useful).
 
