@@ -290,6 +290,15 @@ Error Message:</value>
   <data name="Settings_Personalization.Text" xml:space="preserve">
     <value>Personalization</value>
   </data>
+  <data name="Settings_Preferances.Text" xml:space="preserve">
+    <value>Preferances</value>
+  </data>
+  <data name="Settings_Save.Text" xml:space="preserve">
+    <value>Save when exit</value>
+  </data>
+  <data name="Settings_SaveCheck.Content" xml:space="preserve">
+    <value>Save when exiting from a note</value>
+  </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
     <value>Startup</value>
   </data>
