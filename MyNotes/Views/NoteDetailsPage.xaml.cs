@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Text;
+﻿using Microsoft.UI.Composition.SystemBackdrops;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -20,6 +21,8 @@ public sealed partial class NoteDetailsPage : Page
     private readonly ILocalSettingsService localSettingsService;
     private DispatcherTimer? dispatcherTimer;
     private readonly string SpellcheckKey = "SpellCheck";
+    private readonly string SaveWhenExitKey = "SaveWhenExit";
+    private bool saveWhenExit;
 
     public NoteDetailsViewModel ViewModel
     {
@@ -31,14 +34,16 @@ public sealed partial class NoteDetailsPage : Page
         InitializeComponent();
         localSettingsService = App.GetService<ILocalSettingsService>();
         LoadDocument();
+        SaveWhenExitState();
         SpellCheckState();
+
         noteName.Title = "NoteDetails_NoteNameTitle".GetLocalized();
         NoteEditor.PlaceholderText = "NoteDetails_EditorPlaceholder".GetLocalized();
         findBox.PlaceholderText = "NoteDetails_FindPlaceholder".GetLocalized();
         findBoxLabel.Text = "NoteDetails_FindText".GetLocalized();
         ToolTipService.SetToolTip(BtnSaveFile, "NoteDetails_SaveTooltip".GetLocalized());
-        //TODO: add save when exit to settings
     }
+    public async void SaveWhenExitState() => saveWhenExit = await localSettingsService.ReadSettingAsync<bool>(SaveWhenExitKey);
     public async void SpellCheckState()
     {
         bool check = await localSettingsService.ReadSettingAsync<bool>(SpellcheckKey);
@@ -72,28 +77,30 @@ public sealed partial class NoteDetailsPage : Page
                 using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.Read);
                 NoteEditor.Document.LoadFromStream(TextSetOptions.FormatRtf, randAccStream);
                 noteName.Message = ShellPage.NoteName;
-                //TODO: Add an option to not show name flyout when note details opened in options page
             }
         }
     }
     private async void SaveFile(bool showInfo)
     {
-        var directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
-        StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
-        if (file != null)
+        if (saveWhenExit)
         {
-            try
+            var directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
+            StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
+            if (file != null)
             {
-                using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
-                NoteEditor.Document.SaveToStream(TextGetOptions.FormatRtf, randAccStream);
-                if (showInfo)
+                try
                 {
-                    InfoBar("Success".GetLocalized(), InfoBarSeverity.Success, "NoteDetails_SuccessMessage".GetLocalized());
+                    using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
+                    NoteEditor.Document.SaveToStream(TextGetOptions.FormatRtf, randAccStream);
+                    if (showInfo)
+                    {
+                        InfoBar("Success".GetLocalized(), InfoBarSeverity.Success, "NoteDetails_SuccessMessage".GetLocalized());
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "NoteDetails_ErrorMessage".GetLocalized() + ex.Message);
+                catch (Exception ex)
+                {
+                    InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "NoteDetails_ErrorMessage".GetLocalized() + ex.Message);
+                }
             }
         }
     }

@@ -50,23 +50,28 @@
                         </RadioButton>
                     </StackPanel>
                 </StackPanel>
+                <TextBlock x:Uid="Settings_BackDrop" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <TextBlock x:Uid="Settings_BackDrop" />
-                    <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                        <RadioButton
+                    <RadioButton
                         x:Uid="Settings_BackDrop_Base"
                             Name="Settings_BackDrop_Base"
                         Checked="HandleCheck"
                         FontSize="15"
                         GroupName="BackDrop">
-                        </RadioButton>
-                        <RadioButton
+                    </RadioButton>
+                    <RadioButton
                         x:Uid="Settings_BackDrop_BaseAlt"
                             Name="Settings_BackDrop_BaseAlt"
                         Checked="HandleCheck"
                         FontSize="15"
                         GroupName="BackDrop">
-                        </RadioButton>
+                    </RadioButton>
+                </StackPanel>
+                <TextBlock x:Uid="Settings_Preferances" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+                    <TextBlock x:Uid="Settings_Save" />
+                    <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                        <CheckBox x:Uid="Settings_SaveCheck" Checked="SaveCheck_Checked" Unchecked="SaveCheck_Unchecked" Name="SaveCheck"/>
                     </StackPanel>
                 </StackPanel>
                 <TextBlock x:Uid="Settings_Startup" Style="{ThemeResource SubtitleTextBlockStyle}" />

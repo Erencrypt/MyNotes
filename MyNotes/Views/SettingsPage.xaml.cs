@@ -18,6 +18,7 @@ public sealed partial class SettingsPage : Page
     private readonly ILocalSettingsService localSettingsService;
     StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
+    private readonly string SaveWhenExitKey = "SaveWhenExit";
     public SettingsViewModel ViewModel
     {
         get;
@@ -28,6 +29,7 @@ public sealed partial class SettingsPage : Page
         InitializeComponent();
         localSettingsService = App.GetService<ILocalSettingsService>();
         BackDropState();
+        SaveWhenExitState();
         if (RuntimeHelper.IsMSIX)
         {
             GetTask();
@@ -59,6 +61,26 @@ public sealed partial class SettingsPage : Page
         {
             _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
             Settings_BackDrop_Base.IsChecked= true;
+        }
+    }
+    private async void SaveWhenExitState()
+    {
+        var save = await localSettingsService.ReadSettingAsync<bool>(SaveWhenExitKey);
+        if (save.ToString() != null)
+        {
+            if (save)
+            {
+                SaveCheck.IsChecked = true;
+            }
+            else if (!save)
+            {
+                SaveCheck.IsChecked = false;
+            }
+        }
+        else if (save.ToString() == null)
+        {
+            _ = localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
+            SaveCheck.IsChecked = true;
         }
     }
     private async void GetTask()
@@ -164,5 +186,17 @@ public sealed partial class SettingsPage : Page
         {
             App.MainWindow.SystemBackdrop = micaBackdrop;
         }
+    }
+
+    private void SaveCheck_Checked(object sender, RoutedEventArgs e)
+    {
+        _ = localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
+        SaveCheck.IsChecked = true;
+    }
+
+    private void SaveCheck_Unchecked(object sender, RoutedEventArgs e)
+    {
+        _ = localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
+        SaveCheck.IsChecked = false;
     }
 }
