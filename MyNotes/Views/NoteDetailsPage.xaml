@@ -21,7 +21,8 @@
                 </Style>
             </RelativePanel.Resources>
             <InfoBar Name="infobar"
-                     Margin="0,-64,0,0"
+                     Margin="0,-96,-32,0"
+                     Visibility="Visible"
                      RelativePanel.AlignBottomWithPanel="True"
                      RelativePanel.AlignRightWithPanel="True">
                 <InfoBar.Transitions>
