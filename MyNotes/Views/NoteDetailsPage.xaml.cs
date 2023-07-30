@@ -2,6 +2,7 @@
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -36,6 +37,7 @@ public sealed partial class NoteDetailsPage : Page
         LoadDocument();
         SaveWhenExitState();
         SpellCheckState();
+        NoteEditor.SelectionFlyout = null;
 
         noteName.Title = "NoteDetails_NoteNameTitle".GetLocalized();
         NoteEditor.PlaceholderText = "NoteDetails_EditorPlaceholder".GetLocalized();
@@ -43,6 +45,7 @@ public sealed partial class NoteDetailsPage : Page
         findBoxLabel.Text = "NoteDetails_FindText".GetLocalized();
         ToolTipService.SetToolTip(BtnSaveFile, "NoteDetails_SaveTooltip".GetLocalized());
     }
+
     public async void SaveWhenExitState() => saveWhenExit = await localSettingsService.ReadSettingAsync<bool>(SaveWhenExitKey);
     public async void SpellCheckState()
     {
