@@ -6,4 +6,3 @@ public class Reminder
     public string? DateTime { get; set; }
     public string? Repeat { get; set; }
 }
-
