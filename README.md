@@ -154,7 +154,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the **GNU General Public License v3.0** License. See `LICENSE` file for more information.
+Distributed under the **GNU General Public License v3.0** License. See [`LICENSE`](https://github.com/ErenCanUtku/MyNotes/blob/main/LICENSE) file for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
