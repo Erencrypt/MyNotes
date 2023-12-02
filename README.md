@@ -158,14 +158,14 @@ Distributed under the **GNU General Public License v3.0** License. See [`LICENSE
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
+<!-- CONTACT
 ## Contact
 
 Eren Can Utku - [@eren_can_utku](https://www.instagram.com/eren_can_utku/)
 
 Project Link: [https://github.com/ErenCanUtku/MyNotes](https://github.com/your_username/repo_name)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
