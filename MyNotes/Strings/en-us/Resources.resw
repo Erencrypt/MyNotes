@@ -129,6 +129,9 @@
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
     <value>You have {0} active reminder.</value>
   </data>
+  <data name="AppNotification_ActiveReminders" xml:space="preserve">
+    <value>You have {0} active reminders.</value>
+  </data>
   <data name="AppNotification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>
@@ -271,6 +274,9 @@ Error Message:</value>
   </data>
   <data name="Settings_BackDrop_BaseAlt.Content" xml:space="preserve">
     <value>Mica Alt</value>
+  </data>
+  <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
+    <value>Acrylic</value>
   </data>
   <data name="Settings_DisabledByPolicy" xml:space="preserve">
     <value>Startup disabled by group policy, or not supported on this device</value>
