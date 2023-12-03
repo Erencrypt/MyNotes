@@ -18,7 +18,9 @@ public sealed partial class SettingsPage : Page
     private readonly ILocalSettingsService localSettingsService;
     StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
+    private readonly string AcrylicKey = "IsAcrylic";
     private readonly string SaveWhenExitKey = "SaveWhenExit";
+    private bool isAcrylic;
     public SettingsViewModel ViewModel
     {
         get;
@@ -34,33 +36,42 @@ public sealed partial class SettingsPage : Page
         {
             GetTask();
         }
-        if (key.GetValue("MyNotes")!=null)
+        if (key.GetValue("MyNotes") != null)
         {
             StartupCheck.IsChecked = true;
         }
-        else 
-        { 
+        else
+        {
             StartupCheck.IsChecked = false;
         }
     }
     private async void BackDropState()
     {
+        isAcrylic = await localSettingsService.ReadSettingAsync<bool>(AcrylicKey);
         var backdrop = await localSettingsService.ReadSettingAsync<MicaKind>(BackDropKey);
-        if (backdrop.ToString() != null)
+        if (isAcrylic)
         {
-            if (backdrop == MicaKind.Base)
+            Settings_BackDrop_Acrylic.IsChecked = true;
+        }
+        else
+        {
+            isAcrylic =false;
+            if (backdrop.ToString() != null)
             {
+                if (backdrop == MicaKind.Base)
+                {
+                    Settings_BackDrop_Base.IsChecked = true;
+                }
+                else if (backdrop == MicaKind.BaseAlt)
+                {
+                    Settings_BackDrop_BaseAlt.IsChecked = true;
+                }
+            }
+            else if (backdrop.ToString() == null)
+            {
+                _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
                 Settings_BackDrop_Base.IsChecked = true;
             }
-            else if (backdrop == MicaKind.BaseAlt)
-            {
-                Settings_BackDrop_BaseAlt.IsChecked = true;
-            }
-        }
-        else if (backdrop.ToString()==null)
-        {
-            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
-            Settings_BackDrop_Base.IsChecked= true;
         }
     }
     private async void SaveWhenExitState()
@@ -132,7 +143,7 @@ public sealed partial class SettingsPage : Page
         }
         else
         {
-            if (Environment.ProcessPath!=null)
+            if (Environment.ProcessPath != null)
             {
                 key.SetValue("MyNotes", Environment.ProcessPath!);
             }
@@ -167,25 +178,52 @@ public sealed partial class SettingsPage : Page
     {
         DisableStartup();
     }
+
     private void HandleCheck(object sender, RoutedEventArgs e)
     {
+        MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
         MicaBackdrop micaBackdrop = new();
         RadioButton? rb = sender as RadioButton;
+        
         if (rb.Name == "Settings_BackDrop_Base")
         {
             _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
             micaBackdrop.Kind = MicaKind.Base;
+            if (isAcrylic)
+            {
+                App.MainWindow.SystemBackdrop = micaBackdrop;
+                isAcrylic = false;
+            }
+            else if (knd != micaBackdrop.Kind)
+            {
+                App.MainWindow.SystemBackdrop = micaBackdrop;
+            }
         }
         else if (rb.Name == "Settings_BackDrop_BaseAlt")
         {
             _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
             micaBackdrop.Kind = MicaKind.BaseAlt;
+            if (isAcrylic)
+            {
+                App.MainWindow.SystemBackdrop = micaBackdrop;
+                isAcrylic = false;
+            }
+            else if (knd != micaBackdrop.Kind)
+            {
+                App.MainWindow.SystemBackdrop = micaBackdrop;
+            }
         }
-        MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
-        if (knd != micaBackdrop.Kind)
+        else if (rb.Name == "Settings_BackDrop_Acrylic")
         {
-            App.MainWindow.SystemBackdrop = micaBackdrop;
+            if (!isAcrylic)
+            {
+                _ = localSettingsService.SaveSettingAsync(AcrylicKey, true);
+                DesktopAcrylicBackdrop desktopAcrylicBackdrop = new();
+                App.MainWindow.SystemBackdrop = desktopAcrylicBackdrop;
+                isAcrylic = true;
+            }
         }
+        _ = localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
     }
 
     private void SaveCheck_Checked(object sender, RoutedEventArgs e)

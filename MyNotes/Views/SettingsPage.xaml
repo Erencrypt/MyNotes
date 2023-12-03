@@ -66,6 +66,13 @@
                         FontSize="15"
                         GroupName="BackDrop">
                     </RadioButton>
+                    <RadioButton
+                        x:Uid="Settings_BackDrop_Acrylic"
+                            Name="Settings_BackDrop_Acrylic"
+                        Checked="HandleCheck"
+                        FontSize="15"
+                        GroupName="BackDrop">
+                    </RadioButton>
                 </StackPanel>
                 <TextBlock x:Uid="Settings_Preferances" Style="{ThemeResource SubtitleTextBlockStyle}" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">

@@ -9,11 +9,12 @@ public sealed partial class MainWindow : WindowEx
 {
     private readonly ILocalSettingsService localSettingsService;
     private readonly string BackDropKey = "BackDrop";
+    private readonly string AcrylicKey = "IsAcrylic";
     private MicaKind micaKind;
     public MainWindow()
     {
         InitializeComponent();
-        localSettingsService= App.GetService<ILocalSettingsService>();
+        localSettingsService = App.GetService<ILocalSettingsService>();
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
         Content = null;
         Title = "AppDisplayName".GetLocalized();
@@ -21,19 +22,28 @@ public sealed partial class MainWindow : WindowEx
     }
     public async void BackDropState()
     {
-        MicaKind backdrop = await localSettingsService.ReadSettingAsync<MicaKind>(BackDropKey);
-        if (backdrop.ToString() != null)
+        bool isAcrylic = await localSettingsService.ReadSettingAsync<bool>(AcrylicKey);
+        if (isAcrylic)
         {
-            micaKind = backdrop;
+            DesktopAcrylicBackdrop desktopAcrylicBackdrop = new();
+            SystemBackdrop = desktopAcrylicBackdrop;
         }
-        else if (backdrop.ToString() == null)
+        else
         {
-            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            MicaKind backdrop = await localSettingsService.ReadSettingAsync<MicaKind>(BackDropKey);
+            if (backdrop.ToString() != null)
+            {
+                micaKind = backdrop;
+            }
+            else if (backdrop.ToString() == null)
+            {
+                _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            }
+            MicaBackdrop systemBackdrop = new()
+            {
+                Kind = micaKind
+            };
+            SystemBackdrop = systemBackdrop;
         }
-        MicaBackdrop systemBackdrop = new()
-        {
-            Kind = micaKind
-        };
-        SystemBackdrop = systemBackdrop;
     }
 }
