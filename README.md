@@ -158,19 +158,19 @@ Distributed under the **GNU General Public License v3.0** License. See [`LICENSE
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
+<!-- CONTACT
 ## Contact
 
 Eren Can Utku - [@eren_can_utku](https://www.instagram.com/eren_can_utku/)
 
 Project Link: [https://github.com/ErenCanUtku/MyNotes](https://github.com/your_username/repo_name)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 These are the list of resources I find helpful and would like to give credit to. 
-* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D)(especially Dan)
+* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D)
 * I fixed life cycle API and removed old solution to this problem, but i will left [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) here, maybe it will be useful to someone.
 * [Choose an Open Source License](https://choosealicense.com)
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template) (This template is so useful).
