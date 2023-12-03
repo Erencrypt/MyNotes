@@ -71,7 +71,7 @@ namespace MyNotes.Helpers
                         }
                     }
                 }
-                if(isStartup)
+                if (isStartup)
                 {
                     ShowNotifications();
                 }
@@ -83,9 +83,13 @@ namespace MyNotes.Helpers
         }
         private void ShowNotifications()
         {
+            string localizationString = AddedCount == 1 ? "AppNotification_ActiveReminder"
+                : AddedCount > 1 ? "AppNotification_ActiveReminders"
+                : string.Empty;
+
             if (DeletedCount > 0 && AddedCount > 0)
             {
-                notificationService.ShowDeletedMessage("Info".GetLocalized(), string.Format("AppNotification_ActiveReminder".GetLocalized(), AddedCount.ToString()) +
+                notificationService.ShowDeletedMessage("Info".GetLocalized(), string.Format(localizationString.GetLocalized(), AddedCount.ToString()) +
                     "\n" +
                     string.Format("AppNotification_Expired".GetLocalized(), DeletedCount.ToString()));
             }
@@ -95,7 +99,7 @@ namespace MyNotes.Helpers
             }
             else if (DeletedCount == 0 && AddedCount > 0)
             {
-                notificationService.ShowInfoMessage("Info".GetLocalized(), string.Format("AppNotification_ActiveReminder".GetLocalized(), AddedCount.ToString()));
+                notificationService.ShowInfoMessage("Info".GetLocalized(), string.Format(localizationString.GetLocalized(), AddedCount.ToString()));
             }
         }
     }
