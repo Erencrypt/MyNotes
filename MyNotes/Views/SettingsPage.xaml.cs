@@ -69,7 +69,7 @@ public sealed partial class SettingsPage : Page
             }
             else if (backdrop.ToString() == null)
             {
-                _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+                await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
                 Settings_BackDrop_Base.IsChecked = true;
             }
         }
@@ -90,7 +90,7 @@ public sealed partial class SettingsPage : Page
         }
         else if (save.ToString() == null)
         {
-            _ = localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
+            await localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
             SaveCheck.IsChecked = true;
         }
     }
@@ -187,7 +187,7 @@ public sealed partial class SettingsPage : Page
         
         if (rb.Name == "Settings_BackDrop_Base")
         {
-            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
             micaBackdrop.Kind = MicaKind.Base;
             if (isAcrylic)
             {
@@ -201,7 +201,7 @@ public sealed partial class SettingsPage : Page
         }
         else if (rb.Name == "Settings_BackDrop_BaseAlt")
         {
-            _ = localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
+            localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
             micaBackdrop.Kind = MicaKind.BaseAlt;
             if (isAcrylic)
             {
@@ -217,24 +217,24 @@ public sealed partial class SettingsPage : Page
         {
             if (!isAcrylic)
             {
-                _ = localSettingsService.SaveSettingAsync(AcrylicKey, true);
+                localSettingsService.SaveSettingAsync(AcrylicKey, true);
                 DesktopAcrylicBackdrop desktopAcrylicBackdrop = new();
                 App.MainWindow.SystemBackdrop = desktopAcrylicBackdrop;
                 isAcrylic = true;
             }
         }
-        _ = localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
+        localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
     }
 
     private void SaveCheck_Checked(object sender, RoutedEventArgs e)
     {
-        _ = localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
+        localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
         SaveCheck.IsChecked = true;
     }
 
     private void SaveCheck_Unchecked(object sender, RoutedEventArgs e)
     {
-        _ = localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
+        localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
         SaveCheck.IsChecked = false;
     }
 }
