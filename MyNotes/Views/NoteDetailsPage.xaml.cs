@@ -1,8 +1,6 @@
-﻿using Microsoft.UI.Composition.SystemBackdrops;
-using Microsoft.UI.Text;
+﻿using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -52,8 +50,8 @@ public sealed partial class NoteDetailsPage : Page
         bool check = await localSettingsService.ReadSettingAsync<bool>(SpellcheckKey);
         if (check.ToString() != null)
         {
-            SpellCheck.IsChecked= check;
-            NoteEditor.IsSpellCheckEnabled= check;
+            SpellCheck.IsChecked = check;
+            NoteEditor.IsSpellCheckEnabled = check;
         }
         else if (check.ToString() == null)
         {

@@ -1,14 +1,14 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Composition.SystemBackdrops;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.Win32;
+using MyNotes.Contracts.Services;
+using MyNotes.Helpers;
 using MyNotes.ViewModels;
 using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.UI.Popups;
-using Microsoft.Win32;
-using MyNotes.Helpers;
-using MyNotes.Contracts.Services;
-using Microsoft.UI.Composition.SystemBackdrops;
-using Microsoft.UI.Xaml.Media;
 
 namespace MyNotes.Views;
 
@@ -55,7 +55,7 @@ public sealed partial class SettingsPage : Page
         }
         else
         {
-            isAcrylic =false;
+            isAcrylic = false;
             if (backdrop.ToString() != null)
             {
                 if (backdrop == MicaKind.Base)
@@ -184,7 +184,7 @@ public sealed partial class SettingsPage : Page
         MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
         MicaBackdrop micaBackdrop = new();
         RadioButton? rb = sender as RadioButton;
-        
+
         if (rb.Name == "Settings_BackDrop_Base")
         {
             localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);

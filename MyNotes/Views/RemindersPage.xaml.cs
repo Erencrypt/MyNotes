@@ -105,7 +105,7 @@ public sealed partial class RemindersPage : Page
                 items.Remove(selectedItem);
                 items.Insert(index, rm);
                 DateTime rmndDate = Convert.ToDateTime(EditReminderDialog.rmnd.DateTime);
-                if ( rmndDate > DateTime.Now && rmndDate< DateTime.Now.AddDays(1))
+                if (rmndDate > DateTime.Now && rmndDate < DateTime.Now.AddDays(1))
                 {
                     reminderCleanup.Clean(false);
                 }

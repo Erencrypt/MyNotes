@@ -43,7 +43,7 @@ public sealed partial class TrashPage : Page
         pivotItem.Header = "Trash_ReminderPivotHeader".GetLocalized();
         ToolTipService.SetToolTip(deleteReminder, "Delete".GetLocalized());
         ToolTipService.SetToolTip(restoreReminder, "Restore".GetLocalized());
-        
+
         LstReminders.ItemsSource = items;
         ListNotes();
         ListReminders();

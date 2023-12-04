@@ -8,14 +8,14 @@ namespace MyNotes.Helpers
 {
     public class MoveFile
     {
-        private readonly StorageFolder storageFolder= App.StorageFolder;
+        private readonly StorageFolder storageFolder = App.StorageFolder;
         public async void Move(string from, string to, string filename, XamlRoot root)
         {
             try
             {
                 if (filename != null)
                 {
-                    Mover(from, to, filename,".txt");
+                    Mover(from, to, filename, ".txt");
                 }
                 else
                 {

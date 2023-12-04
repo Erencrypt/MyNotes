@@ -182,7 +182,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
                     {
                         Error("CreateReminder_ErrorLaterDate", args);
                     }
-                    else if (time.Hour==23 && ofsetDate.Hour==0)
+                    else if (time.Hour == 23 && ofsetDate.Hour == 0)
                     {
                         Error("CreateReminder_ErrorLaterTime", args);
                     }
@@ -240,7 +240,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
                     {
                         Error("CreateReminder_ErrorLaterTime", args);
                     }
-                    else if ( time.Minute >= ofsetDate.Minute)
+                    else if (time.Minute >= ofsetDate.Minute)
                     {
                         EditReminder(args);
                     }

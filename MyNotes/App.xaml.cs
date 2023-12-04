@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
-using Windows.Storage;
-
 using MyNotes.Activation;
 using MyNotes.Contracts.Services;
 using MyNotes.Core.Contracts.Services;
@@ -14,6 +12,7 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
+using Windows.Storage;
 
 namespace MyNotes;
 
@@ -183,7 +182,7 @@ public partial class App : Application
     public static void ReminderDismissed()
     {
         Reminder reminder = InvokedReminders[0];
-        bool repeat= Convert.ToBoolean(reminder.Repeat);
+        bool repeat = Convert.ToBoolean(reminder.Repeat);
         if (repeat)
         {
             InvokedReminders.Remove(reminder);
@@ -228,7 +227,7 @@ public partial class App : Application
     }
     private static async void CreateFolders()
     {
-        List<string> folders = new() {"Notes", "Reminders", "Trash" };
+        List<string> folders = new() { "Notes", "Reminders", "Trash" };
         foreach (string folder in folders)
         {
             await StorageFolder.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);

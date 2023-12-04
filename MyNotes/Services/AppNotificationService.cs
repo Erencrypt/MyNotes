@@ -1,8 +1,8 @@
 ﻿using Microsoft.Windows.AppNotifications;
 using MyNotes.Contracts.Services;
+using MyNotes.Helpers;
 using MyNotes.ViewModels;
 using MyNotes.Views;
-using MyNotes.Helpers;
 using System.Collections.Specialized;
 using System.Web;
 

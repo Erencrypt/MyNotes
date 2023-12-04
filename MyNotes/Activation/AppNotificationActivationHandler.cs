@@ -1,8 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
 
-using MyNotes.Contracts.Services;
-
 namespace MyNotes.Activation;
 
 public class AppNotificationActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
