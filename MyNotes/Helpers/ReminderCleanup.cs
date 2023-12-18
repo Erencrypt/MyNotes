@@ -50,23 +50,23 @@ namespace MyNotes.Helpers
                         if (lines.Length == 4)
                         {
                             t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                            if (t.Date < DateTime.Now.Date)
-                            {
-                                moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                                DeletedCount++;
-                            }
-                            else if (t.Date == DateTime.Now.Date)
+                            if (t.Date == DateTime.Now.Date)
                             {
                                 if (t.TimeOfDay < DateTime.Now.TimeOfDay)
                                 {
                                     moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
                                     DeletedCount++;
                                 }
+                                else if (t.TimeOfDay > DateTime.Now.TimeOfDay)
+                                {
+                                    App.Reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
+                                    AddedCount++;
+                                }
                             }
-                            else
+                            else if (t.Date < DateTime.Now.Date)
                             {
-                                App.Reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
-                                AddedCount++;
+                                moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
+                                DeletedCount++;
                             }
                         }
                     }
