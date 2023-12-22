@@ -63,6 +63,8 @@
                                   >
             </controls:TextToolbar>
             <RichEditBox x:Name="NoteEditor"
+                GettingFocus="NoteEditor_GettingFocus"
+                LosingFocus="NoteEditor_LosingFocus"
                 ProcessKeyboardAccelerators="NoteEditor_ProcessKeyboardAccelerators"
                 KeyboardAcceleratorPlacementMode="Hidden"
                 Width="auto" Height="auto"

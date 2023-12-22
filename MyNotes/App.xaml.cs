@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.WinUI.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
@@ -142,14 +143,15 @@ public partial class App : Application
         if (mainInstance.IsCurrent)
         {
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+            sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+            CreateSaveFile();
+            CreateFolders();
             ReminderCleanup reminderCleanup = new();
             await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
-            sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             reminderCleanup.Clean(true);
-            CreateFolders();
 
             base.OnLaunched(args);
-            await App.GetService<IActivationService>().ActivateAsync(args);
+            await GetService<IActivationService>().ActivateAsync(args);
             timer.Interval = TimeSpan.FromSeconds(15);
             timer.Tick += Timer_Tick;
             timer.Start();
@@ -227,10 +229,18 @@ public partial class App : Application
     }
     private static async void CreateFolders()
     {
-        List<string> folders = new() { "Notes", "Reminders", "Trash" };
+        List<string> folders = new() { "Notes", "Reminders", "Trash", "ApplicationData" };
         foreach (string folder in folders)
         {
             await StorageFolder.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);
+        }
+    }
+    private static async void CreateSaveFile()
+    {
+        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
+        if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
+        {
+            await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit",true);
         }
     }
 }

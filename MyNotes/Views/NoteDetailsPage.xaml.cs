@@ -63,14 +63,17 @@ public sealed partial class NoteDetailsPage : Page
     protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
     {
         base.OnNavigatingFrom(e);
-        SaveFile(false);
+        if (saveWhenExit)
+        {
+            SaveFile(false);
+        }
     }
     private async void LoadDocument()
     {
         // Open a text file.
         if (ShellPage.NoteName != null)
         {
-            var directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
+            string directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
             StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
 
             if (file != null)
@@ -83,25 +86,22 @@ public sealed partial class NoteDetailsPage : Page
     }
     private async void SaveFile(bool showInfo)
     {
-        if (saveWhenExit)
+        string directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
+        StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
+        if (file != null)
         {
-            var directory = notesFolder.Path + @"\Notes\" + ShellPage.NoteName + ".rtf";
-            StorageFile file = await StorageFile.GetFileFromPathAsync(directory);
-            if (file != null)
+            try
             {
-                try
+                using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
+                NoteEditor.Document.SaveToStream(TextGetOptions.FormatRtf, randAccStream);
+                if (showInfo)
                 {
-                    using IRandomAccessStream randAccStream = await file.OpenAsync(FileAccessMode.ReadWrite);
-                    NoteEditor.Document.SaveToStream(TextGetOptions.FormatRtf, randAccStream);
-                    if (showInfo)
-                    {
-                        InfoBar("Success".GetLocalized(), InfoBarSeverity.Success, "NoteDetails_SuccessMessage".GetLocalized());
-                    }
+                    InfoBar("Success".GetLocalized(), InfoBarSeverity.Success, "NoteDetails_SuccessMessage".GetLocalized());
                 }
-                catch (Exception ex)
-                {
-                    InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "NoteDetails_ErrorMessage".GetLocalized() + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "NoteDetails_ErrorMessage".GetLocalized() + ex.Message);
             }
         }
     }
@@ -192,5 +192,19 @@ public sealed partial class NoteDetailsPage : Page
     {
         _ = localSettingsService.SaveSettingAsync(SpellcheckKey, false);
         NoteEditor.IsSpellCheckEnabled = false;
+    }
+
+    private void NoteEditor_GettingFocus(UIElement sender, GettingFocusEventArgs args)
+    {
+        NoteEditor.PlaceholderText = string.Empty;
+    }
+
+    private void NoteEditor_LosingFocus(UIElement sender, LosingFocusEventArgs args)
+    {
+        NoteEditor.TextDocument.GetText(TextGetOptions.UseObjectText, out string outtext);
+        if (outtext == string.Empty)
+        {
+            NoteEditor.PlaceholderText = "NoteDetails_EditorPlaceholder".GetLocalized();
+        }
     }
 }
