@@ -19,33 +19,33 @@ public sealed partial class RemindersPage : Page
     {
         get;
     }
-    public static bool IsNewNote
+    public static bool IsNewReminder
     {
         get
         {
-            return isNewNote;
+            return isNewReminder;
         }
         set
         {
-            isNewNote = value;
+            isNewReminder = value;
         }
     }
-    public static string NoteName
+    public static string ReminderName
     {
         get
         {
-            return noteName;
+            return reminderName;
         }
         set
         {
-            noteName = value;
+            reminderName = value;
         }
     }
-    private static bool isNewNote = false;
-    private static string noteName = string.Empty;
+    private static bool isNewReminder = false;
+    private static string reminderName = string.Empty;
     public RemindersPage()
     {
-        //TODO:Add ReminderDetails page and add an option to app notification for opening note details
+        //TODO:Add ReminderDetails page and add function to app notification for opening reminder details
         ViewModel = App.GetService<RemindersViewModel>();
         InitializeComponent();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
@@ -66,7 +66,7 @@ public sealed partial class RemindersPage : Page
     }
     private async void AddReminder()
     {
-        IsNewNote = true;
+        IsNewReminder = true;
         CreateReminderDialog AddReminderDialog = new()
         {
             XamlRoot = XamlRoot
@@ -90,8 +90,8 @@ public sealed partial class RemindersPage : Page
         if (LstReminders.SelectedItem is Reminder selectedItem)
         {
             int index = LstReminders.SelectedIndex;
-            IsNewNote = false;
-            noteName = selectedItem.ReminderHeader!;
+            IsNewReminder = false;
+            reminderName = selectedItem.ReminderHeader!;
             CreateReminderDialog EditReminderDialog = new()
             {
                 XamlRoot = XamlRoot,
