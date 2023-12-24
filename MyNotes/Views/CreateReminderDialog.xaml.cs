@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using MyNotes.Helpers;
 using MyNotes.Models;
 using System.Text;
+using System.Text.Json;
 using Windows.Storage;
 
 namespace MyNotes.Views;
@@ -21,8 +22,8 @@ public sealed partial class CreateReminderDialog : ContentDialog
     {
         get; private set;
     }
-    readonly private bool isNewNote;
-    private readonly string noteName;
+    readonly private bool isNewReminder;
+    private readonly string reminderName;
     private bool isRepeated = false;
     TimeSpan tmsp;
     DateTime time, selectedDate, ofsetDate;
@@ -40,36 +41,27 @@ public sealed partial class CreateReminderDialog : ContentDialog
         Title = "CreateReminder_Title".GetLocalized();
         PrimaryButtonText = "CreateReminder_ButtonText".GetLocalized();
         CloseButtonText = "Cancel".GetLocalized();
-        isNewNote = RemindersPage.IsNewNote;
-        noteName = RemindersPage.NoteName;
-        if (!isNewNote)
+        isNewReminder = RemindersPage.IsNewReminder;
+        reminderName = RemindersPage.ReminderName;
+        if (!isNewReminder)
         {
+
             reminderNameTextBox.IsEnabled = false;
             DirectoryInfo dinfo = new(storageFolder.Path + "\\Reminders");
-            FileInfo fileInfo = new(noteName + ".txt");
+            FileInfo fileInfo = new(reminderName + ".json");
             string fullPath = dinfo.ToString() + "\\" + fileInfo;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-            string[] lines = readText.Split("\r\n");
+            Reminder readedReminder = JsonSerializer.Deserialize<Reminder>(readText)!;
             DateTime t;
-            if (lines.Length == 3)
-            {
-                t = Convert.ToDateTime(lines[2]);
-                reminderNameTextBox.Text = fileInfo.Name[..^4];
-                reminderTextTextBox.Text = lines[1];
-                ReminderRepeatCheck.IsChecked = Convert.ToBoolean(lines[0]);
-                timePicker.SelectedTime = t.TimeOfDay;
-            }
-            else if (lines.Length == 4)
-            {
-                t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                reminderNameTextBox.Text = fileInfo.Name[..^4];
-                reminderTextTextBox.Text = lines[1];
-                ReminderRepeatCheck.IsChecked = Convert.ToBoolean(lines[0]);
-                timePicker.SelectedTime = t.TimeOfDay;
-                datePicker.SelectedDate = t.Date;
-            }
+
+            t = Convert.ToDateTime(readedReminder.DateTime);
+            reminderNameTextBox.Text = readedReminder.ReminderHeader;
+            reminderTextTextBox.Text = readedReminder.ReminderText;
+            ReminderRepeatCheck.IsChecked = readedReminder.Repeat;
+            timePicker.SelectedTime = t.TimeOfDay;
+            datePicker.SelectedDate = t.Date;
         }
-        else if (isNewNote)
+        else if (isNewReminder)
         {
             ReminderRepeatCheck.IsChecked = false;
             timePicker.SelectedTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
@@ -83,32 +75,14 @@ public sealed partial class CreateReminderDialog : ContentDialog
         try
         {
             var directory = storageFolder.Path + @"\Reminders\";
-            var filelocation = directory + reminderNameTextBox.Text + ".txt";
+            var filelocation = directory + reminderNameTextBox.Text + ".json";
             if (File.Exists(filelocation))
             {
                 Error("CreateReminder_ErrorExistingFile", args);
             }
             else
             {
-                using StreamWriter writer = new(filelocation);
-                selectedDate = datePicker.SelectedDate!.Value.DateTime;
-                writer.WriteLine(isRepeated.ToString());
-                writer.WriteLine(reminderTextTextBox.Text);
-                DateTime t;
-                if (!isRepeated)
-                {
-                    t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                    writer.WriteLine(timePicker.SelectedTime);
-                    writer.Write(selectedDate.Day + "/" + selectedDate.Month + "/" + selectedDate.Year);
-                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("dd/MM/yyyy hh:mm tt"), Repeat = isRepeated.ToString() };
-                }
-                else
-                {
-                    t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                    writer.Write(timePicker.SelectedTime);
-                    rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("hh:mm tt"), Repeat = isRepeated.ToString() };
-                }
-                writer.Close();
+                SaveReminder(filelocation);
                 Result = ReminderCreateResult.ReminderCreationOK;
             }
         }
@@ -125,26 +99,9 @@ public sealed partial class CreateReminderDialog : ContentDialog
         try
         {
             var directory = storageFolder.Path + @"\Reminders\";
-            var filelocation = directory + reminderNameTextBox.Text + ".txt";
-            using StreamWriter writer = new(filelocation);
-            selectedDate = datePicker.SelectedDate!.Value.DateTime;
-            writer.WriteLine(isRepeated.ToString());
-            writer.WriteLine(reminderTextTextBox.Text);
-            DateTime t;
-            if (!isRepeated)
-            {
-                t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("dd/MM/yyyy hh:mm tt"), Repeat = isRepeated.ToString() };
-                writer.WriteLine(timePicker.SelectedTime);
-                writer.Write(selectedDate.Day + "/" + selectedDate.Month + "/" + selectedDate.Year);
-            }
-            else
-            {
-                t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
-                rmnd = new Reminder { ReminderHeader = reminderNameTextBox.Text, ReminderText = reminderTextTextBox.Text, DateTime = t.ToString("hh:mm tt"), Repeat = isRepeated.ToString() };
-                writer.Write(timePicker.SelectedTime);
-            }
-            writer.Close();
+            var filelocation = directory + reminderNameTextBox.Text + ".json";
+
+            SaveReminder(filelocation);
             Result = ReminderCreateResult.ReminderCreationOK;
         }
         catch (Exception ex)
@@ -159,7 +116,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
     {
         try
         {
-            if (isNewNote)
+            if (isNewReminder)
             {
                 if (string.IsNullOrEmpty(reminderNameTextBox.Text) || string.IsNullOrEmpty(reminderTextTextBox.Text))
                 {
@@ -282,5 +239,36 @@ public sealed partial class CreateReminderDialog : ContentDialog
         errorTextBlock.Visibility = Visibility.Visible;
         errorTextBlock.Text = errorText.GetLocalized();
         return;
+    }
+
+    private void SaveReminder(string filelocation)
+    {
+        DateTime t;
+        string time;
+        string icon;
+        selectedDate = datePicker.SelectedDate!.Value.DateTime;
+        if (!isRepeated)
+        {
+            t = selectedDate.Date.Add((TimeSpan)timePicker.SelectedTime!);
+            time = t.ToString("dd/MM/yyyy hh:mm tt");
+            icon = "\uEC92";
+        }
+        else
+        {
+            t = Convert.ToDateTime(timePicker.SelectedTime.ToString());
+            time = t.ToString("hh:mm tt");
+            icon = "\uE823";
+        }
+        Reminder reminder = new()
+        {
+            ReminderIcon = icon,
+            ReminderHeader = reminderNameTextBox.Text,
+            ReminderText = reminderTextTextBox.Text,
+            DateTime = time,
+            Repeat = isRepeated
+        };
+        string jsonString = JsonSerializer.Serialize(reminder);
+        File.WriteAllText(filelocation, jsonString);
+        rmnd = reminder;
     }
 }
