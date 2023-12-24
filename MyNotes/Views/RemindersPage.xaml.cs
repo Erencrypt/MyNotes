@@ -6,6 +6,7 @@ using MyNotes.Models;
 using MyNotes.ViewModels;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Text.Json;
 using Windows.Storage;
 
 namespace MyNotes.Views;
@@ -111,17 +112,11 @@ public sealed partial class RemindersPage : Page
                 }
             }
         }
-        else
-        {
-            ContentDialog noWifiDialog = new()
-            { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-            await noWifiDialog.ShowAsync();
-        }
     }
     private void ListReminders()
     {
         DirectoryInfo dinfo = new(storageFolder.Path + "\\Reminders");
-        FileInfo[] Files = dinfo.GetFiles("*.txt");
+        FileInfo[] Files = dinfo.GetFiles("*.json");
         List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
         string fullPath;
         items.Clear();
@@ -129,25 +124,19 @@ public sealed partial class RemindersPage : Page
         {
             fullPath = dinfo.ToString() + "\\" + file.Name;
             string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-            string[] lines = readText.Split("\r\n");
-            DateTime t;
-            if (lines.Length == 3)
-            {
-                t = Convert.ToDateTime(lines[2]);
-                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString("hh:mm tt"), Repeat = lines[0] });
-            }
-            else if (lines.Length == 4)
-            {
-                t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                items.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString("dd/MM/yyyy hh:mm tt"), Repeat = lines[0] });
-            }
+            Reminder readedReminder = JsonSerializer.Deserialize<Reminder>(readText)!;
+            readedReminder.ReminderHeader = file.Name[..^5];
+            items.Add(readedReminder);
         }
         LstReminders.ItemsSource = items;
         LstReminders.UpdateLayout();
     }
     private void LstReminders_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
-        EditReminder();
+        if (LstReminders.SelectedItem != null)
+        {
+            EditReminder();
+        }
     }
     private void NewReminder_Click(object sender, RoutedEventArgs e)
     {

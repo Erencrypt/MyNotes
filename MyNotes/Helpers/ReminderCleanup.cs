@@ -1,6 +1,7 @@
 ﻿using MyNotes.Contracts.Services;
 using MyNotes.Models;
 using System.Text;
+using System.Text.Json;
 using Windows.Storage;
 
 namespace MyNotes.Helpers
@@ -22,7 +23,7 @@ namespace MyNotes.Helpers
                 AddedCount = 0;
                 await App.StorageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
                 DirectoryInfo dinfo = new(App.StorageFolder.Path + "\\Reminders");
-                FileInfo[] Files = dinfo.GetFiles("*.txt");
+                FileInfo[] Files = dinfo.GetFiles("*.json");
                 List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
                 string fullPath;
                 MoveFile moveFile = new();
@@ -30,44 +31,36 @@ namespace MyNotes.Helpers
                 {
                     fullPath = dinfo.ToString() + "\\" + file.Name;
                     string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-                    string[] lines = readText.Split("\r\n");
-                    if (lines.Length < 3)
+                    Reminder readedReminder = JsonSerializer.Deserialize<Reminder>(readText)!;
+
+                    DateTime t = Convert.ToDateTime(readedReminder.DateTime);
+                    if (readedReminder.Repeat)
                     {
-                        continue;
-                    }
-                    else
-                    {
-                        DateTime t;
-                        if (lines.Length == 3)
+                        if (t.TimeOfDay > DateTime.Now.TimeOfDay)
                         {
-                            t = Convert.ToDateTime(lines[2]);
-                            if (t.TimeOfDay > DateTime.Now.TimeOfDay)
+                            App.Reminders.Add(readedReminder);
+                            AddedCount++;
+                        }
+                    }
+                    else if (!readedReminder.Repeat)
+                    {
+                        if (t.Date == DateTime.Now.Date)
+                        {
+                            if (t.TimeOfDay < DateTime.Now.TimeOfDay)
                             {
-                                App.Reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
+                                moveFile.Move("Reminders", "Trash", readedReminder.ReminderHeader!, root: null!);
+                                DeletedCount++;
+                            }
+                            else if (t.TimeOfDay > DateTime.Now.TimeOfDay)
+                            {
+                                App.Reminders.Add(readedReminder);
                                 AddedCount++;
                             }
                         }
-                        if (lines.Length == 4)
+                        else if (t.Date < DateTime.Now.Date)
                         {
-                            t = Convert.ToDateTime(lines[3] + " " + lines[2]);
-                            if (t.Date == DateTime.Now.Date)
-                            {
-                                if (t.TimeOfDay < DateTime.Now.TimeOfDay)
-                                {
-                                    moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                                    DeletedCount++;
-                                }
-                                else if (t.TimeOfDay > DateTime.Now.TimeOfDay)
-                                {
-                                    App.Reminders.Add(new Reminder() { ReminderHeader = file.Name[..^4], ReminderText = lines[1], DateTime = t.ToString(), Repeat = lines[0] });
-                                    AddedCount++;
-                                }
-                            }
-                            else if (t.Date < DateTime.Now.Date)
-                            {
-                                moveFile.Move("Reminders", "Trash", file.Name[..^4].ToString(), root: null!);
-                                DeletedCount++;
-                            }
+                            moveFile.Move("Reminders", "Trash", readedReminder.ReminderHeader!, root: null!);
+                            DeletedCount++;
                         }
                     }
                 }
