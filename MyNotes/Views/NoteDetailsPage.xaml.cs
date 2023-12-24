@@ -105,20 +105,6 @@ public sealed partial class NoteDetailsPage : Page
             }
         }
     }
-    private void DispatcherTimer_Tick(object sender, object e)
-    {
-        try
-        {
-            infobar.IsOpen = false;
-            dispatcherTimer?.Stop();
-            dispatcherTimer = null;
-            BtnSaveFile.IsEnabled = true;
-        }
-        catch (Exception)
-        {
-            //TODO: handle exceptions
-        }
-    }
     private void InfoBar(string title, InfoBarSeverity type, string message)
     {
         infobar.Title = title;
@@ -132,8 +118,22 @@ public sealed partial class NoteDetailsPage : Page
     {
         dispatcherTimer = new DispatcherTimer();
         dispatcherTimer.Tick += DispatcherTimer_Tick;
-        dispatcherTimer.Interval = TimeSpan.FromSeconds(3);
+        dispatcherTimer.Interval = TimeSpan.FromSeconds(2);
         dispatcherTimer.Start();
+    }
+    private void DispatcherTimer_Tick(object sender, object e)
+    {
+        try
+        {
+            infobar.IsOpen = false;
+            dispatcherTimer?.Stop();
+            dispatcherTimer = null;
+            BtnSaveFile.IsEnabled = true;
+        }
+        catch (Exception)
+        {
+            //TODO: handle exceptions
+        }
     }
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {

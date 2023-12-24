@@ -23,6 +23,7 @@
             <InfoBar Name="infobar"
                      Margin="0,-96,-32,0"
                      Visibility="Visible"
+                     Canvas.ZIndex="1"
                      RelativePanel.AlignBottomWithPanel="True"
                      RelativePanel.AlignRightWithPanel="True">
                 <InfoBar.Transitions>
@@ -76,7 +77,6 @@
                 <RichEditBox.KeyboardAccelerators>
                     <KeyboardAccelerator Modifiers="Control" Key="F"/>
                 </RichEditBox.KeyboardAccelerators>
-
             </RichEditBox>
 
             <StackPanel Name="search" Orientation="Horizontal"
