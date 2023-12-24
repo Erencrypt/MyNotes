@@ -183,7 +183,7 @@ public partial class App : Application
     public static void ReminderDismissed()
     {
         Reminder reminder = InvokedReminders[0];
-        bool repeat = Convert.ToBoolean(reminder.Repeat);
+        bool repeat = reminder.Repeat;
         if (repeat)
         {
             InvokedReminders.Remove(reminder);
@@ -200,7 +200,7 @@ public partial class App : Application
         for (int i = 0; i < reminders.Count; i++)
         {
             Reminder reminder = reminders[i];
-            bool rep = Convert.ToBoolean(reminder.Repeat);
+            bool rep = reminder.Repeat;
             DateTime tm = Convert.ToDateTime(reminder.DateTime);
             DateTime now = DateTime.Now;
             if (rep == true)
@@ -239,7 +239,7 @@ public partial class App : Application
         StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {
-            await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit",true);
+            await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit", true);
         }
     }
 }
