@@ -149,7 +149,6 @@ public class AppNotificationService : IAppNotificationService
     {
         return HttpUtility.ParseQueryString(arguments);
     }
-
     public void Unregister()
     {
         AppNotificationManager.Default.Unregister();
