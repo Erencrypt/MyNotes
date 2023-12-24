@@ -15,7 +15,7 @@ namespace MyNotes.Helpers
             {
                 if (filename != null)
                 {
-                    Mover(from, to, filename, ".txt");
+                    Mover(from, to, filename, ".json");
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace MyNotes.Helpers
                 Reminder selectedItem = (Reminder)list.SelectedItem;
                 if (selectedItem != null)
                 {
-                    Mover(from, to, selectedItem.ReminderHeader!, ".txt");
+                    Mover(from, to, selectedItem.ReminderHeader!, ".json");
                     items.Remove(reminder);
                 }
                 else
