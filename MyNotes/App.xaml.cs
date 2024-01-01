@@ -143,10 +143,10 @@ public partial class App : Application
         {
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
             sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+            await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
             CreateSaveFile();
             CreateFolders();
             ReminderCleanup reminderCleanup = new();
-            await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
             reminderCleanup.Clean(true);
 
             base.OnLaunched(args);
@@ -207,7 +207,7 @@ public partial class App : Application
             {
                 if (tm.Hour == now.Hour && tm.Minute == now.Minute)
                 {
-                    GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("d/MM/yyyy\nh:mm tt"));
+                    GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("h:mm tt  - d/MM/yyyy"));
                     InvokedReminders.Add(reminder);
                     reminders.Remove(reminder);
                 }

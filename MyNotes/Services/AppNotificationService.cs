@@ -77,7 +77,7 @@ public class AppNotificationService : IAppNotificationService
             <toast scenario='reminder'>
               <visual>
                 <binding template='ToastGeneric'>
-                  <text>{title}</text>
+                  <text hint-maxLines='1'>{title}</text>
                   <text>{message}</text>
                   <text>{time}</text>
                 </binding>
