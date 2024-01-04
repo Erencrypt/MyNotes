@@ -350,4 +350,7 @@ Error Message:</value>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Your trash is empty.</value>
   </data>
+  <data name="CreateReminder_Alarm" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
 </root>
