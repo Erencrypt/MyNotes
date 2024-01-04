@@ -68,7 +68,7 @@
           <uap5:StartupTask
             TaskId="8163264128256"
             Enabled="true"
-            DisplayName="My Notes" />
+            DisplayName="MyNotes" />
         </uap5:Extension>
       </Extensions>
     </Application>
