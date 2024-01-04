@@ -25,6 +25,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
     readonly private bool isNewReminder;
     private readonly string reminderName;
     private bool isRepeated = false;
+    private bool isAlarm =false;
     TimeSpan tmsp;
     DateTime time, selectedDate, ofsetDate;
     public CreateReminderDialog()
@@ -35,7 +36,8 @@ public sealed partial class CreateReminderDialog : ContentDialog
         InitializeComponent();
         reminderNameTextBox.Header = "CreateReminder_NameBoxHeader".GetLocalized();
         reminderTextTextBox.Header = "CreateReminder_TextBoxHeader".GetLocalized();
-        ReminderRepeatCheck.Content = "CreateReminder_Repeated".GetLocalized();
+        ReminderAlarmTogleText.Text = "CreateReminder_Alarm".GetLocalized();
+        ReminderRepeatTogleText.Text = "CreateReminder_Repeated".GetLocalized();
         datePicker.Header = "CreateReminder_DateHeader".GetLocalized();
         timePicker.Header = "CreateReminder_TimeHeader".GetLocalized();
         Title = "CreateReminder_Title".GetLocalized();
@@ -57,13 +59,14 @@ public sealed partial class CreateReminderDialog : ContentDialog
             t = Convert.ToDateTime(readedReminder.DateTime);
             reminderNameTextBox.Text = readedReminder.ReminderHeader;
             reminderTextTextBox.Text = readedReminder.ReminderText;
-            ReminderRepeatCheck.IsChecked = readedReminder.Repeat;
+            ReminderRepeatTogle.IsOn = readedReminder.Repeat;
+            ReminderAlarmTogle.IsOn = readedReminder.Alarm;
             timePicker.SelectedTime = t.TimeOfDay;
             datePicker.SelectedDate = t.Date;
         }
         else if (isNewReminder)
         {
-            ReminderRepeatCheck.IsChecked = false;
+            ReminderRepeatTogle.IsOn = false;
             timePicker.SelectedTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
         }
         datePicker.SelectedDate = DateTime.Now;
@@ -221,18 +224,33 @@ public sealed partial class CreateReminderDialog : ContentDialog
         Result = ReminderCreateResult.ReminderCreationCancel;
     }
 
-    private void ReminderRepeatCheck_Checked(object sender, RoutedEventArgs e)
+    private void ReminderAlarmTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        datePicker.Visibility = Visibility.Collapsed;
-        isRepeated = true;
+        if (ReminderAlarmTogle.IsOn)
+        {
+            isAlarm = true;
+        }
+        else
+        {
+            isAlarm = false;
+        }
     }
 
-    private void ReminderRepeatCheck_Unchecked(object sender, RoutedEventArgs e)
+    private void ReminderRepeatTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        datePicker.Visibility = Visibility.Visible;
-        isRepeated = false;
-        datePicker.SelectedDate = DateTime.Now;
+        if (ReminderRepeatTogle.IsOn)
+        {
+            datePicker.Visibility = Visibility.Collapsed;
+            isRepeated = true;
+        }
+        else
+        {
+            datePicker.Visibility = Visibility.Visible;
+            isRepeated = false;
+            datePicker.SelectedDate = DateTime.Now;
+        }
     }
+
     private void Error(string errorText, ContentDialogButtonClickEventArgs args)
     {
         args.Cancel = true;
@@ -265,7 +283,8 @@ public sealed partial class CreateReminderDialog : ContentDialog
             ReminderHeader = reminderNameTextBox.Text,
             ReminderText = reminderTextTextBox.Text,
             DateTime = time,
-            Repeat = isRepeated
+            Repeat = isRepeated,
+            Alarm = isAlarm
         };
         string jsonString = JsonSerializer.Serialize(reminder);
         File.WriteAllText(filelocation, jsonString);

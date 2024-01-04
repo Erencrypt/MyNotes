@@ -7,7 +7,7 @@ public interface IAppNotificationService
 {
     void Initialize();
 
-    bool ShowReminder(string title, string message, string time);
+    bool ShowReminder(string title, string message, string time, bool isAlarm);
     bool ShowDeletedMessage(string title, string message);
     bool ShowInfoMessage(string title, string message);
 

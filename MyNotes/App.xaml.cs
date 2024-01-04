@@ -207,7 +207,7 @@ public partial class App : Application
             {
                 if (tm.Hour == now.Hour && tm.Minute == now.Minute)
                 {
-                    GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("h:mm tt  - d/MM/yyyy"));
+                    GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("h:mm tt  - d/MM/yyyy"), reminder.Alarm);
                     InvokedReminders.Add(reminder);
                     reminders.Remove(reminder);
                 }
@@ -218,7 +218,7 @@ public partial class App : Application
                 {
                     if (tm.Hour == now.Hour && tm.Minute == now.Minute)
                     {
-                        GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("d/MM/yyyy\nh:mm tt"));
+                        GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("d/MM/yyyy\nh:mm tt"), reminder.Alarm);
                         InvokedReminders.Add(reminder);
                         reminders.Remove(reminder);
                     }
@@ -236,6 +236,7 @@ public partial class App : Application
     }
     private static async void CreateSaveFile()
     {
+        //TODO: check if open at startup settings is enabled, and add other settings for apps first start
         StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {

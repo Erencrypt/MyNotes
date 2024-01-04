@@ -68,9 +68,13 @@ public class AppNotificationService : IAppNotificationService
         }
     }
 
-    public bool ShowReminder(string title, string message, string time)
+    public bool ShowReminder(string title, string message, string time, bool isAlarm)
     {
-        //TODO:Add Scnerio Selection To Settings as Notification Type
+        string alarmtext = string.Empty;
+        if (isAlarm)
+        {
+            alarmtext = "<audio src='ms-winsoundevent:Notification.Looping.Alarm' loop='true'/>";
+        }
         string snooze = "AppNotification_Snooze".GetLocalized();
         string dismiss = "AppNotification_Dismiss".GetLocalized();
         string payload = new(@$"
@@ -93,6 +97,7 @@ public class AppNotificationService : IAppNotificationService
                 <action arguments='snooze' hint-inputId='snoozeTime' content='{snooze}'/>
                 <action arguments='dismiss' content='{dismiss}'/>
               </actions>
+                {alarmtext}
             </toast>");
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
         {

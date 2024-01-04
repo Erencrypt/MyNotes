@@ -6,4 +6,5 @@ public class Reminder
     public string? ReminderText { get; set; }
     public string? DateTime { get; set; }
     public bool Repeat { get; set; }
+    public bool Alarm {  get; set; }
 }
