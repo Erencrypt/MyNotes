@@ -5,93 +5,83 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:MyNotes.Helpers"
-    xmlns:xaml="using:Microsoft.UI.Xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     mc:Ignorable="d">
     <Page.Resources>
+        <x:Double x:Key="SettingsCardSpacing">4</x:Double>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+        <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+               BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="0,30,0,6" />
+            </Style.Setters>
+        </Style>
     </Page.Resources>
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel
-            x:Name="ContentArea">
-                <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <TextBlock x:Uid="Settings_Theme" />
-                    <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                        <RadioButton
-                        x:Uid="Settings_Theme_Light"
-                        Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                        IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
-                        FontSize="15"
-                        GroupName="AppTheme">
-                            <RadioButton.CommandParameter>
-                                <xaml:ElementTheme>Light</xaml:ElementTheme>
-                            </RadioButton.CommandParameter>
-                        </RadioButton>
-                        <RadioButton
-                        x:Uid="Settings_Theme_Dark"
-                        Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                        IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
-                        FontSize="15"
-                        GroupName="AppTheme">
-                            <RadioButton.CommandParameter>
-                                <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                            </RadioButton.CommandParameter>
-                        </RadioButton>
-                        <RadioButton
-                        x:Uid="Settings_Theme_Default"
-                        Command="{x:Bind ViewModel.SwitchThemeCommand}"
-                        IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
-                        FontSize="15"
-                        GroupName="AppTheme">
-                            <RadioButton.CommandParameter>
-                                <xaml:ElementTheme>Default</xaml:ElementTheme>
-                            </RadioButton.CommandParameter>
-                        </RadioButton>
-                    </StackPanel>
-                </StackPanel>
-                <TextBlock x:Uid="Settings_BackDrop" />
-                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <RadioButton
-                        x:Uid="Settings_BackDrop_Base"
-                            Name="Settings_BackDrop_Base"
-                        Checked="HandleCheck"
-                        FontSize="15"
-                        GroupName="BackDrop">
-                    </RadioButton>
-                    <RadioButton
-                        x:Uid="Settings_BackDrop_BaseAlt"
-                            Name="Settings_BackDrop_BaseAlt"
-                        Checked="HandleCheck"
-                        FontSize="15"
-                        GroupName="BackDrop">
-                    </RadioButton>
-                    <RadioButton
-                        x:Uid="Settings_BackDrop_Acrylic"
-                            Name="Settings_BackDrop_Acrylic"
-                        Checked="HandleCheck"
-                        FontSize="15"
-                        GroupName="BackDrop">
-                    </RadioButton>
-                </StackPanel>
-                <TextBlock x:Uid="Settings_Preferances" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <TextBlock x:Uid="Settings_Save" />
-                    <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                        <CheckBox x:Uid="Settings_SaveCheck" Checked="SaveCheck_Checked" Unchecked="SaveCheck_Unchecked" Name="SaveCheck"/>
-                    </StackPanel>
-                </StackPanel>
-                <TextBlock x:Uid="Settings_Startup" Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <CheckBox x:Uid="Settings_StartupCheck" Name="StartupCheck" Checked="StartupCheck_Checked" Unchecked="StartupCheck_Unchecked" Margin="0,8,0,0"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,-16,8">
+            <StackPanel x:Name="ContentArea" Margin="0,-30,12,16">
+                <StackPanel MaxWidth="1000"
+        HorizontalAlignment="Stretch"
+        Spacing="{StaticResource SettingsCardSpacing}">
+                    <win:StackPanel.ChildrenTransitions>
+                        <win:EntranceThemeTransition FromVerticalOffset="50" />
+                        <win:RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </win:StackPanel.ChildrenTransitions>
+                    <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+           x:Uid="Settings_Personalization" />
+                    <controls:SettingsCard Name="ThemeCard" HeaderIcon="{ui:FontIcon Glyph=&#xE799;}">
+                        <ComboBox Name="ThemeComboBox" SelectionChanged="ThemeComboBox_SelectionChanged">
+                            <ComboBoxItem x:Uid="Settings_Theme_Light"
+                IsSelected="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"></ComboBoxItem>
+                            <ComboBoxItem x:Uid="Settings_Theme_Dark"
+                IsSelected="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"></ComboBoxItem>
+                            <ComboBoxItem x:Uid="Settings_Theme_Default"
+                IsSelected="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"></ComboBoxItem>
+                        </ComboBox>
+                    </controls:SettingsCard>
 
-                <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,16,0,0"/>
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                    <TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" Style="{ThemeResource BodyTextBlockStyle}" />
-                    <TextBlock
-                    x:Uid="Settings_AboutDescription"
-                    Margin="{StaticResource XSmallTopMargin}"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
-                    <HyperlinkButton x:Uid="Settings_GitHubPage" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+                    <controls:SettingsCard Name="BackdropCard" HeaderIcon="{ui:FontIcon Glyph=&#xE799;}">
+                        <ComboBox Name="BackdropComboBox" SelectionChanged="BackdropComboBox_SelectionChanged">
+                            <ComboBoxItem Name="Settings_BackDrop_Base" x:Uid="Settings_BackDrop_Base"></ComboBoxItem>
+                            <ComboBoxItem Name="Settings_BackDrop_BaseAlt" x:Uid="Settings_BackDrop_BaseAlt"></ComboBoxItem>
+                            <ComboBoxItem Name="Settings_BackDrop_Acrylic" x:Uid="Settings_BackDrop_Acrylic"></ComboBoxItem>
+                        </ComboBox>
+                    </controls:SettingsCard>
+
+                    <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" x:Uid="Settings_Preferances" />
+                    <controls:SettingsCard Name="SaveCard" HeaderIcon="{ui:FontIcon Glyph=&#xE716;}">
+                        <ToggleSwitch Name="SaveTogle" Toggled="SaveTogle_Toggled" />
+                    </controls:SettingsCard>
+                    <controls:SettingsCard Name="StartupCard"
+                       HeaderIcon="{ui:FontIcon Glyph=&#xE716;}">
+                        <ToggleSwitch Name="StartupTogle" Toggled="StartupTogle_Toggled" />
+                    </controls:SettingsCard>
+
+                    <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
+           Text="About" />
+
+                    <controls:SettingsExpander Name="AboutSection"
+                           HeaderIcon="{ui:BitmapIcon Source=ms-appx:///Assets/WindowIcon.ico}">
+                        <TextBlock win:IsTextSelectionEnabled="True"
+               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+               Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}" />
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard HorizontalContentAlignment="Left"
+                               ContentAlignment="Left">
+                                <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
+                                    <TextBlock
+                        x:Uid="Settings_AboutDescription"
+                        Margin="{StaticResource XSmallTopMargin}"
+                        Style="{ThemeResource BodyTextBlockStyle}" />
+                                    <HyperlinkButton x:Uid="Settings_GitHubPage"/>
+                                </StackPanel>
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+                    
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

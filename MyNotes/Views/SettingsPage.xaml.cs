@@ -29,7 +29,17 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
+
+        ThemeCard.Header = "Settings_Theme".GetLocalized();
+        BackdropCard.Header = "Settings_BackDrop".GetLocalized();
+        SaveCard.Header = "Settings_Save".GetLocalized();
+        SaveCard.Description = "Settings_SaveDescription".GetLocalized();
+        StartupCard.Header = "Settings_Startup".GetLocalized();
+        StartupCard.Description = "Settings_StartupDescription".GetLocalized();
+        AboutSection.Header = "AppDescription".GetLocalized();
+        AboutSection.Description = "Settings_About".GetLocalized();
         localSettingsService = App.GetService<ILocalSettingsService>();
+        ThemeState();
         BackDropState();
         SaveWhenExitState();
         if (RuntimeHelper.IsMSIX)
@@ -38,11 +48,11 @@ public sealed partial class SettingsPage : Page
         }
         if (key.GetValue("MyNotes") != null)
         {
-            StartupCheck.IsChecked = true;
+            StartupTogle.IsOn = true;
         }
         else
         {
-            StartupCheck.IsChecked = false;
+            StartupTogle.IsOn = false;
         }
     }
     private async void BackDropState()
@@ -51,7 +61,7 @@ public sealed partial class SettingsPage : Page
         var backdrop = await localSettingsService.ReadSettingAsync<MicaKind>(BackDropKey);
         if (isAcrylic)
         {
-            Settings_BackDrop_Acrylic.IsChecked = true;
+            BackdropComboBox.SelectedItem = Settings_BackDrop_Acrylic;
         }
         else
         {
@@ -60,18 +70,34 @@ public sealed partial class SettingsPage : Page
             {
                 if (backdrop == MicaKind.Base)
                 {
-                    Settings_BackDrop_Base.IsChecked = true;
+                    BackdropComboBox.SelectedItem = Settings_BackDrop_Base;
                 }
                 else if (backdrop == MicaKind.BaseAlt)
                 {
-                    Settings_BackDrop_BaseAlt.IsChecked = true;
+                    BackdropComboBox.SelectedItem = Settings_BackDrop_BaseAlt;
                 }
             }
             else if (backdrop.ToString() == null)
             {
                 await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
-                Settings_BackDrop_Base.IsChecked = true;
+                BackdropComboBox.SelectedItem = Settings_BackDrop_Base;
             }
+        }
+    }
+
+    private void ThemeState()
+    {
+        switch (ViewModel.ElementTheme)
+        {
+            case ElementTheme.Default:
+                ThemeComboBox.SelectedIndex = 2;
+                break;
+            case ElementTheme.Light:
+                ThemeComboBox.SelectedIndex = 0;
+                break;
+            case ElementTheme.Dark:
+                ThemeComboBox.SelectedIndex = 1;
+                break;
         }
     }
     private async void SaveWhenExitState()
@@ -81,17 +107,17 @@ public sealed partial class SettingsPage : Page
         {
             if (save)
             {
-                SaveCheck.IsChecked = true;
+                SaveTogle.IsOn = true;
             }
             else if (!save)
             {
-                SaveCheck.IsChecked = false;
+                SaveTogle.IsOn = false;
             }
         }
         else if (save.ToString() == null)
         {
             await localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
-            SaveCheck.IsChecked = true;
+            SaveTogle.IsOn = true;
         }
     }
     private async void GetTask()
@@ -100,24 +126,24 @@ public sealed partial class SettingsPage : Page
         switch (startupTask.State)
         {
             case StartupTaskState.Enabled:
-                StartupCheck.IsChecked = true;
+                StartupTogle.IsOn = true;
                 break;
             case StartupTaskState.Disabled:
-                StartupCheck.IsChecked = false;
+                StartupTogle.IsOn = false;
                 break;
             case StartupTaskState.DisabledByUser:
                 // Task is disabled and user must enable it manually.
                 MessageDialog dialog = new("Settings_DisabledByUser".GetLocalized());
                 await dialog.ShowAsync();
-                StartupCheck.IsChecked = false;
+                StartupTogle.IsOn = false;
                 break;
             case StartupTaskState.DisabledByPolicy:
-                StartupCheck.IsChecked = false;
-                StartupCheck.IsEnabled = false;
+                StartupTogle.IsOn = false;
+                StartupTogle.IsEnabled = false;
                 break;
             case StartupTaskState.EnabledByPolicy:
-                StartupCheck.IsChecked = true;
-                StartupCheck.IsEnabled = true;
+                StartupTogle.IsOn = true;
+                StartupTogle.IsEnabled = true;
                 break;
         }
     }
@@ -169,23 +195,38 @@ public sealed partial class SettingsPage : Page
             key.DeleteValue("MyNotes", false);
         }
     }
-    private void StartupCheck_Checked(object sender, RoutedEventArgs e)
+
+    private void StartupTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        EnableStartup();
+        if (StartupTogle.IsOn)
+        {
+            EnableStartup();
+        }
+        else
+        {
+            DisableStartup();
+        }
     }
 
-    private void StartupCheck_Unchecked(object sender, RoutedEventArgs e)
+    private void SaveTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        DisableStartup();
+        if(SaveTogle.IsOn)
+        {
+            localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
+        }
+        else
+        {
+            localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
+        }
     }
 
-    private void HandleCheck(object sender, RoutedEventArgs e)
+    private void BackdropComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
         MicaBackdrop micaBackdrop = new();
-        RadioButton? rb = sender as RadioButton;
+        ComboBoxItem? cbItem = BackdropComboBox.SelectedItem as ComboBoxItem;
 
-        if (rb.Name == "Settings_BackDrop_Base")
+        if (cbItem.Name == "Settings_BackDrop_Base")
         {
             localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
             micaBackdrop.Kind = MicaKind.Base;
@@ -199,7 +240,7 @@ public sealed partial class SettingsPage : Page
                 App.MainWindow.SystemBackdrop = micaBackdrop;
             }
         }
-        else if (rb.Name == "Settings_BackDrop_BaseAlt")
+        else if (cbItem.Name == "Settings_BackDrop_BaseAlt")
         {
             localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
             micaBackdrop.Kind = MicaKind.BaseAlt;
@@ -213,7 +254,7 @@ public sealed partial class SettingsPage : Page
                 App.MainWindow.SystemBackdrop = micaBackdrop;
             }
         }
-        else if (rb.Name == "Settings_BackDrop_Acrylic")
+        else if (cbItem.Name == "Settings_BackDrop_Acrylic")
         {
             if (!isAcrylic)
             {
@@ -226,15 +267,23 @@ public sealed partial class SettingsPage : Page
         localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
     }
 
-    private void SaveCheck_Checked(object sender, RoutedEventArgs e)
+    private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
-        SaveCheck.IsChecked = true;
+        switch (ThemeComboBox.SelectedIndex)
+        {
+            case 0:
+                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Light);
+                break;
+            case 1:
+                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Dark);
+                break;
+            case 2:
+                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Default);
+                break;
+            default:
+                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Default);
+                break;
+        }
     }
 
-    private void SaveCheck_Unchecked(object sender, RoutedEventArgs e)
-    {
-        localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
-        SaveCheck.IsChecked = false;
-    }
 }

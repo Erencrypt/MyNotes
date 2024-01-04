@@ -260,13 +260,13 @@ Error Message:</value>
   <data name="Restore" xml:space="preserve">
     <value>Restore</value>
   </data>
-  <data name="Settings_About.Text" xml:space="preserve">
+  <data name="Settings_About" xml:space="preserve">
     <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>This application is created by Erencrypt as an opensource project under GNU General Public License v3.0. For more Detailed information, visit our GitHub page.</value>
   </data>
-  <data name="Settings_BackDrop.Text" xml:space="preserve">
+  <data name="Settings_BackDrop" xml:space="preserve">
     <value>Window Backdrop</value>
   </data>
   <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
@@ -299,19 +299,19 @@ Error Message:</value>
   <data name="Settings_Preferances.Text" xml:space="preserve">
     <value>Preferances</value>
   </data>
-  <data name="Settings_Save.Text" xml:space="preserve">
+  <data name="Settings_Save" xml:space="preserve">
     <value>Save when exit</value>
   </data>
-  <data name="Settings_SaveCheck.Content" xml:space="preserve">
+  <data name="Settings_SaveDescription" xml:space="preserve">
     <value>Save when exiting from a note</value>
   </data>
-  <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Startup</value>
-  </data>
-  <data name="Settings_StartupCheck.Content" xml:space="preserve">
+  <data name="Settings_Startup" xml:space="preserve">
     <value>Open on startup</value>
   </data>
-  <data name="Settings_Theme.Text" xml:space="preserve">
+  <data name="Settings_StartupDescription" xml:space="preserve">
+    <value>This setting must be enabled for notifications to work properly</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
     <value>Theme</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
