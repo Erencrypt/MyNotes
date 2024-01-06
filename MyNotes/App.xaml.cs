@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using Microsoft.Win32;
 using Microsoft.Windows.AppLifecycle;
 using MyNotes.Activation;
 using MyNotes.Contracts.Services;
@@ -12,6 +13,7 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
+using System.Diagnostics;
 using Windows.Storage;
 
 namespace MyNotes;
@@ -71,6 +73,8 @@ public partial class App : Application
             sFolder = value;
         }
     }
+    private static readonly Windows.ApplicationModel.StartupTask? startupTask;
+    private static readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\MyNotes";
     private static StorageFolder? sFolder;
     private readonly DispatcherTimer timer = new();
@@ -159,7 +163,7 @@ public partial class App : Application
         {
             var activatedEventArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
             await mainInstance.RedirectActivationToAsync(activatedEventArgs);
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Process.GetCurrentProcess().Kill();
             return;
         }
     }
@@ -236,11 +240,34 @@ public partial class App : Application
     }
     private static async void CreateSaveFile()
     {
-        //TODO: check if open at startup settings is enabled, and add other settings for apps first start
         StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {
             await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit", true);
+            await GetService<ILocalSettingsService>().SaveSettingAsync("SpellCheck", false);
+
+            if (RuntimeHelper.IsMSIX)
+            {
+                switch (startupTask.State)
+                {
+                    case Windows.ApplicationModel.StartupTaskState.Disabled:
+                        Windows.ApplicationModel.StartupTaskState newState = await startupTask.RequestEnableAsync();
+                        Debug.WriteLine("Request to enable startup, result = {0}", newState);
+                        break;
+                    case Windows.ApplicationModel.StartupTaskState.DisabledByUser:
+                        break;
+                    case Windows.ApplicationModel.StartupTaskState.DisabledByPolicy:
+                        Debug.WriteLine("Settings_DisabledByPolicy".GetLocalized());
+                        break;
+                }
+            }
+            else
+            {
+                if (Environment.ProcessPath != null)
+                {
+                    key.SetValue("MyNotes", Environment.ProcessPath!);
+                }
+            }
         }
     }
 }
