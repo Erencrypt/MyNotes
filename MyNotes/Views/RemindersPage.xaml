@@ -38,6 +38,7 @@
                                 Margin="0,2,-2,2"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"/>
+                            <FontIcon Grid.RowSpan="2" Glyph="&#xEDAC;" Foreground="{StaticResource AccentFillColorTertiaryBrush}" Visibility="{Binding Alarm}" FontSize="16" Margin="-24,-24,0,0"/>
                             <TextBlock Grid.Column="1"
                                 Text="{Binding ReminderHeader}"
                                 Style="{ThemeResource BaseTextBlockStyle}"
