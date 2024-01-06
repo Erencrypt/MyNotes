@@ -291,7 +291,7 @@ Error Message:</value>
     <value>GitHub Page</value>
   </data>
   <data name="Settings_GitHubPage.NavigateUri" xml:space="preserve">
-    <value>https://github.com/ErenCanUtku/MyNotes/</value>
+    <value>https://github.com/Erencrypt/MyNotes/</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
     <value>Personalization</value>
