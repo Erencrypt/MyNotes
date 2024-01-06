@@ -48,7 +48,7 @@ namespace MyNotes.Helpers
                         {
                             if (t.TimeOfDay < DateTime.Now.TimeOfDay)
                             {
-                                moveFile.Move("Reminders", "Trash", readedReminder.ReminderHeader!, root: null!);
+                                moveFile.Move("Reminders", "Trash", file.Name[..^5], root: null!);
                                 DeletedCount++;
                             }
                             else if (t.TimeOfDay > DateTime.Now.TimeOfDay)
@@ -59,7 +59,7 @@ namespace MyNotes.Helpers
                         }
                         else if (t.Date < DateTime.Now.Date)
                         {
-                            moveFile.Move("Reminders", "Trash", readedReminder.ReminderHeader!, root: null!);
+                            moveFile.Move("Reminders", "Trash", file.Name[..^5], root: null!);
                             DeletedCount++;
                         }
                     }
