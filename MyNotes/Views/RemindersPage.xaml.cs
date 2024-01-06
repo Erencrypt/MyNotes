@@ -46,7 +46,6 @@ public sealed partial class RemindersPage : Page
     private static string reminderName = string.Empty;
     public RemindersPage()
     {
-        //TODO:Add alarm icon on alarm enabled reminders
         ViewModel = App.GetService<RemindersViewModel>();
         InitializeComponent();
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
