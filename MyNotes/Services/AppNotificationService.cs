@@ -60,11 +60,11 @@ public class AppNotificationService : IAppNotificationService
         }
         else
         {
-            /*App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
             {
-                App.MainWindow.ShowMessageDialogAsync("Notification notification itself clicked", "Notification Invoked");
+                //This code will work if there is no arguments passed.(notification itself clicked)
                 App.MainWindow.BringToFront();
-            });*/
+            });
         }
     }
 
@@ -110,7 +110,7 @@ public class AppNotificationService : IAppNotificationService
     {
         string buttonText = "AppNotification_SeeDeletedReminders".GetLocalized();
         string payload = new(@$"
-            <toast>
+            <toast launch='trash'>
               <visual>
                 <binding template='ToastGeneric'>
                   <text>{title}</text>
@@ -144,7 +144,7 @@ public class AppNotificationService : IAppNotificationService
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
         {
             ExpiresOnReboot = true,
-            Expiration = DateTime.Now.AddHours(1),
+            Expiration = DateTime.Now.AddMinutes(10),
             Priority = AppNotificationPriority.High
         };
         AppNotificationManager.Default.Show(appNotification);
