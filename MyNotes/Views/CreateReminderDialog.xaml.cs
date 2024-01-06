@@ -31,8 +31,6 @@ public sealed partial class CreateReminderDialog : ContentDialog
     public CreateReminderDialog()
     {
         //TODO: localize strings
-        //TODO: simplify and clean code blocks
-        //TODO: change reminder tex texbox to rich edit box
         InitializeComponent();
         reminderNameTextBox.Header = "CreateReminder_NameBoxHeader".GetLocalized();
         reminderTextTextBox.Header = "CreateReminder_TextBoxHeader".GetLocalized();
