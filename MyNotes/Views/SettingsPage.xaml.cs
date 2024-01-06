@@ -14,7 +14,7 @@ namespace MyNotes.Views;
 
 public sealed partial class SettingsPage : Page
 {
-    readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
+    private readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private readonly ILocalSettingsService localSettingsService;
     StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
@@ -163,6 +163,8 @@ public sealed partial class SettingsPage : Page
                     await dialog.ShowAsync();
                     break;
                 case StartupTaskState.DisabledByPolicy:
+                    MessageDialog dialog2 = new("Settings_DisabledByPolicy".GetLocalized());
+                    await dialog2.ShowAsync();
                     Debug.WriteLine("Settings_DisabledByPolicy".GetLocalized());
                     break;
             }
