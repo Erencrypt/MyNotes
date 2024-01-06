@@ -212,7 +212,7 @@ public sealed partial class SettingsPage : Page
 
     private void SaveTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        if(SaveTogle.IsOn)
+        if (SaveTogle.IsOn)
         {
             localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
         }

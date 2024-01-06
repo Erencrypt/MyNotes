@@ -33,12 +33,20 @@
                                 <ColumnDefinition Width="90"/>
                             </Grid.ColumnDefinitions>
                             <FontIcon Glyph="{Binding ReminderIcon}"
-                                Grid.RowSpan="2"
-                                FontSize="24"
-                                Margin="0,2,-2,2"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                            <FontIcon Grid.RowSpan="2" Glyph="&#xEDAC;" Foreground="{StaticResource AccentFillColorTertiaryBrush}" Visibility="{Binding Alarm}" FontSize="16" Margin="-24,-24,0,0"/>
+                                    Grid.RowSpan="2"
+                                    FontSize="24"
+                                    Margin="0,0,-2,0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            <FontIcon Glyph="&#xEDAC;"
+                                      Grid.RowSpan="2"
+                                      Foreground="{StaticResource AccentFillColorTertiaryBrush}"
+                                      Visibility="{Binding Alarm}"
+                                      FontSize="16"
+                                      Width="14" Height="14"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Left"
+                                      Margin="-8,8,0,0"/>
                             <TextBlock Grid.Column="1"
                                 Text="{Binding ReminderHeader}"
                                 Style="{ThemeResource BaseTextBlockStyle}"
