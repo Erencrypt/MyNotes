@@ -32,7 +32,7 @@
                     </win:StackPanel.ChildrenTransitions>
                     <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}"
            x:Uid="Settings_Personalization" />
-                    <controls:SettingsCard Name="ThemeCard" HeaderIcon="{ui:FontIcon Glyph=&#xE799;}">
+                    <controls:SettingsCard Name="ThemeCard" HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
                         <ComboBox Name="ThemeComboBox" SelectionChanged="ThemeComboBox_SelectionChanged">
                             <ComboBoxItem x:Uid="Settings_Theme_Light"
                 IsSelected="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"></ComboBoxItem>
@@ -43,7 +43,7 @@
                         </ComboBox>
                     </controls:SettingsCard>
 
-                    <controls:SettingsCard Name="BackdropCard" HeaderIcon="{ui:FontIcon Glyph=&#xE799;}">
+                    <controls:SettingsCard Name="BackdropCard" HeaderIcon="{ui:FontIcon Glyph=&#xE7FA;}">
                         <ComboBox Name="BackdropComboBox" SelectionChanged="BackdropComboBox_SelectionChanged">
                             <ComboBoxItem Name="Settings_BackDrop_Base" x:Uid="Settings_BackDrop_Base"></ComboBoxItem>
                             <ComboBoxItem Name="Settings_BackDrop_BaseAlt" x:Uid="Settings_BackDrop_BaseAlt"></ComboBoxItem>
@@ -52,11 +52,11 @@
                     </controls:SettingsCard>
 
                     <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" x:Uid="Settings_Preferances" />
-                    <controls:SettingsCard Name="SaveCard" HeaderIcon="{ui:FontIcon Glyph=&#xE716;}">
+                    <controls:SettingsCard Name="SaveCard" HeaderIcon="{ui:FontIcon Glyph=&#xE74E;}">
                         <ToggleSwitch Name="SaveTogle" Toggled="SaveTogle_Toggled" />
                     </controls:SettingsCard>
                     <controls:SettingsCard Name="StartupCard"
-                       HeaderIcon="{ui:FontIcon Glyph=&#xE716;}">
+                       HeaderIcon="{ui:FontIcon Glyph=&#xE777;}">
                         <ToggleSwitch Name="StartupTogle" Toggled="StartupTogle_Toggled" />
                     </controls:SettingsCard>
 
