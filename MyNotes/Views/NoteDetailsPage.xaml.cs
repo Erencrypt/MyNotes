@@ -182,15 +182,15 @@ public sealed partial class NoteDetailsPage : Page
         documentRange.CharacterFormat.ForegroundColor = defaultForeground.Color;
     }
 
-    private void SpellCheck_Checked(object sender, RoutedEventArgs e)
+    private async void SpellCheck_Checked(object sender, RoutedEventArgs e)
     {
-        _ = localSettingsService.SaveSettingAsync(SpellcheckKey, true);
+        await localSettingsService.SaveSettingAsync(SpellcheckKey, true);
         NoteEditor.IsSpellCheckEnabled = true;
     }
 
-    private void SpellCheck_Unchecked(object sender, RoutedEventArgs e)
+    private async void SpellCheck_Unchecked(object sender, RoutedEventArgs e)
     {
-        _ = localSettingsService.SaveSettingAsync(SpellcheckKey, false);
+        await localSettingsService.SaveSettingAsync(SpellcheckKey, false);
         NoteEditor.IsSpellCheckEnabled = false;
     }
 
