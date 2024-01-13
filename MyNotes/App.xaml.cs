@@ -146,10 +146,10 @@ public partial class App : Application
         if (mainInstance.IsCurrent)
         {
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
-            CreateSaveFile();
+            sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             CreateFolders();
+            CreateSaveFile();
             ReminderCleanup reminderCleanup = new();
             reminderCleanup.Clean(true);
 
@@ -240,6 +240,7 @@ public partial class App : Application
     }
     private static async void CreateSaveFile()
     {
+        await StorageFolder.CreateFolderAsync("ApplicationData", CreationCollisionOption.OpenIfExists);
         StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {
