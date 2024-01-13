@@ -14,7 +14,7 @@
   <Identity
     Name="Erencrypt.MyNotes.App"
     Publisher="CN=Eren"
-    Version="1.2.2.0" />
+    Version="1.2.3.0" />
 
   <mp:PhoneIdentity PhoneProductId="166337ec-0558-4cfa-b8ae-e0bc55492db9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

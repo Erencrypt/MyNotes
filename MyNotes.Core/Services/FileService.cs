@@ -1,8 +1,6 @@
-﻿using System.Text;
-
-using MyNotes.Core.Contracts.Services;
-
+﻿using MyNotes.Core.Contracts.Services;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace MyNotes.Core.Services;
 
