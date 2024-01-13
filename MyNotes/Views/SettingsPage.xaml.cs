@@ -210,19 +210,19 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    private void SaveTogle_Toggled(object sender, RoutedEventArgs e)
+    private async void SaveTogle_Toggled(object sender, RoutedEventArgs e)
     {
         if (SaveTogle.IsOn)
         {
-            localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
+            await localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
         }
         else
         {
-            localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
+            await localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
         }
     }
 
-    private void BackdropComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void BackdropComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
         MicaBackdrop micaBackdrop = new();
@@ -230,7 +230,7 @@ public sealed partial class SettingsPage : Page
 
         if (cbItem.Name == "Settings_BackDrop_Base")
         {
-            localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            _= localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
             micaBackdrop.Kind = MicaKind.Base;
             if (isAcrylic)
             {
@@ -244,7 +244,7 @@ public sealed partial class SettingsPage : Page
         }
         else if (cbItem.Name == "Settings_BackDrop_BaseAlt")
         {
-            localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
+            await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
             micaBackdrop.Kind = MicaKind.BaseAlt;
             if (isAcrylic)
             {
@@ -260,13 +260,13 @@ public sealed partial class SettingsPage : Page
         {
             if (!isAcrylic)
             {
-                localSettingsService.SaveSettingAsync(AcrylicKey, true);
+                await localSettingsService.SaveSettingAsync(AcrylicKey, true);
                 DesktopAcrylicBackdrop desktopAcrylicBackdrop = new();
                 App.MainWindow.SystemBackdrop = desktopAcrylicBackdrop;
                 isAcrylic = true;
             }
         }
-        localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
+        await localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
     }
 
     private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
