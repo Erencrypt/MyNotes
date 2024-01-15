@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-
+﻿using System.Text.Json;
 namespace MyNotes.Core.Helpers;
 
 public static class Json
@@ -8,7 +7,7 @@ public static class Json
     {
         return await Task.Run<T>(() =>
         {
-            return JsonConvert.DeserializeObject<T>(value);
+            return JsonSerializer.Deserialize<T>(value);
         });
     }
 
@@ -16,7 +15,7 @@ public static class Json
     {
         return await Task.Run<string>(() =>
         {
-            return JsonConvert.SerializeObject(value);
+            return JsonSerializer.Serialize(value);
         });
     }
 }
