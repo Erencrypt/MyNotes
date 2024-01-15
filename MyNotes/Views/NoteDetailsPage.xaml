@@ -24,6 +24,8 @@
                      Margin="0,-96,-32,0"
                      Visibility="Visible"
                      Canvas.ZIndex="1"
+                     Background="{StaticResource CardBackgroundFillColorDefault}"
+                     Opacity="0.9"
                      RelativePanel.AlignBottomWithPanel="True"
                      RelativePanel.AlignRightWithPanel="True">
                 <InfoBar.Transitions>
