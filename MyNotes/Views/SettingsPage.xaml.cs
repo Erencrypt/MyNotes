@@ -210,17 +210,12 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    private async void SaveTogle_Toggled(object sender, RoutedEventArgs e)
+    private void SaveTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        if (SaveTogle.IsOn)
-        {
-            await localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
-        }
-        else
-        {
-            await localSettingsService.SaveSettingAsync(SaveWhenExitKey, false);
-        }
+        _= localSettingsService.SaveSettingAsync(SaveWhenExitKey, SaveTogle.IsOn);
     }
+
+
 
     private async void BackdropComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -230,7 +225,7 @@ public sealed partial class SettingsPage : Page
 
         if (cbItem.Name == "Settings_BackDrop_Base")
         {
-            _= localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
+            await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
             micaBackdrop.Kind = MicaKind.Base;
             if (isAcrylic)
             {
