@@ -111,7 +111,6 @@ public sealed partial class NoteDetailsPage : Page
         infobar.Severity = type;
         infobar.Message = message;
         infobar.IsOpen = true;
-        infobar.Background.Opacity = 1;
         CreateTimer();
     }
     private void CreateTimer()
