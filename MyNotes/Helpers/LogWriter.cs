@@ -23,8 +23,9 @@ namespace MyNotes.Helpers
                 }
                 else
                 {
-                    using StreamWriter w = File.AppendText(filePath);
-                    Loger(logMessage, w, logLevel);
+                    StreamWriter writer = File.AppendText(filePath);
+                    Loger(logMessage, writer, logLevel);
+                    writer.Close();
                 }
             }
             catch (Exception ex)
