@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using System.Diagnostics;
+using Windows.Storage;
 
 namespace MyNotes.Helpers
 {
