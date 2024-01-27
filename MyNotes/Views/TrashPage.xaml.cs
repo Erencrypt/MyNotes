@@ -117,21 +117,22 @@ public sealed partial class TrashPage : Page
             }
             else
             {
-                ContentDialog noWifiDialog = new()
+                ContentDialog infoDialog = new()
                 { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                await noWifiDialog.ShowAsync();
+                await infoDialog.ShowAsync();
             }
         }
         catch (Exception ex)
         {
-            ContentDialog noWifiDialog = new()
+            ContentDialog infoDialog = new()
             {
                 XamlRoot = XamlRoot,
                 Title = "Error".GetLocalized(),
                 Content = "Error_Meesage".GetLocalized() + ex.Message,
                 CloseButtonText = "Ok".GetLocalized()
             };
-            await noWifiDialog.ShowAsync();
+            await infoDialog.ShowAsync();
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
     private async void DeleteReminder()
@@ -147,21 +148,22 @@ public sealed partial class TrashPage : Page
             }
             else
             {
-                ContentDialog noWifiDialog = new()
+                ContentDialog infoDialog = new()
                 { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                await noWifiDialog.ShowAsync();
+                await infoDialog.ShowAsync();
             }
         }
         catch (Exception ex)
         {
-            ContentDialog noWifiDialog = new()
+            ContentDialog errorDialog = new()
             {
                 XamlRoot = XamlRoot,
                 Title = "Error".GetLocalized(),
                 Content = "Error_Meesage".GetLocalized() + ex.Message,
                 CloseButtonText = "Ok".GetLocalized()
             };
-            await noWifiDialog.ShowAsync();
+            await errorDialog.ShowAsync();
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
     private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -30,7 +30,6 @@ public sealed partial class CreateReminderDialog : ContentDialog
     DateTime time, selectedDate, ofsetDate;
     public CreateReminderDialog()
     {
-        //TODO: localize strings
         InitializeComponent();
         reminderNameTextBox.Header = "CreateReminder_NameBoxHeader".GetLocalized();
         reminderTextTextBox.Header = "CreateReminder_TextBoxHeader".GetLocalized();
@@ -93,6 +92,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
             errorTextBlock.Visibility = Visibility.Visible;
             errorTextBlock.Text = ex.Message;
             Result = ReminderCreateResult.ReminderCreationFail;
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
     private void EditReminder(ContentDialogButtonClickEventArgs args)
@@ -111,6 +111,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
             errorTextBlock.Visibility = Visibility.Visible;
             errorTextBlock.Text = ex.Message;
             Result = ReminderCreateResult.ReminderCreationFail;
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
     private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -214,6 +215,7 @@ public sealed partial class CreateReminderDialog : ContentDialog
         {
             errorTextBlock.Visibility = Visibility.Visible;
             errorTextBlock.Text = "Error_Meesage".GetLocalized() + ex.Message;
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
 

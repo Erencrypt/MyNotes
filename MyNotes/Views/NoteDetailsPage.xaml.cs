@@ -102,6 +102,7 @@ public sealed partial class NoteDetailsPage : Page
             catch (Exception ex)
             {
                 InfoBar("Error".GetLocalized(), InfoBarSeverity.Error, "NoteDetails_ErrorMessage".GetLocalized() + ex.Message);
+                LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
             }
         }
     }
@@ -129,9 +130,9 @@ public sealed partial class NoteDetailsPage : Page
             dispatcherTimer = null;
             BtnSaveFile.IsEnabled = true;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            //TODO: handle exceptions
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
     private void SaveButton_Click(object sender, RoutedEventArgs e)

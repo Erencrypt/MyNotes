@@ -53,6 +53,7 @@ public sealed partial class CreateNoteDialog : ContentDialog
             args.Cancel = true;
             errorTextBlock.Visibility = Visibility.Visible;
             errorTextBlock.Text = "Error_Meesage".GetLocalized() + ex.Message;
+            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
         }
     }
     private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

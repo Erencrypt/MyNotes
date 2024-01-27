@@ -67,11 +67,12 @@ namespace MyNotes.Helpers
                 if (isStartup)
                 {
                     ShowNotifications();
+                    LogWriter.Log("Startup notifications showed up", LogWriter.LogLevel.Debug);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
             }
         }
         private void ShowNotifications()

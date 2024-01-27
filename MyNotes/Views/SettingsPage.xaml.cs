@@ -210,12 +210,10 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    private void SaveTogle_Toggled(object sender, RoutedEventArgs e)
+    private async void SaveTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        _= localSettingsService.SaveSettingAsync(SaveWhenExitKey, SaveTogle.IsOn);
+        await localSettingsService.SaveSettingAsync(SaveWhenExitKey, SaveTogle.IsOn);
     }
-
-
 
     private async void BackdropComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {

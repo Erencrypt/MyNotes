@@ -20,11 +20,6 @@ namespace MyNotes;
 
 public partial class App : Application
 {
-    // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
-    // https://docs.microsoft.com/dotnet/core/extensions/generic-host
-    // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
-    // https://docs.microsoft.com/dotnet/core/extensions/configuration
-    // https://docs.microsoft.com/dotnet/core/extensions/logging
     public IHost Host
     {
         get;
@@ -73,7 +68,9 @@ public partial class App : Application
             sFolder = value;
         }
     }
-    private static readonly Windows.ApplicationModel.StartupTask? startupTask;
+
+    public static Windows.ApplicationModel.StartupTask? StartupTask { get; }
+
     private static readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\MyNotes";
     private static StorageFolder? sFolder;
@@ -131,11 +128,12 @@ public partial class App : Application
 
         UnhandledException += App_UnhandledException;
     }
-
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
     {
-        // TODO: Log and handle exceptions as appropriate.
-        // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.
+        if (e.Exception != null)
+        {
+            LogWriter.Log("Unhandled Exception :" + e.Exception.Message, LogWriter.LogLevel.Error);
+        }
     }
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
@@ -150,6 +148,10 @@ public partial class App : Application
             sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             CreateFolders();
             CreateSaveFile();
+
+            LogWriter.CheckLogFile();
+            LogWriter.Log("App Started", LogWriter.LogLevel.Info);
+
             ReminderCleanup reminderCleanup = new();
             reminderCleanup.Clean(true);
 
@@ -249,10 +251,10 @@ public partial class App : Application
 
             if (RuntimeHelper.IsMSIX)
             {
-                switch (startupTask.State)
+                switch (StartupTask.State)
                 {
                     case Windows.ApplicationModel.StartupTaskState.Disabled:
-                        Windows.ApplicationModel.StartupTaskState newState = await startupTask.RequestEnableAsync();
+                        Windows.ApplicationModel.StartupTaskState newState = await StartupTask.RequestEnableAsync();
                         Debug.WriteLine("Request to enable startup, result = {0}", newState);
                         break;
                     case Windows.ApplicationModel.StartupTaskState.DisabledByUser:

@@ -21,9 +21,9 @@ namespace MyNotes.Helpers
                 {
                     if (root != null)
                     {
-                        ContentDialog noWifiDialog = new()
+                        ContentDialog infoDialog = new()
                         { XamlRoot = root, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                        await noWifiDialog.ShowAsync();
+                        await infoDialog.ShowAsync();
                     }
                 }
             }
@@ -31,9 +31,10 @@ namespace MyNotes.Helpers
             {
                 if (root != null)
                 {
-                    ContentDialog noWifiDialog = new()
+                    ContentDialog infoDialog = new()
                     { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
-                    await noWifiDialog.ShowAsync();
+                    await infoDialog.ShowAsync();
+                    LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
                 }
             }
         }
@@ -49,16 +50,17 @@ namespace MyNotes.Helpers
                 }
                 else
                 {
-                    ContentDialog noWifiDialog = new()
+                    ContentDialog infoDialog = new()
                     { XamlRoot = root, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                    await noWifiDialog.ShowAsync();
+                    await infoDialog.ShowAsync();
                 }
             }
             catch (Exception ex)
             {
-                ContentDialog noWifiDialog = new()
+                ContentDialog infoDialog = new()
                 { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
-                await noWifiDialog.ShowAsync();
+                await infoDialog.ShowAsync();
+                LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
             }
         }
         public async void Move(string from, string to, ListView list, XamlRoot root, Reminder reminder, ObservableCollection<Reminder> items)
@@ -73,16 +75,17 @@ namespace MyNotes.Helpers
                 }
                 else
                 {
-                    ContentDialog noWifiDialog = new()
+                    ContentDialog infoDialog = new()
                     { XamlRoot = root, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                    await noWifiDialog.ShowAsync();
+                    await infoDialog.ShowAsync();
                 }
             }
             catch (Exception ex)
             {
-                ContentDialog noWifiDialog = new()
+                ContentDialog infoDialog = new()
                 { XamlRoot = root, Title = "Error".GetLocalized(), Content = "Error_Meesage".GetLocalized() + ex.Message, CloseButtonText = "Ok".GetLocalized() };
-                await noWifiDialog.ShowAsync();
+                await infoDialog.ShowAsync();
+                LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
             }
         }
         private async void Mover(string from, string to, string filename, string extention)
