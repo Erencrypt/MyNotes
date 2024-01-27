@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Windows.Storage;
 
 namespace MyNotes.Helpers
 {
@@ -50,11 +49,13 @@ namespace MyNotes.Helpers
             }
         }
 
-        public static async void CheckLogFile()
+        public static void CheckLogFile()
         {
-            await App.StorageFolder.CreateFileAsync("log.txt", CreationCollisionOption.OpenIfExists);
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+            }
             var lines = File.ReadAllLines(filePath);
-
             if (lines.Length >= 1000)
             {
                 File.WriteAllLines(filePath, lines.Skip(500).ToArray());
