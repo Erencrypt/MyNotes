@@ -29,15 +29,6 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
-
-        ThemeCard.Header = "Settings_Theme".GetLocalized();
-        BackdropCard.Header = "Settings_BackDrop".GetLocalized();
-        SaveCard.Header = "Settings_Save".GetLocalized();
-        SaveCard.Description = "Settings_SaveDescription".GetLocalized();
-        StartupCard.Header = "Settings_Startup".GetLocalized();
-        StartupCard.Description = "Settings_StartupDescription".GetLocalized();
-        AboutSection.Header = "AppDescription".GetLocalized();
-        AboutSection.Description = "Settings_About".GetLocalized();
         localSettingsService = App.GetService<ILocalSettingsService>();
         ThemeState();
         BackDropState();
@@ -54,6 +45,15 @@ public sealed partial class SettingsPage : Page
         {
             StartupTogle.IsOn = false;
         }
+
+        ThemeCard.Header = "Settings_Theme".GetLocalized();
+        BackdropCard.Header = "Settings_BackDrop".GetLocalized();
+        SaveCard.Header = "Settings_Save".GetLocalized();
+        SaveCard.Description = "Settings_SaveDescription".GetLocalized();
+        StartupCard.Header = "Settings_Startup".GetLocalized();
+        StartupCard.Description = "Settings_StartupDescription".GetLocalized();
+        AboutSection.Header = "AppDescription".GetLocalized();
+        AboutSection.Description = "Settings_About".GetLocalized();
     }
     private async void BackDropState()
     {
