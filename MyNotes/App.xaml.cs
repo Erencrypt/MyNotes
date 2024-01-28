@@ -35,28 +35,8 @@ public partial class App : Application
     }
     public static WindowEx MainWindow { get; } = new MainWindow();
 
-    public static List<Reminder> InvokedReminders
-    {
-        get
-        {
-            return invokedReminders;
-        }
-        set
-        {
-            invokedReminders = value;
-        }
-    }
-    public static List<Reminder> Reminders
-    {
-        get
-        {
-            return reminders;
-        }
-        set
-        {
-            reminders = value;
-        }
-    }
+    public static List<Reminder> InvokedReminders { get; set; } = new();
+    public static List<Reminder> Reminders { get; set; } = new();
     public static StorageFolder StorageFolder
     {
         get
@@ -75,8 +55,6 @@ public partial class App : Application
     private static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\MyNotes";
     private static StorageFolder? sFolder;
     private readonly DispatcherTimer timer = new();
-    private static List<Reminder> reminders = new();
-    private static List<Reminder> invokedReminders = new();
 
     public App()
     {
@@ -183,7 +161,7 @@ public partial class App : Application
     public static void ReminderSnoozed()
     {
         Reminder reminder = InvokedReminders[0];
-        reminders.Add(reminder);
+        Reminders.Add(reminder);
         InvokedReminders.Remove(reminder);
     }
     public static void ReminderDismissed()
@@ -203,9 +181,9 @@ public partial class App : Application
     }
     private void Timer_Tick(object? sender, object e)
     {
-        for (int i = 0; i < reminders.Count; i++)
+        for (int i = 0; i < Reminders.Count; i++)
         {
-            Reminder reminder = reminders[i];
+            Reminder reminder = Reminders[i];
             bool rep = reminder.Repeat;
             DateTime tm = Convert.ToDateTime(reminder.DateTime);
             DateTime now = DateTime.Now;
@@ -215,7 +193,7 @@ public partial class App : Application
                 {
                     GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("h:mm tt  - d/MM/yyyy"), reminder.Alarm);
                     InvokedReminders.Add(reminder);
-                    reminders.Remove(reminder);
+                    Reminders.Remove(reminder);
                 }
             }
             else if (rep == false)
@@ -226,7 +204,7 @@ public partial class App : Application
                     {
                         GetService<IAppNotificationService>().ShowReminder(reminder.ReminderHeader!, reminder.ReminderText!, tm.ToString("d/MM/yyyy\nh:mm tt"), reminder.Alarm);
                         InvokedReminders.Add(reminder);
-                        reminders.Remove(reminder);
+                        Reminders.Remove(reminder);
                     }
                 }
             }
