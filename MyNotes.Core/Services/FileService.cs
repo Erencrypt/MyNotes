@@ -1,5 +1,5 @@
 ﻿using MyNotes.Core.Contracts.Services;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System.Text;
 
 namespace MyNotes.Core.Services;
@@ -12,7 +12,7 @@ public class FileService : IFileService
         if (File.Exists(path))
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonSerializer.Deserialize<T>(json);
         }
 
         return default;
@@ -25,7 +25,7 @@ public class FileService : IFileService
             Directory.CreateDirectory(folderPath);
         }
 
-        var fileContent = JsonConvert.SerializeObject(content);
+        var fileContent = JsonSerializer.Serialize(content);
         File.WriteAllTextAsync(Path.Combine(folderPath, fileName), fileContent, Encoding.UTF8);
     }
 
