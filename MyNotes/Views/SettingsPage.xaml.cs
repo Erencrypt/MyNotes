@@ -16,6 +16,7 @@ public sealed partial class SettingsPage : Page
 {
     private readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private readonly ILocalSettingsService localSettingsService;
+    private static bool isClose = false;
     StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
     private readonly string AcrylicKey = "IsAcrylic";
@@ -25,6 +26,20 @@ public sealed partial class SettingsPage : Page
     {
         get;
     }
+
+    public static bool IsClose
+    {
+        get
+        {
+            return isClose;
+        }
+
+        set
+        {
+            isClose = value;
+        }
+    }
+
     public SettingsPage()
     {
         ViewModel = App.GetService<SettingsViewModel>();
@@ -54,6 +69,8 @@ public sealed partial class SettingsPage : Page
         StartupCard.Description = "Settings_StartupDescription".GetLocalized();
         AboutSection.Header = "AppDescription".GetLocalized();
         AboutSection.Description = "Settings_About".GetLocalized();
+        ExitCard.Header = "Settings_Exit".GetLocalized();
+        ExitCard.Description = "Settings_ExitDescription".GetLocalized();
     }
     private async void BackDropState()
     {
@@ -281,4 +298,9 @@ public sealed partial class SettingsPage : Page
         }
     }
 
+    private void ExitButton_Click(object sender, RoutedEventArgs e)
+    {
+        IsClose = true;
+        Application.Current.Exit();
+    }
 }

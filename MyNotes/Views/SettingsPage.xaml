@@ -81,7 +81,11 @@
                             </controls:SettingsCard>
                         </controls:SettingsExpander.Items>
                     </controls:SettingsExpander>
-                    
+                    <controls:SettingsCard Name="ExitCard"
+                       HeaderIcon="{ui:FontIcon Glyph=&#xE7E8;}">
+                        <Button Name="ExitButton" x:Uid="Settings_ExitButton" Click="ExitButton_Click"></Button>
+                    </controls:SettingsCard>
+
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

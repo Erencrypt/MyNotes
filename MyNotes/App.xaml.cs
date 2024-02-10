@@ -155,8 +155,11 @@ public partial class App : Application
     }
     private void MainWindow_Closed(object sender, WindowEventArgs args)
     {
-        args.Handled = true;
-        MainWindow.Hide();
+        if (SettingsPage.IsClose == false)
+        {
+            args.Handled = true;
+            MainWindow.Hide();
+        }
     }
     public static void ReminderSnoozed()
     {

@@ -353,4 +353,13 @@ Error Message:</value>
   <data name="CreateReminder_Alarm" xml:space="preserve">
     <value>Alarm</value>
   </data>
+  <data name="Settings_Exit" xml:space="preserve">
+    <value>Close Application</value>
+  </data>
+  <data name="Settings_ExitDescription" xml:space="preserve">
+    <value>This will compleatly close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+  </data>
+  <data name="Settings_ExitButton.Content" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>
