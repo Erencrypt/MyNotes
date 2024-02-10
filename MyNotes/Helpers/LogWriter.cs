@@ -17,7 +17,7 @@ namespace MyNotes.Helpers
                 if (logLevel == LogLevel.Debug)
                 {
 #if DEBUG
-                    Debug.Print("Debug Log: {0}",logMessage);
+                    Debug.Print("Debug Log: {0}", logMessage);
 #endif
                 }
                 else
