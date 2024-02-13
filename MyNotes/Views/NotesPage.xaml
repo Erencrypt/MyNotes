@@ -8,16 +8,24 @@
 
     <Grid x:Name="ContentArea" Width="auto">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
+            <AutoSuggestBox Name="NotesSearch"
+                            PlaceholderText="Search"
+                            TextChanged="NotesSearch_TextChanged"
+                            QueryIcon="Find"
+                            Margin="0,-48,0,16"
+                            Width="200"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"/>
             <ListView Width="auto" Name="LstNotes" DoubleTapped="LstNotes_DoubleTapped"
-                 SelectionChanged="LstNotes_SelectionChanged"
-                 CornerRadius="2"
-                 RelativePanel.AlignLeftWithPanel="True"
-                 RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.AlignTopWithPanel="True"
-                 RelativePanel.AlignBottomWithPanel="True"
-                 BorderThickness="1"
-                 BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
-                 Margin="0,0,0,64">
+                      SelectionChanged="LstNotes_SelectionChanged"
+                      CornerRadius="2"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.AlignBottomWithPanel="True"
+                      BorderThickness="1"
+                      BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
+                      Margin="0,0,0,64"> 
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition/>
@@ -62,9 +70,34 @@
                         </StackPanel>
                     </Flyout>
                 </Button.Flyout>
-
             </Button>
         </RelativePanel>
-        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="FadeOut" >
+                    <Storyboard>
+                        <DoubleAnimation
+                            AutoReverse="False"
+                            Storyboard.TargetName="LstNotes"
+                            Storyboard.TargetProperty="Opacity"
+                            From="1.0"
+                            To="0.0"
+                            Duration="0:0:0.2" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FadeIn">
+                    <Storyboard>
+                        <DoubleAnimation
+                            AutoReverse="False"
+                            Storyboard.TargetName="LstNotes"
+                            Storyboard.TargetProperty="Opacity"
+                            From="0.0"
+                            To="1.0"
+                            Duration="0:0:0.2" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

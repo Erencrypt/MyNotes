@@ -12,7 +12,7 @@ public sealed partial class NotesPage : Page
 {
     private readonly StorageFolder storageFolder = App.StorageFolder;
     private readonly INavigationService navigationService;
-
+    //TODO: add rename option
     public NotesViewModel ViewModel
     {
         get;
@@ -22,31 +22,28 @@ public sealed partial class NotesPage : Page
         ViewModel = App.GetService<NotesViewModel>();
         navigationService = App.GetService<INavigationService>();
         InitializeComponent();
-        ListFiles();
-        if (LstNotes.Items.Count < 1)
-        {
-            EmptyText.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            EmptyText.Visibility = Visibility.Collapsed;
-        }
+        ListFiles(string.Empty);
+        EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteConfirm".GetLocalized();
         EmptyText.Text = "Notes_EmptyText".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "Delete".GetLocalized());
         ToolTipService.SetToolTip(newNote, "Add".GetLocalized());
     }
-    private void ListFiles()
+    private void ListFiles(string SearchText)
     {
         DirectoryInfo dinfo = new(storageFolder.Path + "\\Notes");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
-        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
+        List<FileInfo> orderedList = SearchText == null ? orderedList = Files.OrderByDescending(x => x.LastAccessTime).ToList() :
+        orderedList = Files.Where(x => x.Name[..^4].ToLower().Contains(SearchText.ToLower())).OrderByDescending(x => x.LastAccessTime).ToList();
+        VisualStateManager.GoToState(this, "Normal", false);
+        VisualStateManager.GoToState(this, "FadeOut", false);
         LstNotes.Items.Clear();
         foreach (FileInfo file in orderedList)
         {
             LstNotes.Items.Add(file.Name[..^4]);
         }
+        VisualStateManager.GoToState(this, "FadeIn", false);
     }
     private void LstNotes_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
@@ -88,5 +85,10 @@ public sealed partial class NotesPage : Page
         {
             deleteNote.IsEnabled = true;
         }
+    }
+
+    private void NotesSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        ListFiles(NotesSearch.Text);
     }
 }

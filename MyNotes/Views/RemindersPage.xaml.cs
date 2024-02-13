@@ -20,30 +20,9 @@ public sealed partial class RemindersPage : Page
     {
         get;
     }
-    public static bool IsNewReminder
-    {
-        get
-        {
-            return isNewReminder;
-        }
-        set
-        {
-            isNewReminder = value;
-        }
-    }
-    public static string ReminderName
-    {
-        get
-        {
-            return reminderName;
-        }
-        set
-        {
-            reminderName = value;
-        }
-    }
-    private static bool isNewReminder = false;
-    private static string reminderName = string.Empty;
+    public static bool IsNewReminder { get; set; }
+    public static string ReminderName { get; set; } = string.Empty;
+
     public RemindersPage()
     {
         ViewModel = App.GetService<RemindersViewModel>();
@@ -55,15 +34,9 @@ public sealed partial class RemindersPage : Page
         ToolTipService.SetToolTip(newReminder, "Add".GetLocalized());
         LstReminders.ItemsSource = items;
         ListReminders();
-        if (LstReminders.Items.Count < 1)
-        {
-            EmptyText.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            EmptyText.Visibility = Visibility.Collapsed;
-        }
+        EmptyText.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
     }
+
     private async void AddReminder()
     {
         IsNewReminder = true;
@@ -75,6 +48,7 @@ public sealed partial class RemindersPage : Page
         if (AddReminderDialog.Result == ReminderCreateResult.ReminderCreationOK)
         {
             items.Insert(0, AddReminderDialog.rmnd);
+            LstReminders.ItemsSource = items;
             if (Convert.ToDateTime(AddReminderDialog.rmnd.DateTime) > DateTime.Now)
             {
                 reminderCleanup.Clean(false);
@@ -91,7 +65,7 @@ public sealed partial class RemindersPage : Page
         {
             int index = LstReminders.SelectedIndex;
             IsNewReminder = false;
-            reminderName = selectedItem.ReminderHeader!;
+            ReminderName = selectedItem.ReminderHeader!;
             CreateReminderDialog EditReminderDialog = new()
             {
                 XamlRoot = XamlRoot,
@@ -160,6 +134,18 @@ public sealed partial class RemindersPage : Page
         if (!deleteReminder.IsEnabled)
         {
             deleteReminder.IsEnabled = true;
+        }
+    }
+
+    private void RemindersSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (RemindersSearch!=null)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+            VisualStateManager.GoToState(this, "FadeOut", false);
+            LstReminders.ItemsSource = items.Where(x => x.ReminderHeader.ToLower().Contains(RemindersSearch.Text.ToLower()));
+            LstReminders.UpdateLayout();
+            VisualStateManager.GoToState(this, "FadeIn", false);
         }
     }
 }
