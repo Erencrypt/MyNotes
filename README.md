@@ -86,7 +86,7 @@ Your Windows version should be higher than **Windows 10 version 1809** because m
 ### Installation
 Installation process is pretty straight forward, 
 
- 1. Download MyNotes_x64.msi from [Releases](https://github.com/ErenCanUtku/MyNotes/releases)
+ 1. Download MyNotes_x64.msi from [Releases](https://github.com/Erencrypt/MyNotes/releases)
  2. Follow the setup wizard instructions
  3. Open MyNotes from the shortcut that installation wizard created on your desktop
  4. (Optional but recommended) For reminders feature to work properly, open settings and select "Open on startup".
@@ -131,13 +131,13 @@ When app opened, it will check for expired reminders and send a notification abo
 - [x] Create App notifications
 - [x] Change assets
 - [x] Open on windows startup
-- [ ] Edit README file
-- [ ] Implement localization and add every possible string to Resources.resw
+- [x] Edit README file
+- [ ] Implement localization (Crowdin)
 - [ ] Multi-language Support
     - [x] English
-    - [ ] Turkish (I will make it after finishing the implementation of localization)
+    - [ ] Turkish
 
-See the [open issues](https://github.com/ErenCanUtku/MyNotes/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/Erencrypt/MyNotes/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -154,7 +154,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the **GNU General Public License v3.0** License. See [`LICENSE`](https://github.com/ErenCanUtku/MyNotes/blob/main/LICENSE) file for more information.
+Distributed under the **GNU General Public License v3.0** License. See [`LICENSE`](https://github.com/Erencrypt/MyNotes/blob/main/LICENSE) file for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -179,16 +179,16 @@ These are the list of resources I find helpful and would like to give credit to.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ErenCanUtku/MyNotes.svg?style=for-the-badge
-[contributors-url]: https://github.com/ErenCanUtku/MyNotes/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ErenCanUtku/MyNotes.svg?style=for-the-badge
-[forks-url]: https://github.com/ErenCanUtku/MyNotes/network/members
-[stars-shield]: https://img.shields.io/github/stars/ErenCanUtku/MyNotes.svg?style=for-the-badge
-[stars-url]: https://github.com/ErenCanUtku/MyNotes/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ErenCanUtku/MyNotes.svg?style=for-the-badge
-[issues-url]: https://github.com/ErenCanUtku/MyNotes/issues
-[license-shield]: https://img.shields.io/github/license/ErenCanUtku/MyNotes.svg?style=for-the-badge
-[license-url]: https://github.com/ErenCanUtku/MyNotes/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/Erencrypt/MyNotes.svg?style=for-the-badge
+[contributors-url]: https://github.com/Erencrypt/MyNotes/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Erencrypt/MyNotes.svg?style=for-the-badge
+[forks-url]: https://github.com/Erencrypt/MyNotes/network/members
+[stars-shield]: https://img.shields.io/github/stars/Erencrypt/MyNotes.svg?style=for-the-badge
+[stars-url]: https://github.com/Erencrypt/MyNotes/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Erencrypt/MyNotes.svg?style=for-the-badge
+[issues-url]: https://github.com/Erencrypt/MyNotes/issues
+[license-shield]: https://img.shields.io/github/license/Erencrypt/MyNotes.svg?style=for-the-badge
+[license-url]: https://github.com/Erencrypt/MyNotes/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/eren-can-utku/
 [product-screenshot]: ReadmeResources/AppImage.png
