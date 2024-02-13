@@ -14,12 +14,8 @@ public sealed partial class ShellPage : Page
     {
         get;
     }
-    public static string? NoteName
-    {
-        get => noteName;
-        set => noteName = value;
-    }
-    private static string? noteName;
+    public static string? NoteName { get; set; }
+
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;

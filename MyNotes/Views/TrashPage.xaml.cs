@@ -18,12 +18,8 @@ public sealed partial class TrashPage : Page
     {
         get;
     }
-    public static bool? NtfInvoke
-    {
-        get => ntfInvoke;
-        set => ntfInvoke = value;
-    }
-    private static bool? ntfInvoke;
+    public static bool? NtfInvoke { get; set; }
+
     public TrashPage()
     {
         ViewModel = App.GetService<TrashViewModel>();
@@ -48,23 +44,9 @@ public sealed partial class TrashPage : Page
         LstReminders.ItemsSource = items;
         ListNotes();
         ListReminders();
-        if (LstNotes.Items.Count < 1)
-        {
-            EmptyText.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            EmptyText.Visibility = Visibility.Collapsed;
-        }
-        if (LstReminders.Items.Count < 1)
-        {
-            EmptyText2.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            EmptyText2.Visibility = Visibility.Collapsed;
-        }
-        if (ntfInvoke == true)
+        EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+        EmptyText2.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+        if (NtfInvoke == true)
         {
             PivotChange();
         }

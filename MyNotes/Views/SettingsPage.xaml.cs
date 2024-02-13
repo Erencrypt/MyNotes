@@ -16,7 +16,6 @@ public sealed partial class SettingsPage : Page
 {
     private readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private readonly ILocalSettingsService localSettingsService;
-    private static bool isClose = false;
     StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
     private readonly string AcrylicKey = "IsAcrylic";
@@ -26,19 +25,9 @@ public sealed partial class SettingsPage : Page
     {
         get;
     }
-
-    public static bool IsClose
-    {
-        get
-        {
-            return isClose;
-        }
-
-        set
-        {
-            isClose = value;
-        }
-    }
+    //TODO: add sort by option for lists
+    //TODO: add option to delete items on trash page that are older than 30 day option
+    public static bool IsClose { get; set; }
 
     public SettingsPage()
     {
@@ -52,14 +41,7 @@ public sealed partial class SettingsPage : Page
         {
             GetTask();
         }
-        if (key.GetValue("MyNotes") != null)
-        {
-            StartupTogle.IsOn = true;
-        }
-        else
-        {
-            StartupTogle.IsOn = false;
-        }
+        StartupTogle.IsOn = key.GetValue("MyNotes") != null;
 
         ThemeCard.Header = "Settings_Theme".GetLocalized();
         BackdropCard.Header = "Settings_BackDrop".GetLocalized();
