@@ -42,7 +42,7 @@ public sealed partial class TrashPage : Page
         ToolTipService.SetToolTip(restoreReminder, "Restore".GetLocalized());
 
         LstReminders.ItemsSource = items;
-        ListNotes();
+        ListNotes(string.Empty);
         ListReminders();
         EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         EmptyText2.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
@@ -56,11 +56,12 @@ public sealed partial class TrashPage : Page
         TrashPivot.SelectedItem = TrashPivot.Items[1];
         TrashPivot.UpdateLayout();
     }
-    private void ListNotes()
+    private void ListNotes(string SearchText)
     {
-        DirectoryInfo dinfo = new(storageFolder.Path + "\\Trash");
+        DirectoryInfo dinfo = new(storageFolder.Path + "\\Notes");
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
-        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
+        List<FileInfo> orderedList = SearchText == null ? orderedList = Files.OrderByDescending(x => x.LastAccessTime).ToList() :
+        orderedList = Files.Where(x => x.Name[..^4].ToLower().Contains(SearchText.ToLower())).OrderByDescending(x => x.LastAccessTime).ToList();
         LstNotes.Items.Clear();
         foreach (FileInfo file in orderedList)
         {
@@ -218,5 +219,19 @@ public sealed partial class TrashPage : Page
             DeleteReminder();
         }
         deleteReminder.Flyout.Hide();
+    }
+
+    private void NotesSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        ListNotes(NotesSearch.Text);
+    }
+
+    private void RemindersSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (RemindersSearch != null)
+        {
+            LstReminders.ItemsSource = items.Where(x => x.ReminderHeader.ToLower().Contains(RemindersSearch.Text.ToLower()));
+            LstReminders.UpdateLayout();
+        }
     }
 }
