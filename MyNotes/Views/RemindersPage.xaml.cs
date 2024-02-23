@@ -136,16 +136,12 @@ public sealed partial class RemindersPage : Page
             deleteReminder.IsEnabled = true;
         }
     }
-
     private void RemindersSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
         if (RemindersSearch!=null)
         {
-            VisualStateManager.GoToState(this, "Normal", false);
-            VisualStateManager.GoToState(this, "FadeOut", false);
             LstReminders.ItemsSource = items.Where(x => x.ReminderHeader.ToLower().Contains(RemindersSearch.Text.ToLower()));
             LstReminders.UpdateLayout();
-            VisualStateManager.GoToState(this, "FadeIn", false);
         }
     }
 }

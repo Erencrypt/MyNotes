@@ -36,14 +36,11 @@ public sealed partial class NotesPage : Page
         FileInfo[] Files = dinfo.GetFiles("*.rtf");
         List<FileInfo> orderedList = SearchText == null ? orderedList = Files.OrderByDescending(x => x.LastAccessTime).ToList() :
         orderedList = Files.Where(x => x.Name[..^4].ToLower().Contains(SearchText.ToLower())).OrderByDescending(x => x.LastAccessTime).ToList();
-        VisualStateManager.GoToState(this, "Normal", false);
-        VisualStateManager.GoToState(this, "FadeOut", false);
         LstNotes.Items.Clear();
         foreach (FileInfo file in orderedList)
         {
             LstNotes.Items.Add(file.Name[..^4]);
         }
-        VisualStateManager.GoToState(this, "FadeIn", false);
     }
     private void LstNotes_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {

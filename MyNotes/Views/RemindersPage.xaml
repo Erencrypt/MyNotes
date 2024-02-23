@@ -26,6 +26,10 @@
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition/>
+                        <ReorderThemeTransition/>
+                        <ContentThemeTransition/>
+                        <RepositionThemeTransition/>
+                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
                     </TransitionCollection>
                 </ListView.ItemContainerTransitions>
                 <ListView.ItemTemplate>
@@ -42,11 +46,11 @@
                                 <ColumnDefinition Width="90"/>
                             </Grid.ColumnDefinitions>
                             <FontIcon Glyph="{Binding ReminderIcon}"
-                                    Grid.RowSpan="2"
-                                    FontSize="24"
-                                    Margin="0,0,-2,0"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"/>
+                                      Grid.RowSpan="2"
+                                      FontSize="24"
+                                      Margin="0,0,-2,0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"/>
                             <FontIcon Glyph="&#xEDAC;"
                                       Grid.RowSpan="2"
                                       Foreground="{StaticResource AccentFillColorTertiaryBrush}"
@@ -57,9 +61,9 @@
                                       HorizontalAlignment="Left"
                                       Margin="-8,8,0,0"/>
                             <TextBlock Grid.Column="1"
-                                Text="{Binding ReminderHeader}"
-                                Style="{ThemeResource BaseTextBlockStyle}"
-                                Margin="12,6,0,0"/>
+                                       Text="{Binding ReminderHeader}"
+                                       Style="{ThemeResource BaseTextBlockStyle}"
+                                       Margin="12,6,0,0"/>
                             <TextBlock  Grid.Column="1"
                                 Grid.Row="1"
                                 Opacity="0.8"
@@ -87,8 +91,7 @@
                        FontSize="16"
                        HorizontalAlignment="Center"
                        RelativePanel.AlignLeftWithPanel="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                           />
+                       RelativePanel.AlignRightWithPanel="True"/>
             <Button 
                     Name="newReminder"
                     RelativePanel.AlignBottomWithPanel="True"
@@ -107,8 +110,7 @@
                     RelativePanel.AlignRightWithPanel="True"
                     Width="auto"
                     FocusVisualPrimaryBrush="Red"
-                    Margin="16,0,0,16"
-                >
+                    Margin="16,0,0,16">
                 <FontIcon Glyph="&#xE74D;" />
                 <Button.Flyout>
                     <Flyout>
@@ -120,32 +122,5 @@
                 </Button.Flyout>
             </Button>
         </RelativePanel>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Normal" />
-                <VisualState x:Name="FadeOut" >
-                    <Storyboard>
-                        <DoubleAnimation
-                    AutoReverse="False"
-                    Storyboard.TargetName="LstReminders"
-                    Storyboard.TargetProperty="Opacity"
-                    From="1.0"
-                    To="0.0"
-                    Duration="0:0:0.2" />
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="FadeIn">
-                    <Storyboard>
-                        <DoubleAnimation
-                    AutoReverse="False"
-                    Storyboard.TargetName="LstReminders"
-                    Storyboard.TargetProperty="Opacity"
-                    From="0.0"
-                    To="1.0"
-                    Duration="0:0:0.2" />
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

@@ -25,10 +25,14 @@
                       RelativePanel.AlignBottomWithPanel="True"
                       BorderThickness="1"
                       BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}"
-                      Margin="0,0,0,64"> 
+                      Margin="0,0,0,64">
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition/>
+                        <ReorderThemeTransition/>
+                        <ContentThemeTransition/>
+                        <RepositionThemeTransition/>
+                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
                     </TransitionCollection>
                 </ListView.ItemContainerTransitions>
             </ListView>
@@ -72,32 +76,5 @@
                 </Button.Flyout>
             </Button>
         </RelativePanel>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Normal" />
-                <VisualState x:Name="FadeOut" >
-                    <Storyboard>
-                        <DoubleAnimation
-                            AutoReverse="False"
-                            Storyboard.TargetName="LstNotes"
-                            Storyboard.TargetProperty="Opacity"
-                            From="1.0"
-                            To="0.0"
-                            Duration="0:0:0.2" />
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="FadeIn">
-                    <Storyboard>
-                        <DoubleAnimation
-                            AutoReverse="False"
-                            Storyboard.TargetName="LstNotes"
-                            Storyboard.TargetProperty="Opacity"
-                            From="0.0"
-                            To="1.0"
-                            Duration="0:0:0.2" />
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
