@@ -262,9 +262,6 @@ Hata mesajı:</value>
   <data name="Restore" xml:space="preserve">
     <value>Geri getir</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Ara</value>
-  </data>
   <data name="Settings_About" xml:space="preserve">
     <value>Bu uygulama hakkında</value>
   </data>
