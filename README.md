@@ -181,7 +181,7 @@ These are the list of resources I find helpful and would like to give credit to.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [crowdin-url]:https://crowdin.com/project/mynotes
-[crowdin-shield]:https://badges.crowdin.net/mynotes/localized.svg?style=for-the-badge
+[crowdin-shield]:https://img.shields.io/github/forks/Erencrypt/MyNotes.svg?style=for-the-badge
 [contributors-shield]: https://img.shields.io/github/contributors/Erencrypt/MyNotes.svg?style=for-the-badge
 [contributors-url]: https://github.com/Erencrypt/MyNotes/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Erencrypt/MyNotes.svg?style=for-the-badge
