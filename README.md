@@ -6,7 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 [![GPL-3.0 License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-[![Crowdin](https://badges.crowdin.net/mynotes/localized.svg)](https://crowdin.com)
+[![Crowdin][crowdin-shield]][crowdin-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -180,6 +180,8 @@ These are the list of resources I find helpful and would like to give credit to.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[crowdin-url]:https://crowdin.com
+[crowdin-shield]:https://badges.crowdin.net/mynotes/localized.svg
 [contributors-shield]: https://img.shields.io/github/contributors/Erencrypt/MyNotes.svg?style=for-the-badge
 [contributors-url]: https://github.com/Erencrypt/MyNotes/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Erencrypt/MyNotes.svg?style=for-the-badge
