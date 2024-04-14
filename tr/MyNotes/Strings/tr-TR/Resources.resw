@@ -136,7 +136,7 @@
     <value>Durdur</value>
   </data>
   <data name="AppNotification_Expired" xml:space="preserve">
-    <value>{0} Hatırlatıcı zaman aşımından dolayı çöp kutusuna . Silinmiş hatırlatıcıları görmek için çöp kutusuna bakabilirsin.</value>
+    <value>{0} Hatırlatıcı zaman aşımından dolayı çöp kutusuna taşındı. Silinmiş hatırlatıcıları görmek için çöp kutusuna bakabilirsin.</value>
   </data>
   <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
     <value>Silinmiş hatırlatıcıları gör</value>
@@ -260,7 +260,7 @@ Hata mesajı:</value>
     <value>Not adı gereklidir.</value>
   </data>
   <data name="Restore" xml:space="preserve">
-    <value>Geri getir</value>
+    <value>Geri Getir</value>
   </data>
   <data name="Settings_About" xml:space="preserve">
     <value>Bu uygulama hakkında</value>
@@ -269,7 +269,7 @@ Hata mesajı:</value>
     <value>Bu uygulama Erencrypt tarafından GNU General Public License v3.0 kapsamında açık kaynaklı bir proje olarak oluşturulmuştur. Daha detaylı bilgi için GitHub sayfamızı ziyaret edin.</value>
   </data>
   <data name="Settings_BackDrop" xml:space="preserve">
-    <value>Pencere Arkaplanı</value>
+    <value>Pencere Arka Planı</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Akrilik</value>
@@ -284,7 +284,7 @@ Hata mesajı:</value>
     <value>Başlatma, grup ilkesi tarafından devre dışı bırakıldı veya bu cihazda desteklenmiyor</value>
   </data>
   <data name="Settings_DisabledByUser" xml:space="preserve">
-    <value>Bu uygulamanın oturum açar açmaz çalışma özelliğini devre dışı bıraktınız, ancak fikrinizi değiştirirseniz bunu Görev Yöneticisi'ndeki Başlangıç sekmesinde etkinleştirebilirsiniz. My Notes</value>
+    <value>Bu uygulamanın oturum açar açmaz çalışma özelliğini devre dışı bıraktınız, ancak fikrinizi değiştirirseniz bunu Görev Yöneticisindeki Başlangıç sekmesinde etkinleştirebilirsiniz. MyNotes</value>
   </data>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
     <value>Grup ilkesi tarafından başlatma etkinleştirildi</value>
@@ -296,7 +296,7 @@ Hata mesajı:</value>
     <value>Kapat</value>
   </data>
   <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>Bu, MyNotes'u tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
+    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Sayfası</value>
@@ -350,7 +350,7 @@ Hata mesajı:</value>
     <value>Başarılı</value>
   </data>
   <data name="Trash_DeleteFlyout" xml:space="preserve">
-    <value>Seçilen öğe kalıcı olarak silinecek. Devam etmek istiyor musun?</value>
+    <value>Seçilen öge kalıcı olarak silinecek. Devam etmek istiyor musun?</value>
   </data>
   <data name="Trash_NotePivotHeader" xml:space="preserve">
     <value>Notlar</value>
