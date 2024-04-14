@@ -127,10 +127,10 @@
     <value>MyNotes</value>
   </data>
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
-    <value>Aktif {0} hatırlatıcı var.</value>
+    <value>Aktif {0} hatırlatıcın var.</value>
   </data>
   <data name="AppNotification_ActiveReminders" xml:space="preserve">
-    <value>Aktif {0} hatırlatıcı var.</value>
+    <value>Aktif {0} hatırlatıcın var.</value>
   </data>
   <data name="AppNotification_Dismiss" xml:space="preserve">
     <value>Durdur</value>
@@ -296,7 +296,7 @@ Hata mesajı:</value>
     <value>Kapat</value>
   </data>
   <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>Bu, MyNotes'u tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
+    <value>Bu, MyNotes uygulamasını tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Sayfası</value>
