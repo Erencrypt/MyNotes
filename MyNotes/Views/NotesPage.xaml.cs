@@ -27,6 +27,7 @@ public sealed partial class NotesPage : Page
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteConfirm".GetLocalized();
         EmptyText.Text = "Notes_EmptyText".GetLocalized();
+        NotesSearch.PlaceholderText = "Search".GetLocalized();
         ToolTipService.SetToolTip(deleteNote, "Delete".GetLocalized());
         ToolTipService.SetToolTip(newNote, "Add".GetLocalized());
     }

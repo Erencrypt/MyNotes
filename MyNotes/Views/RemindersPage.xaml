@@ -9,7 +9,6 @@
     <Grid x:Name="ContentArea">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
             <AutoSuggestBox Name="RemindersSearch"
-                PlaceholderText="Search"
                 TextChanged="RemindersSearch_TextChanged"
                 QueryIcon="Find"
                 Margin="0,-48,0,16"

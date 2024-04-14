@@ -22,10 +22,13 @@ public sealed partial class TrashPage : Page
 
     public TrashPage()
     {
+
         ViewModel = App.GetService<TrashViewModel>();
         InitializeComponent();
         PivotItem pivotItem;
         //Localizatinos
+        NotesSearch.PlaceholderText = "Search".GetLocalized();
+        RemindersSearch.PlaceholderText = "Search".GetLocalized();
         deleteFlyoutNoteText.Text = "Trash_DeleteFlyout".GetLocalized();
         deleteNoteFly.Content = "DeleteConfirm".GetLocalized();
         EmptyText.Text = "Trash_TrashEmpty".GetLocalized();

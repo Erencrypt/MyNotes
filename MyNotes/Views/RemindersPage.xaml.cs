@@ -30,6 +30,7 @@ public sealed partial class RemindersPage : Page
         deleteFlyout.Text = "DeleteFlyout".GetLocalized();
         deleteReminderFly.Content = "DeleteConfirm".GetLocalized();
         EmptyText.Text = "Reminders_EmptyText".GetLocalized();
+        RemindersSearch.PlaceholderText = "Search".GetLocalized();
         ToolTipService.SetToolTip(deleteReminder, "Delete".GetLocalized());
         ToolTipService.SetToolTip(newReminder, "Add".GetLocalized());
         LstReminders.ItemsSource = items;

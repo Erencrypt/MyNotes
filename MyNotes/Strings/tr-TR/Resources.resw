@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Ekle</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>MyNotes</value>
@@ -127,242 +127,241 @@
     <value>MyNotes</value>
   </data>
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
-    <value>You have {0} active reminder.</value>
+    <value>Aktif {0} hatırlatıcı var.</value>
   </data>
   <data name="AppNotification_ActiveReminders" xml:space="preserve">
-    <value>You have {0} active reminders.</value>
+    <value>Aktif {0} hatırlatıcı var.</value>
   </data>
   <data name="AppNotification_Dismiss" xml:space="preserve">
-    <value>Dismiss</value>
+    <value>Durdur</value>
   </data>
   <data name="AppNotification_Expired" xml:space="preserve">
-    <value>{0} Reminder moved to trash due to expiration. You can check out trash page to see deleted reminders.</value>
+    <value>{0} Hatırlatıcı zaman aşımından dolayı çöp kutusuna . Silinmiş hatırlatıcıları görmek için çöp kutusuna bakabilirsin.</value>
   </data>
   <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
-    <value>See deleted reminders</value>
+    <value>Silinmiş hatırlatıcıları gör</value>
   </data>
   <data name="AppNotification_Snooze" xml:space="preserve">
-    <value>Snooze</value>
+    <value>Ertele</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>İptal</value>
   </data>
   <data name="CreateNote_ButtonText" xml:space="preserve">
-    <value>Create Note</value>
+    <value>Not Oluştur</value>
   </data>
   <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>There is a note with the same name
-already exist. Please use another name.</value>
+    <value>Aynı isimde bir not mevcut. Lütfen başka bir isim kullan.</value>
   </data>
   <data name="CreateNote_NameBoxHeader" xml:space="preserve">
-    <value>Note Name</value>
+    <value>Not Adı</value>
   </data>
   <data name="CreateNote_Title" xml:space="preserve">
-    <value>New Note</value>
+    <value>Yeni Not</value>
   </data>
   <data name="CreateReminder_Alarm" xml:space="preserve">
     <value>Alarm</value>
   </data>
   <data name="CreateReminder_ButtonText" xml:space="preserve">
-    <value>Create Reminder</value>
+    <value>Hatırlatıcı Oluştur</value>
   </data>
   <data name="CreateReminder_DateHeader" xml:space="preserve">
-    <value>Date</value>
+    <value>Tarih</value>
   </data>
   <data name="CreateReminder_ErrorExistingFile" xml:space="preserve">
-    <value>There is a reminder with the same name already exist. Please use another name.</value>
+    <value>Aynı isimde bir hatırlatıcı mevcut. Lütfen başka bir isim kullan.</value>
   </data>
   <data name="CreateReminder_ErrorLaterDate" xml:space="preserve">
-    <value>Please select a date that later than (or equal to) the current date.</value>
+    <value>Lütfen şu anki tarihten büyük (veya eşit) bir tarih seçin.</value>
   </data>
   <data name="CreateReminder_ErrorLaterTime" xml:space="preserve">
-    <value>Please select a time that at least 5 minutes later than the current time.</value>
+    <value>Lütfen şu anki tarihten en az 5 dakika daha büyük bir tarih seçin.</value>
   </data>
   <data name="CreateReminder_ErrorRequired" xml:space="preserve">
-    <value>Reminder name and text is required.</value>
+    <value>Hatırlatıcı adı ve metni gereklidir.</value>
   </data>
   <data name="CreateReminder_NameBoxHeader" xml:space="preserve">
-    <value>Name</value>
+    <value>Ad</value>
   </data>
   <data name="CreateReminder_Repeated" xml:space="preserve">
-    <value>Repeated</value>
+    <value>Tekrarlı</value>
   </data>
   <data name="CreateReminder_TextBoxHeader" xml:space="preserve">
-    <value>Text</value>
+    <value>Metin</value>
   </data>
   <data name="CreateReminder_TimeHeader" xml:space="preserve">
-    <value>Time</value>
+    <value>Zaman</value>
   </data>
   <data name="CreateReminder_Title" xml:space="preserve">
-    <value>New Reminder</value>
+    <value>Yeni Hatırlatıcı</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Sil</value>
   </data>
   <data name="DeleteConfirm" xml:space="preserve">
-    <value>Yes, delete this</value>
+    <value>Evet, sil bunu</value>
   </data>
   <data name="DeleteFlyout" xml:space="preserve">
-    <value>Selected item will be deleted. Do you want to continue?</value>
+    <value>Seçili öğe silinecek . Devam etmek istiyormusun?</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Hata</value>
   </data>
   <data name="Error_Meesage" xml:space="preserve">
-    <value>An error occured. Error message:</value>
+    <value>Bir hata oluştu. Hata mesajı:</value>
   </data>
   <data name="Info" xml:space="preserve">
-    <value>Info</value>
+    <value>Bilgi</value>
   </data>
   <data name="NoSelection" xml:space="preserve">
-    <value>There is no item selected.</value>
+    <value>Herhangi bir öğe seçili değil.</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
-    <value>Enter Text</value>
+    <value>Metin Girin</value>
   </data>
   <data name="NoteDetails_ErrorMessage" xml:space="preserve">
-    <value>File couldn't be saved.
-Error Message:</value>
+    <value>Dosya kaydedilemedi.
+Hata mesajı:</value>
   </data>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
-    <value>Enter Search Text</value>
+    <value>Arama metni girin</value>
   </data>
   <data name="NoteDetails_FindText" xml:space="preserve">
-    <value>Find:</value>
+    <value>Bul:</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
-    <value>Note Name:</value>
+    <value>Not Adı:</value>
   </data>
   <data name="NoteDetails_SaveTooltip" xml:space="preserve">
-    <value>Save (Ctrl+S)</value>
+    <value>Kaydet (Ctrl+S)</value>
   </data>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
-    <value>Use spellcheck</value>
+    <value>Yazım denetimi kullan</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
-    <value>Changes Saved</value>
+    <value>Değişiklikler Kaydedildi</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
-    <value>Your notes is empty, you can add one.</value>
+    <value>Notların boş, yeni bir not ekleyebilirsin.</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
+    <value>Tamam</value>
   </data>
   <data name="Reminders_EditReminder" xml:space="preserve">
-    <value>Edit Reminder</value>
+    <value>Hatırlatıcıyı Düzenle</value>
   </data>
   <data name="Reminders_EmptyText" xml:space="preserve">
-    <value>Your reminders is empty, you can add one.</value>
+    <value>Hatırlatıcıların boş, yeni bir hatırlatıcı ekleyebilirsin.</value>
   </data>
   <data name="Reminders_SaveReminder" xml:space="preserve">
-    <value>Save Reminder</value>
+    <value>Hatırlatıcıyı Kaydet</value>
   </data>
   <data name="Required_Message" xml:space="preserve">
-    <value>Note name is required.</value>
+    <value>Not adı gereklidir.</value>
   </data>
   <data name="Restore" xml:space="preserve">
-    <value>Restore</value>
+    <value>Geri getir</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Ara</value>
   </data>
   <data name="Settings_About" xml:space="preserve">
-    <value>About this application</value>
+    <value>Bu uygulama hakkında</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>This application is created by Erencrypt as an opensource project under GNU General Public License v3.0. For more Detailed information, visit our GitHub page.</value>
+    <value>Bu uygulama Erencrypt tarafından GNU General Public License v3.0 kapsamında açık kaynaklı bir proje olarak oluşturulmuştur. Daha detaylı bilgi için GitHub sayfamızı ziyaret edin.</value>
   </data>
   <data name="Settings_BackDrop" xml:space="preserve">
-    <value>Window Backdrop</value>
+    <value>Pencere Arkaplanı</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
-    <value>Acrylic</value>
+    <value>Akrilik</value>
   </data>
   <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
-    <value>Mica</value>
+    <value>Mika</value>
   </data>
   <data name="Settings_BackDrop_BaseAlt.Content" xml:space="preserve">
-    <value>Mica Alt</value>
+    <value>Mika Alt</value>
   </data>
   <data name="Settings_DisabledByPolicy" xml:space="preserve">
-    <value>Startup disabled by group policy, or not supported on this device</value>
+    <value>Başlatma, grup ilkesi tarafından devre dışı bırakıldı veya bu cihazda desteklenmiyor</value>
   </data>
   <data name="Settings_DisabledByUser" xml:space="preserve">
-    <value>You have disabled this app's ability to run as soon as you sign in, but if you change your mind, you can enable this in the Startup tab in Task Manager. My Notes</value>
+    <value>Bu uygulamanın oturum açar açmaz çalışma özelliğini devre dışı bıraktınız, ancak fikrinizi değiştirirseniz bunu Görev Yöneticisi'ndeki Başlangıç sekmesinde etkinleştirebilirsiniz. My Notes</value>
   </data>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
-    <value>Startup enabled by group policy</value>
+    <value>Grup ilkesi tarafından başlatma etkinleştirildi</value>
   </data>
   <data name="Settings_Exit" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Uygulamayı Kapat</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
-    <value>Close</value>
+    <value>Kapat</value>
   </data>
   <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>This will compleatly close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>Bu, MyNotes'u tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
-    <value>GitHub Page</value>
+    <value>GitHub Sayfası</value>
   </data>
   <data name="Settings_GitHubPage.NavigateUri" xml:space="preserve">
     <value>https://github.com/Erencrypt/MyNotes/</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalization</value>
+    <value>Kişiselleştirme</value>
   </data>
   <data name="Settings_Preferances.Text" xml:space="preserve">
-    <value>Preferances</value>
+    <value>Tercihler</value>
   </data>
   <data name="Settings_Save" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Çıkarken kaydet</value>
   </data>
   <data name="Settings_SaveDescription" xml:space="preserve">
-    <value>Save when exiting from a note</value>
+    <value>Bir notu kapatırken değişiklikleri kaydet</value>
   </data>
   <data name="Settings_Startup" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Başlangıçta çalıştır</value>
   </data>
   <data name="Settings_StartupDescription" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly</value>
+    <value>Bildirimlerin düzgün çalışması için bu ayarın etkinleştirilmesi gerekir</value>
   </data>
   <data name="Settings_Theme" xml:space="preserve">
-    <value>Theme</value>
+    <value>Tema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>Dark</value>
+    <value>Karanlık</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>Default</value>
+    <value>Varsayılan</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Light</value>
+    <value>Aydınlık</value>
   </data>
   <data name="Shell_NoteDetails.Content" xml:space="preserve">
-    <value>Note Details</value>
+    <value>Not Detayları</value>
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notlar</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
-    <value>Reminders</value>
+    <value>Hatırlatıcılar</value>
   </data>
   <data name="Shell_Trash.Content" xml:space="preserve">
-    <value>Trash</value>
+    <value>Çöp Kutusu</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success</value>
+    <value>Başarılı</value>
   </data>
   <data name="Trash_DeleteFlyout" xml:space="preserve">
-    <value>Selected item will be deleted permanently. Do you want to continue?</value>
+    <value>Seçilen öğe kalıcı olarak silinecek. Devam etmek istiyor musun?</value>
   </data>
   <data name="Trash_NotePivotHeader" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notlar</value>
   </data>
   <data name="Trash_ReminderPivotHeader" xml:space="preserve">
-    <value>Reminders</value>
+    <value>Hatırlatıcılar</value>
   </data>
   <data name="Trash_TrashEmpty" xml:space="preserve">
-    <value>Your trash is empty.</value>
+    <value>Çöp kutusu boş.</value>
   </data>
 </root>

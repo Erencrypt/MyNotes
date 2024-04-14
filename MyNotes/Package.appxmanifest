@@ -30,8 +30,8 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="en-us"/>
-    <!--<Resource Language="tr-tr"/>-->
+    <Resource Language="en-US"/>
+    <Resource Language="tr-TR"/>
   </Resources>
 
   <Applications>

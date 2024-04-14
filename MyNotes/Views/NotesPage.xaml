@@ -9,7 +9,6 @@
     <Grid x:Name="ContentArea" Width="auto">
         <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
             <AutoSuggestBox Name="NotesSearch"
-                            PlaceholderText="Search"
                             TextChanged="NotesSearch_TextChanged"
                             QueryIcon="Find"
                             Margin="0,-48,0,16"

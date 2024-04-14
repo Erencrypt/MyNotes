@@ -16,7 +16,6 @@
                 <PivotItem>
                     <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
                         <AutoSuggestBox Name="NotesSearch"
-                                        PlaceholderText="Search"
                                         TextChanged="NotesSearch_TextChanged"
                                         QueryIcon="Find"
                                         Margin="0,-48,0,16"
@@ -86,7 +85,6 @@
                 <PivotItem>
                     <RelativePanel Width="auto" Height="auto" HorizontalAlignment="Stretch">
                         <AutoSuggestBox Name="RemindersSearch"
-                                        PlaceholderText="Search"
                                         TextChanged="RemindersSearch_TextChanged"
                                         QueryIcon="Find"
                                         Margin="0,-48,0,16"
