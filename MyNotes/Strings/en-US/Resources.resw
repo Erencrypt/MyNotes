@@ -297,7 +297,7 @@ Error Message:</value>
     <value>Close</value>
   </data>
   <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>This will compleatly close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
