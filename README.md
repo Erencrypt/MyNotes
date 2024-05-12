@@ -133,12 +133,12 @@ When app opened, it will check for expired reminders and send a notification abo
 - [x] Change assets
 - [x] Open on windows startup
 - [x] Edit README file
-- [x] Implement localization (Crowdin)(https://crowdin.com/project/mynotes)
+- [x] Implement localization - [Crowdin](https://crowdin.com/project/mynotes)
 - [x] Multi-language Support
     - [x] English
     - [x] Turkish
     - [ ] other languages will be added in the feature
-    - [ ] if you want to contribute to translation of this project => (Crowdin Invite)(https://crowdin.com/project/mynotes/invite?h=20ff76b875d52eab71cd15b7170cfedf2084788)
+    - [ ] if you want to contribute to translation of this project => [Crowdin Invite](https://crowdin.com/project/mynotes/invite?h=20ff76b875d52eab71cd15b7170cfedf2084788)
 
 See the [open issues](https://github.com/Erencrypt/MyNotes/issues) for a full list of proposed features (and known issues).
 
