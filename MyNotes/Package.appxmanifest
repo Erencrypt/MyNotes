@@ -31,6 +31,8 @@
 
   <Resources>
     <Resource Language="en-US"/>
+    <Resource Language="fr-FR"/>
+    <Resource Language="nl-NL"/>
     <Resource Language="tr-TR"/>
   </Resources>
 
