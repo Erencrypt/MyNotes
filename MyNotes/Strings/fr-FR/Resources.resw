@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Ajouter</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>MyNotes</value>
@@ -127,150 +127,153 @@
     <value>MyNotes</value>
   </data>
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
-    <value>You have {0} active reminder.</value>
+    <value>Vous avez {0} un rappel actif.</value>
   </data>
   <data name="AppNotification_ActiveReminders" xml:space="preserve">
-    <value>You have {0} active reminders.</value>
+    <value>Vous avez {0} rappels actifs.</value>
   </data>
   <data name="AppNotification_Dismiss" xml:space="preserve">
-    <value>Dismiss</value>
+    <value>Refuser</value>
   </data>
   <data name="AppNotification_Expired" xml:space="preserve">
-    <value>{0} Reminder moved to trash due to expiration. You can check out trash page to see deleted reminders.</value>
+    <value>Rappel {0} déplacé dans la corbeille en raison de l'expiration. Vous pouvez consulter la page de corbeille pour voir les rappels supprimés.</value>
   </data>
   <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
-    <value>See deleted reminders</value>
+    <value>Voir les rappels supprimés</value>
   </data>
   <data name="AppNotification_Snooze" xml:space="preserve">
-    <value>Snooze</value>
+    <value>Répéter</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Abandonner</value>
   </data>
   <data name="CreateNote_ButtonText" xml:space="preserve">
-    <value>Create Note</value>
+    <value>Créer une note</value>
   </data>
   <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>There is a note with the same name
-already exist. Please use another name.</value>
+    <value>Il existe déjà une note portant le même nom
+. Veuillez utiliser un autre nom.</value>
   </data>
   <data name="CreateNote_NameBoxHeader" xml:space="preserve">
-    <value>Note Name</value>
+    <value>Nom de la note</value>
   </data>
   <data name="CreateNote_Title" xml:space="preserve">
-    <value>New Note</value>
+    <value>Nouvelle note</value>
   </data>
   <data name="CreateReminder_Alarm" xml:space="preserve">
     <value>Alarm</value>
   </data>
   <data name="CreateReminder_ButtonText" xml:space="preserve">
-    <value>Create Reminder</value>
+    <value>Créer un rappel</value>
   </data>
   <data name="CreateReminder_DateHeader" xml:space="preserve">
     <value>Date</value>
   </data>
   <data name="CreateReminder_ErrorExistingFile" xml:space="preserve">
-    <value>There is a reminder with the same name already exist. Please use another name.</value>
+    <value>Un rappel avec le même nom existe déjà. Veuillez utiliser un autre nom.</value>
   </data>
   <data name="CreateReminder_ErrorLaterDate" xml:space="preserve">
-    <value>Please select a date that later than (or equal to) the current date.</value>
+    <value>Veuillez sélectionner une date supérieure (ou égale) à la date courante.</value>
   </data>
   <data name="CreateReminder_ErrorLaterTime" xml:space="preserve">
-    <value>Please select a time that at least 5 minutes later than the current time.</value>
+    <value>Veuillez sélectionner une heure d'au moins 5 minutes après l'heure actuelle.</value>
   </data>
   <data name="CreateReminder_ErrorRequired" xml:space="preserve">
-    <value>Reminder name and text is required.</value>
+    <value>Le nom et le texte du rappel sont requis.</value>
   </data>
   <data name="CreateReminder_NameBoxHeader" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="CreateReminder_Repeated" xml:space="preserve">
-    <value>Repeated</value>
+    <value>Répéter</value>
   </data>
   <data name="CreateReminder_TextBoxHeader" xml:space="preserve">
-    <value>Text</value>
+    <value>Texte du texte</value>
   </data>
   <data name="CreateReminder_TimeHeader" xml:space="preserve">
-    <value>Time</value>
+    <value>Date et heure</value>
   </data>
   <data name="CreateReminder_Title" xml:space="preserve">
-    <value>New Reminder</value>
+    <value>Nouveau rappel</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Supprimez</value>
   </data>
   <data name="DeleteConfirm" xml:space="preserve">
-    <value>Yes, delete this</value>
+    <value>Oui, supprimer ceci</value>
   </data>
   <data name="DeleteFlyout" xml:space="preserve">
-    <value>Selected item will be deleted. Do you want to continue?</value>
+    <value>L'élément sélectionné sera supprimé. Voulez-vous continuer ?</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Erreur</value>
   </data>
   <data name="Error_Meesage" xml:space="preserve">
-    <value>An error occured. Error message:</value>
+    <value>Une erreur s'est produite. Message d'erreur:</value>
   </data>
   <data name="Info" xml:space="preserve">
-    <value>Info</value>
+    <value>Infos</value>
   </data>
   <data name="NoSelection" xml:space="preserve">
-    <value>There is no item selected.</value>
+    <value>Il n'y a aucun élément sélectionné.</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
-    <value>Enter Text</value>
+    <value>Entrez le texte</value>
   </data>
   <data name="NoteDetails_ErrorMessage" xml:space="preserve">
-    <value>File couldn't be saved.
-Error Message:</value>
+    <value>Le fichier n'a pas pu être sauvegardé.
+Message d'erreur:</value>
   </data>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
-    <value>Enter Search Text</value>
+    <value>Entrez le texte de recherche</value>
   </data>
   <data name="NoteDetails_FindText" xml:space="preserve">
-    <value>Find:</value>
+    <value>Rechercher:</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
-    <value>Note Name:</value>
+    <value>Nom de la note :</value>
   </data>
   <data name="NoteDetails_SaveTooltip" xml:space="preserve">
-    <value>Save (Ctrl+S)</value>
+    <value>Enregistrer (Ctrl+S)</value>
   </data>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
-    <value>Use spellcheck</value>
+    <value>Utiliser la vérification orthographique</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
-    <value>Changes Saved</value>
+    <value>Changements enregistrés</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
-    <value>Your notes is empty, you can add one.</value>
+    <value>Vos notes sont vides, vous pouvez en ajouter une.</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
   <data name="Reminders_EditReminder" xml:space="preserve">
-    <value>Edit Reminder</value>
+    <value>Modifier le rappel</value>
   </data>
   <data name="Reminders_EmptyText" xml:space="preserve">
-    <value>Your reminders is empty, you can add one.</value>
+    <value>Vos rappels sont vides, vous pouvez en ajouter un.</value>
   </data>
   <data name="Reminders_SaveReminder" xml:space="preserve">
-    <value>Save Reminder</value>
+    <value>Enregistrer le rappel</value>
   </data>
   <data name="Required_Message" xml:space="preserve">
-    <value>Note name is required.</value>
+    <value>Le nom de la note est requis.</value>
   </data>
   <data name="Restore" xml:space="preserve">
-    <value>Restore</value>
+    <value>Restaurer</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Recherche</value>
   </data>
   <data name="Settings_About" xml:space="preserve">
-    <value>About this application</value>
+    <value>À propos de cette application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>This application is created by Erencrypt as an opensource project under GNU General Public License v3.0. For more Detailed information, visit our GitHub page.</value>
+    <value>Cette application est créée par Erencrypt en tant que projet opensource sous GNU General Public License v3.0. Pour plus d'informations détaillées, visitez notre page GitHub.</value>
   </data>
   <data name="Settings_BackDrop" xml:space="preserve">
-    <value>Window Backdrop</value>
+    <value>Arrière-plan de la fenêtre</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Acrylic</value>
@@ -282,22 +285,22 @@ Error Message:</value>
     <value>Mica Alt</value>
   </data>
   <data name="Settings_DisabledByPolicy" xml:space="preserve">
-    <value>Startup disabled by group policy, or not supported on this device</value>
+    <value>Démarrage désactivé par la politique de groupe, ou non pris en charge sur cet appareil</value>
   </data>
   <data name="Settings_DisabledByUser" xml:space="preserve">
-    <value>You have disabled this app's ability to run as soon as you sign in, but if you change your mind, you can enable this in the Startup tab in Task Manager. My Notes</value>
+    <value>Vous avez désactivé la possibilité d'exécuter cette application dès que vous vous connectez, mais si vous changez d'avis, vous pouvez l'activer dans l'onglet Démarrage du Gestionnaire des tâches. Mes Notes</value>
   </data>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
-    <value>Startup enabled by group policy</value>
+    <value>Démarrage activé par la politique de groupe</value>
   </data>
   <data name="Settings_Exit" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Fermer l'application</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
-    <value>Close</value>
+    <value>Fermer</value>
   </data>
   <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>Ceci fermera complètement MyNotes. Utilisez uniquement si vous avez des problèmes avec la mise à jour ou la désinstallation.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -306,60 +309,60 @@ Error Message:</value>
     <value>https://github.com/Erencrypt/MyNotes/</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalization</value>
+    <value>Personnalisation</value>
   </data>
   <data name="Settings_Preferances.Text" xml:space="preserve">
-    <value>Preferances</value>
+    <value>Préférences</value>
   </data>
   <data name="Settings_Save" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Enregistrer en quittant</value>
   </data>
   <data name="Settings_SaveDescription" xml:space="preserve">
-    <value>Save when exiting from a note</value>
+    <value>Enregistrer en quittant une note</value>
   </data>
   <data name="Settings_Startup" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Ouvrir au démarrage</value>
   </data>
   <data name="Settings_StartupDescription" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly</value>
+    <value>Ce paramètre doit être activé pour que les notifications fonctionnent correctement</value>
   </data>
   <data name="Settings_Theme" xml:space="preserve">
-    <value>Theme</value>
+    <value>Thème</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>Dark</value>
+    <value>Sombre</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>Default</value>
+    <value>Par défaut</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>Light</value>
+    <value>Lumière</value>
   </data>
   <data name="Shell_NoteDetails.Content" xml:space="preserve">
-    <value>Note Details</value>
+    <value>Détails de la note</value>
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
-    <value>Reminders</value>
+    <value>Rappels</value>
   </data>
   <data name="Shell_Trash.Content" xml:space="preserve">
-    <value>Trash</value>
+    <value>Corbeille</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success</value>
+    <value>Succès</value>
   </data>
   <data name="Trash_DeleteFlyout" xml:space="preserve">
-    <value>Selected item will be deleted permanently. Do you want to continue?</value>
+    <value>L'élément sélectionné sera supprimé définitivement. Voulez-vous continuer ?</value>
   </data>
   <data name="Trash_NotePivotHeader" xml:space="preserve">
     <value>Notes</value>
   </data>
   <data name="Trash_ReminderPivotHeader" xml:space="preserve">
-    <value>Reminders</value>
+    <value>Rappels</value>
   </data>
   <data name="Trash_TrashEmpty" xml:space="preserve">
-    <value>Your trash is empty.</value>
+    <value>Votre corbeille est vide.</value>
   </data>
 </root>
