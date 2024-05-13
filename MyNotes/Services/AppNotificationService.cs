@@ -73,6 +73,7 @@ public class AppNotificationService : IAppNotificationService
         string alarmtext = string.Empty;
         if (isAlarm)
         {
+            //TODO: add an option to select alarm sound looping
             alarmtext = "<audio src='ms-winsoundevent:Notification.Looping.Alarm' loop='true'/>";
         }
         string snooze = "AppNotification_Snooze".GetLocalized();
@@ -101,6 +102,7 @@ public class AppNotificationService : IAppNotificationService
             </toast>");
         AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
         {
+            //TODO: Add Option for selecting priority
             Priority = AppNotificationPriority.High
         };
         AppNotificationManager.Default.Show(appNotification);
