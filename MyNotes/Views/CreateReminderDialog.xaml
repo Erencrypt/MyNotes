@@ -18,21 +18,24 @@
             </StackPanel>
         </DataTemplate>
     </ContentDialog.TitleTemplate>
+    <ContentDialog.Resources>
+        <ResourceDictionary Source="ms-appx:///Microsoft.UI.Xaml/DensityStyles/Compact.xaml" />
+    </ContentDialog.Resources>
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <RepositionThemeTransition/>
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
-        <TextBox Name="reminderNameTextBox" Width="300"/>
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition/>
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+                <TextBox Name="reminderNameTextBox" Width="300"/>
         <TextBox Name="reminderTextTextBox" Width="300" Margin="0,2,0,0"/>
         <StackPanel Orientation="Horizontal" CornerRadius="8" Background="{StaticResource CardBackgroundFillColorDefault}" Margin="0,8,0,0" Padding="10,0,8,0" >
             <TextBlock Name="ReminderRepeatTogleText" VerticalAlignment="Center" HorizontalAlignment="Left" Width="238">Repeated</TextBlock>
-            <ToggleSwitch Name="ReminderRepeatTogle" Toggled="ReminderRepeatTogle_Toggled" OffContent="" OnContent="" VerticalAlignment="Center" Margin="0,0,-128,0"/>
+            <ToggleSwitch Name="ReminderRepeatTogle" Toggled="ReminderRepeatTogle_Toggled" VerticalAlignment="Center" Height="30" Margin="0,-4,-140,6"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" CornerRadius="8" Background="{StaticResource CardBackgroundFillColorDefault}" Margin="0,8,0,0" Padding="10,0,8,0">
             <TextBlock Name="ReminderAlarmTogleText" VerticalAlignment="Center" HorizontalAlignment="Left" Width="238">Alarm</TextBlock>
-            <ToggleSwitch Name="ReminderAlarmTogle" Toggled="ReminderAlarmTogle_Toggled" OffContent="" OnContent="" VerticalAlignment="Center" Margin="0,0,-128,0"/>
+            <ToggleSwitch Name="ReminderAlarmTogle" Toggled="ReminderAlarmTogle_Toggled" VerticalAlignment="Center" Height="30" Margin="0,-4,-140,6"/>
         </StackPanel>
         <DatePicker Name="datePicker" DayFormat="{}{day.integer} ({dayofweek.abbreviated})" Width="300" Margin="0,2,0,0"/>
         <TimePicker Name="timePicker" Width="300" Margin="0,2,0,0"/>
