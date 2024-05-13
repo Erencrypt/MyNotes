@@ -262,6 +262,9 @@ Hata mesajı:</value>
   <data name="Restore" xml:space="preserve">
     <value>Geri Getir</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
   <data name="Settings_About" xml:space="preserve">
     <value>Bu uygulama hakkında</value>
   </data>
@@ -350,7 +353,7 @@ Hata mesajı:</value>
     <value>Başarılı</value>
   </data>
   <data name="Trash_DeleteFlyout" xml:space="preserve">
-    <value>Seçilen öge kalıcı olarak silinecek. Devam etmek istiyor musun?</value>
+    <value>Seçili öge kalıcı olarak silinecek. Devam etmek istiyor musun?</value>
   </data>
   <data name="Trash_NotePivotHeader" xml:space="preserve">
     <value>Notlar</value>
