@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>MyNotes</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>MyNotes</value>
+  </data>
+  <data name="AppNotification_ActiveReminder" xml:space="preserve">
+    <value>Sie haben {0} aktive Erinnerung.</value>
+  </data>
+  <data name="AppNotification_ActiveReminders" xml:space="preserve">
+    <value>Sie haben {0} aktive Erinnerungen.</value>
+  </data>
+  <data name="AppNotification_Dismiss" xml:space="preserve">
+    <value>Verwerfen</value>
+  </data>
+  <data name="AppNotification_Expired" xml:space="preserve">
+    <value>{0} Erinnerung wegen Verfallsdatum in den Papierkorb verschoben. Sie können die Papierkorbseite auschecken, um gelöschte Erinnerungen zu sehen.</value>
+  </data>
+  <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
+    <value>Gelöschte Erinnerungen ansehen</value>
+  </data>
+  <data name="AppNotification_Snooze" xml:space="preserve">
+    <value>Schlummern</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CreateNote_ButtonText" xml:space="preserve">
+    <value>Notiz erstellen</value>
+  </data>
+  <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
+    <value>Es existiert bereits eine Notiz mit dem gleichen Namen
+. Bitte verwenden Sie einen anderen Namen.</value>
+  </data>
+  <data name="CreateNote_NameBoxHeader" xml:space="preserve">
+    <value>Notizname</value>
+  </data>
+  <data name="CreateNote_Title" xml:space="preserve">
+    <value>Neue Notiz</value>
+  </data>
+  <data name="CreateReminder_Alarm" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
+  <data name="CreateReminder_ButtonText" xml:space="preserve">
+    <value>Erinnerung erstellen</value>
+  </data>
+  <data name="CreateReminder_DateHeader" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="CreateReminder_ErrorExistingFile" xml:space="preserve">
+    <value>Es existiert bereits eine Erinnerung mit dem gleichen Namen. Bitte verwenden Sie einen anderen Namen.</value>
+  </data>
+  <data name="CreateReminder_ErrorLaterDate" xml:space="preserve">
+    <value>Bitte wählen Sie ein Datum, das später als (oder gleich dem aktuellen Datum) ist.</value>
+  </data>
+  <data name="CreateReminder_ErrorLaterTime" xml:space="preserve">
+    <value>Bitte wählen Sie eine Zeit, die mindestens 5 Minuten später als die aktuelle Zeit ist.</value>
+  </data>
+  <data name="CreateReminder_ErrorRequired" xml:space="preserve">
+    <value>Erinnerungsname und Text sind erforderlich.</value>
+  </data>
+  <data name="CreateReminder_NameBoxHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CreateReminder_Repeated" xml:space="preserve">
+    <value>Wiederholt</value>
+  </data>
+  <data name="CreateReminder_TextBoxHeader" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="CreateReminder_TimeHeader" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="CreateReminder_Title" xml:space="preserve">
+    <value>Neue Erinnerung</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Ja, löschen</value>
+  </data>
+  <data name="DeleteFlyout" xml:space="preserve">
+    <value>Das ausgewählte Element wird gelöscht. Möchten Sie fortfahren?</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Error_Meesage" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten. Fehlermeldung:</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="NoSelection" xml:space="preserve">
+    <value>Es wurde kein Element ausgewählt.</value>
+  </data>
+  <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
+    <value>Text eingeben</value>
+  </data>
+  <data name="NoteDetails_ErrorMessage" xml:space="preserve">
+    <value>Datei konnte nicht gespeichert werden.
+Fehlermeldung:</value>
+  </data>
+  <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
+    <value>Suchtext eingeben</value>
+  </data>
+  <data name="NoteDetails_FindText" xml:space="preserve">
+    <value>Suche:</value>
+  </data>
+  <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
+    <value>Notiz-Name:</value>
+  </data>
+  <data name="NoteDetails_SaveTooltip" xml:space="preserve">
+    <value>Speichern (Strg+S)</value>
+  </data>
+  <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
+    <value>Rechtschreibprüfung verwenden</value>
+  </data>
+  <data name="NoteDetails_SuccessMessage" xml:space="preserve">
+    <value>Änderungen gespeichert</value>
+  </data>
+  <data name="Notes_EmptyText" xml:space="preserve">
+    <value>Ihre Notizen sind leer, Sie können sie hinzufügen.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Reminders_EditReminder" xml:space="preserve">
+    <value>Erinnerung bearbeiten</value>
+  </data>
+  <data name="Reminders_EmptyText" xml:space="preserve">
+    <value>Ihre Erinnerungen sind leer, Sie können eine hinzufügen.</value>
+  </data>
+  <data name="Reminders_SaveReminder" xml:space="preserve">
+    <value>Erinnerung speichern</value>
+  </data>
+  <data name="Required_Message" xml:space="preserve">
+    <value>Notizname ist erforderlich.</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>Über diese Anwendung</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>Diese Anwendung wird von Erencrypt als Opensource-Projekt unter der GNU General Public License v3.0 erstellt. Weitere Informationen finden Sie auf unserer GitHub Seite.</value>
+  </data>
+  <data name="Settings_BackDrop" xml:space="preserve">
+    <value>Fenster-Hintergrund</value>
+  </data>
+  <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Settings_BackDrop_BaseAlt.Content" xml:space="preserve">
+    <value>Mica Alt</value>
+  </data>
+  <data name="Settings_DisabledByPolicy" xml:space="preserve">
+    <value>Startup durch Gruppenrichtlinien deaktiviert oder auf diesem Gerät nicht unterstützt</value>
+  </data>
+  <data name="Settings_DisabledByUser" xml:space="preserve">
+    <value>Sie haben die Funktion dieser App deaktiviert, sobald Sie sich anmelden aber wenn Sie Ihre Meinung ändern, können Sie dies im Tab Start im Task-Manager aktivieren. Meine Notizen</value>
+  </data>
+  <data name="Settings_EnabledByPolicy" xml:space="preserve">
+    <value>Startup aktiviert durch Gruppenrichtlinien</value>
+  </data>
+  <data name="Settings_Exit" xml:space="preserve">
+    <value>Anwendung schließen</value>
+  </data>
+  <data name="Settings_ExitButton.Content" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Settings_ExitDescription" xml:space="preserve">
+    <value>Dies schließt MyNotes vollständig. Benutzen Sie nur, wenn Sie Probleme beim Aktualisieren oder Deinstallieren haben.</value>
+  </data>
+  <data name="Settings_GitHubPage.Content" xml:space="preserve">
+    <value>GitHub Page</value>
+  </data>
+  <data name="Settings_GitHubPage.NavigateUri" xml:space="preserve">
+    <value>https://github.com/Erencrypt/MyNotes/</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>Personalisierung</value>
+  </data>
+  <data name="Settings_Preferances.Text" xml:space="preserve">
+    <value>Präferenzen</value>
+  </data>
+  <data name="Settings_Save" xml:space="preserve">
+    <value>Speichern beim Beenden</value>
+  </data>
+  <data name="Settings_SaveDescription" xml:space="preserve">
+    <value>Speichern beim Verlassen einer Notiz</value>
+  </data>
+  <data name="Settings_Startup" xml:space="preserve">
+    <value>Beim Start öffnen</value>
+  </data>
+  <data name="Settings_StartupDescription" xml:space="preserve">
+    <value>Diese Einstellung muss aktiviert sein, damit Benachrichtigungen richtig funktionieren können</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Thema</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="Shell_NoteDetails.Content" xml:space="preserve">
+    <value>Notizdetails</value>
+  </data>
+  <data name="Shell_Notes.Content" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="Shell_Reminders.Content" xml:space="preserve">
+    <value>Erinnerungen</value>
+  </data>
+  <data name="Shell_Trash.Content" xml:space="preserve">
+    <value>Papierkorb</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Erfolg</value>
+  </data>
+  <data name="Trash_DeleteFlyout" xml:space="preserve">
+    <value>Ausgewähltes Element wird dauerhaft gelöscht. Möchten Sie fortfahren?</value>
+  </data>
+  <data name="Trash_NotePivotHeader" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="Trash_ReminderPivotHeader" xml:space="preserve">
+    <value>Erinnerungen</value>
+  </data>
+  <data name="Trash_TrashEmpty" xml:space="preserve">
+    <value>Ihr Papierkorb ist leer.</value>
+  </data>
+</root>
