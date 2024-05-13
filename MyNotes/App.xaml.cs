@@ -34,7 +34,7 @@ public partial class App : Application
         return service;
     }
     public static WindowEx MainWindow { get; } = new MainWindow();
-
+    public static UIElement? AppTitlebar { get; set; }
     public static List<Reminder> InvokedReminders { get; set; } = new();
     public static List<Reminder> Reminders { get; set; } = new();
     public static StorageFolder StorageFolder
