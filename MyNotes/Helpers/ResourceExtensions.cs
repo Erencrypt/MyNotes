@@ -6,5 +6,17 @@ public static class ResourceExtensions
 {
     private static readonly ResourceLoader _resourceLoader = new();
 
-    public static string GetLocalized(this string resourceKey) => _resourceLoader.GetString(resourceKey);
+    public static string GetLocalized(this string resourceKey)
+    {
+        string Text = string.Empty;
+		try
+		{
+            Text = _resourceLoader.GetString(resourceKey);
+        }
+		catch (Exception ex)
+		{
+            LogWriter.Log($"Last Resource Key: {resourceKey}, Error message:{ex.Message}", LogWriter.LogLevel.Debug);
+		}
+        return Text;
+    }
 }
