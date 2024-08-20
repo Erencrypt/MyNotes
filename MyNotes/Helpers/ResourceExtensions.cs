@@ -13,12 +13,13 @@ public static class ResourceExtensions
 		try
 		{
             Text = _resourceLoader.GetString(resourceKey);
+            return Text;
         }
-		catch (Exception ex)
+        catch (Exception ex)
 		{
             Debug.Print($"Last Resource Key: {resourceKey}, Error message:{ex.Message}");
             LogWriter.Log($"Last Resource Key: {resourceKey}, Error message:{ex.Message}", LogWriter.LogLevel.Debug);
-		}
-        return Text;
+            return $"Last Resource Key: {resourceKey}, Error message:{ex.Message}";
+        }
     }
 }
