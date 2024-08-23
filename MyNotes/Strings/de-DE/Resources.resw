@@ -365,4 +365,7 @@ Fehlermeldung:</value>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Ihr Papierkorb ist leer.</value>
   </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planner</value>
+  </data>
 </root>
