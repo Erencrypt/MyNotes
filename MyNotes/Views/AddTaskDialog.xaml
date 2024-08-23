@@ -1,0 +1,27 @@
+<ContentDialog
+    x:Class="MyNotes.Views.AddTaskDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:MyNotes.Views"
+    mc:Ignorable="d"
+    CornerRadius="10"
+    PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
+    CloseButtonStyle="{StaticResource DefaultButtonStyle}"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    CloseButtonClick="ContentDialog_CloseButtonClick">
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xE7C3;" Margin="0,0,10,0"/>
+                <TextBlock Text="Add Task" FontWeight="Medium"/>
+            </StackPanel>
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBox x:Name="TitleInput" Header="Title"  Width="300" Margin="0,0,0,6"/>
+        <TextBox x:Name="TextInput" Header="Text" AcceptsReturn="True" Width="300"/>
+        <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" TextWrapping="Wrap" Width="300" Height="auto"/>
+    </StackPanel>
+</ContentDialog>

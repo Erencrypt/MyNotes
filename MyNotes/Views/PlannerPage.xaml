@@ -1,0 +1,161 @@
+﻿<Page
+    x:Class="MyNotes.Views.PlannerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:MyNotes.Models"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea" Margin="0,0,0,12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- To Do Column -->
+        <StackPanel Grid.Column="0" Padding="10"
+                  CornerRadius="{StaticResource ControlCornerRadius}"
+                  Background="{StaticResource SmokeFillColorDefaultBrush}" Margin="0,0,12,0" >
+            <Border BorderThickness="0,0,0,1" Margin="0,0,0,6" BorderBrush="#6c757d">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="To Do" FontWeight="Bold" Margin="0,0,0,6" Style="{StaticResource SubtitleTextBlockStyle}" Name="ToDoText" Tapped="TextBlock_Tapped"/>
+                    <Button Click="OnAddTaskButtonClick" Grid.Column="2" Name="ToDoButton" Background="Transparent" BorderThickness="0">
+                        <FontIcon Glyph="&#xE710;"/>
+                    </Button>
+                </Grid>
+            </Border>
+            <ListView ItemsSource="{x:Bind ViewModel.ToDoTasks, Mode=OneWay}" Name="ToDoListView"
+                  MinHeight="400" Margin="-6,0,-6,0"
+                  CanDragItems="True" AllowDrop="True"
+                  DragItemsStarting="OnDragItemsStarting"
+                  DragOver="OnDragOver" Drop="OnDrop">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:TaskModel">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{x:Bind Title}" Grid.Row="1" FontWeight="semibold" Margin="0,2,0,0" TextWrapping="WrapWholeWords"/>
+                                <Button Grid.RowSpan="2" Grid.Column="2" 
+                                            HorizontalAlignment="Right" 
+                                            VerticalAlignment="Center"
+                                            Click="OnDeleteTaskClicked"
+                                            DataContext="{x:Bind}" 
+                                            BorderThickness="0"
+                                            Padding="2" Margin="0,0,-10,0"
+                                            Background="Transparent">
+                                    <FontIcon x:Name="DeleteIcon" Glyph="&#xE74D;" Foreground="#dc3545" FontSize="14"/>
+                                </Button>
+                            </Grid>
+                            <TextBlock Text="{x:Bind Text}" Grid.Row="2" Margin="0,0,0,6" TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <!-- In Progress Column -->
+        <StackPanel Grid.Column="1" Padding="10"
+                  CornerRadius="{StaticResource ControlCornerRadius}"
+                  Background="{StaticResource SmokeFillColorDefaultBrush}" >
+            <Border BorderThickness="0,0,0,1" Margin="0,0,0,6" BorderBrush="#ffc107">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="In Progress" FontWeight="Bold" Margin="0,0,0,6" Style="{StaticResource SubtitleTextBlockStyle}" Name="InProgressText" Tapped="TextBlock_Tapped"/>
+                    <Button Click="OnAddTaskButtonClick" Grid.Column="2" Name="InProgressButton" Background="Transparent" BorderThickness="0">
+                        <FontIcon Glyph="&#xE710;"/>
+                    </Button>
+                </Grid>
+            </Border>
+            <ListView ItemsSource="{x:Bind ViewModel.InProgressTasks, Mode=OneWay}" Name="InProgressListView"
+                  MinHeight="400" Margin="-6,0,-6,0"
+                  CanDragItems="True" AllowDrop="True"
+                  DragItemsStarting="OnDragItemsStarting"
+                  DragOver="OnDragOver" Drop="OnDrop">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:TaskModel">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{x:Bind Title}" Grid.Row="1" FontWeight="semibold" Margin="0,2,0,0"/>
+                                <Button Grid.RowSpan="2" Grid.Column="2" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Click="OnDeleteTaskClicked"
+                    DataContext="{x:Bind}" 
+                    BorderThickness="0"
+                    Padding="2" Margin="0,0,-10,0"
+                    Background="Transparent">
+                                    <FontIcon Glyph="&#xE74D;" Foreground="#dc3545" FontSize="14" />
+                                </Button>
+                            </Grid>
+                            <TextBlock Text="{x:Bind Text}" Grid.Row="2" Margin="0,0,0,6" TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <!-- Done Column -->
+        <StackPanel Grid.Column="2" Padding="10"
+                  CornerRadius="{StaticResource ControlCornerRadius}"
+                  Background="{StaticResource SmokeFillColorDefaultBrush}" Margin="12,0,0,0">
+            <Border BorderThickness="0,0,0,1" Margin="0,0,0,6" BorderBrush="#198754">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Done" FontWeight="Bold" Margin="0,0,0,6" Style="{StaticResource SubtitleTextBlockStyle}" Name="DoneText" Tapped="TextBlock_Tapped"/>
+                    <Button Click="OnAddTaskButtonClick" Grid.Column="2" Name="DoneButton" Background="Transparent" BorderThickness="0">
+                        <FontIcon Glyph="&#xE710;"/>
+                    </Button>
+                </Grid>
+            </Border>
+            <ListView ItemsSource="{x:Bind ViewModel.DoneTasks, Mode=OneWay}" Name="DoneListView"
+                  MinHeight="400" Margin="-6,0,-6,0"
+                  CanDragItems="True" AllowDrop="True"
+                  DragItemsStarting="OnDragItemsStarting"
+                  DragOver="OnDragOver" Drop="OnDrop">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:TaskModel">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{x:Bind Title}" Grid.Row="1" FontWeight="semibold" Margin="0,2,0,0"/>
+                                <Button Grid.RowSpan="2" Grid.Column="2" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Click="OnDeleteTaskClicked"
+                    DataContext="{x:Bind}" 
+                    BorderThickness="0"
+                    Padding="2" Margin="0,0,-10,0"
+                    Background="Transparent">
+                                    <FontIcon Glyph="&#xE74D;" Foreground="#dc3545" FontSize="14" />
+                                </Button>
+                            </Grid>
+                            <TextBlock Text="{x:Bind Text}" Grid.Row="2" Margin="0,0,0,6" TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

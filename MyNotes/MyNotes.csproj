@@ -19,6 +19,7 @@
     <StartupObject>MyNotes.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Views\AddTaskDialog.xaml" />
     <None Remove="Views\CreateNoteDialog.xaml" />
     <None Remove="Views\CreateReminderDialog.xaml" />
   </ItemGroup>
@@ -55,6 +56,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\AddTaskDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\CreateReminderDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
