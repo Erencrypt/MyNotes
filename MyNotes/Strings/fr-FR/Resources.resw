@@ -365,4 +365,7 @@ Message d'erreur:</value>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Votre corbeille est vide.</value>
   </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planner</value>
+  </data>
 </root>
