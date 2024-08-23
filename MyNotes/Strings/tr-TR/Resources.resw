@@ -364,4 +364,7 @@ Hata mesajı:</value>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Çöp kutusu boş.</value>
   </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planner</value>
+  </data>
 </root>
