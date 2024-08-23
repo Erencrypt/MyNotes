@@ -365,4 +365,7 @@ Foutmelding:</value>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Jouw prullenbak is leeg.</value>
   </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planner</value>
+  </data>
 </root>
