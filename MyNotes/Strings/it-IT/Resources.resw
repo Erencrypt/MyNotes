@@ -127,7 +127,7 @@
     <value>MyNotes</value>
   </data>
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
-    <value>Hai un promemoria attivo {0}.</value>
+    <value>Hai {0} promemoria attivo.</value>
   </data>
   <data name="AppNotification_ActiveReminders" xml:space="preserve">
     <value>Hai {0} promemoria attivi.</value>
@@ -364,5 +364,8 @@ Messaggio di errore:</value>
   </data>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Il cestino è vuoto.</value>
+  </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planner</value>
   </data>
 </root>
