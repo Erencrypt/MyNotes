@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Diagnostics;
+
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.Win32;
 using Microsoft.Windows.AppLifecycle;
+
 using MyNotes.Activation;
 using MyNotes.Contracts.Services;
 using MyNotes.Core.Contracts.Services;
@@ -13,7 +16,7 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
-using System.Diagnostics;
+
 using Windows.Storage;
 
 namespace MyNotes;
@@ -84,6 +87,8 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<PlannerViewModel>();
+            services.AddTransient<PlannerPage>();
             services.AddTransient<TrashViewModel>();
             services.AddTransient<TrashPage>();
             services.AddTransient<SettingsViewModel>();
@@ -224,7 +229,7 @@ public partial class App : Application
     private static async void CreateSaveFile()
     {
         await StorageFolder.CreateFolderAsync("ApplicationData", CreationCollisionOption.OpenIfExists);
-        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
+        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(Path.Combine(StorageFolder.Path,"ApplicationData")) ;
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {
             await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit", true);
