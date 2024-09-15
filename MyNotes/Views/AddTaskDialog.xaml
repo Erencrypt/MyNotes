@@ -14,7 +14,7 @@
     <ContentDialog.TitleTemplate>
         <DataTemplate>
             <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xE7C3;" Margin="0,0,10,0"/>
+                <FontIcon Glyph="&#xF0E3;" Margin="0,0,10,0"/>
                 <TextBlock Text="Add Task" FontWeight="Medium"/>
             </StackPanel>
         </DataTemplate>

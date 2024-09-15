@@ -56,7 +56,7 @@
                 </NavigationViewItem>
                 <NavigationViewItem x:Uid="Shell_Planner" helpers:NavigationHelper.NavigateTo="MyNotes.ViewModels.PlannerViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0E3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
