@@ -97,7 +97,7 @@ public partial class PlannerViewModel : ObservableRecipient
         catch (FileNotFoundException)
         {
             var file = await storageFolder.CreateFileAsync(Path.Combine("ApplicationData", "PlannerBoardData.json"), CreationCollisionOption.ReplaceExisting);
-            PlannerBoardData boardData = new PlannerBoardData
+            PlannerBoardData boardData = new()
             {
                 ToDoTasks = new List<TaskModel>(),
                 InProgressTasks = new List<TaskModel>(),

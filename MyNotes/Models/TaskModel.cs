@@ -1,13 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml;
-using Newtonsoft.Json.Linq;
-using static System.Net.Mime.MediaTypeNames;
-using System.Drawing.Printing;
-using System.Xml.Linq;
-using Windows.UI.Text;
-
-namespace MyNotes.Models
+﻿namespace MyNotes.Models
 {
     public class TaskModel
     {
