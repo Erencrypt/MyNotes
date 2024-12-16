@@ -42,17 +42,10 @@ public sealed partial class SettingsPage : Page
             GetTask();
         }
         StartupTogle.IsOn = key.GetValue("MyNotes") != null;
+        AppDescription.Text= "AppDescription".GetLocalized();
 
-        ThemeCard.Header = "Settings_Theme".GetLocalized();
-        BackdropCard.Header = "Settings_BackDrop".GetLocalized();
-        SaveCard.Header = "Settings_Save".GetLocalized();
-        SaveCard.Description = "Settings_SaveDescription".GetLocalized();
-        StartupCard.Header = "Settings_Startup".GetLocalized();
-        StartupCard.Description = "Settings_StartupDescription".GetLocalized();
-        AboutSection.Header = "AppDescription".GetLocalized();
-        AboutSection.Description = "Settings_About".GetLocalized();
-        ExitCard.Header = "Settings_Exit".GetLocalized();
-        ExitCard.Description = "Settings_ExitDescription".GetLocalized();
+        //ExitCard.Header = "Settings_Exit".GetLocalized();
+        //ExitCard.Description = "Settings_ExitDescription".GetLocalized();
     }
     private async void BackDropState()
     {

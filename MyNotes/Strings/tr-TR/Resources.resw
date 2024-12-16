@@ -226,7 +226,7 @@ Hata mesajı:</value>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
     <value>Arama metni girin</value>
   </data>
-  <data name="NoteDetails_FindText" xml:space="preserve">
+  <data name="NoteDetails_FindText.Text" xml:space="preserve">
     <value>Bul:</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
@@ -265,13 +265,13 @@ Hata mesajı:</value>
   <data name="Search" xml:space="preserve">
     <value>Ara</value>
   </data>
-  <data name="Settings_About" xml:space="preserve">
+  <data name="Settings_About.Text" xml:space="preserve">
     <value>Bu uygulama hakkında</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Bu uygulama Erencrypt tarafından GNU General Public License v3.0 kapsamında açık kaynaklı bir proje olarak oluşturulmuştur. Daha detaylı bilgi için GitHub sayfamızı ziyaret edin.</value>
   </data>
-  <data name="Settings_BackDrop" xml:space="preserve">
+  <data name="Settings_BackDrop.Text" xml:space="preserve">
     <value>Pencere Arka Planı</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
@@ -292,13 +292,13 @@ Hata mesajı:</value>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
     <value>Grup ilkesi tarafından başlatma etkinleştirildi</value>
   </data>
-  <data name="Settings_Exit" xml:space="preserve">
+  <data name="Settings_Exit.Text" xml:space="preserve">
     <value>Uygulamayı Kapat</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Kapat</value>
   </data>
-  <data name="Settings_ExitDescription" xml:space="preserve">
+  <data name="Settings_ExitDescription.Text" xml:space="preserve">
     <value>Bu, MyNotes uygulamasını tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
@@ -313,19 +313,19 @@ Hata mesajı:</value>
   <data name="Settings_Preferances.Text" xml:space="preserve">
     <value>Tercihler</value>
   </data>
-  <data name="Settings_Save" xml:space="preserve">
+  <data name="Settings_Save.Text" xml:space="preserve">
     <value>Çıkarken kaydet</value>
   </data>
-  <data name="Settings_SaveDescription" xml:space="preserve">
+  <data name="Settings_SaveDescription.Text" xml:space="preserve">
     <value>Bir notu kapatırken değişiklikleri kaydet</value>
   </data>
-  <data name="Settings_Startup" xml:space="preserve">
+  <data name="Settings_Startup.Text" xml:space="preserve">
     <value>Başlangıçta çalıştır</value>
   </data>
-  <data name="Settings_StartupDescription" xml:space="preserve">
+  <data name="Settings_StartupDescription.Text" xml:space="preserve">
     <value>Bildirimlerin düzgün çalışması için bu ayarın etkinleştirilmesi gerekir</value>
   </data>
-  <data name="Settings_Theme" xml:space="preserve">
+  <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Tema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
@@ -342,6 +342,9 @@ Hata mesajı:</value>
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
     <value>Notlar</value>
+  </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value></value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Hatırlatıcılar</value>

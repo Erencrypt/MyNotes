@@ -80,11 +80,10 @@ public sealed partial class PlannerPage : Page
     private async void OnDeleteTaskClicked(object sender, RoutedEventArgs e)
     {
         var button = sender as Button;
-        var taskToDelete = button?.DataContext as TaskModel;
 
-        if (taskToDelete != null)
+        if (button?.DataContext is TaskModel taskToDelete)
         {
-            ObservableCollection<TaskModel> targetCollection = null;
+            ObservableCollection<TaskModel>? targetCollection = null;
 
             switch (taskToDelete.Status)
             {

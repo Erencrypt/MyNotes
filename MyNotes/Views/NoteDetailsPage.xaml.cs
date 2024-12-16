@@ -40,8 +40,14 @@ public sealed partial class NoteDetailsPage : Page
         noteName.Title = "NoteDetails_NoteNameTitle".GetLocalized();
         NoteEditor.PlaceholderText = "NoteDetails_EditorPlaceholder".GetLocalized();
         findBox.PlaceholderText = "NoteDetails_FindPlaceholder".GetLocalized();
-        findBoxLabel.Text = "NoteDetails_FindText".GetLocalized();
         ToolTipService.SetToolTip(BtnSaveFile, "NoteDetails_SaveTooltip".GetLocalized());
+        ToolTipService.SetToolTip(fontColorButton, "NoteDetails_FontColorTooltip".GetLocalized());
+        ToolTipService.SetToolTip(AlignButton, "NoteDetails_AlignmentTooltip".GetLocalized());
+        ToolTipService.SetToolTip(listButton, "NoteDetails_ListTypeTooltip".GetLocalized());
+        ToolTipService.SetToolTip(boldButton, "NoteDetails_BoldTooltip".GetLocalized());
+        ToolTipService.SetToolTip(italicButton, "NoteDetails_ItalicTooltip".GetLocalized());
+        ToolTipService.SetToolTip(boldButton, "NoteDetails_UnderlineTooltip".GetLocalized());
+        ToolTipService.SetToolTip(StrikeButton, "NoteDetails_StrikethroughTooltip".GetLocalized());
     }
 
     public async void SaveWhenExitState() => saveWhenExit = await localSettingsService.ReadSettingAsync<bool>(SaveWhenExitKey);
@@ -154,6 +160,7 @@ public sealed partial class NoteDetailsPage : Page
             }
         }
     }
+
     private void FindBoxHighlightMatches()
     {
         FindBoxRemoveHighlights();
@@ -207,4 +214,69 @@ public sealed partial class NoteDetailsPage : Page
             NoteEditor.PlaceholderText = "NoteDetails_EditorPlaceholder".GetLocalized();
         }
     }
+
+    private void BoldButton_Click(object sender, RoutedEventArgs e)
+    {
+        NoteEditor.Document.Selection.CharacterFormat.Bold = FormatEffect.Toggle;
+    }
+
+    private void ItalicButton_Click(object sender, RoutedEventArgs e)
+    {
+        NoteEditor.Document.Selection.CharacterFormat.Italic = FormatEffect.Toggle;
+    }
+    private void UnderlineButton_Click(object sender, RoutedEventArgs e)
+    {
+        var selected = NoteEditor.Document.Selection;
+        selected.CharacterFormat.Underline = selected.CharacterFormat.Underline == UnderlineType.Single ? UnderlineType.None : UnderlineType.Single;
+    }
+    private void StrikeButton_Click(object sender, RoutedEventArgs e)
+    {
+        NoteEditor.Document.Selection.CharacterFormat.Strikethrough = FormatEffect.Toggle;
+    }
+    private void ListButton_Click(object sender, RoutedEventArgs e)
+    {
+        Button clickedListType = (Button)sender;
+        var listType = (MarkerType)Convert.ToUInt32(clickedListType.CommandParameter);
+        var selection = NoteEditor.Document.Selection;
+            var currentStyle = selection.ParagraphFormat.ListType;
+            selection.ParagraphFormat.ListType = currentStyle == listType ? MarkerType.None : listType;
+    }
+    private void AlignButton_Click(object sender, RoutedEventArgs e)
+    {
+        Button clickedAlignType = (Button)sender;
+        var alignType = (ParagraphAlignment)Convert.ToUInt32(clickedAlignType.CommandParameter);
+        var selection = NoteEditor.Document.Selection;
+        var currentStyle = selection.ParagraphFormat.Alignment;
+        selection.ParagraphFormat.Alignment = currentStyle == alignType ? ParagraphAlignment.Undefined : alignType;
+    }
+
+    private void ColorButton_Click(object sender, RoutedEventArgs e)
+    {
+        // Extract the color of the button that was clicked.
+        Button clickedColor = (Button)sender;
+        var rectangle = (Microsoft.UI.Xaml.Shapes.Rectangle)clickedColor.Content;
+        var color = ((SolidColorBrush)rectangle.Fill).Color;
+
+        NoteEditor.Document.Selection.CharacterFormat.ForegroundColor = color;
+
+        fontColorButton.Flyout.Hide();
+        NoteEditor.Focus(FocusState.Keyboard);
+    }
+
+    private void findBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        FindBoxHighlightMatches();
+    }
+
+    private void findBox_GotFocus(object sender, RoutedEventArgs e)
+    {
+        FindBoxHighlightMatches();
+    }
+
+    private void findBox_LostFocus(object sender, RoutedEventArgs e)
+    {
+        FindBoxRemoveHighlights();
+    }
+
+
 }

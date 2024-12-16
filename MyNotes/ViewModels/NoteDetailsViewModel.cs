@@ -2,7 +2,7 @@
 
 namespace MyNotes.ViewModels;
 
-public class NoteDetailsViewModel : ObservableRecipient
+public partial class NoteDetailsViewModel : ObservableRecipient
 {
     public NoteDetailsViewModel()
     {

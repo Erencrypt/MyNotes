@@ -10,6 +10,10 @@
     CloseButtonStyle="{StaticResource DefaultButtonStyle}"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     CloseButtonClick="ContentDialog_CloseButtonClick">
+    <!-- KeyboardAccelerators -->
+    <ContentDialog.KeyboardAccelerators>
+        <KeyboardAccelerator Key="Enter" Invoked="PrimaryButtonKeyboardAccelerator_Invoked"/>
+    </ContentDialog.KeyboardAccelerators>
     <ContentDialog.TitleTemplate>
         <DataTemplate>
             <StackPanel Orientation="Horizontal">

@@ -27,8 +27,7 @@ public partial class App : Application
     {
         get;
     }
-    public static T GetService<T>()
-        where T : class
+    public static T GetService<T>() where T : class
     {
         if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
         {
@@ -38,8 +37,8 @@ public partial class App : Application
     }
     public static WindowEx MainWindow { get; } = new MainWindow();
     public static UIElement? AppTitlebar { get; set; }
-    public static List<Reminder> InvokedReminders { get; set; } = new();
-    public static List<Reminder> Reminders { get; set; } = new();
+    public static List<Reminder> InvokedReminders { get; set; } = [];
+    public static List<Reminder> Reminders { get; set; } = [];
     public static StorageFolder StorageFolder
     {
         get
@@ -126,8 +125,10 @@ public partial class App : Application
         mainInstance.Activated += MainInstance_Activated;
         if (mainInstance.IsCurrent)
         {
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
+            var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var myNotesFolderPath = Path.Combine(localAppDataPath, "MyNotes");
+            if (!Directory.Exists(myNotesFolderPath))
+            { Directory.CreateDirectory(myNotesFolderPath); }
             sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             CreateFolders();
             CreateSaveFile();
@@ -220,7 +221,7 @@ public partial class App : Application
     }
     private static async void CreateFolders()
     {
-        List<string> folders = new() { "Notes", "Reminders", "Trash", "ApplicationData" };
+        List<string> folders = ["Notes", "Reminders", "Trash", "ApplicationData"];
         foreach (string folder in folders)
         {
             await StorageFolder.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);

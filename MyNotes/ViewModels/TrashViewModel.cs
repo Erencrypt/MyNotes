@@ -2,7 +2,7 @@
 
 namespace MyNotes.ViewModels;
 
-public class TrashViewModel : ObservableRecipient
+public partial class TrashViewModel : ObservableRecipient
 {
     public TrashViewModel()
     {

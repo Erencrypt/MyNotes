@@ -7,7 +7,7 @@ using MyNotes.Views;
 
 namespace MyNotes.ViewModels;
 
-public class ShellViewModel : ObservableRecipient
+public partial class ShellViewModel : ObservableRecipient
 {
     private bool _isBackEnabled;
     private object? _selected;

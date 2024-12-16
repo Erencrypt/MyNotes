@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -227,7 +227,7 @@
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
     <value>Введіть текст пошуку</value>
   </data>
-  <data name="NoteDetails_FindText" xml:space="preserve">
+  <data name="NoteDetails_FindText.Text" xml:space="preserve">
     <value>Знайти:</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
@@ -266,13 +266,13 @@
   <data name="Search" xml:space="preserve">
     <value>Пошук</value>
   </data>
-  <data name="Settings_About" xml:space="preserve">
+  <data name="Settings_About.Text" xml:space="preserve">
     <value>Про цей додаток</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Цей додаток створюється Erencrypt як проект створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
   </data>
-  <data name="Settings_BackDrop" xml:space="preserve">
+  <data name="Settings_BackDrop.Text" xml:space="preserve">
     <value>Фон вікна</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
@@ -293,13 +293,13 @@
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
     <value>Запуск увімкнено правилами групи</value>
   </data>
-  <data name="Settings_Exit" xml:space="preserve">
+  <data name="Settings_Exit.Text" xml:space="preserve">
     <value>Закрити програму</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Закрити</value>
   </data>
-  <data name="Settings_ExitDescription" xml:space="preserve">
+  <data name="Settings_ExitDescription.Text" xml:space="preserve">
     <value>Це автоматично закриє MyNotes. Використовуйте, якщо у вас виникли проблеми з оновленням або видаленням.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
@@ -314,19 +314,19 @@
   <data name="Settings_Preferances.Text" xml:space="preserve">
     <value>Переваги</value>
   </data>
-  <data name="Settings_Save" xml:space="preserve">
+  <data name="Settings_Save.Text" xml:space="preserve">
     <value>Зберегти при виході</value>
   </data>
-  <data name="Settings_SaveDescription" xml:space="preserve">
+  <data name="Settings_SaveDescription.Text" xml:space="preserve">
     <value>Зберегти при виході з нотатки</value>
   </data>
-  <data name="Settings_Startup" xml:space="preserve">
+  <data name="Settings_Startup.Text" xml:space="preserve">
     <value>Відкривати при запуску</value>
   </data>
-  <data name="Settings_StartupDescription" xml:space="preserve">
+  <data name="Settings_StartupDescription.Text" xml:space="preserve">
     <value>Цей параметр повинен бути включений, щоб сповіщення працювали належним чином</value>
   </data>
-  <data name="Settings_Theme" xml:space="preserve">
+  <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Тема</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
@@ -343,6 +343,9 @@
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
     <value>Нотатки</value>
+  </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value></value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Нагадування</value>

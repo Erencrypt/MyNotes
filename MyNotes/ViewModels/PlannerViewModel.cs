@@ -10,15 +10,16 @@ namespace MyNotes.ViewModels;
 
 public partial class PlannerViewModel : ObservableRecipient
 {
-    public INavigationService NavigationService { get; }
     private readonly StorageFolder storageFolder = App.StorageFolder;
-    private const string _defaultApplicationDataFolder = "MyNotes/ApplicationData";
     public ObservableCollection<TaskModel> ToDoTasks { get; set; }
     public ObservableCollection<TaskModel> InProgressTasks { get; set; }
     public ObservableCollection<TaskModel> DoneTasks { get; set; }
 
     public PlannerViewModel()
     {
+        ToDoTasks = [];
+        InProgressTasks = [];
+        DoneTasks = [];
     }
     public async Task LoadDataAsync()
     {
@@ -41,9 +42,9 @@ public partial class PlannerViewModel : ObservableRecipient
             }
             else
             {
-                ToDoTasks = new ObservableCollection<TaskModel>();
-                InProgressTasks = new ObservableCollection<TaskModel>();
-                DoneTasks = new ObservableCollection<TaskModel>();
+                ToDoTasks = [];
+                InProgressTasks = [];
+                DoneTasks = [];
             }
             LogWriter.Log($"loaded Data: ToDoTasks={ToDoTasks.Count}, InProgressTasks={InProgressTasks.Count}, DoneTasks={DoneTasks.Count}", LogWriter.LogLevel.Debug);
 
@@ -51,9 +52,9 @@ public partial class PlannerViewModel : ObservableRecipient
         catch (Exception ex)
         {
             LogWriter.Log($"Error loading kanban board data: {ex.Message}", LogWriter.LogLevel.Debug);
-            ToDoTasks = new ObservableCollection<TaskModel>();
-            InProgressTasks = new ObservableCollection<TaskModel>();
-            DoneTasks = new ObservableCollection<TaskModel>();
+            ToDoTasks = [];
+            InProgressTasks = [];
+            DoneTasks = [];
         }
     }
 
@@ -99,9 +100,9 @@ public partial class PlannerViewModel : ObservableRecipient
             var file = await storageFolder.CreateFileAsync(Path.Combine("ApplicationData", "PlannerBoardData.json"), CreationCollisionOption.ReplaceExisting);
             PlannerBoardData boardData = new()
             {
-                ToDoTasks = new List<TaskModel>(),
-                InProgressTasks = new List<TaskModel>(),
-                DoneTasks = new List<TaskModel>()
+                ToDoTasks = [],
+                InProgressTasks = [],
+                DoneTasks = []
             };
             var json = JsonSerializer.Serialize(boardData);
             await FileIO.WriteTextAsync(file, json);

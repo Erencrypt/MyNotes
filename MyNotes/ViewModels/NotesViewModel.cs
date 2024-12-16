@@ -7,12 +7,13 @@ using Windows.Storage;
 
 namespace MyNotes.ViewModels;
 
-public class NotesViewModel : ObservableRecipient
+public partial class NotesViewModel : ObservableRecipient
 {
     private readonly StorageFolder storageFolder = App.StorageFolder;
     private readonly INavigationService navigationService;
-    public NotesViewModel()
+    public NotesViewModel(INavigationService navigation)
     {
+        navigationService = navigation;
     }
     public async void AddNote(XamlRoot xamlRoot)
     {
