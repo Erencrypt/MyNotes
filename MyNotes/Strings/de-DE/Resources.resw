@@ -217,6 +217,12 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Es wurde kein Element ausgewählt.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Alignment</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Bold</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Text eingeben</value>
   </data>
@@ -227,8 +233,17 @@ Fehlermeldung:</value>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
     <value>Suchtext eingeben</value>
   </data>
-  <data name="NoteDetails_FindText" xml:space="preserve">
-    <value>Suche:</value>
+  <data name="NoteDetails_FindText.Text" xml:space="preserve">
+    <value>Find:</value>
+  </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>List Type</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Notiz-Name:</value>
@@ -239,8 +254,14 @@ Fehlermeldung:</value>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Rechtschreibprüfung verwenden</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Strikethrough</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Änderungen gespeichert</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Underline</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Ihre Notizen sind leer, Sie können sie hinzufügen.</value>
@@ -266,14 +287,14 @@ Fehlermeldung:</value>
   <data name="Search" xml:space="preserve">
     <value>Suchen</value>
   </data>
-  <data name="Settings_About" xml:space="preserve">
-    <value>Über diese Anwendung</value>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Diese Anwendung wird von Erencrypt als Opensource-Projekt unter der GNU General Public License v3.0 erstellt. Weitere Informationen finden Sie auf unserer GitHub Seite.</value>
   </data>
-  <data name="Settings_BackDrop" xml:space="preserve">
-    <value>Fenster-Hintergrund</value>
+  <data name="Settings_BackDrop.Text" xml:space="preserve">
+    <value>Window Backdrop</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Acrylic</value>
@@ -293,14 +314,14 @@ Fehlermeldung:</value>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
     <value>Startup aktiviert durch Gruppenrichtlinien</value>
   </data>
-  <data name="Settings_Exit" xml:space="preserve">
-    <value>Anwendung schließen</value>
+  <data name="Settings_Exit.Text" xml:space="preserve">
+    <value>Close Application</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Schließen</value>
   </data>
-  <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>Dies schließt MyNotes vollständig. Benutzen Sie nur, wenn Sie Probleme beim Aktualisieren oder Deinstallieren haben.</value>
+  <data name="Settings_ExitDescription.Text" xml:space="preserve">
+    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -314,20 +335,20 @@ Fehlermeldung:</value>
   <data name="Settings_Preferances.Text" xml:space="preserve">
     <value>Präferenzen</value>
   </data>
-  <data name="Settings_Save" xml:space="preserve">
-    <value>Speichern beim Beenden</value>
+  <data name="Settings_Save.Text" xml:space="preserve">
+    <value>Save when exit</value>
   </data>
-  <data name="Settings_SaveDescription" xml:space="preserve">
-    <value>Speichern beim Verlassen einer Notiz</value>
+  <data name="Settings_SaveDescription.Text" xml:space="preserve">
+    <value>Save when exiting from a note</value>
   </data>
-  <data name="Settings_Startup" xml:space="preserve">
-    <value>Beim Start öffnen</value>
+  <data name="Settings_Startup.Text" xml:space="preserve">
+    <value>Open on startup</value>
   </data>
-  <data name="Settings_StartupDescription" xml:space="preserve">
-    <value>Diese Einstellung muss aktiviert sein, damit Benachrichtigungen richtig funktionieren können</value>
+  <data name="Settings_StartupDescription.Text" xml:space="preserve">
+    <value>This setting must be enabled for notifications to work properly</value>
   </data>
-  <data name="Settings_Theme" xml:space="preserve">
-    <value>Thema</value>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>Theme</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Dunkel</value>
@@ -343,6 +364,9 @@ Fehlermeldung:</value>
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
     <value>Notizen</value>
+  </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planer</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Erinnerungen</value>
@@ -364,8 +388,5 @@ Fehlermeldung:</value>
   </data>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Ihr Papierkorb ist leer.</value>
-  </data>
-  <data name="Shell_Planner.Content" xml:space="preserve">
-    <value>Planer</value>
   </data>
 </root>
