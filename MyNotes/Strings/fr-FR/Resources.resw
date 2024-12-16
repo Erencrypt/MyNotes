@@ -217,6 +217,12 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Il n'y a aucun élément sélectionné.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Alignment</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Bold</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Entrez le texte</value>
   </data>
@@ -227,8 +233,17 @@ Message d'erreur:</value>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
     <value>Entrez le texte de recherche</value>
   </data>
-  <data name="NoteDetails_FindText" xml:space="preserve">
-    <value>Rechercher:</value>
+  <data name="NoteDetails_FindText.Text" xml:space="preserve">
+    <value>Find:</value>
+  </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>List Type</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Nom de la note :</value>
@@ -239,8 +254,14 @@ Message d'erreur:</value>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Utiliser la vérification orthographique</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Strikethrough</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Changements enregistrés</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Underline</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Vos notes sont vides, vous pouvez en ajouter une.</value>
@@ -266,14 +287,14 @@ Message d'erreur:</value>
   <data name="Search" xml:space="preserve">
     <value>Recherche</value>
   </data>
-  <data name="Settings_About" xml:space="preserve">
-    <value>À propos de cette application</value>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>About this application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Cette application est créée par Erencrypt en tant que projet opensource sous GNU General Public License v3.0. Pour plus d'informations détaillées, visitez notre page GitHub.</value>
   </data>
-  <data name="Settings_BackDrop" xml:space="preserve">
-    <value>Arrière-plan de la fenêtre</value>
+  <data name="Settings_BackDrop.Text" xml:space="preserve">
+    <value>Window Backdrop</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Acrylic</value>
@@ -293,14 +314,14 @@ Message d'erreur:</value>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
     <value>Démarrage activé par la politique de groupe</value>
   </data>
-  <data name="Settings_Exit" xml:space="preserve">
-    <value>Fermer l'application</value>
+  <data name="Settings_Exit.Text" xml:space="preserve">
+    <value>Close Application</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Fermer</value>
   </data>
-  <data name="Settings_ExitDescription" xml:space="preserve">
-    <value>Ceci fermera complètement MyNotes. Utilisez uniquement si vous avez des problèmes avec la mise à jour ou la désinstallation.</value>
+  <data name="Settings_ExitDescription.Text" xml:space="preserve">
+    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -314,20 +335,20 @@ Message d'erreur:</value>
   <data name="Settings_Preferances.Text" xml:space="preserve">
     <value>Préférences</value>
   </data>
-  <data name="Settings_Save" xml:space="preserve">
-    <value>Enregistrer en quittant</value>
+  <data name="Settings_Save.Text" xml:space="preserve">
+    <value>Save when exit</value>
   </data>
-  <data name="Settings_SaveDescription" xml:space="preserve">
-    <value>Enregistrer en quittant une note</value>
+  <data name="Settings_SaveDescription.Text" xml:space="preserve">
+    <value>Save when exiting from a note</value>
   </data>
-  <data name="Settings_Startup" xml:space="preserve">
-    <value>Ouvrir au démarrage</value>
+  <data name="Settings_Startup.Text" xml:space="preserve">
+    <value>Open on startup</value>
   </data>
-  <data name="Settings_StartupDescription" xml:space="preserve">
-    <value>Ce paramètre doit être activé pour que les notifications fonctionnent correctement</value>
+  <data name="Settings_StartupDescription.Text" xml:space="preserve">
+    <value>This setting must be enabled for notifications to work properly</value>
   </data>
-  <data name="Settings_Theme" xml:space="preserve">
-    <value>Thème</value>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>Theme</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Sombre</value>
@@ -343,6 +364,9 @@ Message d'erreur:</value>
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="Shell_Planner.Content" xml:space="preserve">
+    <value>Planner</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Rappels</value>
@@ -364,8 +388,5 @@ Message d'erreur:</value>
   </data>
   <data name="Trash_TrashEmpty" xml:space="preserve">
     <value>Votre corbeille est vide.</value>
-  </data>
-  <data name="Shell_Planner.Content" xml:space="preserve">
-    <value>Planner</value>
   </data>
 </root>
