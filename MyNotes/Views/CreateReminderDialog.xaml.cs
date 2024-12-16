@@ -26,8 +26,8 @@ public sealed partial class CreateReminderDialog : ContentDialog
     private readonly string reminderName;
     private bool isRepeated = false;
     private bool isAlarm = false;
-    TimeSpan tmsp;
-    DateTime time, selectedDate, ofsetDate;
+    private TimeSpan tmsp;
+    private DateTime time, selectedDate, ofsetDate;
     public CreateReminderDialog()
     {
         InitializeComponent();

@@ -16,7 +16,7 @@ public sealed partial class SettingsPage : Page
 {
     private readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private readonly ILocalSettingsService localSettingsService;
-    StartupTask? startupTask;
+    private StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
     private readonly string AcrylicKey = "IsAcrylic";
     private readonly string SaveWhenExitKey = "SaveWhenExit";
@@ -42,7 +42,7 @@ public sealed partial class SettingsPage : Page
             GetTask();
         }
         StartupTogle.IsOn = key.GetValue("MyNotes") != null;
-        AppDescription.Text= "AppDescription".GetLocalized();
+        AppDescription.Text = "AppDescription".GetLocalized();
 
         //ExitCard.Header = "Settings_Exit".GetLocalized();
         //ExitCard.Description = "Settings_ExitDescription".GetLocalized();

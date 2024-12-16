@@ -29,7 +29,7 @@ public sealed partial class NotesPage : Page
         ToolTipService.SetToolTip(deleteNote, "Delete".GetLocalized());
         ToolTipService.SetToolTip(newNote, "Add".GetLocalized());
     }
-    
+
     private void LstNotes_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {
         if (LstNotes.SelectedItem != null)
@@ -38,7 +38,7 @@ public sealed partial class NotesPage : Page
             navigationService.NavigateTo(typeof(NoteDetailsViewModel).FullName!);
         }
     }
-    
+
     private void NewNote_Click(object sender, RoutedEventArgs e)
     {
         ViewModel.AddNote(XamlRoot);

@@ -238,8 +238,8 @@ public sealed partial class NoteDetailsPage : Page
         Button clickedListType = (Button)sender;
         var listType = (MarkerType)Convert.ToUInt32(clickedListType.CommandParameter);
         var selection = NoteEditor.Document.Selection;
-            var currentStyle = selection.ParagraphFormat.ListType;
-            selection.ParagraphFormat.ListType = currentStyle == listType ? MarkerType.None : listType;
+        var currentStyle = selection.ParagraphFormat.ListType;
+        selection.ParagraphFormat.ListType = currentStyle == listType ? MarkerType.None : listType;
     }
     private void AlignButton_Click(object sender, RoutedEventArgs e)
     {

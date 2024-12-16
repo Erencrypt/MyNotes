@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyNotes.Helpers;
 using MyNotes.Models;
 using System.Collections.ObjectModel;
-using Windows.Storage;
 using System.Text.Json;
-using MyNotes.Contracts.Services;
-using MyNotes.Helpers;
+using Windows.Storage;
 
 namespace MyNotes.ViewModels;
 

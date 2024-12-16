@@ -1,11 +1,8 @@
-﻿using System.Diagnostics;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.Win32;
 using Microsoft.Windows.AppLifecycle;
-
 using MyNotes.Activation;
 using MyNotes.Contracts.Services;
 using MyNotes.Core.Contracts.Services;
@@ -16,7 +13,9 @@ using MyNotes.Notifications;
 using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
-
+using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using Windows.Storage;
 
 namespace MyNotes;
@@ -57,7 +56,10 @@ public partial class App : Application
     private static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\MyNotes";
     private static StorageFolder? sFolder;
     private readonly DispatcherTimer timer = new();
-
+    public static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.General)
+    {
+        TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+    };
     public App()
     {
         InitializeComponent();
@@ -137,7 +139,7 @@ public partial class App : Application
             LogWriter.Log("App Started", LogWriter.LogLevel.Info);
 
             ReminderCleanup reminderCleanup = new();
-            reminderCleanup.Clean(true);
+            await reminderCleanup.Clean(true);
 
             base.OnLaunched(args);
             await GetService<IActivationService>().ActivateAsync(args);
@@ -230,7 +232,7 @@ public partial class App : Application
     private static async void CreateSaveFile()
     {
         await StorageFolder.CreateFolderAsync("ApplicationData", CreationCollisionOption.OpenIfExists);
-        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(Path.Combine(StorageFolder.Path,"ApplicationData")) ;
+        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(Path.Combine(StorageFolder.Path, "ApplicationData"));
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {
             await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit", true);

@@ -24,6 +24,6 @@ namespace MyNotes.Views
             }
         }
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {}
+        { }
     }
 }

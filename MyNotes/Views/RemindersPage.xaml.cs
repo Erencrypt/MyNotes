@@ -15,7 +15,7 @@ public sealed partial class RemindersPage : Page
 {
     private readonly StorageFolder storageFolder = App.StorageFolder;
     private readonly ObservableCollection<Reminder> items = new();
-    readonly ReminderCleanup reminderCleanup = new();
+    private readonly ReminderCleanup reminderCleanup = new();
     public RemindersViewModel ViewModel
     {
         get;
@@ -52,7 +52,7 @@ public sealed partial class RemindersPage : Page
             LstReminders.ItemsSource = items;
             if (Convert.ToDateTime(AddReminderDialog.rmnd.DateTime) > DateTime.Now)
             {
-                reminderCleanup.Clean(false);
+                await reminderCleanup.Clean(false);
             }
             if (EmptyText.Visibility == Visibility.Visible)
             {
@@ -82,7 +82,7 @@ public sealed partial class RemindersPage : Page
                 DateTime rmndDate = Convert.ToDateTime(EditReminderDialog.rmnd.DateTime);
                 if (rmndDate > DateTime.Now && rmndDate < DateTime.Now.AddDays(1))
                 {
-                    reminderCleanup.Clean(false);
+                    await reminderCleanup.Clean(false);
                 }
             }
         }
@@ -139,7 +139,7 @@ public sealed partial class RemindersPage : Page
     }
     private void RemindersSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
-        if (RemindersSearch!=null)
+        if (RemindersSearch != null)
         {
             LstReminders.ItemsSource = items.Where(x => x.ReminderHeader.ToLower().Contains(RemindersSearch.Text.ToLower()));
             LstReminders.UpdateLayout();
