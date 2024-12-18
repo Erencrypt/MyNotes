@@ -53,7 +53,7 @@ namespace MyNotes.Helpers
                     Reminder readedReminder;
                     try
                     {
-                        readedReminder = JsonSerializer.Deserialize<Reminder>(readText)!;
+                        readedReminder = JsonSerializer.Deserialize<Reminder>(readText, App.JsonOptions)!;
                     }
                     catch (Exception deserializationEx)
                     {
