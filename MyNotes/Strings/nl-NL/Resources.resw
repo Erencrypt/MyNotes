@@ -218,10 +218,10 @@ Gebruik een andere naam.</value>
     <value>Er is geen item geselecteerd.</value>
   </data>
   <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
-    <value>Alignment</value>
+    <value>Uitlijning</value>
   </data>
   <data name="NoteDetails_BoldTooltip" xml:space="preserve">
-    <value>Bold</value>
+    <value>Dikgedrukt</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Voer tekst in</value>
@@ -234,16 +234,16 @@ Foutmelding:</value>
     <value>Voer zoektekst in</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Find:</value>
+    <value>Zoek:</value>
   </data>
   <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
-    <value>Font Color</value>
+    <value>Lettertypekleur</value>
   </data>
   <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
-    <value>Italic</value>
+    <value>Cursief</value>
   </data>
   <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
-    <value>List Type</value>
+    <value>Lijst Type</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Notitie naam:</value>
@@ -255,13 +255,13 @@ Foutmelding:</value>
     <value>Gebruik spellingcontrole</value>
   </data>
   <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>Doorstrepen</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Wijzigingen opgeslagen</value>
   </data>
   <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
-    <value>Underline</value>
+    <value>Onderstrepen</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Je notities zijn leeg, je kunt er een toevoegen.</value>
@@ -288,13 +288,13 @@ Foutmelding:</value>
     <value>Zoeken</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>Over deze applicatie</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Deze applicatie wordt door Erencrypt gemaakt als een opensourceproject onder GNU General Public License v3.0. Voor meer gedetailleerde informatie, bezoek onze GitHub pagina.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
-    <value>Window Backdrop</value>
+    <value>Venster Achtergrond</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Acrylic</value>
@@ -315,13 +315,13 @@ Foutmelding:</value>
     <value>Opstarten toegestaan door groepsbeleid</value>
   </data>
   <data name="Settings_Exit.Text" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Sluit applicatie</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Afsluiten</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>Dit zal MyNotes volledig sluiten. Alleen gebruiken bij het bijwerken of deïnstalleren van MyNotes.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -336,19 +336,19 @@ Foutmelding:</value>
     <value>Voorkeuren</value>
   </data>
   <data name="Settings_Save.Text" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Opslaan bij afsluiten</value>
   </data>
   <data name="Settings_SaveDescription.Text" xml:space="preserve">
-    <value>Save when exiting from a note</value>
+    <value>Opslaan bij afsluiten van een notitie</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Open bij opstarten</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly</value>
+    <value>Deze instelling moet ingeschakeld zijn om meldingen goed te laten werken</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Theme</value>
+    <value>Thema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Donker</value>
