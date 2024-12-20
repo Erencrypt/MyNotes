@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Input;
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
+using testtempstd.Helpers;
 using Windows.System;
 
 namespace MyNotes.Views;
@@ -32,13 +33,15 @@ public sealed partial class ShellPage : Page
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        TitleBarHelper.UpdateTitleBar(RequestedTheme);
+
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
     }
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
     {
-
+        App.AppTitlebar = AppTitleBarText;
     }
 
     private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)

@@ -16,7 +16,7 @@ public sealed partial class SettingsPage : Page
 {
     private readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
     private readonly ILocalSettingsService localSettingsService;
-    StartupTask? startupTask;
+    private StartupTask? startupTask;
     private readonly string BackDropKey = "BackDrop";
     private readonly string AcrylicKey = "IsAcrylic";
     private readonly string SaveWhenExitKey = "SaveWhenExit";
@@ -42,17 +42,10 @@ public sealed partial class SettingsPage : Page
             GetTask();
         }
         StartupTogle.IsOn = key.GetValue("MyNotes") != null;
+        AppDescription.Text = "AppDescription".GetLocalized();
 
-        ThemeCard.Header = "Settings_Theme".GetLocalized();
-        BackdropCard.Header = "Settings_BackDrop".GetLocalized();
-        SaveCard.Header = "Settings_Save".GetLocalized();
-        SaveCard.Description = "Settings_SaveDescription".GetLocalized();
-        StartupCard.Header = "Settings_Startup".GetLocalized();
-        StartupCard.Description = "Settings_StartupDescription".GetLocalized();
-        AboutSection.Header = "AppDescription".GetLocalized();
-        AboutSection.Description = "Settings_About".GetLocalized();
-        ExitCard.Header = "Settings_Exit".GetLocalized();
-        ExitCard.Description = "Settings_ExitDescription".GetLocalized();
+        //ExitCard.Header = "Settings_Exit".GetLocalized();
+        //ExitCard.Description = "Settings_ExitDescription".GetLocalized();
     }
     private async void BackDropState()
     {

@@ -9,7 +9,7 @@ using Windows.ApplicationModel;
 
 namespace MyNotes.ViewModels;
 
-public class SettingsViewModel : ObservableRecipient
+public partial class SettingsViewModel : ObservableRecipient
 {
     private readonly IThemeSelectorService _themeSelectorService;
     private ElementTheme _elementTheme;

@@ -19,6 +19,7 @@ public class PageService : IPageService
         Configure<RemindersViewModel, RemindersPage>();
         Configure<SettingsViewModel, SettingsPage>();
         Configure<TrashViewModel, TrashPage>();
+        Configure<PlannerViewModel, PlannerPage>();
     }
 
     public Type GetPageType(string key)

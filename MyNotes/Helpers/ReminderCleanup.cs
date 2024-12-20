@@ -15,23 +15,51 @@ namespace MyNotes.Helpers
         {
             notificationService = App.GetService<IAppNotificationService>();
         }
-        public async void Clean(bool isStartup)
+
+        public async Task Clean(bool isStartup)
         {
             try
             {
                 DeletedCount = 0;
                 AddedCount = 0;
                 await App.StorageFolder.CreateFolderAsync("Reminders", CreationCollisionOption.OpenIfExists);
-                DirectoryInfo dinfo = new(App.StorageFolder.Path + "\\Reminders");
+                DirectoryInfo dinfo = new(Path.Combine(App.StorageFolder.Path,"Reminders"));
                 FileInfo[] Files = dinfo.GetFiles("*.json");
                 List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
                 string fullPath;
                 MoveFile moveFile = new();
+
                 foreach (FileInfo file in orderedList)
                 {
-                    fullPath = dinfo.ToString() + "\\" + file.Name;
-                    string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-                    Reminder readedReminder = JsonSerializer.Deserialize<Reminder>(readText)!;
+                    fullPath = Path.Combine(dinfo.FullName, file.Name);
+                    string readText = string.Empty;
+
+                    try
+                    {
+                        readText = File.ReadAllText(fullPath, Encoding.UTF8);
+                    }
+                    catch (Exception readEx)
+                    {
+                        LogWriter.Log($"Error reading file {fullPath}: {readEx.Message}", LogWriter.LogLevel.Error);
+                        continue;
+                    }
+
+                    if (string.IsNullOrEmpty(readText))
+                    {
+                        LogWriter.Log($"Empty or invalid file {file.Name}", LogWriter.LogLevel.Warning);
+                        continue;
+                    }
+
+                    Reminder readedReminder;
+                    try
+                    {
+                        readedReminder = JsonSerializer.Deserialize<Reminder>(readText, App.JsonOptions)!;
+                    }
+                    catch (Exception deserializationEx)
+                    {
+                        LogWriter.Log($"Error deserializing file {fullPath}: {deserializationEx.Message}", LogWriter.LogLevel.Error);
+                        continue;
+                    }
 
                     DateTime t = Convert.ToDateTime(readedReminder.DateTime);
                     if (readedReminder.Repeat)

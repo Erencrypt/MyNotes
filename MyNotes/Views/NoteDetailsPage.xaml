@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Margin="0">
 
@@ -13,93 +12,280 @@
             <RelativePanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Background" Value="Transparent" />
                 </Style>
                 <Style TargetType="RichEditBox">
-                    <Setter Property="CornerRadius" Value="0"/>
-                    <Setter Property="Margin" Value="0,0,0,48"/>
+                    <Setter Property="CornerRadius" Value="0" />
+                    <Setter Property="Margin" Value="0,0,0,48" />
                 </Style>
             </RelativePanel.Resources>
-            <InfoBar Name="infobar"
-                     Margin="0,-96,-32,0"
-                     Visibility="Visible"
-                     Canvas.ZIndex="1"
-                     Background="{StaticResource CardBackgroundFillColorDefault}"
-                     Opacity="0.9"
-                     RelativePanel.AlignBottomWithPanel="True"
-                     RelativePanel.AlignRightWithPanel="True">
+
+            <!-- InfoBar (Native WinUI 3) -->
+            <InfoBar
+                Name="infobar"
+                Margin="0,-96,-32,0"
+                Visibility="Visible"
+                Canvas.ZIndex="1"
+                Background="{StaticResource CardBackgroundFillColorDefault}"
+                Opacity="0.9"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
                 <InfoBar.Transitions>
                     <TransitionCollection>
-                        <EdgeUIThemeTransition/>
+                        <EdgeUIThemeTransition />
                     </TransitionCollection>
                 </InfoBar.Transitions>
             </InfoBar>
-            <InfoBar Name="noteName"
-                     Margin="0,-64,0,0"
-                     MinWidth="220"
-                     MaxWidth="1280"
-                     Visibility="Visible"
-                     IsOpen="True"
-                     Opacity="0.8"
-                     IsIconVisible="False"
-                     RelativePanel.AlignTopWithPanel="True"
-                     RelativePanel.AlignRightWithPanel="True"/>
-            <Button Name="BtnSaveFile"
-                    RelativePanel.AlignRightWithPanel="True" 
-                    RelativePanel.AlignTopWithPanel="True"
-                    Height="48"
-                    Width="48"
-                    VerticalAlignment="Center"
-                    Click="SaveButton_Click" >
+
+            <InfoBar
+                Name="noteName"
+                Margin="0,-64,0,0"
+                MinWidth="220"
+                MaxWidth="1280"
+                Visibility="Visible"
+                IsOpen="True"
+                Opacity="0.8"
+                IsIconVisible="False"
+                RelativePanel.AlignTopWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True" />
+
+
+            <Button x:Name="boldButton" IsTabStop="False" Click="BoldButton_Click">
                 <Button.Content>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"/>
+                    <FontIcon Glyph="&#xE8DD;"/>
                 </Button.Content>
-                <Button.KeyboardAccelerators>
-                    <KeyboardAccelerator Modifiers="Control" Key="S"/>
-                </Button.KeyboardAccelerators>
             </Button>
-            <controls:TextToolbar x:Name="Toolbar" Editor="{x:Bind NoteEditor}"
-                           RelativePanel.AlignLeftWithPanel="True"
-                           RelativePanel.LeftOf="BtnSaveFile"
-                           RelativePanel.AlignTopWithPanel="True"
-                           Background="Transparent"
-                                  >
-            </controls:TextToolbar>
-            <RichEditBox x:Name="NoteEditor"
+            <Button x:Name="italicButton" IsTabStop="False" Click="ItalicButton_Click" RelativePanel.RightOf="boldButton">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE8DB;"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="underlineButton" IsTabStop="False" Click="UnderlineButton_Click" RelativePanel.RightOf="italicButton">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE8DC;"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="StrikeButton" IsTabStop="False" Click="StrikeButton_Click" RelativePanel.RightOf="underlineButton">
+                <Button.Content>
+                    <FontIcon Glyph="&#xEDE0;"/>
+                </Button.Content>
+            </Button>
+
+            <DropDownButton x:Name="listButton" 
+                Background="Transparent"
+                BorderThickness="0" 
+                IsTabStop="False" 
+                RelativePanel.RightOf="StrikeButton">
+                <FontIcon Glyph="&#xE8FD;" />
+                <DropDownButton.Flyout>
+                    <Flyout Placement="Bottom">
+                        <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2">
+                            <VariableSizedWrapGrid.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Padding" Value="6"/>
+                                    <Setter Property="Width" Value="32"/>
+                                    <Setter Property="Height" Value="32"/>
+                                    <Setter Property="Margin" Value="4"/>
+                                </Style>
+                            </VariableSizedWrapGrid.Resources>
+                            <!-- Unordered -->
+                            <Button Click="ListButton_Click" IsTabStop="False" CommandParameter="2">
+                                <Button.Content>
+                                    <TextBlock Text="."/>
+                                </Button.Content>
+                            </Button>
+                            <!-- Arabic -->
+                            <Button Click="ListButton_Click" IsTabStop="False" CommandParameter="3">
+                                <Button.Content>
+                                    <TextBlock Text="1"/>
+                                </Button.Content>
+                            </Button>
+                            <!-- Lover Case English -->
+                            <Button Click="ListButton_Click" IsTabStop="False" CommandParameter="4">
+                                <Button.Content>
+                                    <TextBlock Text="a"/>
+                                </Button.Content>
+                            </Button>
+                            <!-- Upper Case English -->
+                            <Button Click="ListButton_Click" IsTabStop="False" CommandParameter="5">
+                                <Button.Content>
+                                    <TextBlock Text="A"/>
+                                </Button.Content>
+                            </Button>
+                            <!-- Lover Case Roman -->
+                            <Button Click="ListButton_Click" IsTabStop="False" CommandParameter="6">
+                                <Button.Content>
+                                    <TextBlock Text="i"/>
+                                </Button.Content>
+                            </Button>
+                            <!-- Upper Case Roman -->
+                            <Button Click="ListButton_Click" IsTabStop="False" CommandParameter="7">
+                                <Button.Content>
+                                    <TextBlock Text="I"/>
+                                </Button.Content>
+                            </Button>
+                        </VariableSizedWrapGrid>
+                    </Flyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+
+            <DropDownButton x:Name="AlignButton" BorderThickness="0" Background="Transparent"
+                    IsTabStop="False" RelativePanel.RightOf="listButton">
+                <SymbolIcon Symbol="AlignCenter"/>
+                <DropDownButton.Flyout>
+                    <Flyout Placement="Bottom">
+                        <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4">
+                            <VariableSizedWrapGrid.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Padding" Value="6"/>
+                                    <Setter Property="MinWidth" Value="0"/>
+                                    <Setter Property="MinHeight" Value="0"/>
+                                    <Setter Property="Margin" Value="4"/>
+                                </Style>
+                            </VariableSizedWrapGrid.Resources>
+                            <Button Click="AlignButton_Click" IsTabStop="False" CommandParameter="1">
+                                <Button.Content>
+                                    <SymbolIcon Symbol="AlignLeft"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="AlignButton_Click" IsTabStop="False" CommandParameter="2">
+                                <Button.Content>
+                                    <SymbolIcon Symbol="AlignCenter"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="AlignButton_Click" IsTabStop="False" CommandParameter="3">
+                                <Button.Content>
+                                    <SymbolIcon Symbol="AlignRight"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="AlignButton_Click" IsTabStop="False" CommandParameter="4">
+                                <Button.Content>
+                                    <SymbolIcon Symbol="GlobalNavigationButton"/>
+                                </Button.Content>
+                            </Button>
+                        </VariableSizedWrapGrid>
+                    </Flyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+
+            <DropDownButton x:Name="fontColorButton" BorderThickness="0" Background="Transparent"
+                                IsTabStop="False" RelativePanel.RightOf="AlignButton">
+                <SymbolIcon Symbol="FontColor"/>
+                <DropDownButton.Flyout>
+                    <Flyout Placement="Bottom">
+                        <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3">
+                            <VariableSizedWrapGrid.Resources>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Width" Value="32"/>
+                                    <Setter Property="Height" Value="32"/>
+                                </Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="MinWidth" Value="0"/>
+                                    <Setter Property="MinHeight" Value="0"/>
+                                    <Setter Property="Margin" Value="4"/>
+                                </Style>
+                            </VariableSizedWrapGrid.Resources>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Red">
+                                <Button.Content>
+                                    <Rectangle Fill="Red"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Orange">
+                                <Button.Content>
+                                    <Rectangle Fill="Orange"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Yellow">
+                                <Button.Content>
+                                    <Rectangle Fill="Yellow"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Green">
+                                <Button.Content>
+                                    <Rectangle Fill="Green"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Blue">
+                                <Button.Content>
+                                    <Rectangle Fill="Blue"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Indigo">
+                                <Button.Content>
+                                    <Rectangle Fill="Indigo"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Gray">
+                                <Button.Content>
+                                    <Rectangle Fill="Gray"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="White">
+                                <Button.Content>
+                                    <Rectangle Fill="White"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Click="ColorButton_Click" IsTabStop="False" AutomationProperties.Name="Black">
+                                <Button.Content>
+                                    <Rectangle Fill="Black"/>
+                                </Button.Content>
+                            </Button>
+                        </VariableSizedWrapGrid>
+                    </Flyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+
+            <Button Click="SaveButton_Click" Name="BtnSaveFile" IsTabStop="False" RelativePanel.AlignRightWith="NoteEditor">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE74E;"/>
+                </Button.Content>
+            </Button>
+            <!-- RichEditBox -->
+            <RichEditBox
+                x:Name="NoteEditor"
                 GettingFocus="NoteEditor_GettingFocus"
                 LosingFocus="NoteEditor_LosingFocus"
                 ProcessKeyboardAccelerators="NoteEditor_ProcessKeyboardAccelerators"
                 KeyboardAcceleratorPlacementMode="Hidden"
-                Width="auto" Height="auto"
-                RelativePanel.Below="Toolbar"
+                Width="auto"
+                Height="auto"
+                RelativePanel.Below="boldButton"
                 RelativePanel.Above="search"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
                 RelativePanel.AlignBottomWith="search">
                 <RichEditBox.KeyboardAccelerators>
-                    <KeyboardAccelerator Modifiers="Control" Key="F"/>
+                    <KeyboardAccelerator Modifiers="Control" Key="F" />
                 </RichEditBox.KeyboardAccelerators>
             </RichEditBox>
 
-            <StackPanel Name="search" Orientation="Horizontal"
+            <!-- Search StackPanel -->
+            <StackPanel
+                Name="search"
+                Orientation="Horizontal"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignBottomWithPanel="True"
                 Margin="0,0,0,8">
-                <TextBlock x:Name="findBoxLabel" Height="20"/>
-                <TextBox x:Name="findBox" Width="250" Margin="10,0,0,0"
-                TextChanged="{x:Bind FindBoxHighlightMatches}"
-                GotFocus="{x:Bind FindBoxHighlightMatches}"
-                LostFocus="{x:Bind FindBoxRemoveHighlights}"/>
+                <TextBlock x:Name="findBoxLabel" x:Uid="NoteDetails_FindText" Height="20" />
+                <TextBox
+                    x:Name="findBox"
+                    Width="250"
+                    Margin="10,0,0,0"
+                    TextChanged="findBox_TextChanged"
+                    GotFocus="findBox_GotFocus"
+                    LostFocus="findBox_LostFocus" />
             </StackPanel>
 
-            <CheckBox x:Uid="NoteDetails_SpellCheck"
-                      Name="SpellCheck"
-                      Checked="SpellCheck_Checked"
-                      Unchecked="SpellCheck_Unchecked"
-                      RelativePanel.AlignBottomWithPanel="True"
-                      RelativePanel.AlignRightWithPanel="True"
-                      Margin="0,0,0,8"/>
-
+            <!-- Spell Check CheckBox -->
+            <CheckBox
+                x:Uid="NoteDetails_SpellCheck"
+                Name="SpellCheck"
+                Checked="SpellCheck_Checked"
+                Unchecked="SpellCheck_Unchecked"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                Margin="0,0,0,8" />
         </RelativePanel>
     </Grid>
 </Page>

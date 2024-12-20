@@ -2,7 +2,7 @@
 
 namespace MyNotes.ViewModels;
 
-public class RemindersViewModel : ObservableRecipient
+public partial class RemindersViewModel : ObservableRecipient
 {
     public RemindersViewModel()
     {

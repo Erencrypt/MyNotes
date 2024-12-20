@@ -14,6 +14,8 @@ using MyNotes.Services;
 using MyNotes.ViewModels;
 using MyNotes.Views;
 using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using Windows.Storage;
 
 namespace MyNotes;
@@ -24,8 +26,7 @@ public partial class App : Application
     {
         get;
     }
-    public static T GetService<T>()
-        where T : class
+    public static T GetService<T>() where T : class
     {
         if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
         {
@@ -34,9 +35,9 @@ public partial class App : Application
         return service;
     }
     public static WindowEx MainWindow { get; } = new MainWindow();
-
-    public static List<Reminder> InvokedReminders { get; set; } = new();
-    public static List<Reminder> Reminders { get; set; } = new();
+    public static UIElement? AppTitlebar { get; set; }
+    public static List<Reminder> InvokedReminders { get; set; } = [];
+    public static List<Reminder> Reminders { get; set; } = [];
     public static StorageFolder StorageFolder
     {
         get
@@ -55,7 +56,10 @@ public partial class App : Application
     private static readonly string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\MyNotes";
     private static StorageFolder? sFolder;
     private readonly DispatcherTimer timer = new();
-
+    public static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.General)
+    {
+        TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+    };
     public App()
     {
         InitializeComponent();
@@ -84,6 +88,8 @@ public partial class App : Application
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
+            services.AddTransient<PlannerViewModel>();
+            services.AddTransient<PlannerPage>();
             services.AddTransient<TrashViewModel>();
             services.AddTransient<TrashPage>();
             services.AddTransient<SettingsViewModel>();
@@ -121,8 +127,10 @@ public partial class App : Application
         mainInstance.Activated += MainInstance_Activated;
         if (mainInstance.IsCurrent)
         {
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            await folder.CreateFolderAsync("MyNotes", CreationCollisionOption.OpenIfExists);
+            var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var myNotesFolderPath = Path.Combine(localAppDataPath, "MyNotes");
+            if (!Directory.Exists(myNotesFolderPath))
+            { Directory.CreateDirectory(myNotesFolderPath); }
             sFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
             CreateFolders();
             CreateSaveFile();
@@ -131,7 +139,7 @@ public partial class App : Application
             LogWriter.Log("App Started", LogWriter.LogLevel.Info);
 
             ReminderCleanup reminderCleanup = new();
-            reminderCleanup.Clean(true);
+            await reminderCleanup.Clean(true);
 
             base.OnLaunched(args);
             await GetService<IActivationService>().ActivateAsync(args);
@@ -215,7 +223,7 @@ public partial class App : Application
     }
     private static async void CreateFolders()
     {
-        List<string> folders = new() { "Notes", "Reminders", "Trash", "ApplicationData" };
+        List<string> folders = ["Notes", "Reminders", "Trash", "ApplicationData"];
         foreach (string folder in folders)
         {
             await StorageFolder.CreateFolderAsync(folder, CreationCollisionOption.OpenIfExists);
@@ -224,7 +232,7 @@ public partial class App : Application
     private static async void CreateSaveFile()
     {
         await StorageFolder.CreateFolderAsync("ApplicationData", CreationCollisionOption.OpenIfExists);
-        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(StorageFolder.Path + "\\ApplicationData");
+        StorageFolder SettingsStorage = await StorageFolder.GetFolderFromPathAsync(Path.Combine(StorageFolder.Path, "ApplicationData"));
         if (await SettingsStorage.TryGetItemAsync("LocalSettings.json") == null)
         {
             await GetService<ILocalSettingsService>().SaveSettingAsync("SaveWhenExit", true);
