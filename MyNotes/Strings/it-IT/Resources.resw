@@ -237,7 +237,7 @@ Messaggio di errore:</value>
     <value>Cercare:</value>
   </data>
   <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
-    <value>Colore del caratter</value>
+    <value>Colore del carattere</value>
   </data>
   <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
     <value>Corsivo</value>
@@ -297,7 +297,7 @@ Messaggio di errore:</value>
     <value>Sfondo Finestra</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
-    <value>Acrylic</value>
+    <value>Acrilica</value>
   </data>
   <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
     <value>Mica</value>
@@ -324,7 +324,7 @@ Messaggio di errore:</value>
     <value>Questo chiuderà completamente MyNotes. Usa solo se hai problemi con l'aggiornamento o la disinstallazione.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
-    <value>GitHub Page</value>
+    <value>Pagina GitHub</value>
   </data>
   <data name="Settings_GitHubPage.NavigateUri" xml:space="preserve">
     <value>https://github.com/Erencrypt/MyNotes/</value>
