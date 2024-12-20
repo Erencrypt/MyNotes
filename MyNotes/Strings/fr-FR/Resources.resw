@@ -161,7 +161,7 @@
     <value>Nouvelle note</value>
   </data>
   <data name="CreateReminder_Alarm" xml:space="preserve">
-    <value>Alarm</value>
+    <value>Alarme</value>
   </data>
   <data name="CreateReminder_ButtonText" xml:space="preserve">
     <value>Créer un rappel</value>
@@ -209,7 +209,7 @@
     <value>Erreur</value>
   </data>
   <data name="Error_Meesage" xml:space="preserve">
-    <value>Une erreur s'est produite. Message d'erreur:</value>
+    <value>Une erreur est survenue. Message d'erreur :</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Infos</value>
@@ -217,18 +217,33 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Il n'y a aucun élément sélectionné.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Alignement</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Gras</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Entrez le texte</value>
   </data>
   <data name="NoteDetails_ErrorMessage" xml:space="preserve">
     <value>Le fichier n'a pas pu être sauvegardé.
-Message d'erreur:</value>
+Message d'erreur :</value>
   </data>
   <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
     <value>Entrez le texte de recherche</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Rechercher:</value>
+    <value>Trouver :</value>
+  </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Couleur de police</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Italique</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>Type de liste</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Nom de la note :</value>
@@ -239,8 +254,14 @@ Message d'erreur:</value>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Utiliser la vérification orthographique</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Barré</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Changements enregistrés</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Souligner</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Vos notes sont vides, vous pouvez en ajouter une.</value>
@@ -267,7 +288,7 @@ Message d'erreur:</value>
     <value>Recherche</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>À propos de cette application</value>
+    <value>Au sujet de cette application</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Cette application est créée par Erencrypt en tant que projet opensource sous GNU General Public License v3.0. Pour plus d'informations détaillées, visitez notre page GitHub.</value>
@@ -276,7 +297,7 @@ Message d'erreur:</value>
     <value>Arrière-plan de la fenêtre</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
-    <value>Acrylic</value>
+    <value>Acrylique</value>
   </data>
   <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
     <value>Mica</value>
@@ -345,7 +366,7 @@ Message d'erreur:</value>
     <value>Notes</value>
   </data>
   <data name="Shell_Planner.Content" xml:space="preserve">
-    <value></value>
+    <value>Planeur</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Rappels</value>

@@ -151,11 +151,11 @@
     <value>Notiz erstellen</value>
   </data>
   <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>Es existiert bereits eine Notiz mit dem gleichen Namen
-. Bitte verwenden Sie einen anderen Namen.</value>
+    <value>Es existiert bereits eine Notiz mit dem gleichen Namen.
+Bitte verwenden Sie einen anderen Namen.</value>
   </data>
   <data name="CreateNote_NameBoxHeader" xml:space="preserve">
-    <value>Notizname</value>
+    <value>Notname</value>
   </data>
   <data name="CreateNote_Title" xml:space="preserve">
     <value>Neue Notiz</value>
@@ -217,6 +217,12 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Es wurde kein Element ausgewählt.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Ausrichtung</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Fett</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Text eingeben</value>
   </data>
@@ -228,19 +234,34 @@ Fehlermeldung:</value>
     <value>Suchtext eingeben</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Suche:</value>
+    <value>Suchen:</value>
+  </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Zeichenfarbe</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Kursiv</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>Listentyp</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Notiz-Name:</value>
   </data>
   <data name="NoteDetails_SaveTooltip" xml:space="preserve">
-    <value>Speichern (Strg+S)</value>
+    <value>Speichern (Ctrl+S)</value>
   </data>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Rechtschreibprüfung verwenden</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Durchgestrichen</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Änderungen gespeichert</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Unterstrichen</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Ihre Notizen sind leer, Sie können sie hinzufügen.</value>
@@ -258,7 +279,7 @@ Fehlermeldung:</value>
     <value>Erinnerung speichern</value>
   </data>
   <data name="Required_Message" xml:space="preserve">
-    <value>Notizname ist erforderlich.</value>
+    <value>Notname ist erforderlich.</value>
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Wiederherstellen</value>
@@ -270,28 +291,28 @@ Fehlermeldung:</value>
     <value>Über diese Anwendung</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Diese Anwendung wird von Erencrypt als Opensource-Projekt unter der GNU General Public License v3.0 erstellt. Weitere Informationen finden Sie auf unserer GitHub Seite.</value>
+    <value>Diese Anwendung wird von Erencrypt als Open-Source-Projekt unter der GNU General Public License v3.0 erstellt. Weitere Informationen finden Sie auf unserer GitHub Seite.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
     <value>Fenster-Hintergrund</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
-    <value>Acrylic</value>
+    <value>Acryl</value>
   </data>
   <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
-    <value>Mica</value>
+    <value>Mika</value>
   </data>
   <data name="Settings_BackDrop_BaseAlt.Content" xml:space="preserve">
-    <value>Mica Alt</value>
+    <value>Mika Alt</value>
   </data>
   <data name="Settings_DisabledByPolicy" xml:space="preserve">
-    <value>Startup durch Gruppenrichtlinien deaktiviert oder auf diesem Gerät nicht unterstützt</value>
+    <value>Start-up durch Gruppenrichtlinien deaktiviert oder auf diesem Gerät nicht unterstützt</value>
   </data>
   <data name="Settings_DisabledByUser" xml:space="preserve">
-    <value>Sie haben die Funktion dieser App deaktiviert, sobald Sie sich anmelden aber wenn Sie Ihre Meinung ändern, können Sie dies im Tab Start im Task-Manager aktivieren. Meine Notizen</value>
+    <value>Sie haben die Funktion dieser App deaktiviert, sobald Sie sich anmelden, aber wenn Sie Ihre Meinung ändern, können Sie dies im Tab Start im Task-Manager aktivieren. Meine Notizen</value>
   </data>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
-    <value>Startup aktiviert durch Gruppenrichtlinien</value>
+    <value>Start-up aktiviert durch Gruppenrichtlinien</value>
   </data>
   <data name="Settings_Exit.Text" xml:space="preserve">
     <value>Anwendung schließen</value>
@@ -300,7 +321,7 @@ Fehlermeldung:</value>
     <value>Schließen</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>Dies schließt MyNotes vollständig. Benutzen Sie nur, wenn Sie Probleme beim Aktualisieren oder Deinstallieren haben.</value>
+    <value>Dies wird MyNotes komplett schließen. Verwenden Sie nur, wenn Sie Probleme beim Aktualisieren oder Deinstallieren haben.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -321,7 +342,7 @@ Fehlermeldung:</value>
     <value>Speichern beim Verlassen einer Notiz</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Beim Start öffnen</value>
+    <value>Öffnen nach Hochfahren</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
     <value>Diese Einstellung muss aktiviert sein, damit Benachrichtigungen richtig funktionieren können</value>
@@ -339,13 +360,13 @@ Fehlermeldung:</value>
     <value>Hell</value>
   </data>
   <data name="Shell_NoteDetails.Content" xml:space="preserve">
-    <value>Notizdetails</value>
+    <value>Notartdetails</value>
   </data>
   <data name="Shell_Notes.Content" xml:space="preserve">
     <value>Notizen</value>
   </data>
   <data name="Shell_Planner.Content" xml:space="preserve">
-    <value></value>
+    <value>Planer</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Erinnerungen</value>

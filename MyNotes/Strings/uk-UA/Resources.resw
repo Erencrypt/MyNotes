@@ -217,6 +217,12 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Елемент не вибрано.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Вирівнювання</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Жирний</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Введіть текст</value>
   </data>
@@ -230,6 +236,15 @@
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
     <value>Знайти:</value>
   </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Колір шрифту</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Курсив</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>Тип списку</value>
+  </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Примітка:</value>
   </data>
@@ -239,8 +254,14 @@
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Використовувати перевірку правопису</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Закреслення</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Зміни збережено</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Підкреслення</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Ваші нотатки порожній, ви можете додати один.</value>
@@ -267,10 +288,10 @@
     <value>Пошук</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>Про цей додаток</value>
+    <value>Про цю програму</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Цей додаток створюється Erencrypt як проект створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
+    <value>Цей додаток створюється Erencrypt як проєкт створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
     <value>Фон вікна</value>
@@ -300,7 +321,7 @@
     <value>Закрити</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>Це автоматично закриє MyNotes. Використовуйте, якщо у вас виникли проблеми з оновленням або видаленням.</value>
+    <value>Ця дія повністю закриє MyNotes. Використовується, лише якщо у вас виникли проблеми з оновленням або видаленням.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -321,7 +342,7 @@
     <value>Зберегти при виході з нотатки</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Відкривати при запуску</value>
+    <value>Відкрити під час запуску</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
     <value>Цей параметр повинен бути включений, щоб сповіщення працювали належним чином</value>
@@ -345,7 +366,7 @@
     <value>Нотатки</value>
   </data>
   <data name="Shell_Planner.Content" xml:space="preserve">
-    <value></value>
+    <value>Що планує</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Нагадування</value>

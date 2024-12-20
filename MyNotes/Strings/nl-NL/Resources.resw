@@ -217,6 +217,12 @@ Gebruik een andere naam.</value>
   <data name="NoSelection" xml:space="preserve">
     <value>Er is geen item geselecteerd.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Uitlijning</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Dikgedrukt</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Voer tekst in</value>
   </data>
@@ -230,6 +236,15 @@ Foutmelding:</value>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
     <value>Zoek:</value>
   </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Lettertypekleur</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Cursief</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>Lijst Type</value>
+  </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Notitie naam:</value>
   </data>
@@ -239,8 +254,14 @@ Foutmelding:</value>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Gebruik spellingcontrole</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Doorstrepen</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Wijzigingen opgeslagen</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Onderstrepen</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Je notities zijn leeg, je kunt er een toevoegen.</value>
@@ -267,7 +288,7 @@ Foutmelding:</value>
     <value>Zoeken</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>Over deze toepassing</value>
+    <value>Over deze applicatie</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Deze applicatie wordt door Erencrypt gemaakt als een opensourceproject onder GNU General Public License v3.0. Voor meer gedetailleerde informatie, bezoek onze GitHub pagina.</value>
@@ -300,7 +321,7 @@ Foutmelding:</value>
     <value>Afsluiten</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>Dit sluit MyNotes af. Gebruik alleen als u problemen heeft met het bijwerken of deïnstalleren van MyNotes.</value>
+    <value>Dit zal MyNotes volledig sluiten. Alleen gebruiken bij het bijwerken of deïnstalleren van MyNotes.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -321,7 +342,7 @@ Foutmelding:</value>
     <value>Opslaan bij afsluiten van een notitie</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Openen bij opstarten</value>
+    <value>Open bij opstarten</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
     <value>Deze instelling moet ingeschakeld zijn om meldingen goed te laten werken</value>
@@ -345,7 +366,7 @@ Foutmelding:</value>
     <value>Opmerkingen</value>
   </data>
   <data name="Shell_Planner.Content" xml:space="preserve">
-    <value></value>
+    <value>Planner</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Herinneringen</value>

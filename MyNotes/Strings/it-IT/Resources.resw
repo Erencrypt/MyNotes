@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -127,7 +127,7 @@
     <value>MyNotes</value>
   </data>
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
-    <value>Hai un promemoria attivo {0}.</value>
+    <value>Hai {0} promemoria attivo.</value>
   </data>
   <data name="AppNotification_ActiveReminders" xml:space="preserve">
     <value>Hai {0} promemoria attivi.</value>
@@ -151,8 +151,8 @@
     <value>Crea Nota</value>
   </data>
   <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>Esiste già una nota con lo stesso nome
-. Si prega di usare un altro nome.</value>
+    <value>Esiste già una nota con lo stesso nome.
+Si prega di usare un altro nome.</value>
   </data>
   <data name="CreateNote_NameBoxHeader" xml:space="preserve">
     <value>Nome Della Nota</value>
@@ -161,7 +161,7 @@
     <value>Nuova Nota</value>
   </data>
   <data name="CreateReminder_Alarm" xml:space="preserve">
-    <value>Alarm</value>
+    <value>Alarmi</value>
   </data>
   <data name="CreateReminder_ButtonText" xml:space="preserve">
     <value>Crea Promemoria</value>
@@ -217,6 +217,12 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Non c'è nessun elemento selezionato.</value>
   </data>
+  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
+    <value>Allineamento</value>
+  </data>
+  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
+    <value>Grassetto</value>
+  </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Inserisci Testo</value>
   </data>
@@ -228,7 +234,16 @@ Messaggio di errore:</value>
     <value>Inserisci Testo Di Ricerca</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Trova:</value>
+    <value>Cercare:</value>
+  </data>
+  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
+    <value>Colore del carattere</value>
+  </data>
+  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
+    <value>Corsivo</value>
+  </data>
+  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
+    <value>Tipo di Elenco</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Nome Della Nota:</value>
@@ -239,8 +254,14 @@ Messaggio di errore:</value>
   <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
     <value>Usa controllo ortografico</value>
   </data>
+  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
+    <value>Barrato</value>
+  </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Modifiche Salvate</value>
+  </data>
+  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
+    <value>Sottolinea</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Le tue note sono vuote, puoi aggiungerne una.</value>
@@ -267,7 +288,7 @@ Messaggio di errore:</value>
     <value>Cerca</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>Informazioni su questa applicazione</value>
+    <value>Informazioni sull'applicazione</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Questa applicazione viene creata da Erencrypt come progetto opensource sotto GNU General Public License v3.0. Per maggiori informazioni, visita la nostra pagina GitHub.</value>
@@ -276,7 +297,7 @@ Messaggio di errore:</value>
     <value>Sfondo Finestra</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
-    <value>Acrylic</value>
+    <value>Acrilica</value>
   </data>
   <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
     <value>Mica</value>
@@ -294,16 +315,16 @@ Messaggio di errore:</value>
     <value>Avvio abilitato da criteri di gruppo</value>
   </data>
   <data name="Settings_Exit.Text" xml:space="preserve">
-    <value>Chiudi Applicazione</value>
+    <value>Chiudi applicazione</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Chiudi</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>Questo verrà completamente chiuso MyNotes. Usa solo se hai problemi con l'aggiornamento o la disinstallazione.</value>
+    <value>Questo chiuderà completamente MyNotes. Usa solo se hai problemi con l'aggiornamento o la disinstallazione.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
-    <value>GitHub Page</value>
+    <value>Pagina GitHub</value>
   </data>
   <data name="Settings_GitHubPage.NavigateUri" xml:space="preserve">
     <value>https://github.com/Erencrypt/MyNotes/</value>
@@ -345,7 +366,7 @@ Messaggio di errore:</value>
     <value>Note</value>
   </data>
   <data name="Shell_Planner.Content" xml:space="preserve">
-    <value></value>
+    <value>Planner</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Promemoria</value>
