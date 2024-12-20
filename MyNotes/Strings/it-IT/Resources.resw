@@ -151,8 +151,8 @@
     <value>Crea Nota</value>
   </data>
   <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>Esiste già una nota con lo stesso nome
-. Si prega di usare un altro nome.</value>
+    <value>Esiste già una nota con lo stesso nome.
+Si prega di usare un altro nome.</value>
   </data>
   <data name="CreateNote_NameBoxHeader" xml:space="preserve">
     <value>Nome Della Nota</value>
@@ -161,7 +161,7 @@
     <value>Nuova Nota</value>
   </data>
   <data name="CreateReminder_Alarm" xml:space="preserve">
-    <value>Alarm</value>
+    <value>Alarmi</value>
   </data>
   <data name="CreateReminder_ButtonText" xml:space="preserve">
     <value>Crea Promemoria</value>
@@ -218,10 +218,10 @@
     <value>Non c'è nessun elemento selezionato.</value>
   </data>
   <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
-    <value>Alignment</value>
+    <value>Allineamento</value>
   </data>
   <data name="NoteDetails_BoldTooltip" xml:space="preserve">
-    <value>Bold</value>
+    <value>Grassetto</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Inserisci Testo</value>
@@ -234,16 +234,16 @@ Messaggio di errore:</value>
     <value>Inserisci Testo Di Ricerca</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Find:</value>
+    <value>Cercare:</value>
   </data>
   <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
-    <value>Font Color</value>
+    <value>Colore del caratter</value>
   </data>
   <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
-    <value>Italic</value>
+    <value>Corsivo</value>
   </data>
   <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
-    <value>List Type</value>
+    <value>Tipo di Elenco</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Nome Della Nota:</value>
@@ -255,13 +255,13 @@ Messaggio di errore:</value>
     <value>Usa controllo ortografico</value>
   </data>
   <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>Barrato</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Modifiche Salvate</value>
   </data>
   <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
-    <value>Underline</value>
+    <value>Sottolinea</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Le tue note sono vuote, puoi aggiungerne una.</value>
@@ -288,13 +288,13 @@ Messaggio di errore:</value>
     <value>Cerca</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>Informazioni sull'applicazione</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Questa applicazione viene creata da Erencrypt come progetto opensource sotto GNU General Public License v3.0. Per maggiori informazioni, visita la nostra pagina GitHub.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
-    <value>Window Backdrop</value>
+    <value>Sfondo Finestra</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Acrylic</value>
@@ -315,13 +315,13 @@ Messaggio di errore:</value>
     <value>Avvio abilitato da criteri di gruppo</value>
   </data>
   <data name="Settings_Exit.Text" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Chiudi applicazione</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Chiudi</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>Questo chiuderà completamente MyNotes. Usa solo se hai problemi con l'aggiornamento o la disinstallazione.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -336,19 +336,19 @@ Messaggio di errore:</value>
     <value>Preferenze</value>
   </data>
   <data name="Settings_Save.Text" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Salva quando esci</value>
   </data>
   <data name="Settings_SaveDescription.Text" xml:space="preserve">
-    <value>Save when exiting from a note</value>
+    <value>Salva quando esci da una nota</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Apri all'avvio</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly</value>
+    <value>Questa impostazione deve essere abilitata affinché le notifiche funzionino correttamente</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Theme</value>
+    <value>Tema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Scuro</value>
