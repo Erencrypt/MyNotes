@@ -217,10 +217,10 @@
     <value>Herhangi bir öğe seçili değil.</value>
   </data>
   <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
-    <value>Alignment</value>
+    <value>Hizalama</value>
   </data>
   <data name="NoteDetails_BoldTooltip" xml:space="preserve">
-    <value>Bold</value>
+    <value>Kalın</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Metin Girin</value>
@@ -233,16 +233,16 @@ Hata mesajı:</value>
     <value>Arama metni girin</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Find:</value>
+    <value>Bul:</value>
   </data>
   <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
-    <value>Font Color</value>
+    <value>Yazı Rengi</value>
   </data>
   <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
-    <value>Italic</value>
+    <value>İtalik</value>
   </data>
   <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
-    <value>List Type</value>
+    <value>Liste Türü</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Not Adı:</value>
@@ -254,13 +254,13 @@ Hata mesajı:</value>
     <value>Yazım denetimi kullan</value>
   </data>
   <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>Üstü Çizili</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Değişiklikler Kaydedildi</value>
   </data>
   <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
-    <value>Underline</value>
+    <value>Alt Çizgi</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Notların boş, yeni bir not ekleyebilirsin.</value>
@@ -287,13 +287,13 @@ Hata mesajı:</value>
     <value>Ara</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>Bu uygulama hakkında</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Bu uygulama Erencrypt tarafından GNU General Public License v3.0 kapsamında açık kaynaklı bir proje olarak oluşturulmuştur. Daha detaylı bilgi için GitHub sayfamızı ziyaret edin.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
-    <value>Window Backdrop</value>
+    <value>Pencere Arka Planı</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Akrilik</value>
@@ -314,13 +314,13 @@ Hata mesajı:</value>
     <value>Grup ilkesi tarafından başlatma etkinleştirildi</value>
   </data>
   <data name="Settings_Exit.Text" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Uygulamayı Kapat</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Kapat</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>Bu, MyNotes uygulamasını tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Sayfası</value>
@@ -335,19 +335,19 @@ Hata mesajı:</value>
     <value>Tercihler</value>
   </data>
   <data name="Settings_Save.Text" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Çıkarken kaydet</value>
   </data>
   <data name="Settings_SaveDescription.Text" xml:space="preserve">
-    <value>Save when exiting from a note</value>
+    <value>Bir notu kapatırken değişiklikleri kaydet</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Başlangıçta çalıştır</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly</value>
+    <value>Bildirimlerin düzgün çalışması için bu ayarın etkinleştirilmesi gerekir</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Theme</value>
+    <value>Tema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Karanlık</value>
