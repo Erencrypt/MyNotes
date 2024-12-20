@@ -218,10 +218,10 @@
     <value>Елемент не вибрано.</value>
   </data>
   <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
-    <value>Alignment</value>
+    <value>Вирівнювання</value>
   </data>
   <data name="NoteDetails_BoldTooltip" xml:space="preserve">
-    <value>Bold</value>
+    <value>Жирний</value>
   </data>
   <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
     <value>Введіть текст</value>
@@ -234,16 +234,16 @@
     <value>Введіть текст пошуку</value>
   </data>
   <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Find:</value>
+    <value>Знайти:</value>
   </data>
   <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
-    <value>Font Color</value>
+    <value>Колір шрифту</value>
   </data>
   <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
-    <value>Italic</value>
+    <value>Курсив</value>
   </data>
   <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
-    <value>List Type</value>
+    <value>Тип списку</value>
   </data>
   <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
     <value>Примітка:</value>
@@ -255,13 +255,13 @@
     <value>Використовувати перевірку правопису</value>
   </data>
   <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>Закреслення</value>
   </data>
   <data name="NoteDetails_SuccessMessage" xml:space="preserve">
     <value>Зміни збережено</value>
   </data>
   <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
-    <value>Underline</value>
+    <value>Підкреслення</value>
   </data>
   <data name="Notes_EmptyText" xml:space="preserve">
     <value>Ваші нотатки порожній, ви можете додати один.</value>
@@ -288,13 +288,13 @@
     <value>Пошук</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>Про цю програму</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Цей додаток створюється Erencrypt як проект створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
-    <value>Window Backdrop</value>
+    <value>Фон вікна</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
     <value>Acrylic</value>
@@ -315,13 +315,13 @@
     <value>Запуск увімкнено правилами групи</value>
   </data>
   <data name="Settings_Exit.Text" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Закрити програму</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Закрити</value>
   </data>
   <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>This will completely close MyNotes. Only use if you have problems with updating or uninstalling.</value>
+    <value>Ця дія повністю закриє MyNotes. Використовується, лише якщо у вас виникли проблеми з оновленням або видаленням.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Page</value>
@@ -336,19 +336,19 @@
     <value>Переваги</value>
   </data>
   <data name="Settings_Save.Text" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Зберегти при виході</value>
   </data>
   <data name="Settings_SaveDescription.Text" xml:space="preserve">
-    <value>Save when exiting from a note</value>
+    <value>Зберегти при виході з нотатки</value>
   </data>
   <data name="Settings_Startup.Text" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Відкрити під час запуску</value>
   </data>
   <data name="Settings_StartupDescription.Text" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly</value>
+    <value>Цей параметр повинен бути включений, щоб сповіщення працювали належним чином</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Theme</value>
+    <value>Тема</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Темна</value>
