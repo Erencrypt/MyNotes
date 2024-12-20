@@ -291,7 +291,7 @@
     <value>Про цю програму</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Цей додаток створюється Erencrypt як проект створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
+    <value>Цей додаток створюється Erencrypt як проєкт створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
   </data>
   <data name="Settings_BackDrop.Text" xml:space="preserve">
     <value>Фон вікна</value>
@@ -366,7 +366,7 @@
     <value>Нотатки</value>
   </data>
   <data name="Shell_Planner.Content" xml:space="preserve">
-    <value>Плануючий</value>
+    <value>Що планує</value>
   </data>
   <data name="Shell_Reminders.Content" xml:space="preserve">
     <value>Нагадування</value>
