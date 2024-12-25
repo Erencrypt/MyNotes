@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     CornerRadius="10"
+    KeyboardAcceleratorPlacementMode="Hidden"
     PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
     CloseButtonStyle="{StaticResource DefaultButtonStyle}"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"

@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Navigation;
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
+using System.Diagnostics;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.System;
