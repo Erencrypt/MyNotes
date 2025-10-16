@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Input;
 using MyNotes.Contracts.Services;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
-using testtempstd.Helpers;
 using Windows.System;
 
 namespace MyNotes.Views;
