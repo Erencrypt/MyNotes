@@ -5,6 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![GPL-3.0 License][license-shield]][license-url]
+[![Crowdin][crowdin-shield]][crowdin-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -179,11 +180,11 @@ Enable **Open on startup** in Settings to add MyNotes to your Windows startup ap
 - [ ] Add a task view page
 - [ ] Add weekly and monthly planner views
 - [ ] Explore options for cloud backup
-- [x] Localization
+- [x] Localization - [Crowdin](https://crowdin.com/project/mynotes)
   - [x] English
   - [x] Turkish
   - [ ] Additional languages may be added in the future
-  - [x] Contributions to translations are welcome; open a feature request if you'd like to help
+  - [x] Contributions to translations are welcome; open a feature request if you'd like to help / [Crowdin Invite](https://crowdin.com/project/mynotes/invite?h=20ff76b875d52eab71cd15b7170cfedf2084788)
 
 See the [open issues](https://github.com/Erencrypt/MyNotes/issues) for a full list of proposed features and known issues.
 
@@ -225,6 +226,8 @@ These are the resources that helped me during development and that I'd like to g
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[crowdin-url]:https://crowdin.com/project/mynotes
+[crowdin-shield]:https://badges.crowdin.net/mynotes/localized.svg
 [contributors-shield]: https://img.shields.io/github/contributors/Erencrypt/MyNotes.svg?style=for-the-badge
 [contributors-url]: https://github.com/Erencrypt/MyNotes/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Erencrypt/MyNotes.svg?style=for-the-badge
