@@ -5,13 +5,12 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![GPL-3.0 License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 [![Crowdin][crowdin-shield]][crowdin-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/ErenCanUtku/MyNotes/">
+  <a href="https://github.com/Erencrypt/MyNotes/">
     <img src="MyNotes/Assets/NoteIcon.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -22,9 +21,9 @@
     <br /><!--
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />-->
-    <a href="https://github.com/ErenCanUtku/MyNotes/issues">Report Bug</a>
+    <a href="https://github.com/Erencrypt/MyNotes/issues">Report Bug</a>
     ·
-    <a href="https://github.com/ErenCanUtku/MyNotes/issues">Request Feature</a>
+    <a href="https://github.com/Erencrypt/MyNotes/issues">Request Feature</a>
   </p>
 </div>
 
@@ -164,19 +163,17 @@ Distributed under the **GNU General Public License v3.0** License. See [`LICENSE
 <!-- CONTACT
 ## Contact
 
-Eren Can Utku - [@eren_can_utku](https://www.instagram.com/eren_can_utku/)
-
-Project Link: [https://github.com/ErenCanUtku/MyNotes](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/Erencrypt/MyNotes](https://github.com/your_username/repo_name)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 These are the list of resources I find helpful and would like to give credit to. 
-* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D)
+<!-- new setup tool will be mentioned here -->
 * I fixed life cycle API and removed old solution to this problem, but i will left [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) here, maybe it will be useful to someone.
 * [Choose an Open Source License](https://choosealicense.com)
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template) (This template is so useful).
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -195,7 +192,6 @@ These are the list of resources I find helpful and would like to give credit to.
 [license-shield]: https://img.shields.io/github/license/Erencrypt/MyNotes.svg?style=for-the-badge
 [license-url]: https://github.com/Erencrypt/MyNotes/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/eren-can-utku/
 [product-screenshot]: ReadmeResources/AppImage.png
 [csharp]: https://img.shields.io/badge/C_Sharp-239120?style=for-the-badge&logo=csharp&logoColor=white
 [csharp-url]: https://learn.microsoft.com/en-us/dotnet/csharp/
