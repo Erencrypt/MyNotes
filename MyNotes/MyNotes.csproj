@@ -12,7 +12,7 @@
     <WinUISDKReferences>false</WinUISDKReferences>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
-    <LangVersion>13.0</LangVersion>
+    <LangVersion>14.0</LangVersion>
 	<ImplicitUsings>enable</ImplicitUsings>
 	  <PackageIcon>Assets\NoteIcon.png</PackageIcon>
 	  <ApplicationIcon>Assets\WindowIcon.ico</ApplicationIcon>

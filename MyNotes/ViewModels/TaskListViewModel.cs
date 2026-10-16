@@ -14,13 +14,13 @@ namespace MyNotes.ViewModels
     public partial class TaskListViewModel : ObservableObject
     {
         [ObservableProperty]
-        private TaskList _taskList;
+        public partial TaskList TaskList { get; set; }
 
         public ObservableCollection<TaskItem> Items { get; } = [];
 
         public TaskListViewModel(TaskList taskList)
         {
-            _taskList = taskList;
+            TaskList = taskList;
 
             foreach (var item in taskList.TaskItems
                          .Where(ti => ti.DeletedAt == null)
