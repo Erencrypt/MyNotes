@@ -22,8 +22,10 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -60,45 +62,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -112,14 +114,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
-    <value>Ekle</value>
-  </data>
   <data name="AppDescription" xml:space="preserve">
     <value>MyNotes</value>
   </data>
@@ -127,9 +128,6 @@
     <value>MyNotes</value>
   </data>
   <data name="AppNotification_ActiveReminder" xml:space="preserve">
-    <value>Aktif {0} hatırlatıcın var.</value>
-  </data>
-  <data name="AppNotification_ActiveReminders" xml:space="preserve">
     <value>Aktif {0} hatırlatıcın var.</value>
   </data>
   <data name="AppNotification_Dismiss" xml:space="preserve">
@@ -144,64 +142,25 @@
   <data name="AppNotification_Snooze" xml:space="preserve">
     <value>Ertele</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Başarılı</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>İptal</value>
-  </data>
-  <data name="CreateNote_ButtonText" xml:space="preserve">
-    <value>Not Oluştur</value>
-  </data>
-  <data name="CreateNote_ErrorExistingFile" xml:space="preserve">
-    <value>Aynı isimde bir not mevcut. Lütfen başka bir isim kullan.</value>
-  </data>
-  <data name="CreateNote_NameBoxHeader" xml:space="preserve">
-    <value>Not Adı</value>
-  </data>
-  <data name="CreateNote_Title" xml:space="preserve">
-    <value>Yeni Not</value>
-  </data>
-  <data name="CreateReminder_Alarm" xml:space="preserve">
-    <value>Alarm</value>
-  </data>
-  <data name="CreateReminder_ButtonText" xml:space="preserve">
-    <value>Hatırlatıcı Oluştur</value>
-  </data>
-  <data name="CreateReminder_DateHeader" xml:space="preserve">
-    <value>Tarih</value>
-  </data>
-  <data name="CreateReminder_ErrorExistingFile" xml:space="preserve">
-    <value>Aynı isimde bir hatırlatıcı mevcut. Lütfen başka bir isim kullan.</value>
-  </data>
-  <data name="CreateReminder_ErrorLaterDate" xml:space="preserve">
-    <value>Lütfen şu anki tarihten büyük (veya eşit) bir tarih seçin.</value>
-  </data>
-  <data name="CreateReminder_ErrorLaterTime" xml:space="preserve">
-    <value>Lütfen şu anki tarihten en az 5 dakika daha büyük bir tarih seçin.</value>
-  </data>
-  <data name="CreateReminder_ErrorRequired" xml:space="preserve">
-    <value>Hatırlatıcı adı ve metni gereklidir.</value>
-  </data>
-  <data name="CreateReminder_NameBoxHeader" xml:space="preserve">
-    <value>Ad</value>
-  </data>
-  <data name="CreateReminder_Repeated" xml:space="preserve">
-    <value>Tekrarlı</value>
-  </data>
-  <data name="CreateReminder_TextBoxHeader" xml:space="preserve">
-    <value>Metin</value>
-  </data>
-  <data name="CreateReminder_TimeHeader" xml:space="preserve">
-    <value>Zaman</value>
-  </data>
-  <data name="CreateReminder_Title" xml:space="preserve">
-    <value>Yeni Hatırlatıcı</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
-  <data name="DeleteConfirm" xml:space="preserve">
+  <data name="DeleteConfirm.Content" xml:space="preserve">
     <value>Evet, sil bunu</value>
   </data>
-  <data name="DeleteFlyout" xml:space="preserve">
+  <data name="DeleteFlyout.Text" xml:space="preserve">
     <value>Seçili öğe silinecek . Devam etmek istiyormusun?</value>
   </data>
   <data name="Error" xml:space="preserve">
@@ -216,69 +175,8 @@
   <data name="NoSelection" xml:space="preserve">
     <value>Herhangi bir öğe seçili değil.</value>
   </data>
-  <data name="NoteDetails_AlignmentTooltip" xml:space="preserve">
-    <value>Hizalama</value>
-  </data>
-  <data name="NoteDetails_BoldTooltip" xml:space="preserve">
-    <value>Kalın</value>
-  </data>
-  <data name="NoteDetails_EditorPlaceholder" xml:space="preserve">
-    <value>Metin Girin</value>
-  </data>
-  <data name="NoteDetails_ErrorMessage" xml:space="preserve">
-    <value>Dosya kaydedilemedi.
-Hata mesajı:</value>
-  </data>
-  <data name="NoteDetails_FindPlaceholder" xml:space="preserve">
-    <value>Arama metni girin</value>
-  </data>
-  <data name="NoteDetails_FindText.Text" xml:space="preserve">
-    <value>Bul:</value>
-  </data>
-  <data name="NoteDetails_FontColorTooltip" xml:space="preserve">
-    <value>Yazı Rengi</value>
-  </data>
-  <data name="NoteDetails_ItalicTooltip" xml:space="preserve">
-    <value>İtalik</value>
-  </data>
-  <data name="NoteDetails_ListTypeTooltip" xml:space="preserve">
-    <value>Liste Türü</value>
-  </data>
-  <data name="NoteDetails_NoteNameTitle" xml:space="preserve">
-    <value>Not Adı:</value>
-  </data>
-  <data name="NoteDetails_SaveTooltip" xml:space="preserve">
-    <value>Kaydet (Ctrl+S)</value>
-  </data>
-  <data name="NoteDetails_SpellCheck.Content" xml:space="preserve">
-    <value>Yazım denetimi kullan</value>
-  </data>
-  <data name="NoteDetails_StrikethroughTooltip" xml:space="preserve">
-    <value>Üstü Çizili</value>
-  </data>
-  <data name="NoteDetails_SuccessMessage" xml:space="preserve">
-    <value>Değişiklikler Kaydedildi</value>
-  </data>
-  <data name="NoteDetails_UnderlineTooltip" xml:space="preserve">
-    <value>Alt Çizgi</value>
-  </data>
-  <data name="Notes_EmptyText" xml:space="preserve">
-    <value>Notların boş, yeni bir not ekleyebilirsin.</value>
-  </data>
   <data name="Ok" xml:space="preserve">
     <value>Tamam</value>
-  </data>
-  <data name="Reminders_EditReminder" xml:space="preserve">
-    <value>Hatırlatıcıyı Düzenle</value>
-  </data>
-  <data name="Reminders_EmptyText" xml:space="preserve">
-    <value>Hatırlatıcıların boş, yeni bir hatırlatıcı ekleyebilirsin.</value>
-  </data>
-  <data name="Reminders_SaveReminder" xml:space="preserve">
-    <value>Hatırlatıcıyı Kaydet</value>
-  </data>
-  <data name="Required_Message" xml:space="preserve">
-    <value>Not adı gereklidir.</value>
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Geri Getir</value>
@@ -292,7 +190,7 @@ Hata mesajı:</value>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
     <value>Bu uygulama Erencrypt tarafından GNU General Public License v3.0 kapsamında açık kaynaklı bir proje olarak oluşturulmuştur. Daha detaylı bilgi için GitHub sayfamızı ziyaret edin.</value>
   </data>
-  <data name="Settings_BackDrop.Text" xml:space="preserve">
+  <data name="Settings_BackDrop.Title" xml:space="preserve">
     <value>Pencere Arka Planı</value>
   </data>
   <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
@@ -305,7 +203,7 @@ Hata mesajı:</value>
     <value>Mika Alt</value>
   </data>
   <data name="Settings_DisabledByPolicy" xml:space="preserve">
-    <value>Başlatma, grup ilkesi tarafından devre dışı bırakıldı veya bu cihazda desteklenmiyor</value>
+    <value>Başlatma, grup ilkesi tarafından devre dışı bırakıldı veya bu cihazda desteklenmiyor.</value>
   </data>
   <data name="Settings_DisabledByUser" xml:space="preserve">
     <value>Bu uygulamanın oturum açar açmaz çalışma özelliğini devre dışı bıraktınız, ancak fikrinizi değiştirirseniz bunu Görev Yöneticisindeki Başlangıç sekmesinde etkinleştirebilirsiniz. MyNotes</value>
@@ -313,14 +211,14 @@ Hata mesajı:</value>
   <data name="Settings_EnabledByPolicy" xml:space="preserve">
     <value>Grup ilkesi tarafından başlatma etkinleştirildi</value>
   </data>
-  <data name="Settings_Exit.Text" xml:space="preserve">
+  <data name="Settings_Exit.Title" xml:space="preserve">
     <value>Uygulamayı Kapat</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Kapat</value>
   </data>
-  <data name="Settings_ExitDescription.Text" xml:space="preserve">
-    <value>Bu, MyNotes uygulamasını tamamen kapatacaktır. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
+  <data name="Settings_Exit.Description" xml:space="preserve">
+    <value>Bu, MyNotes uygulamasını tamamen kapatacaktır, bildirimlerin düzgün çalışabilmesi için bu uygulamanın arka planda açık kalması gerekmektedir. Yalnızca güncelleme veya kaldırmayla ilgili sorun yaşıyorsanız kullanın.</value>
   </data>
   <data name="Settings_GitHubPage.Content" xml:space="preserve">
     <value>GitHub Sayfası</value>
@@ -334,19 +232,64 @@ Hata mesajı:</value>
   <data name="Settings_Preferances.Text" xml:space="preserve">
     <value>Tercihler</value>
   </data>
-  <data name="Settings_Save.Text" xml:space="preserve">
+  <data name="Settings_Save.Title" xml:space="preserve">
     <value>Çıkarken kaydet</value>
   </data>
-  <data name="Settings_SaveDescription.Text" xml:space="preserve">
-    <value>Bir notu kapatırken değişiklikleri kaydet</value>
+  <data name="Settings_Save.Description" xml:space="preserve">
+    <value>Bir notu kapatırken otomatik olarak değişiklikleri kaydet.</value>
   </data>
-  <data name="Settings_Startup.Text" xml:space="preserve">
+  <data name="Settings_Startup.Title" xml:space="preserve">
     <value>Başlangıçta çalıştır</value>
   </data>
-  <data name="Settings_StartupDescription.Text" xml:space="preserve">
-    <value>Bildirimlerin düzgün çalışması için bu ayarın etkinleştirilmesi gerekir</value>
+  <data name="Settings_Startup.Description" xml:space="preserve">
+    <value>Bildirimlerin düzgün çalışması için bu ayarın etkinleştirilmesi gerekir.</value>
   </data>
-  <data name="Settings_Theme.Text" xml:space="preserve">
+  <data name="Settings_AlarmSoundLooping.Title" xml:space="preserve">
+    <value>Alarm sesini tekrarla</value>
+  </data>
+  <data name="Settings_AlarmSoundLooping.Description" xml:space="preserve">
+    <value>Alarm hatırlatıcılarında alarm sesini tekrarla.</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority.Title" xml:space="preserve">
+    <value>Hatırlatıcı bildirim önceliği</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority.Description" xml:space="preserve">
+    <value>Hatırlatıcı bildirimleri için kullanılacak önceliği seçin. (Yüksek önerilir)</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority_Default.Content" xml:space="preserve">
+    <value>Varsayılan</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority_High.Content" xml:space="preserve">
+    <value>Yüksek</value>
+  </data>
+  <data name="Settings_TrashRetention.Title" xml:space="preserve">
+    <value>Çöp kutusunda saklama süresi</value>
+  </data>
+  <data name="Settings_TrashRetention.Description" xml:space="preserve">
+    <value>Silinen öğelerin ne zaman kalıcı olarak kaldırılacağını seçin.</value>
+  </data>
+  <data name="Settings_TrashRetention_5.Content" xml:space="preserve">
+    <value>5 gün</value>
+  </data>
+  <data name="Settings_TrashRetention_15.Content" xml:space="preserve">
+    <value>15 gün</value>
+  </data>
+  <data name="Settings_TrashRetention_30.Content" xml:space="preserve">
+    <value>30 gün</value>
+  </data>
+  <data name="Settings_TrashRetention_45.Content" xml:space="preserve">
+    <value>45 gün</value>
+  </data>
+  <data name="Settings_TrashRetention_60.Content" xml:space="preserve">
+    <value>60 gün</value>
+  </data>
+  <data name="Settings_TrashRetention_90.Content" xml:space="preserve">
+    <value>90 gün</value>
+  </data>
+  <data name="Settings_TrashRetention_Never.Content" xml:space="preserve">
+    <value>Asla</value>
+  </data>
+  <data name="Settings_Theme.Title" xml:space="preserve">
     <value>Tema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
@@ -358,34 +301,256 @@ Hata mesajı:</value>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
     <value>Aydınlık</value>
   </data>
-  <data name="Shell_NoteDetails.Content" xml:space="preserve">
-    <value>Not Detayları</value>
-  </data>
-  <data name="Shell_Notes.Content" xml:space="preserve">
-    <value>Notlar</value>
-  </data>
-  <data name="Shell_Planner.Content" xml:space="preserve">
-    <value>Planlayıcı</value>
-  </data>
-  <data name="Shell_Reminders.Content" xml:space="preserve">
-    <value>Hatırlatıcılar</value>
-  </data>
-  <data name="Shell_Trash.Content" xml:space="preserve">
-    <value>Çöp Kutusu</value>
-  </data>
-  <data name="Success" xml:space="preserve">
-    <value>Başarılı</value>
-  </data>
-  <data name="Trash_DeleteFlyout" xml:space="preserve">
+  <data name="Trash_DeleteFlyout.Text" xml:space="preserve">
     <value>Seçili öge kalıcı olarak silinecek. Devam etmek istiyor musun?</value>
   </data>
-  <data name="Trash_NotePivotHeader" xml:space="preserve">
+  <data name="Trash_NotePivotHeader.Text" xml:space="preserve">
     <value>Notlar</value>
   </data>
-  <data name="Trash_ReminderPivotHeader" xml:space="preserve">
+  <data name="Trash_ReminderPivotHeader.Text" xml:space="preserve">
     <value>Hatırlatıcılar</value>
   </data>
-  <data name="Trash_TrashEmpty" xml:space="preserve">
+  <data name="Trash_TrashEmpty.Text" xml:space="preserve">
     <value>Çöp kutusu boş.</value>
+  </data>
+  <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
+    <value>Emin misin?</value>
+  </data>
+  <data name="Settings_BackDrop_AcrylicThin" xml:space="preserve">
+    <value>Akrilik İnce</value>
+  </data>
+  <data name="Settings_TimeFormat.Title" xml:space="preserve">
+    <value>ZamanFormatı</value>
+  </data>
+  <data name="Settings_TimeFormat.Description" xml:space="preserve">
+    <value>Bazı giriş alanları ve listeler, zaman biçimini göstermek için bu ayarı kullanır.</value>
+  </data>
+  <data name="Settings_TimeFormat_12.Content" xml:space="preserve">
+    <value>12 Saat</value>
+  </data>
+  <data name="Settings_TimeFormat_24.Content" xml:space="preserve">
+    <value>24 Saat</value>
+  </data>
+  <data name="Settings_PageHeader.Text" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="Trash_DeletedNotes.Text" xml:space="preserve">
+    <value>Silinmiş Notlar</value>
+  </data>
+  <data name="Trash_DeletedDate.Text" xml:space="preserve">
+    <value>Silinme Tarihi</value>
+  </data>
+  <data name="Trash_DeletedReminders.Text" xml:space="preserve">
+    <value>Silinmiş Hatırlatıcılar</value>
+  </data>
+  <data name="Settings_AboutHeader.Text" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="Reminders_PageHeader.Text" xml:space="preserve">
+    <value>Hatırlatıcılar</value>
+  </data>
+  <data name="Reminders_ListHeader.Text" xml:space="preserve">
+    <value>Başlık / Metin</value>
+  </data>
+  <data name="Reminders_ListDate.Text" xml:space="preserve">
+    <value>Tarih / Saat</value>
+  </data>
+  <data name="Reminders_EmptyText.Text" xml:space="preserve">
+    <value>Hatırlatıcıların boş, yeni bir hatırlatıcı ekleyebilirsin.</value>
+  </data>
+  <data name="Notes_PageHeader.Text" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="Notes_ListHeader.Text" xml:space="preserve">
+    <value>Başlık / İçerik</value>
+  </data>
+  <data name="Notes_ListDate.Text" xml:space="preserve">
+    <value>Güncellenme Tarihi</value>
+  </data>
+  <data name="Notes_EmptyText.Text" xml:space="preserve">
+    <value>Notların boş, yeni bir not ekleyebilirsin.</value>
+  </data>
+  <data name="Settings_Language.Title" xml:space="preserve">
+    <value>Dil Seçimi</value>
+  </data>
+  <data name="Settings_Language.Description" xml:space="preserve">
+    <value>Bu uygulama için kullanılan dil seçeneğini değiştir.</value>
+  </data>
+  <data name="ReminderEditor_HeaderTextBox.Header" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="ReminderEditor_HeaderTextBoxPlaceholder" xml:space="preserve">
+    <value>Hatırlatıcı başlığı girin...</value>
+  </data>
+  <data name="ReminderEditor_TextTextBoxPlaceholder" xml:space="preserve">
+    <value>Hatırlatıcı metni girin...</value>
+  </data>
+  <data name="ReminderEditor_TextTextBox.Header" xml:space="preserve">
+    <value>Metin</value>
+  </data>
+  <data name="ReminderEditor_TimePicker.Header" xml:space="preserve">
+    <value>Hatırlatıcı Saati</value>
+  </data>
+  <data name="ReminderEditor_DatePicker.Header" xml:space="preserve">
+    <value>Hatırlatıcı Tarihi</value>
+  </data>
+  <data name="ReminderEditor_OptionsHeader.Text" xml:space="preserve">
+    <value>Seçenekler</value>
+  </data>
+  <data name="ReminderEditor_RepeatCheckBox.Content" xml:space="preserve">
+    <value>Tekrar Eden</value>
+  </data>
+  <data name="ReminderEditor_AlarmCheckBox.Content" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
+  <data name="ReminderEditor_IsActiveCheckBox.Content" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="ReminderEditor_ClearNoteSelection.Content" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="ReminderEditor_NoteComboBox.Header" xml:space="preserve">
+    <value>Not Seçimi (Opsiyonel)</value>
+  </data>
+  <data name="ReminderEditor_NoteSelectDescription.Text" xml:space="preserve">
+    <value>Bağımsız bir hatırlatıcı oluşturmak için boş bırakın</value>
+  </data>
+  <data name="ReminderEditor_NoteComboBoxPlaceholder" xml:space="preserve">
+    <value>Seçilmedi</value>
+  </data>
+  <data name="ReminderEditor_PageHeader.Text" xml:space="preserve">
+    <value>Hatırlatıcı Düzenleyici</value>
+  </data>
+  <data name="NoteEditor_AlignmentTooltip" xml:space="preserve">
+    <value>Hizalama</value>
+  </data>
+  <data name="NoteEditor_BoldTooltip" xml:space="preserve">
+    <value>Kalın</value>
+  </data>
+  <data name="NoteEditor_EditorPlaceholder" xml:space="preserve">
+    <value>Metin Girin</value>
+  </data>
+  <data name="NoteEditor_FindPlaceholder" xml:space="preserve">
+    <value>Arama metni girin</value>
+  </data>
+  <data name="NoteEditor_FindText.Text" xml:space="preserve">
+    <value>Bul:</value>
+  </data>
+  <data name="NoteEditor_FontColorTooltip" xml:space="preserve">
+    <value>Yazı Rengi</value>
+  </data>
+  <data name="NoteEditor_ItalicTooltip" xml:space="preserve">
+    <value>İtalik</value>
+  </data>
+  <data name="NoteEditor_ListTypeTooltip" xml:space="preserve">
+    <value>Liste Türü</value>
+  </data>
+  <data name="NoteEditor_NoteNameTitle" xml:space="preserve">
+    <value>Not Adı:</value>
+  </data>
+  <data name="NoteEditor_SaveTooltip" xml:space="preserve">
+    <value>Kaydet (Ctrl+S)</value>
+  </data>
+  <data name="NoteEditor_SpellCheck.Content" xml:space="preserve">
+    <value>Yazım denetimi kullan</value>
+  </data>
+  <data name="NoteEditor_StrikethroughTooltip" xml:space="preserve">
+    <value>Üstü Çizili</value>
+  </data>
+  <data name="NoteEditor_SuccessMessage" xml:space="preserve">
+    <value>Değişiklikler Kaydedildi</value>
+  </data>
+  <data name="NoteEditor_UnderlineTooltip" xml:space="preserve">
+    <value>Alt Çizgi</value>
+  </data>
+  <data name="NoteEditor_PageHeader.Text" xml:space="preserve">
+    <value>Not Düzenleyici</value>
+  </data>
+  <data name="NoteEditor_TitleTextBoxPlaceholder" xml:space="preserve">
+    <value>Not başlığı girin...</value>
+  </data>
+  <data name="TaskListEditor_DeleteFlyout.Text" xml:space="preserve">
+    <value>Bu listeyi silmek istediğinize emin misiniz? İçindeki bütün ögeler liste ile birlikte silinecek!</value>
+  </data>
+  <data name="ReminderEditor_DeleteFlyout.Text" xml:space="preserve">
+    <value>Bu hatırlatıcıyı silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="NoteEditor_DeleteFlyout.Text" xml:space="preserve">
+    <value>Bu notu silmek istediğinize emin misiniz?</value>
+  </data>
+  <data name="MainWindow_MenuHeader.Content" xml:space="preserve">
+    <value>Sayfalar</value>
+  </data>
+  <data name="MainWindow_NotesItem.Content" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="MainWindow_RemindersItem" xml:space="preserve">
+    <value>Hatırlatıcılar</value>
+  </data>
+  <data name="MainWindow_PlannerItem" xml:space="preserve">
+    <value>Planlayıcı</value>
+  </data>
+  <data name="MainWindow_TrashItem" xml:space="preserve">
+    <value>Çöp Kutusu</value>
+  </data>
+  <data name="MainWindow_SettingsItem" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="TrayIcon_Notes.Text" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="TrayIcon_Reminders.Text" xml:space="preserve">
+    <value>Hatırlatıcılar</value>
+  </data>
+  <data name="TrayIcon_Planner.Text" xml:space="preserve">
+    <value>Planlayıcı</value>
+  </data>
+  <data name="TrayIcon_Settings.Text" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="TrayIcon_Exit.Text" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="TrayIcon_ExitFlyConfirm.Text" xml:space="preserve">
+    <value>Emin misin? Bu uygulamayı tamamen kapatıcak ve hatırlatıcılar çalışmayacak!</value>
+  </data>
+  <data name="Planner_PageHeader.Text" xml:space="preserve">
+    <value>Planlayıcı</value>
+  </data>
+  <data name="TaskListEditor_PageHeader.Text" xml:space="preserve">
+    <value>Liste Düzenleyici</value>
+  </data>
+  <data name="TaskListEditor_ListNameTextBoxHeader.Text" xml:space="preserve">
+    <value>Liste adı</value>
+  </data>
+  <data name="TaskListEditor_HeaderColorPickerHeader.Text" xml:space="preserve">
+    <value>Başlık rengi</value>
+  </data>
+  <data name="EditTaskDialog_DialogHeader.Text" xml:space="preserve">
+    <value>Liste Öğesi Düzenle</value>
+  </data>
+  <data name="EditTaskDialog_Title.Header" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="EditTaskDialog_Text.Header" xml:space="preserve">
+    <value>Metin</value>
+  </data>
+  <data name="AddTaskDialog_DialogHeader.Text" xml:space="preserve">
+    <value>Liste Öğesi Ekle</value>
+  </data>
+  <data name="AddTaskDialog_Title.Header" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="AddTaskDialog_Text.Header" xml:space="preserve">
+    <value>Metin</value>
+  </data>
+  <data name="Trash_DeletedTaskLists.Text" xml:space="preserve">
+    <value>Silinmiş Planlayıcı Listeleri</value>
+  </data>
+  <data name="Trash_DeletedTaskItemsCount" xml:space="preserve">
+    <value>Silinmeden önce {0} öğe vardı</value>
+  </data>
+  <data name="Trash_TaskListPivotHeader.Text" xml:space="preserve">
+    <value>Planlayıcı Listeleri</value>
   </data>
 </root>

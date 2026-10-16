@@ -4,7 +4,9 @@ namespace MyNotes.Helpers
 {
     internal class LogWriter
     {
-        private static readonly string filePath = Path.Combine(App.StorageFolder.Path, "log.txt");
+        private static readonly string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static readonly string myNotesFolderPath = Path.Combine(localAppDataPath, "MyNotes");
+        private static readonly string filePath = Path.Combine(myNotesFolderPath, "log.txt");
         public enum LogLevel { Debug, Info, Warning, Error }
         public LogWriter(string logMessage, LogLevel logLevel)
         {

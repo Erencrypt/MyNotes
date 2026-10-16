@@ -1,3 +1,0 @@
-files:
-  - source: /MyNotes/Strings/en-US/Resources.resw
-    translation: /MyNotes/Strings/%locale%/%original_file_name%

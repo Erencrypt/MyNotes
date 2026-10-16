@@ -1,21 +1,34 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
 
-namespace MyNotes.Helpers;
-
-// Helper class to set the navigation target for a NavigationViewItem.
-//
-// Usage in XAML:
-// <NavigationViewItem x:Uid="Shell_Main" Icon="Document" helpers:NavigationHelper.NavigateTo="AppName.ViewModels.MainViewModel" />
-//
-// Usage in code:
-// NavigationHelper.SetNavigateTo(navigationViewItem, typeof(MainViewModel).FullName);
-public class NavigationHelper
+namespace MyNotes.Helpers
 {
-    public static string GetNavigateTo(NavigationViewItem item) => (string)item.GetValue(NavigateToProperty);
+    /// <summary>
+    /// Helper class for navigation between pages
+    /// </summary>
+    public static class NavigationHelper
+    {
+        public static void NavigateTo<T>(object parameter)
+        {
+            MainWindow._rootFrame.Navigate(typeof(T), parameter);
+        }
+        public static void NavigateTo<T>()
+        {
+            MainWindow._rootFrame.Navigate(typeof(T));
+        }
+        public static void NavigateTo<T>(NavigationTransitionInfo navigationTransitionInfo)
+        {
+            MainWindow._rootFrame.Navigate(typeof(T),null,navigationTransitionInfo);
+        }
 
-    public static void SetNavigateTo(NavigationViewItem item, string value) => item.SetValue(NavigateToProperty, value);
-
-    public static readonly DependencyProperty NavigateToProperty =
-        DependencyProperty.RegisterAttached("NavigateTo", typeof(string), typeof(NavigationHelper), new PropertyMetadata(null));
+        /// <summary>
+        /// Go back to previous page
+        /// </summary>
+        public static void GoBack()
+        {
+            if (MainWindow._rootFrame.CanGoBack)
+            {
+                MainWindow._rootFrame.GoBack();
+            }
+        }
+    }
 }

@@ -1,240 +1,220 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using MyNotes.Helpers;
-using MyNotes.Models;
+using Microsoft.UI.Xaml.Navigation;
 using MyNotes.ViewModels;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Text.Json;
-using Windows.Storage;
+using System.Diagnostics;
+using WinUI3Localizer;
 
-namespace MyNotes.Views;
-
-public sealed partial class TrashPage : Page
+namespace MyNotes.Views
 {
-    private readonly StorageFolder storageFolder = App.StorageFolder;
-    private readonly ObservableCollection<Reminder> items = new();
-    public TrashViewModel ViewModel
+    /// <summary>
+    /// Trash page
+    /// </summary>
+    public sealed partial class TrashPage : Page
     {
-        get;
-    }
-    public static bool? NtfInvoke { get; set; }
+        public TrashViewModel ViewModel { get; set; }
+        private readonly ILocalizer _localizer = Localizer.Get();
+        public static bool? NtfInvoke
+        {
+            get; set;
+        }
+        public TrashPage()
+        {
+            InitializeComponent();
+            ViewModel = App.GetService<TrashViewModel>();
+            DataContext = ViewModel;
+            ViewModel.DeletedTaskLists.CollectionChanged += (_, _) => UpdateEmptyStates();
 
-    public TrashPage()
-    {
+            NotesSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
+            RemindersSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
+            TaskListSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
+            ToolTipService.SetToolTip(DeleteNote, _localizer.GetLocalizedString("Delete"));
+            ToolTipService.SetToolTip(RestoreNote, _localizer.GetLocalizedString("Restore"));
+            ToolTipService.SetToolTip(DeleteReminder, _localizer.GetLocalizedString("Delete"));
+            ToolTipService.SetToolTip(RestoreReminder, _localizer.GetLocalizedString("Restore"));
+            ToolTipService.SetToolTip(DeleteTaskList, _localizer.GetLocalizedString("Delete"));
+            ToolTipService.SetToolTip(RestoreTaskList, _localizer.GetLocalizedString("Restore"));
 
-        ViewModel = App.GetService<TrashViewModel>();
-        InitializeComponent();
-        PivotItem pivotItem;
-        //Localizatinos
-        NotesSearch.PlaceholderText = "Search".GetLocalized();
-        RemindersSearch.PlaceholderText = "Search".GetLocalized();
-        deleteFlyoutNoteText.Text = "Trash_DeleteFlyout".GetLocalized();
-        deleteNoteFly.Content = "DeleteConfirm".GetLocalized();
-        EmptyText.Text = "Trash_TrashEmpty".GetLocalized();
-        pivotItem = (PivotItem)TrashPivot.Items[0];
-        pivotItem.Header = "Trash_NotePivotHeader".GetLocalized();
-        ToolTipService.SetToolTip(deleteNote, "Delete".GetLocalized());
-        ToolTipService.SetToolTip(restoreNote, "Restore".GetLocalized());
-        deleteFlyoutReminderText.Text = "Trash_DeleteFlyout".GetLocalized();
-        deleteReminderFly.Content = "DeleteConfirm".GetLocalized();
-        EmptyText2.Text = "Trash_TrashEmpty".GetLocalized();
-        pivotItem = (PivotItem)TrashPivot.Items[1];
-        pivotItem.Header = "Trash_ReminderPivotHeader".GetLocalized();
-        ToolTipService.SetToolTip(deleteReminder, "Delete".GetLocalized());
-        ToolTipService.SetToolTip(restoreReminder, "Restore".GetLocalized());
+            EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            EmptyText2.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            EmptyText3.Visibility = LstTaskLists.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
 
-        LstReminders.ItemsSource = items;
-        ListNotes(string.Empty);
-        ListReminders();
-        EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
-        EmptyText2.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
-        if (NtfInvoke == true)
-        {
-            PivotChange();
-        }
-    }
-    private void PivotChange()
-    {
-        TrashPivot.SelectedItem = TrashPivot.Items[1];
-        TrashPivot.UpdateLayout();
-    }
-    private void ListNotes(string SearchText)
-    {
-        DirectoryInfo dinfo = new(storageFolder.Path + "\\Notes");
-        FileInfo[] Files = dinfo.GetFiles("*.rtf");
-        List<FileInfo> orderedList = SearchText == null ? orderedList = Files.OrderByDescending(x => x.LastAccessTime).ToList() :
-        orderedList = Files.Where(x => x.Name[..^4].ToLower().Contains(SearchText.ToLower())).OrderByDescending(x => x.LastAccessTime).ToList();
-        LstNotes.Items.Clear();
-        foreach (FileInfo file in orderedList)
-        {
-            LstNotes.Items.Add(file.Name[..^4]);
-        }
-    }
-    private void ListReminders()
-    {
-        DirectoryInfo dinfo = new(storageFolder.Path + "\\Trash");
-        FileInfo[] Files = dinfo.GetFiles("*.json");
-        List<FileInfo> orderedList = Files.OrderByDescending(x => x.CreationTime).ToList();
-        string fullPath;
-        items.Clear();
-        foreach (FileInfo file in orderedList)
-        {
-            fullPath = dinfo.ToString() + "\\" + file.Name;
-            string readText = File.ReadAllText(fullPath, Encoding.UTF8);
-            Reminder readedReminder = JsonSerializer.Deserialize<Reminder>(readText)!;
-            readedReminder.ReminderHeader = file.Name[..^5];
-            items.Add(readedReminder);
-        }
-        LstReminders.ItemsSource = items;
-        LstReminders.UpdateLayout();
-    }
-    private async void DeleteNote()
-    {
-        try
-        {
-            var selectedItem = LstNotes.SelectedItem;
-            if (selectedItem != null)
+            if (NtfInvoke == true)
             {
-                var directory = storageFolder.Path + @"\Trash\" + LstNotes.SelectedItem.ToString() + ".rtf";
-                var file = await StorageFile.GetFileFromPathAsync(directory);
-                await file.DeleteAsync();
-                LstNotes.Items.Remove(selectedItem);
-            }
-            else
-            {
-                ContentDialog infoDialog = new()
-                { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                await infoDialog.ShowAsync();
+                PivotChange();
             }
         }
-        catch (Exception ex)
+        private void PivotChange()
         {
-            ContentDialog infoDialog = new()
-            {
-                XamlRoot = XamlRoot,
-                Title = "Error".GetLocalized(),
-                Content = "Error_Meesage".GetLocalized() + ex.Message,
-                CloseButtonText = "Ok".GetLocalized()
-            };
-            await infoDialog.ShowAsync();
-            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
+            TrashPivot.SelectedItem = TrashPivot.Items[1];
+            TrashPivot.UpdateLayout();
         }
-    }
-    private async void DeleteReminder()
-    {
-        try
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (LstReminders.SelectedItem is Reminder selectedItem)
-            {
-                var directory = storageFolder.Path + @"\Trash\" + selectedItem.ReminderHeader + ".json";
-                var file = await StorageFile.GetFileFromPathAsync(directory);
-                await file.DeleteAsync();
-                items.Remove(selectedItem);
-            }
-            else
-            {
-                ContentDialog infoDialog = new()
-                { XamlRoot = XamlRoot, Title = "Info".GetLocalized(), Content = "NoSelection".GetLocalized(), CloseButtonText = "Ok".GetLocalized() };
-                await infoDialog.ShowAsync();
-            }
+            base.OnNavigatedTo(e);
+            await ViewModel.Initialize();
+            UpdateEmptyStates();
         }
-        catch (Exception ex)
-        {
-            ContentDialog errorDialog = new()
-            {
-                XamlRoot = XamlRoot,
-                Title = "Error".GetLocalized(),
-                Content = "Error_Meesage".GetLocalized() + ex.Message,
-                CloseButtonText = "Ok".GetLocalized()
-            };
-            await errorDialog.ShowAsync();
-            LogWriter.Log(ex.Message, LogWriter.LogLevel.Error);
-        }
-    }
-    private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (!deleteNote.IsEnabled)
-        {
-            deleteNote.IsEnabled = true;
-        }
-        if (!restoreNote.IsEnabled)
-        {
-            restoreNote.IsEnabled = true;
-        }
-    }
-    private void RestoreNote_Click(object sender, RoutedEventArgs e)
-    {
-        if (LstNotes.SelectedItem != null)
-        {
-            if (LstNotes.Items.Count <= 1)
-            {
-                EmptyText.Visibility = Visibility.Visible;
-            }
-            MoveFile moveFile = new();
-            moveFile.Move("Trash", "Notes", LstNotes, XamlRoot);
-        }
-    }
-    private void DeleteNote_Click(object sender, RoutedEventArgs e)
-    {
-        if (LstNotes.SelectedItem != null)
-        {
-            if (LstNotes.Items.Count <= 1)
-            {
-                EmptyText.Visibility = Visibility.Visible;
-            }
-            DeleteNote();
-        }
-        deleteNote.Flyout.Hide();
-    }
-    private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (!deleteReminder.IsEnabled)
-        {
-            deleteReminder.IsEnabled = true;
-        }
-        if (!restoreReminder.IsEnabled)
-        {
-            restoreReminder.IsEnabled = true;
-        }
-    }
-    private void RestoreReminder_Click(object sender, RoutedEventArgs e)
-    {
-        if (LstReminders.SelectedItem != null)
-        {
-            if (LstReminders.Items.Count <= 1)
-            {
-                EmptyText2.Visibility = Visibility.Visible;
-            }
-            Reminder? rm = LstReminders.SelectedItem as Reminder;
-            MoveFile moveFile = new();
-            moveFile.Move("Trash", "Reminders", LstReminders, XamlRoot, rm!, items);
-        }
-    }
-    private void DeleteReminder_Click(object sender, RoutedEventArgs e)
-    {
-        if (LstReminders.SelectedItem != null)
-        {
-            if (LstReminders.Items.Count <= 1)
-            {
-                EmptyText2.Visibility = Visibility.Visible;
-            }
-            DeleteReminder();
-        }
-        deleteReminder.Flyout.Hide();
-    }
 
-    private void NotesSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-    {
-        ListNotes(NotesSearch.Text);
-    }
-
-    private void RemindersSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-    {
-        if (RemindersSearch != null)
+        private void UpdateEmptyStates()
         {
-            LstReminders.ItemsSource = items.Where(x => x.ReminderHeader.ToLower().Contains(RemindersSearch.Text.ToLower()));
-            LstReminders.UpdateLayout();
+            // Update notes empty state
+            EmptyText.Text = _localizer.GetLocalizedString("Trash_TrashEmpty");
+            EmptyText.Visibility = ViewModel.DeletedNotes.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            // Update reminders empty state
+            EmptyText2.Text = _localizer.GetLocalizedString("Trash_TrashEmpty");
+            EmptyText2.Visibility = ViewModel.DeletedReminders.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            // Update task list empty state
+            EmptyText3.Text = _localizer.GetLocalizedString("Trash_TrashEmpty");
+            EmptyText3.Visibility = ViewModel.DeletedTaskLists.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private async void NotesSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                // Filter notes based on search text
+                var searchText = sender.Text;
+                ViewModel.NotesSearchTerm = searchText;
+                await ViewModel.SearchDeletedNotesCommand.ExecuteAsync(null);
+            }
+        }
+
+        private async void RemindersSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                // Filter deleted reminders based on search text
+                var searchText = sender.Text;
+                ViewModel.RemindersSearchTerm = searchText;
+                await ViewModel.SearchDeletedRemindersCommand.ExecuteAsync(null);
+            }
+        }
+
+        private void LstNotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enable/disable buttons based on selection
+            RestoreNote.IsEnabled = LstNotes.SelectedItem != null;
+            DeleteNote.IsEnabled = LstNotes.SelectedItem != null;
+        }
+
+        private void LstReminders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Enable/disable buttons based on selection
+            RestoreReminder.IsEnabled = LstReminders.SelectedItem != null;
+            DeleteReminder.IsEnabled = LstReminders.SelectedItem != null;
+        }
+
+        private async void RestoreNote_Click(object sender, RoutedEventArgs e)
+        {
+            if (LstNotes.SelectedItem is Data.Models.Note selectedNote)
+            {
+                try
+                {
+                    await ViewModel.RestoreNoteCommand.ExecuteAsync(selectedNote);
+                    UpdateEmptyStates();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error restoring note: {ex.Message}");
+                }
+            }
+        }
+
+        private async void DeleteNote_Click(object sender, RoutedEventArgs e)
+        {
+            if (LstNotes.SelectedItem is Data.Models.Note selectedNote)
+            {
+                try
+                {
+                    await ViewModel.PermanentlyDeleteNoteCommand.ExecuteAsync(selectedNote);
+                    UpdateEmptyStates();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error permanently deleting note: {ex.Message}");
+                }
+            }
+        }
+
+        private async void RestoreReminder_Click(object sender, RoutedEventArgs e)
+        {
+            if (LstReminders.SelectedItem is Data.Models.Reminder selectedReminder)
+            {
+                try
+                {
+                    await ViewModel.RestoreReminderCommand.ExecuteAsync(selectedReminder);
+                    UpdateEmptyStates();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error restoring reminder: {ex.Message}");
+                }
+            }
+        }
+
+        private async void DeleteReminder_Click(object sender, RoutedEventArgs e)
+        {
+            if (LstReminders.SelectedItem is Data.Models.Reminder selectedReminder)
+            {
+                try
+                {
+                    await ViewModel.PermanentlyDeleteReminderCommand.ExecuteAsync(selectedReminder);
+                    UpdateEmptyStates();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error permanently deleting reminder: {ex.Message}");
+                }
+            }
+        }
+
+        private void TaskListSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                ViewModel.TaskListsSearchTerm = sender.Text;
+            }
+        }
+
+        private void LstTaskLists_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RestoreTaskList.IsEnabled = LstTaskLists.SelectedItem != null;
+            DeleteTaskList.IsEnabled = LstTaskLists.SelectedItem != null;
+        }
+
+        private async void RestoreTaskList_Click(object sender, RoutedEventArgs e)
+        {
+            if (LstTaskLists.SelectedItem is Data.Models.TaskList selectedTaskList)
+            {
+                try
+                {
+                    await ViewModel.RestoreTaskListCommand.ExecuteAsync(selectedTaskList);
+                    UpdateEmptyStates();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error restoring task list: {ex.Message}");
+                }
+            }
+        }
+
+        private async void DeleteTaskList_Click(object sender, RoutedEventArgs e)
+        {
+            if (LstTaskLists.SelectedItem is Data.Models.TaskList selectedTaskList)
+            {
+                try
+                {
+                    await ViewModel.PermanentlyDeleteTaskListCommand.ExecuteAsync(selectedTaskList);
+                    UpdateEmptyStates();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error permanently deleting task list: {ex.Message}");
+                }
+            }
         }
     }
 }

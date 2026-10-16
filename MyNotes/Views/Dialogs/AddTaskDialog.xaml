@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="MyNotes.Views.Dialogs.AddTaskDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyNotes.Views.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:l="using:WinUI3Localizer"
+    mc:Ignorable="d"
+    CornerRadius="8"
+    PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
+    CloseButtonStyle="{StaticResource DefaultButtonStyle}"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    CloseButtonClick="ContentDialog_CloseButtonClick">
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xF0E3;" Margin="0,0,10,0"/>
+                <TextBlock l:Uids.Uid="AddTaskDialog_DialogHeader" FontWeight="Medium"/>
+            </StackPanel>
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBox l:Uids.Uid="AddTaskDialog_Title" x:Name="TitleInput" Width="300" Margin="0,0,0,6"/>
+        <TextBox l:Uids.Uid="AddTaskDialog_Text" x:Name="TextInput" AcceptsReturn="True" Width="300"/>
+        <TextBlock x:Name="errorTextBlock" Visibility="Collapsed" Margin="0,16,0,0" TextWrapping="Wrap" Width="300" Height="auto"/>
+    </StackPanel>
+</ContentDialog>

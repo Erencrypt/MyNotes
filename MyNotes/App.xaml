@@ -1,17 +1,18 @@
-﻿<Application
+<?xml version="1.0" encoding="utf-8"?>
+<Application
     x:Class="MyNotes.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyNotes"
+    xmlns:helpers="using:MyNotes.Helpers">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <ResourceDictionary Source="/Styles/FontSizes.xaml" />
-                <ResourceDictionary Source="/Styles/Thickness.xaml" />
-                <ResourceDictionary Source="/Styles/TextBlock.xaml" />
+                <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush x:Key="WindowCaptionBackground">Transparent</SolidColorBrush>
-            <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled">Transparent</SolidColorBrush>
+            <!-- Other app resources here -->
+            <helpers:HexColorToBrushConverter x:Key="HexColorToBrushConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

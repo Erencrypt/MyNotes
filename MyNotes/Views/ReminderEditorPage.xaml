@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MyNotes.Views.ReminderEditorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:MyNotes.Helpers"
+    xmlns:l="using:WinUI3Localizer"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid Margin="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" x:Name="header" BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}" BorderThickness="0,0,0,1" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock l:Uids.Uid="ReminderEditor_PageHeader" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" x:Name="DeleteButton" MaxHeight="26" Padding="6,2" Margin="0,0,0,-1" Background="Transparent" CornerRadius="4,4,0,0" BorderThickness="1,1,1,0" BorderBrush="{ThemeResource AccentFillColorSecondaryBrush}" l:Uids.Uid="TaskListEditor_DeleteButton">
+                    <FontIcon Glyph="&#xE74D;"/>
+                    <Button.Flyout>
+                        <Flyout x:Name="DeleteFlyout">
+                            <StackPanel MaxWidth="420">
+                                <TextBlock l:Uids.Uid="ReminderEditor_DeleteFlyout" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,16" />
+                                <Button l:Uids.Uid="DeleteConfirm" Click="DeleteButton_Click"/>
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Padding="0,8">
+            <RelativePanel>
+                <!-- Header -->
+                    <TextBox x:Name="HeaderTextBox"
+                             l:Uids.Uid="ReminderEditor_HeaderTextBox"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Text="{x:Bind ViewModel.Header, Mode=TwoWay}"/>
+
+                    <!-- Text -->
+                    <TextBox x:Name="TextTextBox"
+                             l:Uids.Uid="ReminderEditor_TextTextBox"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="HeaderTextBox"
+                             RelativePanel.Above="DateTimeGrid"
+                             Height="auto"
+                             Margin="0,8"
+                             Text="{x:Bind ViewModel.Text, Mode=TwoWay}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"/>
+
+                    <!-- Date and Time -->
+                    <Grid Name="DateTimeGrid" 
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.Above="OptionsGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TimePicker x:Name="TimePicker" 
+                                l:Uids.Uid="ReminderEditor_TimePicker"
+                                 Grid.Column="0"
+                                 Width="auto" 
+                                 HorizontalAlignment="Stretch"
+                                 Margin="0,0,8,0" 
+                                 Time="{x:Bind ViewModel.ReminderTime, Mode=TwoWay}"/>
+
+                    <CalendarDatePicker x:Name="DatePicker" 
+                                        l:Uids.Uid="ReminderEditor_DatePicker"
+                                    Grid.Column="1"
+                                    Width="auto"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="8,0,0,0"
+                                    Visibility="{x:Bind ViewModel.Repeat, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"
+                                    Date="{x:Bind ViewModel.ReminderDate, Mode=TwoWay}">
+                        <CalendarDatePicker.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Margin="0,0,0,-6"/>
+                            </DataTemplate>
+                        </CalendarDatePicker.HeaderTemplate>
+                    </CalendarDatePicker>
+                </Grid>
+
+                    <!-- Options -->
+                <Grid Name="OptionsGrid"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      Margin="0,8"
+                      RelativePanel.Above="NoteSelectGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    <TextBlock l:Uids.Uid="ReminderEditor_OptionsHeader" FontWeight="SemiBold" Grid.Row="0" />
+
+                        <CheckBox x:Name="RepeatCheckBox" 
+                                  l:Uids.Uid="ReminderEditor_RepeatCheckBox"
+                                  Grid.Row="1"
+                                  Grid.Column="0"
+                                      Width="auto"
+                                      HorizontalAlignment="Stretch"
+                                      IsChecked="{x:Bind ViewModel.Repeat, Mode=TwoWay}"/>
+
+                        <CheckBox x:Name="AlarmCheckBox" 
+                                  l:Uids.Uid="ReminderEditor_AlarmCheckBox"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                      Width="auto"
+                                      HorizontalAlignment="Stretch"
+                                      IsChecked="{x:Bind ViewModel.Alarm, Mode=TwoWay}"/>
+
+                        <CheckBox x:Name="IsActiveCheckBox" 
+                                  l:Uids.Uid="ReminderEditor_IsActiveCheckBox"
+                                  Grid.Row="1"
+                                  Grid.Column="2"
+                                      Width="auto"
+                                      HorizontalAlignment="Stretch"
+                                      IsChecked="{x:Bind ViewModel.IsActive, Mode=TwoWay}"/>
+                    </Grid>
+
+                    <!-- Note Association -->
+                    <Grid Name="NoteSelectGrid" 
+                          RelativePanel.AlignBottomWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True"
+                        >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox x:Name="NoteComboBox" 
+                                  l:Uids.Uid="ReminderEditor_NoteComboBox"
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                       Width="auto"
+                                  HorizontalAlignment="Stretch"
+                                      ItemsSource="{x:Bind ViewModel.AvailableNotes, Mode=OneWay}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedNote, Mode=TwoWay}"
+                                      DisplayMemberPath="Title"/>
+
+                        <Button Grid.Row="0"
+                                l:Uids.Uid="ReminderEditor_ClearNoteSelection"
+                                Grid.Column="1"
+                                Visibility="{x:Bind ViewModel.SelectedNote, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}"
+                                Margin="8,28,0,0"
+                                VerticalAlignment="Top"
+                                Click="ClearNoteSelection_Click">
+                        </Button>
+
+                        <TextBlock Text="Leave empty to create a standalone reminder"
+                                   l:Uids.Uid="ReminderEditor_NoteSelectDescription"
+                                       Grid.Row="1"
+                                       Grid.ColumnSpan="2"
+                                       FontStyle="Italic" 
+                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Grid>
+                </RelativePanel>
+        </Border>
+
+        <!-- Footer -->
+        <Border Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                <Button x:Name="CancelButton" Content="{x:Bind _Localizer.GetLocalizedString('Cancel')}" Click="CancelButton_Click"/>
+                <Button x:Name="SaveButton" Content="{x:Bind _Localizer.GetLocalizedString('Save')}" Click="SaveButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

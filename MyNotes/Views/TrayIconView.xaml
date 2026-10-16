@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="MyNotes.Views.TrayIconView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="using:H.NotifyIcon"
+    xmlns:l="using:WinUI3Localizer"
+    mc:Ignorable="d">
+
+    <tb:TaskbarIcon
+        x:Name="TrayIcon"
+        x:FieldModifier="public"
+        ContextMenuMode="SecondWindow"
+        IconSource="/Assets/WindowIcon.ico"
+        NoLeftClickDelay="True"
+        ToolTipText="MyNotes"
+        DoubleClickCommand="{x:Bind ShowHideWindowCommand}"
+        >
+        <tb:TaskbarIcon.ContextFlyout>
+            <MenuFlyout AreOpenCloseAnimationsEnabled="True">
+                <MenuFlyoutItem MinWidth="140" l:Uids.Uid="TrayIcon_Notes"
+                    Command="{x:Bind NavigateToNotesCommand}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE70F;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem MinWidth="140" l:Uids.Uid="TrayIcon_Reminders"
+                    Command="{x:Bind NavigateToRemindersCommand}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE823;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem MinWidth="140" l:Uids.Uid="TrayIcon_Planner"
+                     Command="{x:Bind NavigateToPlannerCommand}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xF0E3;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                
+                <MenuFlyoutSeparator />
+                
+                <MenuFlyoutItem MinWidth="140" l:Uids.Uid="TrayIcon_Settings"
+                    Command="{x:Bind NavigateToSettingsCommand}">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE713;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                
+                <MenuFlyoutSeparator />
+                
+                <MenuFlyoutSubItem MinWidth="140" l:Uids.Uid="TrayIcon_Exit">
+                    <MenuFlyoutSubItem.Icon>
+                        <FontIcon Glyph="&#xF3B1;" />
+                    </MenuFlyoutSubItem.Icon>
+                    <MenuFlyoutItem l:Uids.Uid="TrayIcon_ExitFlyConfirm" Name="FlyConfirm" MinWidth="140"
+                         Command="{x:Bind ExitApplicationCommand}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xF3B1;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyoutSubItem>
+               
+            </MenuFlyout>
+           
+        </tb:TaskbarIcon.ContextFlyout>
+    </tb:TaskbarIcon>
+</UserControl>

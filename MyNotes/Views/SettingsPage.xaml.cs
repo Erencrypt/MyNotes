@@ -1,121 +1,100 @@
-﻿using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.Win32;
-using MyNotes.Contracts.Services;
+using Microsoft.Windows.AppNotifications;
+using MyNotes.Data.Models.Enums;
+using MyNotes.Data.Services.Interfaces;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
 using System.Diagnostics;
 using Windows.ApplicationModel;
-using Windows.UI.Popups;
+using WinUI3Localizer;
 
 namespace MyNotes.Views;
-
+//TODO: add an otion for using system theme color or custom one with color picker
 public sealed partial class SettingsPage : Page
 {
-    private readonly RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
-    private readonly ILocalSettingsService localSettingsService;
-    private StartupTask? startupTask;
-    private readonly string BackDropKey = "BackDrop";
-    private readonly string AcrylicKey = "IsAcrylic";
-    private readonly string SaveWhenExitKey = "SaveWhenExit";
-    private bool isAcrylic;
-    public SettingsViewModel ViewModel
-    {
-        get;
-    }
-    //TODO: add sort by option for lists
-    //TODO: add option to delete items on trash page that are older than 30 day option
-    public static bool IsClose { get; set; }
+    private readonly ILocalizer _localizer = Localizer.Get();
+    private StartupTask? _startupTask;
+
+    public SettingsViewModel ViewModel { get; }
 
     public SettingsPage()
     {
-        ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
-        localSettingsService = App.GetService<ILocalSettingsService>();
-        ThemeState();
-        BackDropState();
-        SaveWhenExitState();
-        if (RuntimeHelper.IsMSIX)
-        {
-            GetTask();
-        }
-        StartupTogle.IsOn = key.GetValue("MyNotes") != null;
-        AppDescription.Text = "AppDescription".GetLocalized();
 
-        //ExitCard.Header = "Settings_Exit".GetLocalized();
-        //ExitCard.Description = "Settings_ExitDescription".GetLocalized();
+        ViewModel = App.GetService<SettingsViewModel>();
+        DataContext = ViewModel;
+
+        Loaded += SettingsPage_Loaded;
     }
-    private async void BackDropState()
+
+    private async void SettingsPage_Loaded(object sender, RoutedEventArgs e)
     {
-        isAcrylic = await localSettingsService.ReadSettingAsync<bool>(AcrylicKey);
-        var backdrop = await localSettingsService.ReadSettingAsync<MicaKind>(BackDropKey);
-        if (isAcrylic)
+        Loaded -= SettingsPage_Loaded;
+        ViewModel.IsLoading = true;
+
+        await ViewModel.Initialize();
+        SaveTogle.IsOn = ViewModel.SaveWhenExit;
+        AlarmSoundLoopingToggle.IsOn = ViewModel.AlarmSoundLooping;
+        ReminderNotificationPriorityCb.SelectedIndex = ViewModel.ReminderNotificationPriority == AppNotificationPriority.High ? 1 : 0;
+        TrashRetentionCb.SelectedIndex = ViewModel.TrashRetentionDays switch
         {
-            BackdropComboBox.SelectedItem = Settings_BackDrop_Acrylic;
+            5 => 0,
+            15 => 1,
+            30 => 2,
+            45 => 3,
+            60 => 4,
+            90 => 5,
+            0 => 6,
+            _ => 2
+        };
+
+        if (Helpers.RuntimeHelper.IsMSIX)
+        {
+            await GetTaskAsync();
         }
         else
         {
-            isAcrylic = false;
-            if (backdrop.ToString() != null)
-            {
-                if (backdrop == MicaKind.Base)
-                {
-                    BackdropComboBox.SelectedItem = Settings_BackDrop_Base;
-                }
-                else if (backdrop == MicaKind.BaseAlt)
-                {
-                    BackdropComboBox.SelectedItem = Settings_BackDrop_BaseAlt;
-                }
-            }
-            else if (backdrop.ToString() == null)
-            {
-                await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
-                BackdropComboBox.SelectedItem = Settings_BackDrop_Base;
-            }
+            StartupTogle.IsOn = AppUtilities.StartupEntryExists(AppConfig.StartupRegistryValueName);
         }
+
+        AppDescription.Text = _localizer.GetLocalizedString("AppDescription");
+        TimeFormatCb.SelectedIndex = (int)ViewModel.TimeFormat;
+        LanguageCardCb.SelectedIndex = ViewModel.Language switch
+        {
+            "en-US" => 0,
+            "tr-TR" => 1,
+            _ => 0
+        };
+
+        var currentTheme = await App.Current.SettingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
+        ThemeCb.SelectedIndex = currentTheme switch
+        {
+            ElementTheme.Light => 0,
+            ElementTheme.Dark => 1,
+            _ => 2
+        };
+
+        var currentBackdrop = await App.Current.SettingService.GetSettingAsync(DataKeys.Backdrop, DevWinUI.BackdropType.Mica);
+        BackdropCb.SelectedIndex = currentBackdrop switch
+        {
+            DevWinUI.BackdropType.Mica => 0,
+            DevWinUI.BackdropType.MicaAlt => 1,
+            DevWinUI.BackdropType.Acrylic => 2,
+            DevWinUI.BackdropType.AcrylicThin => 3,
+            _ => 0
+        };
+
+        ViewModel.IsLoading = false;
     }
 
-    private void ThemeState()
+    #region startup
+
+    private async Task GetTaskAsync()
     {
-        switch (ViewModel.ElementTheme)
-        {
-            case ElementTheme.Default:
-                ThemeComboBox.SelectedIndex = 2;
-                break;
-            case ElementTheme.Light:
-                ThemeComboBox.SelectedIndex = 0;
-                break;
-            case ElementTheme.Dark:
-                ThemeComboBox.SelectedIndex = 1;
-                break;
-        }
-    }
-    private async void SaveWhenExitState()
-    {
-        var save = await localSettingsService.ReadSettingAsync<bool>(SaveWhenExitKey);
-        if (save.ToString() != null)
-        {
-            if (save)
-            {
-                SaveTogle.IsOn = true;
-            }
-            else if (!save)
-            {
-                SaveTogle.IsOn = false;
-            }
-        }
-        else if (save.ToString() == null)
-        {
-            await localSettingsService.SaveSettingAsync(SaveWhenExitKey, true);
-            SaveTogle.IsOn = true;
-        }
-    }
-    private async void GetTask()
-    {
-        startupTask = await StartupTask.GetAsync("8163264128256");
-        switch (startupTask.State)
+        _startupTask = await StartupTask.GetAsync(AppConfig.StartupTaskId);
+
+        switch (_startupTask.State)
         {
             case StartupTaskState.Enabled:
                 StartupTogle.IsOn = true;
@@ -124,9 +103,7 @@ public sealed partial class SettingsPage : Page
                 StartupTogle.IsOn = false;
                 break;
             case StartupTaskState.DisabledByUser:
-                // Task is disabled and user must enable it manually.
-                MessageDialog dialog = new("Settings_DisabledByUser".GetLocalized());
-                await dialog.ShowAsync();
+                await ShowStatusDialogAsync(_localizer.GetLocalizedString("Settings_DisabledByUser"));
                 StartupTogle.IsOn = false;
                 break;
             case StartupTaskState.DisabledByPolicy:
@@ -139,57 +116,67 @@ public sealed partial class SettingsPage : Page
                 break;
         }
     }
+
+    private async Task ShowStatusDialogAsync(string content)
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "",
+            Content = content,
+            CloseButtonText =  _localizer.GetLocalizedString("Ok")
+        };
+
+        await dialog.ShowAsync();
+    }
+
     private async void EnableStartup()
     {
-        if (RuntimeHelper.IsMSIX)
+        if (Helpers.RuntimeHelper.IsMSIX)
         {
-            switch (startupTask.State)
+            if (_startupTask is null)
             {
-                case StartupTaskState.Disabled:
-                    StartupTaskState newState = await startupTask.RequestEnableAsync();
-                    Debug.WriteLine("Request to enable startup, result = {0}", newState);
-                    break;
-                case StartupTaskState.DisabledByUser:
-                    // Task is disabled and user must enable it manually.
-                    MessageDialog dialog = new("Settings_DisabledByUser".GetLocalized());
-                    await dialog.ShowAsync();
-                    break;
-                case StartupTaskState.DisabledByPolicy:
-                    MessageDialog dialog2 = new("Settings_DisabledByPolicy".GetLocalized());
-                    await dialog2.ShowAsync();
-                    Debug.WriteLine("Settings_DisabledByPolicy".GetLocalized());
-                    break;
+                return;
             }
+
+            var newState = await _startupTask.RequestEnableAsync();
+            Debug.WriteLine("Request to enable startup, result = {0}", newState);
         }
         else
         {
-            if (Environment.ProcessPath != null)
+            if (AppUtilities.GetProcessPath() is string processPath)
             {
-                key.SetValue("MyNotes", Environment.ProcessPath!);
+                AppUtilities.SetStartupEntry(AppConfig.StartupRegistryValueName, processPath);
             }
-        }
-    }
-    private void DisableStartup()
-    {
-        if (RuntimeHelper.IsMSIX)
-        {
-            switch (startupTask.State)
-            {
-                case StartupTaskState.Enabled:
-                    startupTask.Disable();
-                    Debug.WriteLine("Request to disable startup, result = {0}", startupTask.State);
-                    break;
-                case StartupTaskState.EnabledByPolicy:
-                    Debug.WriteLine("Settings_EnabledByPolicy".GetLocalized());
-                    break;
-            }
-        }
-        else
-        {
-            key.DeleteValue("MyNotes", false);
         }
     }
 
+    private void DisableStartup()
+    {
+        if (Helpers.RuntimeHelper.IsMSIX)
+        {
+            if (_startupTask is null)
+            {
+                return;
+            }
+
+            switch (_startupTask.State)
+            {
+                case StartupTaskState.Enabled:
+                    _startupTask.Disable();
+                    Debug.WriteLine("Request to disable startup, result = {0}", _startupTask.State);
+                    break;
+                case StartupTaskState.EnabledByPolicy:
+                    Debug.WriteLine(_localizer.GetLocalizedString("Settings_EnabledByPolicy"));
+                    break;
+            }
+        }
+        else
+        {
+            AppUtilities.RemoveStartupEntry(AppConfig.StartupRegistryValueName);
+        }
+    }
+
+    #endregion
     private void StartupTogle_Toggled(object sender, RoutedEventArgs e)
     {
         if (StartupTogle.IsOn)
@@ -204,78 +191,117 @@ public sealed partial class SettingsPage : Page
 
     private async void SaveTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        await localSettingsService.SaveSettingAsync(SaveWhenExitKey, SaveTogle.IsOn);
+        await ViewModel.SetSaveWhenExitAsync(SaveTogle.IsOn);
     }
 
-    private async void BackdropComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void AlarmSoundLoopingToggle_Toggled(object sender, RoutedEventArgs e)
     {
-        MicaKind knd = (MicaKind)App.MainWindow.SystemBackdrop.GetValue(MicaBackdrop.KindProperty);
-        MicaBackdrop micaBackdrop = new();
-        ComboBoxItem? cbItem = BackdropComboBox.SelectedItem as ComboBoxItem;
+        if (ViewModel.IsLoading)
+        {
+            return;
+        }
 
-        if (cbItem.Name == "Settings_BackDrop_Base")
-        {
-            await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.Base);
-            micaBackdrop.Kind = MicaKind.Base;
-            if (isAcrylic)
-            {
-                App.MainWindow.SystemBackdrop = micaBackdrop;
-                isAcrylic = false;
-            }
-            else if (knd != micaBackdrop.Kind)
-            {
-                App.MainWindow.SystemBackdrop = micaBackdrop;
-            }
-        }
-        else if (cbItem.Name == "Settings_BackDrop_BaseAlt")
-        {
-            await localSettingsService.SaveSettingAsync(BackDropKey, MicaKind.BaseAlt);
-            micaBackdrop.Kind = MicaKind.BaseAlt;
-            if (isAcrylic)
-            {
-                App.MainWindow.SystemBackdrop = micaBackdrop;
-                isAcrylic = false;
-            }
-            else if (knd != micaBackdrop.Kind)
-            {
-                App.MainWindow.SystemBackdrop = micaBackdrop;
-            }
-        }
-        else if (cbItem.Name == "Settings_BackDrop_Acrylic")
-        {
-            if (!isAcrylic)
-            {
-                await localSettingsService.SaveSettingAsync(AcrylicKey, true);
-                DesktopAcrylicBackdrop desktopAcrylicBackdrop = new();
-                App.MainWindow.SystemBackdrop = desktopAcrylicBackdrop;
-                isAcrylic = true;
-            }
-        }
-        await localSettingsService.SaveSettingAsync(AcrylicKey, isAcrylic);
+        await ViewModel.SetAlarmSoundLoopingAsync(AlarmSoundLoopingToggle.IsOn);
     }
 
-    private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void ReminderNotificationPriorityCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        switch (ThemeComboBox.SelectedIndex)
+        if (ViewModel.IsLoading || ReminderNotificationPriorityCb.SelectedItem is not ComboBoxItem item)
         {
-            case 0:
-                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Light);
-                break;
-            case 1:
-                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Dark);
-                break;
-            case 2:
-                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Default);
-                break;
-            default:
-                ViewModel.SwitchThemeCommand.Execute(ElementTheme.Default);
-                break;
+            return;
         }
+
+        var priority = item.Tag?.ToString() == "High"
+            ? AppNotificationPriority.High
+            : AppNotificationPriority.Default;
+        await ViewModel.SetReminderNotificationPriorityAsync(priority);
     }
+
+    private async void TrashRetentionCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ViewModel.IsLoading ||
+            TrashRetentionCb.SelectedItem is not ComboBoxItem item ||
+            !int.TryParse(item.Tag?.ToString(), out var retentionDays))
+        {
+            return;
+        }
+
+        await ViewModel.SetTrashRetentionDaysAsync(retentionDays);
+    }
+
 
     private void ExitButton_Click(object sender, RoutedEventArgs e)
     {
-        IsClose = true;
-        Application.Current.Exit();
+        App.HandleClosedEvents = false;
+        App.Current.Exit();
+    }
+
+    private async void TimeFormatCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        TimeFormat timeFormat = (TimeFormat)TimeFormatCb.SelectedIndex;
+        await ViewModel.SetTimeFormatAsync(timeFormat);
+        ViewModel.TimeFormat = timeFormat;
+    }
+
+    private async void LanguageCardCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ViewModel.IsLoading)
+        {
+            return;
+        }
+
+        if (LanguageCardCb.SelectedItem is not ComboBoxItem selectedLanguage)
+        {
+            return;
+        }
+
+        var lang = selectedLanguage.Tag?.ToString() ?? "en-US";
+        if (lang == ViewModel.Language)
+        {
+            return;
+        }
+
+        await ViewModel.SetLanguageAsync(lang);
+        NavigationHelper.NavigateTo<SettingsPage>();
+    }
+
+    private async void ThemeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ThemeCb.SelectedItem is ComboBoxItem item && item.Tag is string tag)
+        {
+            var theme = tag switch
+            {
+                "Light" => ElementTheme.Light,
+                "Dark" => ElementTheme.Dark,
+                _ => ElementTheme.Default
+            };
+            
+            var currentTheme = await App.Current.SettingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
+            if (currentTheme != theme)
+            {
+                await App.Current.ThemeService.SetElementThemeAsync(theme);
+            }
+        }
+    }
+
+    private async void BackdropCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (BackdropCb.SelectedItem is ComboBoxItem item && item.Tag is string tag)
+        {
+            var backdrop = tag switch
+            {
+                "Mica" => DevWinUI.BackdropType.Mica,
+                "MicaAlt" => DevWinUI.BackdropType.MicaAlt,
+                "Acrylic" => DevWinUI.BackdropType.Acrylic,
+                "AcrylicThin" => DevWinUI.BackdropType.AcrylicThin,
+                _ => DevWinUI.BackdropType.Mica
+            };
+            
+            var currentBackdrop = await App.Current.SettingService.GetSettingAsync(DataKeys.Backdrop, DevWinUI.BackdropType.Mica);
+            if (currentBackdrop != backdrop)
+            {
+                await App.Current.ThemeService.SetBackdropTypeAsync(backdrop);
+            }
+        }
     }
 }
