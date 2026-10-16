@@ -206,7 +206,7 @@ If you find MyNotes useful, consider giving the project a star. Thanks for your 
 <!-- LICENSE -->
 ## License
 
-Distributed under the **GNU General Public License v3.0** License. See [`LICENSE`](https://github.com/Erencrypt/MyNotes/blob/main/LICENSE) file for more information.
+MyNotes is licensed under the **GNU General Public License v3.0**. See [`LICENSE`](https://github.com/Erencrypt/MyNotes/blob/main/LICENSE) file for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
