@@ -29,6 +29,8 @@ namespace MyNotes.ViewModels
             _scheduler.ReminderSnoozed += (r) =>
             {
                 // Update list with snoozed reminder to show snoozed indicator
+                if (App._mainWindow == null)
+                { return; }
                 App._mainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
                     var existing = Reminders.FirstOrDefault(x => x.Id == r.Id);
@@ -44,6 +46,8 @@ namespace MyNotes.ViewModels
                 // Only remove non-repeating reminders from list on dismiss
                 if (!r.Repeat)
                 {
+                    if (App._mainWindow == null)
+                    { return; }
                     App._mainWindow.DispatcherQueue.TryEnqueue(() =>
                     {
                         var existing = Reminders.FirstOrDefault(x => x.Id == r.Id);

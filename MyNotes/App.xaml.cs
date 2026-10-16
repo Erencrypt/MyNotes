@@ -155,10 +155,14 @@ namespace MyNotes
         #region Window activation and closing
         private void MainInstance_Activated(object? sender, AppActivationArguments e)
         {
+            if (_mainWindow==null)
+            {return;}
             _mainWindow.AppWindow.Show();
         }
         private async void Window_Closed(object sender, WindowEventArgs args)
         {
+            if (_mainWindow == null)
+            { return; }
             if (HandleClosedEvents == true)
             {
                 args.Handled = true;

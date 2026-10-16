@@ -21,7 +21,8 @@ namespace MyNotes.Helpers
                 Debug.WriteLine($"AppInfoBar not initialized yet. Title: {title}. Message: {message}");
                 return;
             }
-
+            if (App._mainWindow == null)
+            { return; }
             App._mainWindow.DispatcherQueue.TryEnqueue(() =>
             {
                 var infoBar = MainWindow.AppAlertInfoBar;
