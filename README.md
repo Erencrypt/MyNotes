@@ -63,14 +63,14 @@
 
 I simply wanted to create a good-looking notes and reminders app that utilizes the Windows notification system. I also liked the look of WinUI design.
 
-This app started as a side project that I aimed to use daily while continuing to develop it. Life had other plans, and I wasn't able to spend as much time on the project, but I never forgot about it or abandoned it.
+This app started as a side project that I aimed to use daily while continuing to develop it. <!-- Life had other plans, and --> I wasn't able to spend as much time on the project, but I never forgot about it or abandoned it.
 
 The original version was created with .NET 7 and Template Studio. I later tried upgrading it to .NET 8 for long-term support, but WinUI wasn't getting much attention at the time, and it was unstable. Some parts broke, and I encountered strange errors that were difficult to trace back to their causes, so I left it alone for a while. But I was determined to return someday and rewrite it.
 
 Now rewritten in .NET 10 and modernized.
-
-"Behold my creation, in all its glory!" -me
-
+<!--
+"Behold my creation, in all its glory!" -me :D
+-->
 ## What's New in Version 2.0
 
 - The new version uses SQLite with Entity Framework Core instead of JSON and RTF files.
@@ -215,11 +215,10 @@ MyNotes is licensed under the **GNU General Public License v3.0**. See [`LICENSE
 ## Acknowledgments
 
 These are the resources that helped me during development and that I'd like to give credit to.
-
+* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D) (update: i think licance is expired, i need to check it and re-apply for new one if possible)
 - **Stack Overflow:** I fixed the app's lifecycle handling and replaced the old solution, but I'm leaving [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) here in case it helps someone else.
 * [Choose an Open Source License](https://choosealicense.com)
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template).
-* The installer tool will be listed here once implemented.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
