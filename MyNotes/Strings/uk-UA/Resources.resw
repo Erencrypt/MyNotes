@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDescription" xml:space="preserve">
+    <value>MyNotes</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>MyNotes</value>
+  </data>
+  <data name="AppNotification_ActiveReminder" xml:space="preserve">
+    <value>У вас активне нагадування {0}.</value>
+  </data>
+  <data name="AppNotification_Dismiss" xml:space="preserve">
+    <value>Відхилити</value>
+  </data>
+  <data name="AppNotification_Expired" xml:space="preserve">
+    <value>{0} нагадування переміщено в смітник через закінчення кінця. Ви можете перевірити сміття, щоб побачити видалені нагадування.</value>
+  </data>
+  <data name="AppNotification_SeeDeletedReminders" xml:space="preserve">
+    <value>Переглянути видалені нагадування</value>
+  </data>
+  <data name="AppNotification_Snooze" xml:space="preserve">
+    <value>Повторити</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Додати</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успіх</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Скасувати</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="DeleteConfirm.Content" xml:space="preserve">
+    <value>Yes, delete this</value>
+  </data>
+  <data name="DeleteFlyout.Text" xml:space="preserve">
+    <value>Selected item will be deleted. Do you want to continue?</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
+  <data name="Error_Meesage" xml:space="preserve">
+    <value>Сталася помилка. Повідомлення:</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+  <data name="NoSelection" xml:space="preserve">
+    <value>Елемент не вибрано.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Гаразд</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Відновити</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Пошук</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>Про цю програму</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>Цей додаток створюється Erencrypt як проєкт створення нотаток з відкритим кодом в рамках GNU General Public License v3.0. Для отримання додаткової інформації відвідайте сторінку GitHub.</value>
+  </data>
+  <data name="Settings_BackDrop.Title" xml:space="preserve">
+    <value>Window Backdrop</value>
+  </data>
+  <data name="Settings_BackDrop_Acrylic.Content" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="Settings_BackDrop_Base.Content" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="Settings_BackDrop_BaseAlt.Content" xml:space="preserve">
+    <value>Mica Alt</value>
+  </data>
+  <data name="Settings_DisabledByPolicy" xml:space="preserve">
+    <value>Startup disabled by group policy, or not supported on this device.</value>
+  </data>
+  <data name="Settings_DisabledByUser" xml:space="preserve">
+    <value>Ви вимкнули можливість цього додатку запускатися, як тільки ввійдете, але якщо ви передумаєте, ви можете включити це у вкладці Startup в диспетчері Задач. Мої нотатки</value>
+  </data>
+  <data name="Settings_EnabledByPolicy" xml:space="preserve">
+    <value>Запуск увімкнено правилами групи</value>
+  </data>
+  <data name="Settings_Exit.Title" xml:space="preserve">
+    <value>Close Application</value>
+  </data>
+  <data name="Settings_ExitButton.Content" xml:space="preserve">
+    <value>Закрити</value>
+  </data>
+  <data name="Settings_Exit.Description" xml:space="preserve">
+    <value>This will completely close MyNotes, for notifications to work properly this app needs to stay open in the background. Only use if you have problems with updating or uninstalling.</value>
+  </data>
+  <data name="Settings_GitHubPage.Content" xml:space="preserve">
+    <value>GitHub Page</value>
+  </data>
+  <data name="Settings_GitHubPage.NavigateUri" xml:space="preserve">
+    <value>https://github.com/Erencrypt/MyNotes/</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>Персоналізація</value>
+  </data>
+  <data name="Settings_Preferances.Text" xml:space="preserve">
+    <value>Переваги</value>
+  </data>
+  <data name="Settings_Save.Title" xml:space="preserve">
+    <value>Save when exit</value>
+  </data>
+  <data name="Settings_Save.Description" xml:space="preserve">
+    <value>Save automatically when exiting from a note.</value>
+  </data>
+  <data name="Settings_Startup.Title" xml:space="preserve">
+    <value>Open on startup</value>
+  </data>
+  <data name="Settings_Startup.Description" xml:space="preserve">
+    <value>This setting must be enabled for notifications to work properly.</value>
+  </data>
+  <data name="Settings_AlarmSoundLooping.Title" xml:space="preserve">
+    <value>Loop alarm sound</value>
+  </data>
+  <data name="Settings_AlarmSoundLooping.Description" xml:space="preserve">
+    <value>Repeat the alarm sound for alarm reminders.</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority.Title" xml:space="preserve">
+    <value>Reminder notification priority</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority.Description" xml:space="preserve">
+    <value>Choose the priority used for reminder notifications. (High is recommended)</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority_Default.Content" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Settings_ReminderNotificationPriority_High.Content" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="Settings_TrashRetention.Title" xml:space="preserve">
+    <value>Trash retention</value>
+  </data>
+  <data name="Settings_TrashRetention.Description" xml:space="preserve">
+    <value>Choose when deleted items are permanently removed.</value>
+  </data>
+  <data name="Settings_TrashRetention_5.Content" xml:space="preserve">
+    <value>5 days</value>
+  </data>
+  <data name="Settings_TrashRetention_15.Content" xml:space="preserve">
+    <value>15 days</value>
+  </data>
+  <data name="Settings_TrashRetention_30.Content" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="Settings_TrashRetention_45.Content" xml:space="preserve">
+    <value>45 days</value>
+  </data>
+  <data name="Settings_TrashRetention_60.Content" xml:space="preserve">
+    <value>60 days</value>
+  </data>
+  <data name="Settings_TrashRetention_90.Content" xml:space="preserve">
+    <value>90 days</value>
+  </data>
+  <data name="Settings_TrashRetention_Never.Content" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="Settings_Theme.Title" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>Темна</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>Типово</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>Світла</value>
+  </data>
+  <data name="Trash_DeleteFlyout.Text" xml:space="preserve">
+    <value>Selected item will be deleted permanently. Do you want to continue?</value>
+  </data>
+  <data name="Trash_NotePivotHeader.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Trash_ReminderPivotHeader.Text" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="Trash_TrashEmpty.Text" xml:space="preserve">
+    <value>Your trash is empty.</value>
+  </data>
+  <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
+    <value>Are You Sure?</value>
+  </data>
+  <data name="Settings_BackDrop_AcrylicThin" xml:space="preserve">
+    <value>Acrylic Thin</value>
+  </data>
+  <data name="Settings_TimeFormat.Title" xml:space="preserve">
+    <value>Time Format</value>
+  </data>
+  <data name="Settings_TimeFormat.Description" xml:space="preserve">
+    <value>Some input fields and lists use this setting to display the time format.</value>
+  </data>
+  <data name="Settings_TimeFormat_12.Content" xml:space="preserve">
+    <value>12 Hour</value>
+  </data>
+  <data name="Settings_TimeFormat_24.Content" xml:space="preserve">
+    <value>24 Hour</value>
+  </data>
+  <data name="Settings_PageHeader.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Trash_DeletedNotes.Text" xml:space="preserve">
+    <value>Deleted Notes</value>
+  </data>
+  <data name="Trash_DeletedDate.Text" xml:space="preserve">
+    <value>Deleted Date</value>
+  </data>
+  <data name="Trash_DeletedReminders.Text" xml:space="preserve">
+    <value>Deleted Reminders</value>
+  </data>
+  <data name="Settings_AboutHeader.Text" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Reminders_PageHeader.Text" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="Reminders_ListHeader.Text" xml:space="preserve">
+    <value>Header / Text</value>
+  </data>
+  <data name="Reminders_ListDate.Text" xml:space="preserve">
+    <value>Date / Time</value>
+  </data>
+  <data name="Reminders_EmptyText.Text" xml:space="preserve">
+    <value>Your reminders is empty, you can add one.</value>
+  </data>
+  <data name="Notes_PageHeader.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notes_ListHeader.Text" xml:space="preserve">
+    <value>Title / Content</value>
+  </data>
+  <data name="Notes_ListDate.Text" xml:space="preserve">
+    <value>Updated Date</value>
+  </data>
+  <data name="Notes_EmptyText.Text" xml:space="preserve">
+    <value>Your notes is empty, you can add one.</value>
+  </data>
+  <data name="Settings_Language.Title" xml:space="preserve">
+    <value>Language Selection</value>
+  </data>
+  <data name="Settings_Language.Description" xml:space="preserve">
+    <value>Change used language option for this app.</value>
+  </data>
+  <data name="ReminderEditor_HeaderTextBox.Header" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="ReminderEditor_HeaderTextBoxPlaceholder" xml:space="preserve">
+    <value>Enter reminder header...</value>
+  </data>
+  <data name="ReminderEditor_TextTextBox.Header" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ReminderEditor_TextTextBoxPlaceholder" xml:space="preserve">
+    <value>Enter reminder text...</value>
+  </data>
+  <data name="ReminderEditor_TimePicker.Header" xml:space="preserve">
+    <value>Reminder Time</value>
+  </data>
+  <data name="ReminderEditor_DatePicker.Header" xml:space="preserve">
+    <value>Reminder Date</value>
+  </data>
+  <data name="ReminderEditor_OptionsHeader.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ReminderEditor_RepeatCheckBox.Content" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="ReminderEditor_AlarmCheckBox.Content" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
+  <data name="ReminderEditor_IsActiveCheckBox.Content" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ReminderEditor_ClearNoteSelection.Content" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ReminderEditor_NoteComboBox.Header" xml:space="preserve">
+    <value>Select Note (Optional)</value>
+  </data>
+  <data name="ReminderEditor_NoteSelectDescription.Text" xml:space="preserve">
+    <value>Leave empty to create a standalone reminder</value>
+  </data>
+  <data name="ReminderEditor_NoteComboBoxPlaceholder" xml:space="preserve">
+    <value>Not Selected</value>
+  </data>
+  <data name="ReminderEditor_PageHeader.Text" xml:space="preserve">
+    <value>Reminder Editor</value>
+  </data>
+  <data name="NoteEditor_AlignmentTooltip" xml:space="preserve">
+    <value>Alignment</value>
+  </data>
+  <data name="NoteEditor_BoldTooltip" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="NoteEditor_EditorPlaceholder" xml:space="preserve">
+    <value>Enter Text</value>
+  </data>
+  <data name="NoteEditor_FindPlaceholder" xml:space="preserve">
+    <value>Enter Search Text</value>
+  </data>
+  <data name="NoteEditor_FindText.Text" xml:space="preserve">
+    <value>Find:</value>
+  </data>
+  <data name="NoteEditor_FontColorTooltip" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="NoteEditor_ItalicTooltip" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="NoteEditor_ListTypeTooltip" xml:space="preserve">
+    <value>List Type</value>
+  </data>
+  <data name="NoteEditor_NoteNameTitle" xml:space="preserve">
+    <value>Note Name:</value>
+  </data>
+  <data name="NoteEditor_SaveTooltip" xml:space="preserve">
+    <value>Save (Ctrl+S)</value>
+  </data>
+  <data name="NoteEditor_SpellCheck.Content" xml:space="preserve">
+    <value>Use spellcheck</value>
+  </data>
+  <data name="NoteEditor_StrikethroughTooltip" xml:space="preserve">
+    <value>Strikethrough</value>
+  </data>
+  <data name="NoteEditor_SuccessMessage" xml:space="preserve">
+    <value>Changes Saved</value>
+  </data>
+  <data name="NoteEditor_UnderlineTooltip" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="NoteEditor_PageHeader.Text" xml:space="preserve">
+    <value>Note Editor</value>
+  </data>
+  <data name="NoteEditor_TitleTextBoxPlaceholder" xml:space="preserve">
+    <value>Enter note title...</value>
+  </data>
+  <data name="TaskListEditor_DeleteFlyout.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this list? All items in this list will be deleted too!</value>
+  </data>
+  <data name="ReminderEditor_DeleteFlyout.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this reminder?</value>
+  </data>
+  <data name="NoteEditor_DeleteFlyout.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this note?</value>
+  </data>
+  <data name="MainWindow_MenuHeader.Content" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="MainWindow_NotesItem.Content" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="MainWindow_RemindersItem" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="MainWindow_PlannerItem" xml:space="preserve">
+    <value>Planner</value>
+  </data>
+  <data name="MainWindow_TrashItem" xml:space="preserve">
+    <value>Trash</value>
+  </data>
+  <data name="MainWindow_SettingsItem" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TrayIcon_Notes.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="TrayIcon_Reminders.Text" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="TrayIcon_Planner.Text" xml:space="preserve">
+    <value>Planner</value>
+  </data>
+  <data name="TrayIcon_Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TrayIcon_Exit.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="TrayIcon_ExitFlyConfirm.Text" xml:space="preserve">
+    <value>Are you sure? This will close app completely and reminders won't work!</value>
+  </data>
+  <data name="Planner_PageHeader.Text" xml:space="preserve">
+    <value>Planner</value>
+  </data>
+  <data name="TaskListEditor_PageHeader.Text" xml:space="preserve">
+    <value>List Editor</value>
+  </data>
+  <data name="TaskListEditor_ListNameTextBoxHeader.Text" xml:space="preserve">
+    <value>List name</value>
+  </data>
+  <data name="TaskListEditor_HeaderColorPickerHeader.Text" xml:space="preserve">
+    <value>Header color</value>
+  </data>
+  <data name="EditTaskDialog_DialogHeader.Text" xml:space="preserve">
+    <value>Edit List Item</value>
+  </data>
+  <data name="EditTaskDialog_Title.Header" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="EditTaskDialog_Text.Header" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="AddTaskDialog_DialogHeader.Text" xml:space="preserve">
+    <value>Add List Item</value>
+  </data>
+  <data name="AddTaskDialog_Title.Header" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="AddTaskDialog_Text.Header" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Trash_DeletedTaskLists.Text" xml:space="preserve">
+    <value>Deleted Planner Lists</value>
+  </data>
+  <data name="Trash_DeletedTaskItemsCount" xml:space="preserve">
+    <value>Had {0} item(s) before deletion</value>
+  </data>
+  <data name="Trash_TaskListPivotHeader.Text" xml:space="preserve">
+    <value>Planner Lists</value>
+  </data>
+</root>
