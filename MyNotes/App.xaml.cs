@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppLifecycle;
+using Microsoft.Windows.Globalization;
 using MyNotes.Data.Context;
 using MyNotes.Data.Services;
 using MyNotes.Data.Services.Interfaces;
@@ -12,9 +13,7 @@ using MyNotes.Helpers;
 using MyNotes.Services;
 using MyNotes.Services.Interfaces;
 using MyNotes.ViewModels;
-using MyNotes.Views;
 using System.Diagnostics;
-using Microsoft.Windows.Globalization;
 using Windows.Storage;
 using WinUI3Localizer;
 
@@ -25,6 +24,7 @@ namespace MyNotes
         public new static App Current => (App)Application.Current;
         public static Window? _mainWindow { get; set; }
         private IHost? _host;
+        private readonly SemaphoreSlim _updateCheckSemaphore = new(1, 1);
         public IThemeService ThemeService => GetService<IThemeService>();
         public ISettingService SettingService => GetService<ISettingService>();
 
@@ -66,6 +66,7 @@ namespace MyNotes
 
                     // Theme service as singleton since it manages app-wide state and resources
                     services.AddSingleton<IAppNotificationService, AppNotificationService>();
+                    services.AddSingleton<IAppUpdateService, AppUpdateService>();
                     services.AddSingleton<IThemeService, ThemeService>();
 
                     // ViewModels
@@ -98,8 +99,6 @@ namespace MyNotes
 
         protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
-
-
             var mainInstance = AppInstance.FindOrRegisterForKey("MyNotes");
             mainInstance.Activated += MainInstance_Activated;
 
@@ -132,16 +131,25 @@ namespace MyNotes
 
                 try
                 {
-                    await GetService<IReminderScheduler>().InitializeAsync();
                     await GetService<IAppNotificationService>().InitializeAsync();
                 }
                 catch (Exception ex)
                 {
-                    LogWriter.Log("Failed to initialize ReminderScheduler: " + ex.Message, LogWriter.LogLevel.Error);
+                    LogWriter.Log($"Failed to initialize app notifications: {ex}", LogWriter.LogLevel.Error);
+                }
+
+                try
+                {
+                    await GetService<IReminderScheduler>().InitializeAsync();
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log($"Failed to initialize reminder scheduler: {ex}", LogWriter.LogLevel.Error);
                 }
 
                 base.OnLaunched(args);
                 App._mainWindow.Activate();
+                await CheckForUpdatesAsync(isManual: false);
             }
             if (!mainInstance.IsCurrent)
             {
@@ -151,12 +159,25 @@ namespace MyNotes
                 return;
             }
         }
+        private async Task ShutdownServicesAsync()
+        {
+            var host = _host;
+            if (host is null)
+            {
+                return;
+            }
+
+            GetService<IAppNotificationService>().Unregister();
+            await host.StopAsync();
+            host.Dispose();
+            _host = null;
+        }
 
         #region Window activation and closing
         private void MainInstance_Activated(object? sender, AppActivationArguments e)
         {
-            if (_mainWindow==null)
-            {return;}
+            if (_mainWindow == null)
+            { return; }
             _mainWindow.AppWindow.Show();
         }
         private async void Window_Closed(object sender, WindowEventArgs args)
@@ -170,11 +191,102 @@ namespace MyNotes
             }
             else
             {
-                if (_host != null)
+                try
                 {
-                    await _host.StopAsync();
-                    _host.Dispose();
+                    await ShutdownServicesAsync();
                 }
+                catch (Exception ex)
+                {
+                    LogWriter.Log($"Failed to shut down application services: {ex}", LogWriter.LogLevel.Error);
+                }
+            }
+        }
+        #endregion
+
+        #region Update checking and installation
+        public async Task CheckForUpdatesAsync(bool isManual)
+        {
+            await _updateCheckSemaphore.WaitAsync();
+            try
+            {
+                var updateService = GetService<IAppUpdateService>();
+                var localizer = Localizer.Get();
+
+                if (!updateService.IsInstalled)
+                {
+                    if (isManual)
+                    {
+                        AppInfoBar.Show(
+                            localizer.GetLocalizedString("Update_CheckTitle"),
+                            localizer.GetLocalizedString("Update_InstalledReleaseRequired"),
+                            AlertInfoBarSeverity.Informational);
+                    }
+                    return;
+                }
+
+                if (isManual)
+                {
+                    AppInfoBar.Show(localizer.GetLocalizedString("Update_CheckTitle"), localizer.GetLocalizedString("Update_Checking"));
+                }
+
+                var updateInfo = await updateService.CheckForUpdatesAsync();
+                if (updateInfo is null)
+                {
+                    if (isManual)
+                    {
+                        AppInfoBar.Show(
+                            localizer.GetLocalizedString("Update_CheckTitle"),
+                            localizer.GetLocalizedString("Update_UpToDate"),
+                            AlertInfoBarSeverity.Success);
+                    }
+                    return;
+                }
+
+                var version = updateInfo.TargetFullRelease.Version.ToString();
+                var updateTitle = localizer.GetLocalizedString("Update_AvailableTitle");
+                var updateMessage = localizer.GetLocalizedString("Update_VersionAvailable").Replace("{0}", version, StringComparison.Ordinal);
+
+                try
+                {
+                    var notificationShown = await GetService<IAppNotificationService>().ShowUpdateAvailableMessage(updateTitle, $"MyNotes {version} is available.");
+                    if (!notificationShown)
+                    {
+                        throw new InvalidOperationException("Windows did not accept the update notification.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log($"Failed to show the update notification: {ex}", LogWriter.LogLevel.Error);
+                    AppInfoBar.Show(updateTitle, localizer.GetLocalizedString("Update_NotificationFailed"), AlertInfoBarSeverity.Warning);
+                }
+
+                var dialog = new ContentDialog
+                {
+                    XamlRoot = MainWindow._rootFrame.XamlRoot,
+                    Title = updateTitle,
+                    Content = updateMessage,
+                    PrimaryButtonText = localizer.GetLocalizedString("Update_DownloadAndInstall"),
+                    CloseButtonText = localizer.GetLocalizedString("Update_Later"),
+                    DefaultButton = ContentDialogButton.Primary
+                };
+
+                if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+                { return; }
+
+                AppInfoBar.Show(localizer.GetLocalizedString("Update_DownloadingTitle"), localizer.GetLocalizedString("Update_Downloading"));
+
+                await updateService.DownloadUpdatesAsync(updateInfo);
+                await ShutdownServicesAsync();
+                updateService.ApplyUpdatesAndRestart(updateInfo);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log($"Update check or installation failed: {ex}", LogWriter.LogLevel.Error);
+                AppInfoBar.Show(Localizer.Get().GetLocalizedString("Update_FailedTitle"), ex.Message, AlertInfoBarSeverity.Error);
+            }
+            finally
+            {
+                _updateCheckSemaphore.Release();
             }
         }
         #endregion

@@ -1,0 +1,107 @@
+name: Build and publish Velopack release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Read release version
+        id: version
+        shell: pwsh
+        run: |
+          $version = $env:GITHUB_REF_NAME -replace '^v', ''
+          if ($version -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$') {
+            throw "Tag '$env:GITHUB_REF_NAME' must be v-prefixed semantic version (for example, v2.0.0)."
+          }
+          "value=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Publish x64 application
+        run: >-
+          dotnet publish MyNotes/MyNotes.csproj
+          --configuration Release
+          --runtime win-x64
+          --self-contained true
+          --output artifacts/publish
+          -p:Platform=x64
+          -p:PublishProfile=
+          -p:PublishTrimmed=false
+          -p:PublishReadyToRun=false
+          -p:WindowsAppSDKSelfContained=true
+          -p:Version=${{ steps.version.outputs.value }}
+
+      - name: Install Velopack CLI
+        run: dotnet tool install vpk --tool-path .tools --version 1.2.161
+
+      - name: Download previous release for delta packages
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $releases = gh release list --repo $env:GITHUB_REPOSITORY --json tagName --limit 1 | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) {
+            throw "Could not check for previous GitHub Releases."
+          }
+
+          if ($releases.Count -gt 0) {
+            $previousRelease = gh release view $releases[0].tagName --repo $env:GITHUB_REPOSITORY --json assets | ConvertFrom-Json
+            if ($LASTEXITCODE -ne 0) {
+              throw "Could not inspect the latest GitHub Release."
+            }
+
+            if ($previousRelease.assets.name -contains "releases.win.json") {
+              & .\.tools\vpk.exe download github --repoUrl "https://github.com/$env:GITHUB_REPOSITORY" --token $env:GH_TOKEN
+              if ($LASTEXITCODE -ne 0) {
+                throw "Could not download previous Velopack release assets."
+              }
+            } else {
+              Write-Host "Latest release is not a Velopack release; skipping delta package download."
+            }
+          }
+
+      - name: Package installer and release assets
+        shell: pwsh
+        run: |
+          & .\.tools\vpk.exe pack `
+            --packId Erencrypt.MyNotes `
+            --packTitle MyNotes `
+            --packVersion "${{ steps.version.outputs.value }}" `
+            --packDir artifacts/publish `
+            --mainExe MyNotes.exe `
+            --icon MyNotes/Assets/WindowIcon.ico `
+            --runtime win10.0.17763-x64 `
+            --outputDir artifacts/releases
+          if ($LASTEXITCODE -ne 0) {
+            throw "Velopack packaging failed."
+          }
+
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & .\.tools\vpk.exe upload github `
+            --repoUrl "https://github.com/$env:GITHUB_REPOSITORY" `
+            --outputDir artifacts/releases `
+            --publish `
+            --releaseName "MyNotes ${{ steps.version.outputs.value }}" `
+            --tag "$env:GITHUB_REF_NAME" `
+            --token $env:GH_TOKEN
+          if ($LASTEXITCODE -ne 0) {
+            throw "Publishing the Velopack GitHub Release failed."
+          }

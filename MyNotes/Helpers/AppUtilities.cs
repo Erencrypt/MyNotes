@@ -143,7 +143,12 @@ namespace MyNotes.Helpers
         public static void SetStartupEntry(string valueName, string executablePath)
         {
             using var key = Registry.CurrentUser.OpenSubKey(AppConfig.StartupRegistryKey, true);
-            key?.SetValue(valueName, executablePath);
+            if (key is null)
+            {
+                throw new InvalidOperationException("The current user's Windows startup registry key is unavailable.");
+            }
+
+            key.SetValue(valueName, $"\"{executablePath}\"");
         }
 
         /// <summary>

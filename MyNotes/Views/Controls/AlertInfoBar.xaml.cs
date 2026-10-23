@@ -1,6 +1,8 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using MyNotes.Helpers;
+using Windows.UI;
 
 namespace MyNotes.Views.Controls
 {
@@ -29,6 +31,16 @@ namespace MyNotes.Views.Controls
             InnerInfoBar.Title = title;
             InnerInfoBar.Message = message;
             InnerInfoBar.Severity = MapSeverity(severity);
+            if (severity == AlertInfoBarSeverity.Informational)
+            {
+                var themeColor = ((SolidColorBrush)Resources["InformationalInfoBarBackgroundBrush"]).Color;
+                InnerInfoBar.Background = new SolidColorBrush(Color.FromArgb(0xFF, themeColor.R, themeColor.G, themeColor.B));
+            }
+            else
+            {
+                InnerInfoBar.ClearValue(Control.BackgroundProperty);
+            }
+
             InnerInfoBar.IsOpen = true;
 
             var showDuration = duration ?? DefaultDuration;

@@ -86,6 +86,11 @@
                         <ComboBox Name="LanguageCardCb" Margin="4,0,12,0" SelectionChanged="LanguageCardCb_SelectionChanged">
                             <ComboBoxItem Content="English" Tag="en-US"></ComboBoxItem>
                             <ComboBoxItem Content="Türkçe" Tag="tr-TR"></ComboBoxItem>
+                            <ComboBoxItem Content="Deutsch" Tag="de-DE"></ComboBoxItem>
+                            <ComboBoxItem Content="Français" Tag="fr-FR"></ComboBoxItem>
+                            <ComboBoxItem Content="Italiano" Tag="it-IT"></ComboBoxItem>
+                            <ComboBoxItem Content="Nederlands" Tag="nl-NL"></ComboBoxItem>
+                            <ComboBoxItem Content="Українська" Tag="uk-UA"></ComboBoxItem>
                         </ComboBox>
                     </controls:SettingsCard>
 
@@ -146,6 +151,18 @@
                         </ComboBox>
                     </controls:SettingsCard>
 
+                    <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="Updates"/>
+
+                    <controls:SettingsCard Name="CheckUpdatesNowCard" Icon="&#xEBD3;" l:Uids.Uid="Settings_CheckUpdatesNow">
+                        <Button Name="CheckUpdatesNowButton"
+                        Grid.Column="2"
+                        Grid.RowSpan="2"
+                        VerticalAlignment="Center"
+                        Margin="0,0,12,0"
+                        l:Uids.Uid="CheckUpdatesNowButton"
+                        Click="CheckUpdatesNowButton_Click"/>
+                    </controls:SettingsCard>
+
                     <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" l:Uids.Uid="Settings_AboutHeader"/>
 
                     <Expander Name="AboutSection"
@@ -202,6 +219,7 @@
                             </Button.Flyout>
                         </Button>
                     </controls:SettingsCard>
+
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

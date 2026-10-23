@@ -68,8 +68,8 @@ namespace MyNotes.Services
                 await _reminderService.SoftDeleteReminderAsync(r.Id);
             }
 
-            ShowNotifications(AddedCount, DeletedCount);
             _workerTask = Task.Run(() => WorkerLoopAsync(_cts.Token));
+            await ShowNotificationsAsync(AddedCount, DeletedCount);
         }
 
         public void Schedule(Reminder reminder)
@@ -134,7 +134,18 @@ namespace MyNotes.Services
                     {
                         try
                         {
-                            await _notificationService.ShowReminderAsync(r.Id, r.ReminderHeader ?? string.Empty, r.ReminderText ?? string.Empty, r.ReminderDateTime.ToString("g"), r.Alarm);
+                            var notificationShown = await _notificationService.ShowReminderAsync(
+                                r.Id,
+                                r.ReminderHeader ?? string.Empty,
+                                r.ReminderText ?? string.Empty,
+                                r.ReminderDateTime.ToString("g"),
+                                r.Alarm);
+                            if (!notificationShown)
+                            {
+                                LogWriter.Log($"Windows did not accept the notification for reminder {r.Id}.",
+                                    LogWriter.LogLevel.Warning);
+                            }
+
                             // raise event for subscribers
                             if (ReminderInvoked != null)
                                 await ReminderInvoked.Invoke(r);
@@ -153,7 +164,7 @@ namespace MyNotes.Services
                         }
                         catch (Exception ex)
                         {
-                            LogWriter.Log($"Failed to show reminder notification: {ex.Message}", LogWriter.LogLevel.Error);
+                            LogWriter.Log($"Failed to show reminder notification {r.Id}: {ex}", LogWriter.LogLevel.Error);
                         }
                     }
 
@@ -163,23 +174,41 @@ namespace MyNotes.Services
             catch (TaskCanceledException) { }
         }
 
-        private void ShowNotifications(int AddedCount, int DeletedCount)
+        private async Task ShowNotificationsAsync(int AddedCount, int DeletedCount)
         {
-            if (DeletedCount > 0 && AddedCount > 0)
+            try
             {
-                _notificationService.ShowDeletedMessage(_localizer.GetLocalizedString("Info"),
-                    string.Format(_localizer.GetLocalizedString("AppNotification_ActiveReminder"), AddedCount.ToString()) + "\n" +
-                    string.Format(_localizer.GetLocalizedString("AppNotification_Expired"), DeletedCount.ToString()));
+                bool notificationShown;
+                if (DeletedCount > 0 && AddedCount > 0)
+                {
+                    notificationShown = await _notificationService.ShowDeletedMessage(
+                        _localizer.GetLocalizedString("Info"),
+                        string.Format(_localizer.GetLocalizedString("AppNotification_ActiveReminder"), AddedCount) + "\n" +
+                        string.Format(_localizer.GetLocalizedString("AppNotification_Expired"), DeletedCount));
+                }
+                else if (DeletedCount > 0)
+                {
+                    notificationShown = await _notificationService.ShowDeletedMessage(
+                        _localizer.GetLocalizedString("Info"),
+                        string.Format(_localizer.GetLocalizedString("AppNotification_Expired"), DeletedCount));
+                }
+                else if (AddedCount > 0)
+                {
+                    notificationShown = await _notificationService.ShowInfoMessage(
+                        _localizer.GetLocalizedString("Info"),
+                        string.Format(_localizer.GetLocalizedString("AppNotification_ActiveReminder"), AddedCount));
+                }
+                else
+                { return; }
+
+                if (!notificationShown)
+                {
+                    LogWriter.Log("The startup reminder summary notification was not accepted by Windows.", LogWriter.LogLevel.Warning);
+                }
             }
-            else if (DeletedCount > 0 && AddedCount == 0)
+            catch (Exception ex)
             {
-                _notificationService.ShowDeletedMessage(_localizer.GetLocalizedString("Info"),
-                    string.Format(_localizer.GetLocalizedString("AppNotification_Expired"), DeletedCount.ToString()));
-            }
-            else if (DeletedCount == 0 && AddedCount > 0)
-            {
-                _notificationService.ShowInfoMessage(_localizer.GetLocalizedString("Info"),
-                    string.Format(_localizer.GetLocalizedString("AppNotification_ActiveReminder"), AddedCount.ToString()));
+                LogWriter.Log($"Failed to show the startup reminder summary notification: {ex}", LogWriter.LogLevel.Error);
             }
         }
         public void Dispose()

@@ -3,6 +3,7 @@ using MyNotes.Data.Services.Interfaces;
 using MyNotes.Helpers;
 using MyNotes.Services.Interfaces;
 using MyNotes.Views;
+using System.Security;
 using WinUI3Localizer;
 
 namespace MyNotes.Services
@@ -14,6 +15,11 @@ namespace MyNotes.Services
         private string SnoozeText =string.Empty;
         private string DismissText = string.Empty;
         private string ShowDeletedButtonText = string.Empty;
+        private string ShowUpdateAvailableMessageText = string.Empty;
+
+        private AppNotificationPriority NotificationPriority = AppNotificationPriority.High;
+        private bool _isInitialized;
+
         public AppNotificationService(ISettingService settingService)
         {
             _settingService = settingService;
@@ -26,12 +32,31 @@ namespace MyNotes.Services
 
         public async Task InitializeAsync()
         {
-            AppNotificationManager.Default.NotificationInvoked += OnNotificationInvoked;
+            if (_isInitialized)
+            {
+                return;
+            }
 
-            AppNotificationManager.Default.Register();
             SnoozeText = _localizer.GetLocalizedString("AppNotification_Snooze");
             DismissText = _localizer.GetLocalizedString("AppNotification_Dismiss");
             ShowDeletedButtonText = _localizer.GetLocalizedString("AppNotification_SeeDeletedReminders");
+            ShowUpdateAvailableMessageText = _localizer.GetLocalizedString("AppNotification_UpdateAvailable");
+            NotificationPriority = await _settingService.GetSettingAsync<AppNotificationPriority>(
+                DataKeys.ReminderNotificationPriority,
+                AppNotificationPriority.High);
+
+            AppNotificationManager.Default.NotificationInvoked += OnNotificationInvoked;
+            try
+            {
+                AppNotificationManager.Default.Register();
+                _isInitialized = true;
+                LogWriter.Log("App notification manager registered.", LogWriter.LogLevel.Info);
+            }
+            catch
+            {
+                AppNotificationManager.Default.NotificationInvoked -= OnNotificationInvoked;
+                throw;
+            }
         }
 
         public void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
@@ -69,6 +94,13 @@ namespace MyNotes.Services
                     NavigationHelper.NavigateTo<TrashPage>();
                 });
             }
+            else if (ar == "update")
+            {
+                App._mainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    NavigationHelper.NavigateTo<SettingsPage>();
+                });
+            }
             else
             {
                 App._mainWindow.DispatcherQueue.TryEnqueue(() =>
@@ -91,9 +123,9 @@ namespace MyNotes.Services
             <toast scenario='reminder'>
               <visual>
                 <binding template='ToastGeneric'>
-                  <text hint-maxLines='1'>{title}</text>
-                  <text>{message}</text>
-                  <text>{time}</text>
+                  <text hint-maxLines='1'>{EscapeXml(title)}</text>
+                  <text>{EscapeXml(message)}</text>
+                  <text>{EscapeXml(time)}</text>
                 </binding>
               </visual>
                 <actions>
@@ -104,67 +136,101 @@ namespace MyNotes.Services
                   <selection id='240' content='4 hours'/>
                   <selection id='1440' content='1 day'/>
                 </input>
-                <action arguments='snooze:{reminderId}' hint-inputId='snoozeTime' content='{SnoozeText}'/>
-                <action arguments='dismiss:{reminderId}' content='{DismissText}'/>
+                <action arguments='snooze:{reminderId}' hint-inputId='snoozeTime' content='{EscapeXml(SnoozeText)}'/>
+                <action arguments='dismiss:{reminderId}' content='{EscapeXml(DismissText)}'/>
               </actions>
                 {alarmtext}
             </toast>");
-            AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
+            AppNotification appNotification = new(payload)
             {
                 ExpiresOnReboot = true,
-                Priority = await _settingService.GetSettingAsync<AppNotificationPriority>(
-                    DataKeys.ReminderNotificationPriority,
-                    AppNotificationPriority.High)
+                Priority = NotificationPriority
             };
             AppNotificationManager.Default.Show(appNotification);
             return appNotification.Id != 0;
         }
-        public bool ShowDeletedMessage(string title, string message)
+        public Task<bool> ShowDeletedMessage(string title, string message)
         {
             string payload = new(@$"
             <toast launch='trash'>
               <visual>
                 <binding template='ToastGeneric'>
-                  <text>{title}</text>
-                  <text>{message}</text>
+                  <text>{EscapeXml(title)}</text>
+                  <text>{EscapeXml(message)}</text>
                 </binding>
               </visual>
               <actions>
-                <action arguments='trash' content='{ShowDeletedButtonText}'/>
+                <action arguments='trash' content='{EscapeXml(ShowDeletedButtonText)}'/>
               </actions>
             </toast>");
-            AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
+            AppNotification appNotification = new(payload)
             {
                 ExpiresOnReboot = true,
                 Expiration = DateTime.Now.AddMinutes(10),
-                Priority = AppNotificationPriority.High
+                Priority = NotificationPriority
             };
             AppNotificationManager.Default.Show(appNotification);
-            return appNotification.Id != 0;
+            return Task.FromResult(appNotification.Id != 0);
         }
-        public bool ShowInfoMessage(string title, string message)
+        public Task<bool> ShowInfoMessage(string title, string message)
         {
             string payload = new(@$"
             <toast>
               <visual>
                 <binding template='ToastGeneric'>
-                  <text>{title}</text>
-                  <text>{message}</text>
+                  <text>{EscapeXml(title)}</text>
+                  <text>{EscapeXml(message)}</text>
                 </binding>
               </visual>
             </toast>");
-            AppNotification appNotification = new(string.Format(payload, AppContext.BaseDirectory))
+            AppNotification appNotification = new(payload)
             {
                 ExpiresOnReboot = true,
                 Expiration = DateTime.Now.AddMinutes(10),
-                Priority = AppNotificationPriority.High
+                Priority = NotificationPriority
             };
             AppNotificationManager.Default.Show(appNotification);
-            return appNotification.Id != 0;
+            return Task.FromResult(appNotification.Id != 0);
         }
+
+        public Task<bool> ShowUpdateAvailableMessage(string title, string message)
+        {
+            string payload = new(@$"
+            <toast launch='update'>
+              <visual>
+                <binding template='ToastGeneric'>
+                  <text>{EscapeXml(title)}</text>
+                  <text>{EscapeXml(message)}</text>
+                </binding>
+              </visual>
+              <actions>
+                <action arguments='update' content='{EscapeXml(ShowUpdateAvailableMessageText)}'/>
+              </actions>
+            </toast>");
+
+            AppNotification appNotification = new(payload)
+            {
+                ExpiresOnReboot = true,
+                Expiration = DateTime.Now.AddMinutes(10),
+                Priority = NotificationPriority
+            };
+
+            AppNotificationManager.Default.Show(appNotification);
+            return Task.FromResult(appNotification.Id != 0);
+        }
+
+        private static string EscapeXml(string value) => SecurityElement.Escape(value) ?? string.Empty;
+
         public void Unregister()
         {
+            if (!_isInitialized)
+            {
+                return;
+            }
+
+            AppNotificationManager.Default.NotificationInvoked -= OnNotificationInvoked;
             AppNotificationManager.Default.Unregister();
+            _isInitialized = false;
         }
     }
 

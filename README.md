@@ -107,10 +107,12 @@ MyNotes 2.0 is built with .NET 10 and WinUI 3. Windows 10 compatibility has not 
 The installer should handle the required dependencies where possible. If a dependency is missing, you may need to install the appropriate .NET 10 and Windows App SDK components.
 
 ### Installation
-1. Download `MyNotes_x64.msi` from the [GitHub Releases](https://github.com/Erencrypt/MyNotes/releases) page.
-2. Run the installer and follow the setup wizard.
-3. Launch MyNotes using the shortcut created by the installer.
-4. **Enable "Open on startup" in the app's settings** to help ensure reminders work reliably.
+1. Download `Erencrypt.MyNotes-win-Setup.exe` from the [GitHub Releases](https://github.com/Erencrypt/MyNotes/releases) page.
+2. Run the installer. MyNotes will be installed for your Windows user and a Start menu shortcut will be created.
+3. Launch MyNotes from the Start menu.
+4. MyNotes enables **Open on startup** by default on its first launch. You can turn it off in Settings.
+
+New installers are built and published to GitHub Releases when a `v*` version tag is pushed. MyNotes checks for stable updates at startup and also provides a manual update check in Settings. Updates are downloaded only after you confirm installation.
 
 ### Upgrading from v1.2.4
 Version 2.0 introduces a new SQLite database, replacing the previous JSON and RTF file-based storage. Existing data must be migrated using the separate migration tool.
@@ -167,7 +169,7 @@ By default, items in Trash are permanently deleted after 30 days. You can change
 
 ### Startup
 
-Enable **Open on startup** in Settings to add MyNotes to your Windows startup apps. Manage this option from within MyNotes rather than changing it through Task Manager.
+MyNotes adds itself to your Windows startup apps on its first launch after installation. Manage **Open on startup** in Settings rather than changing it through Task Manager.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -217,7 +219,8 @@ MyNotes is licensed under the **GNU General Public License v3.0**. See [`LICENSE
 ## Acknowledgments
 
 These are the resources that helped me during development and that I'd like to give credit to.
-* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D) (update: i think licance is expired, i need to check it and re-apply for new one if possible)
+* This project uses [**Advance Installer**](https://www.advancedinstaller.com) to create an installation package. They provided us a professional license to use for this project (if someone from advance installer is reading this, thank you all, you guys helped me a lot :D) ( used versions prior to 2.0)
+* [Velopack](https://velopack.io/) is used to package and distribute the Windows installer. (versions 2.0 and later)
 - **Stack Overflow:** I fixed the app's lifecycle handling and replaced the old solution, but I'm leaving [this question](https://stackoverflow.com/questions/59706160/c-sharp-dot-net-core-single-instance-app-passing-parameters-to-first-instance) here in case it helps someone else.
 * [Choose an Open Source License](https://choosealicense.com)
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template).

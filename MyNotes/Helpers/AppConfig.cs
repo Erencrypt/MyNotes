@@ -42,7 +42,9 @@ namespace MyNotes.Helpers
         /// <summary>
         /// Application version
         /// </summary>
-        public static string AppVersion => "2.0.0.0";
+        public static string AppVersion =>
+            typeof(AppConfig).Assembly.GetName().Version?.ToString()
+            ?? throw new InvalidOperationException("The application assembly version is unavailable.");
 
         /// <summary>
         /// Database file name

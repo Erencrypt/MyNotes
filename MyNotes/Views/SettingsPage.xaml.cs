@@ -64,6 +64,11 @@ public sealed partial class SettingsPage : Page
         {
             "en-US" => 0,
             "tr-TR" => 1,
+            "de-DE" => 2,
+            "fr-FR" => 3,
+            "it-IT" => 4,
+            "nl-NL" => 5,
+            "uk-UA" => 6,
             _ => 0
         };
 
@@ -123,7 +128,7 @@ public sealed partial class SettingsPage : Page
         {
             Title = "",
             Content = content,
-            CloseButtonText =  _localizer.GetLocalizedString("Ok")
+            CloseButtonText = _localizer.GetLocalizedString("Ok")
         };
 
         await dialog.ShowAsync();
@@ -275,7 +280,7 @@ public sealed partial class SettingsPage : Page
                 "Dark" => ElementTheme.Dark,
                 _ => ElementTheme.Default
             };
-            
+
             var currentTheme = await App.Current.SettingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
             if (currentTheme != theme)
             {
@@ -296,12 +301,25 @@ public sealed partial class SettingsPage : Page
                 "AcrylicThin" => DevWinUI.BackdropType.AcrylicThin,
                 _ => DevWinUI.BackdropType.Mica
             };
-            
+
             var currentBackdrop = await App.Current.SettingService.GetSettingAsync(DataKeys.Backdrop, DevWinUI.BackdropType.Mica);
             if (currentBackdrop != backdrop)
             {
                 await App.Current.ThemeService.SetBackdropTypeAsync(backdrop);
             }
+        }
+    }
+
+    private async void CheckUpdatesNowButton_Click(object sender, RoutedEventArgs e)
+    {
+        CheckUpdatesNowButton.IsEnabled = false;
+        try
+        {
+            await App.Current.CheckForUpdatesAsync(isManual: true);
+        }
+        finally
+        {
+            CheckUpdatesNowButton.IsEnabled = true;
         }
     }
 }
