@@ -161,7 +161,7 @@
     <value>Evet, sil bunu</value>
   </data>
   <data name="DeleteFlyout.Text" xml:space="preserve">
-    <value>Seçili öğe silinecek . Devam etmek istiyormusun?</value>
+    <value>Seçili öğe silinecek. Devam etmek istiyormusun?</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Hata</value>
@@ -248,7 +248,7 @@
     <value>Alarm sesini tekrarla</value>
   </data>
   <data name="Settings_AlarmSoundLooping.Description" xml:space="preserve">
-    <value>Alarm hatırlatıcılarında alarm sesini tekrarla.</value>
+    <value>Alarm hatırlatıcılarda alarm sesini tekrarla.</value>
   </data>
   <data name="Settings_ReminderNotificationPriority.Title" xml:space="preserve">
     <value>Hatırlatıcı bildirim önceliği</value>
@@ -320,7 +320,7 @@
     <value>Akrilik İnce</value>
   </data>
   <data name="Settings_TimeFormat.Title" xml:space="preserve">
-    <value>ZamanFormatı</value>
+    <value>Zaman Biçimi</value>
   </data>
   <data name="Settings_TimeFormat.Description" xml:space="preserve">
     <value>Bazı giriş alanları ve listeler, zaman biçimini göstermek için bu ayarı kullanır.</value>
@@ -512,7 +512,7 @@
     <value>Kapat</value>
   </data>
   <data name="TrayIcon_ExitFlyConfirm.Text" xml:space="preserve">
-    <value>Emin misin? Bu uygulamayı tamamen kapatıcak ve hatırlatıcılar çalışmayacak!</value>
+    <value>Emin misin? Bu uygulamayı tamamen kapatacak ve hatırlatıcılar çalışmayacak!</value>
   </data>
   <data name="Planner_PageHeader.Text" xml:space="preserve">
     <value>Planlayıcı</value>
@@ -552,5 +552,53 @@
   </data>
   <data name="Trash_TaskListPivotHeader.Text" xml:space="preserve">
     <value>Planlayıcı Listeleri</value>
+  </data>
+  <data name="Settings_CheckUpdatesNow.Title" xml:space="preserve">
+    <value>Güncellemeler</value>
+  </data>
+  <data name="Settings_CheckUpdatesNow.Description" xml:space="preserve">
+    <value>En güncel MyNotes sürümünü kontrol edin.</value>
+  </data>
+  <data name="CheckUpdatesNowButton.Content" xml:space="preserve">
+    <value>Güncellemeleri kontrol et</value>
+  </data>
+  <data name="AppNotification_UpdateAvailable" xml:space="preserve">
+    <value>Güncelleme ayarlarını aç</value>
+  </data>
+  <data name="Update_CheckTitle" xml:space="preserve">
+    <value>Güncellemeler</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Güncellemeler kontrol ediliyor...</value>
+  </data>
+  <data name="Update_InstalledReleaseRequired" xml:space="preserve">
+    <value>Güncelleme denetimleri yalnızca MyNotes'un kurulu sürümünde çalışır. Hata ayıklama (debug) sürümleri kendilerini güncelleyemezler.</value>
+  </data>
+  <data name="Update_UpToDate" xml:space="preserve">
+    <value>Güncelsiniz.</value>
+  </data>
+  <data name="Update_AvailableTitle" xml:space="preserve">
+    <value>Güncelleme mevcut</value>
+  </data>
+  <data name="Update_VersionAvailable" xml:space="preserve">
+    <value>Sürüm {0} mevcut. Şimdi indirip yüklemek ister misiniz?</value>
+  </data>
+  <data name="Update_DownloadAndInstall" xml:space="preserve">
+    <value>İndir ve kur</value>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Daha sonra</value>
+  </data>
+  <data name="Update_DownloadingTitle" xml:space="preserve">
+    <value>Güncelleme indiriliyor</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Güncelleme indiriliyor. Hazır olduğunda MyNotes yeniden başlatılacak.</value>
+  </data>
+  <data name="Update_NotificationFailed" xml:space="preserve">
+    <value>Windows güncelleme bildirimi gösterilemedi.</value>
+  </data>
+  <data name="Update_FailedTitle" xml:space="preserve">
+    <value>Güncelleme başarısız oldu</value>
   </data>
 </root>

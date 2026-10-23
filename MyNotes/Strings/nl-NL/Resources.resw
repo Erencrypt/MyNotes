@@ -553,4 +553,52 @@
   <data name="Trash_TaskListPivotHeader.Text" xml:space="preserve">
     <value>Planner Lists</value>
   </data>
+  <data name="Settings_CheckUpdatesNow.Title" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Settings_CheckUpdatesNow.Description" xml:space="preserve">
+    <value>Check for the latest MyNotes release.</value>
+  </data>
+  <data name="CheckUpdatesNowButton.Content" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="AppNotification_UpdateAvailable" xml:space="preserve">
+    <value>Open update settings</value>
+  </data>
+  <data name="Update_CheckTitle" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Checking for updates...</value>
+  </data>
+  <data name="Update_InstalledReleaseRequired" xml:space="preserve">
+    <value>Update checks work only in the installed version of MyNotes. Debug builds cannot update themselves.</value>
+  </data>
+  <data name="Update_UpToDate" xml:space="preserve">
+    <value>You're up to date.</value>
+  </data>
+  <data name="Update_AvailableTitle" xml:space="preserve">
+    <value>Update available</value>
+  </data>
+  <data name="Update_VersionAvailable" xml:space="preserve">
+    <value>Version {0} is available. Download and install it now?</value>
+  </data>
+  <data name="Update_DownloadAndInstall" xml:space="preserve">
+    <value>Download and install</value>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="Update_DownloadingTitle" xml:space="preserve">
+    <value>Downloading update</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>The update is downloading. MyNotes will restart when it's ready.</value>
+  </data>
+  <data name="Update_NotificationFailed" xml:space="preserve">
+    <value>The Windows update notification could not be shown.</value>
+  </data>
+  <data name="Update_FailedTitle" xml:space="preserve">
+    <value>Update failed</value>
+  </data>
 </root>
