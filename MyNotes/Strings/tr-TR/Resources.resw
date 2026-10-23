@@ -554,7 +554,7 @@
     <value>Planlayıcı Listeleri</value>
   </data>
   <data name="Settings_CheckUpdatesNow.Title" xml:space="preserve">
-    <value>Updates</value>
+    <value>Güncellemeler</value>
   </data>
   <data name="Settings_CheckUpdatesNow.Description" xml:space="preserve">
     <value>Check for the latest MyNotes release.</value>
