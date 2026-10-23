@@ -1,4 +1,5 @@
 ﻿using Microsoft.Windows.AppNotifications;
+using MyNotes.Data.Models;
 using MyNotes.Data.Services.Interfaces;
 using MyNotes.Helpers;
 using MyNotes.Services.Interfaces;
@@ -11,7 +12,9 @@ namespace MyNotes.Services
     public class AppNotificationService : IAppNotificationService
     {
         private readonly ILocalizer _localizer = Localizer.Get();
+        private readonly INoteService _noteService;
         private readonly ISettingService _settingService;
+        private string OpenNoteText = string.Empty;
         private string SnoozeText =string.Empty;
         private string DismissText = string.Empty;
         private string ShowDeletedButtonText = string.Empty;
@@ -20,9 +23,10 @@ namespace MyNotes.Services
         private AppNotificationPriority NotificationPriority = AppNotificationPriority.High;
         private bool _isInitialized;
 
-        public AppNotificationService(ISettingService settingService)
+        public AppNotificationService(ISettingService settingService, INoteService noteService)
         {
             _settingService = settingService;
+            _noteService = noteService;
         }
 
         ~AppNotificationService()
@@ -37,6 +41,7 @@ namespace MyNotes.Services
                 return;
             }
 
+            OpenNoteText = _localizer.GetLocalizedString("AppNotification_OpenNote");
             SnoozeText = _localizer.GetLocalizedString("AppNotification_Snooze");
             DismissText = _localizer.GetLocalizedString("AppNotification_Dismiss");
             ShowDeletedButtonText = _localizer.GetLocalizedString("AppNotification_SeeDeletedReminders");
@@ -65,13 +70,27 @@ namespace MyNotes.Services
             string ar = args.Argument;
             // argument format: action:reminderId  e.g. "snooze:00000000-0000-0000-0000-000000000000"
             if (string.IsNullOrEmpty(ar)) ar = string.Empty;
-            var parts = ar.Split(':', 2);
+            var parts = ar.Split(':', 3);
             var action = parts.Length > 0 ? parts[0] : string.Empty;
-            var id = parts.Length > 1 ? parts[1] : string.Empty;
+            var ReminderId = parts.Length > 1 ? parts[1] : string.Empty;
+            var NoteId = parts.Length > 2 ? parts[2] : string.Empty;
 
             if (App._mainWindow==null) {return;}
 
-            if (action == "snooze" && Guid.TryParse(id, out var snoozeId))
+            if (action == "opennote" && Guid.TryParse(NoteId, out var noteId) && Guid.TryParse(ReminderId, out var noteReminderId))
+            {
+                App._mainWindow.DispatcherQueue.TryEnqueue(async () =>
+                {
+                    await App.GetService<IReminderScheduler>().DismissAsync(noteReminderId);
+
+                    var note = await _noteService.GetNoteByIdAsync(noteId);
+                    if (note==null)
+                    { return; }
+                    App._mainWindow.Activate();
+                    NavigationHelper.NavigateTo<NoteEditorPage>(note);
+                });
+            }
+            else if (action == "snooze" && Guid.TryParse(ReminderId, out var snoozeId))
             {
                 App._mainWindow.DispatcherQueue.TryEnqueue(async () =>
                 {
@@ -79,7 +98,7 @@ namespace MyNotes.Services
                     await App.GetService<IReminderScheduler>().SnoozeAsync(snoozeId, TimeSpan.FromMinutes(input));
                 });
             }
-            else if (action == "dismiss" && Guid.TryParse(id, out var dismissId))
+            else if (action == "dismiss" && Guid.TryParse(ReminderId, out var dismissId))
             {
                 App._mainWindow.DispatcherQueue.TryEnqueue(async () =>
                 {
@@ -111,13 +130,18 @@ namespace MyNotes.Services
             }
         }
 
-        public async Task<bool> ShowReminderAsync(Guid reminderId, string title, string message, string time, bool isAlarm)
+        public async Task<bool> ShowReminderAsync(Guid reminderId, string title, string message, string time, bool isAlarm, Guid? noteId=null)
         {
             string alarmtext = string.Empty;
             if (isAlarm)
             {
                 var loopAlarmSound = await _settingService.GetSettingAsync<bool>(DataKeys.AlarmSoundLooping, true);
                 alarmtext = $"<audio src='ms-winsoundevent:Notification.Looping.Alarm' loop='{loopAlarmSound.ToString().ToLowerInvariant()}'/>";
+            }
+            string noteButton = string.Empty;
+            if (noteId.HasValue)
+            {
+                noteButton = $"<action arguments='opennote:{reminderId}:{noteId}' content='{EscapeXml(OpenNoteText)}'/>";
             }
             string payload = new(@$"
             <toast scenario='reminder'>
@@ -136,6 +160,7 @@ namespace MyNotes.Services
                   <selection id='240' content='4 hours'/>
                   <selection id='1440' content='1 day'/>
                 </input>
+                {noteButton}
                 <action arguments='snooze:{reminderId}' hint-inputId='snoozeTime' content='{EscapeXml(SnoozeText)}'/>
                 <action arguments='dismiss:{reminderId}' content='{EscapeXml(DismissText)}'/>
               </actions>

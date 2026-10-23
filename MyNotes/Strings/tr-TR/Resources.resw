@@ -604,4 +604,7 @@
   <data name="Settings_UpdatesHeader.Text" xml:space="preserve">
     <value>Güncellemeler</value>
   </data>
+  <data name="AppNotification_OpenNote" xml:space="preserve">
+    <value>Notu Aç</value>
+  </data>
 </root>

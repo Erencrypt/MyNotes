@@ -604,4 +604,7 @@
   <data name="Settings_UpdatesHeader.Text" xml:space="preserve">
     <value>Updates</value>
   </data>
+  <data name="AppNotification_OpenNote" xml:space="preserve">
+    <value>Open Note</value>
+  </data>
 </root>

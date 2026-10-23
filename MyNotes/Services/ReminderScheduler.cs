@@ -97,6 +97,9 @@ namespace MyNotes.Services
                 // Update in-memory scheduled time only, do NOT update database
                 reminder.ReminderDateTime = DateTime.Now.Add(snoozeDuration);
                 ReminderSnoozed?.Invoke(reminder);
+                //TODO: hold snozed statue and later if it gets dissmised return it to original time from db
+                //currently it updates in memory and adds minutes, but when dissmissed its still shows last snooze updated time
+                //its in memory and restarting app shows original time
             }
             await Task.CompletedTask;
         }
@@ -139,7 +142,8 @@ namespace MyNotes.Services
                                 r.ReminderHeader ?? string.Empty,
                                 r.ReminderText ?? string.Empty,
                                 r.ReminderDateTime.ToString("g"),
-                                r.Alarm);
+                                r.Alarm,
+                                r.NoteId);
                             if (!notificationShown)
                             {
                                 LogWriter.Log($"Windows did not accept the notification for reminder {r.Id}.",
