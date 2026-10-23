@@ -24,6 +24,7 @@
   <ItemGroup>
     <None Remove="Views\Controls\SettingsCard.xaml" />
     <None Remove="Views\Dialogs\AddTaskDialog.xaml" />
+    <None Remove="Views\Dialogs\UpdateAvailableDialog.xaml" />
     <None Remove="Views\PlannerPage.xaml" />
     <None Remove="Views\TrayIconView.xaml" />
   </ItemGroup>
@@ -96,6 +97,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Page Update="Views\Dialogs\AddTaskDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Dialogs\UpdateAvailableDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\TaskListEditorPage.xaml">

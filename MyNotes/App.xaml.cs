@@ -13,6 +13,7 @@ using MyNotes.Helpers;
 using MyNotes.Services;
 using MyNotes.Services.Interfaces;
 using MyNotes.ViewModels;
+using MyNotes.Views.Dialogs;
 using System.Diagnostics;
 using Windows.Storage;
 using WinUI3Localizer;
@@ -204,6 +205,37 @@ namespace MyNotes
         #endregion
 
         #region Update checking and installation
+        private static async Task<XamlRoot> GetMainWindowXamlRootAsync()
+        {
+            var rootFrame = MainWindow._rootFrame;
+            if (rootFrame.XamlRoot is { } xamlRoot)
+            {
+                return xamlRoot;
+            }
+
+            var loadedSource = new TaskCompletionSource<XamlRoot>(TaskCreationOptions.RunContinuationsAsynchronously);
+            RoutedEventHandler loadedHandler = null!;
+            loadedHandler = (_, _) =>
+            {
+                if (rootFrame.XamlRoot is not { } loadedXamlRoot)
+                {
+                    return;
+                }
+
+                rootFrame.Loaded -= loadedHandler;
+                loadedSource.TrySetResult(loadedXamlRoot);
+            };
+
+            rootFrame.Loaded += loadedHandler;
+            if (rootFrame.XamlRoot is { } currentXamlRoot)
+            {
+                rootFrame.Loaded -= loadedHandler;
+                return currentXamlRoot;
+            }
+
+            return await loadedSource.Task;
+        }
+
         public async Task CheckForUpdatesAsync(bool isManual)
         {
             await _updateCheckSemaphore.WaitAsync();
@@ -260,17 +292,12 @@ namespace MyNotes
                     AppInfoBar.Show(updateTitle, localizer.GetLocalizedString("Update_NotificationFailed"), AlertInfoBarSeverity.Warning);
                 }
 
-                var dialog = new ContentDialog
+                UpdateAvailableDialog updateDialog = new(updateTitle, updateMessage)
                 {
-                    XamlRoot = MainWindow._rootFrame.XamlRoot,
-                    Title = updateTitle,
-                    Content = updateMessage,
-                    PrimaryButtonText = localizer.GetLocalizedString("Update_DownloadAndInstall"),
-                    CloseButtonText = localizer.GetLocalizedString("Update_Later"),
-                    DefaultButton = ContentDialogButton.Primary
+                    XamlRoot = await GetMainWindowXamlRootAsync()
                 };
 
-                if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+                if (await updateDialog.ShowAsync() != ContentDialogResult.Primary)
                 { return; }
 
                 AppInfoBar.Show(localizer.GetLocalizedString("Update_DownloadingTitle"), localizer.GetLocalizedString("Update_Downloading"));

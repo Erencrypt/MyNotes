@@ -28,8 +28,8 @@ namespace MyNotes.Services
 
         public async Task InitializeAsync()
         {
-            int DeletedCount=0;
-            int AddedCount=0;
+            int DeletedCount = 0;
+            int AddedCount = 0;
             // Get upcoming non-repeating reminders (not yet fired)
             var upcomingNonRepeating = await _reminderService.GetUpcomingRemindersAsync();
             foreach (var r in upcomingNonRepeating)
@@ -46,7 +46,7 @@ namespace MyNotes.Services
                 // Calculate next occurrence based on time only (daily recurring)
                 var reminderTime = r.ReminderDateTime.TimeOfDay;
                 var todayOccurrence = DateTime.Now.Date.Add(reminderTime);
-                
+
                 if (todayOccurrence <= DateTime.Now)
                 {
                     // Time has passed today, schedule for tomorrow
@@ -56,7 +56,7 @@ namespace MyNotes.Services
                 {
                     // Time hasn't passed, schedule for today
                     r.ReminderDateTime = todayOccurrence;
-                }                
+                }
                 _scheduled[r.Id] = r;
                 AddedCount += 1;
             }
@@ -129,7 +129,7 @@ namespace MyNotes.Services
                 while (!ct.IsCancellationRequested)
                 {
                     var now = DateTime.Now;
-                    var due = _scheduled.Values.Where(r => r.ReminderDateTime <= now && r.ReminderDateTime>= now.AddMinutes(-1)).ToList();
+                    var due = _scheduled.Values.Where(r => r.ReminderDateTime <= now && r.ReminderDateTime >= now.AddMinutes(-1)).ToList();
                     foreach (var r in due)
                     {
                         try
@@ -148,7 +148,9 @@ namespace MyNotes.Services
 
                             // raise event for subscribers
                             if (ReminderInvoked != null)
+                            {
                                 await ReminderInvoked.Invoke(r);
+                            }
 
                             if (!r.Repeat)
                             {
