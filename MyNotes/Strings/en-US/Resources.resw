@@ -601,4 +601,7 @@
   <data name="Update_FailedTitle" xml:space="preserve">
     <value>Update failed</value>
   </data>
+  <data name="Settings_UpdatesHeader.Text" xml:space="preserve">
+    <value>Updates</value>
+  </data>
 </root>

@@ -151,7 +151,7 @@
                         </ComboBox>
                     </controls:SettingsCard>
 
-                    <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" Text="Updates"/>
+                    <TextBlock Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" l:Uids.Uid="Settings_UpdatesHeader"/>
 
                     <controls:SettingsCard Name="CheckUpdatesNowCard" Icon="&#xEBD3;" l:Uids.Uid="Settings_CheckUpdatesNow">
                         <Button Name="CheckUpdatesNowButton"

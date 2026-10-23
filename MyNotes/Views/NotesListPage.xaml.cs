@@ -13,7 +13,7 @@ namespace MyNotes.Views
     /// </summary>
     public sealed partial class NotesListPage : Page
     {
-        private ILocalizer _localizer = Localizer.Get();
+        private readonly ILocalizer _localizer = Localizer.Get();
         public NotesListViewModel ViewModel { get; set; }
 
         public NotesListPage()
