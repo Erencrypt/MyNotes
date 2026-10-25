@@ -572,7 +572,7 @@
     <value>Güncellemeler kontrol ediliyor...</value>
   </data>
   <data name="Update_InstalledReleaseRequired" xml:space="preserve">
-    <value>Güncelleme denetimleri yalnızca MyNotes'un kurulu sürümünde çalışır. Hata ayıklama (debug) sürümleri kendilerini güncelleyemezler.</value>
+    <value>Güncelleme denetimleri yalnızca MyNotes'un kurulu sürümünde çalışır. Hata ayıklama sürümleri kendilerini güncelleyemezler.</value>
   </data>
   <data name="Update_UpToDate" xml:space="preserve">
     <value>Güncelsiniz.</value>
@@ -602,9 +602,9 @@
     <value>Güncelleme başarısız oldu</value>
   </data>
   <data name="Settings_UpdatesHeader.Text" xml:space="preserve">
-    <value>Updates</value>
+    <value>Güncellemeler</value>
   </data>
   <data name="AppNotification_OpenNote" xml:space="preserve">
-    <value>Open Note</value>
+    <value>Notu Aç</value>
   </data>
 </root>
