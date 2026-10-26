@@ -97,9 +97,6 @@ namespace MyNotes.Services
                 // Update in-memory scheduled time only, do NOT update database
                 reminder.ReminderDateTime = DateTime.Now.Add(snoozeDuration);
                 ReminderSnoozed?.Invoke(reminder);
-                //TODO: hold snozed statue and later if it gets dissmised return it to original time from db
-                //currently it updates in memory and adds minutes, but when dissmissed its still shows last snooze updated time
-                //its in memory and restarting app shows original time
             }
             await Task.CompletedTask;
         }
@@ -110,8 +107,10 @@ namespace MyNotes.Services
             {
                 if (reminder.Repeat)
                 {
+                    // Gets reminders from db to ensure correct time is used for rescheduling, in case it was snoozed before.
+                    var reminderForTime = await _reminderService.GetReminderByIdAsync(reminderId) ?? reminder;
                     // For repeating reminders, reschedule for tomorrow
-                    reminder.ReminderDateTime = reminder.ReminderDateTime.AddDays(1);
+                    reminder.ReminderDateTime = reminderForTime.ReminderDateTime.AddDays(1);
                     await _reminderService.UpdateReminderAsync(reminder);
                     // Keep it in scheduled with updated time
                 }
