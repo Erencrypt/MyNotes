@@ -149,7 +149,7 @@
     <value>Succès</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Sauvegarder</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Abandonner</value>
@@ -233,16 +233,16 @@
     <value>Préférences</value>
   </data>
   <data name="Settings_Save.Title" xml:space="preserve">
-    <value>Save when exit</value>
+    <value>Enregistrer en quittant</value>
   </data>
   <data name="Settings_Save.Description" xml:space="preserve">
     <value>Save automatically when exiting from a note.</value>
   </data>
   <data name="Settings_Startup.Title" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Ouvrir au démarrage</value>
   </data>
   <data name="Settings_Startup.Description" xml:space="preserve">
-    <value>This setting must be enabled for notifications to work properly.</value>
+    <value>Ce paramètre doit être activé pour que les notifications fonctionnent correctement.</value>
   </data>
   <data name="Settings_AlarmSoundLooping.Title" xml:space="preserve">
     <value>Loop alarm sound</value>
