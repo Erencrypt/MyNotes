@@ -149,7 +149,7 @@
     <value>Successo</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Salva</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annulla</value>
@@ -212,7 +212,7 @@
     <value>Avvio abilitato da criteri di gruppo</value>
   </data>
   <data name="Settings_Exit.Title" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Chiudi applicazione</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Chiudi</value>
@@ -260,7 +260,7 @@
     <value>Default</value>
   </data>
   <data name="Settings_ReminderNotificationPriority_High.Content" xml:space="preserve">
-    <value>High</value>
+    <value>Alte</value>
   </data>
   <data name="Settings_TrashRetention.Title" xml:space="preserve">
     <value>Trash retention</value>
@@ -287,10 +287,10 @@
     <value>90 days</value>
   </data>
   <data name="Settings_TrashRetention_Never.Content" xml:space="preserve">
-    <value>Never</value>
+    <value>Mai</value>
   </data>
   <data name="Settings_Theme.Title" xml:space="preserve">
-    <value>Theme</value>
+    <value>Tema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Scuro</value>
@@ -311,10 +311,10 @@
     <value>Reminders</value>
   </data>
   <data name="Trash_TrashEmpty.Text" xml:space="preserve">
-    <value>Your trash is empty.</value>
+    <value>Il tuo cestino è vuoto.</value>
   </data>
   <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
-    <value>Are You Sure?</value>
+    <value>Sei sicuro?</value>
   </data>
   <data name="Settings_BackDrop_AcrylicThin" xml:space="preserve">
     <value>Acrylic Thin</value>
