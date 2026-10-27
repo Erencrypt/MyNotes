@@ -149,7 +149,7 @@
     <value>Erfolg</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
@@ -212,7 +212,7 @@
     <value>Start-up aktiviert durch Gruppenrichtlinien</value>
   </data>
   <data name="Settings_Exit.Title" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Anwendung schließen</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Schließen</value>
@@ -287,7 +287,7 @@
     <value>90 days</value>
   </data>
   <data name="Settings_TrashRetention_Never.Content" xml:space="preserve">
-    <value>Never</value>
+    <value>Niemals</value>
   </data>
   <data name="Settings_Theme.Title" xml:space="preserve">
     <value>Theme</value>
@@ -311,10 +311,10 @@
     <value>Reminders</value>
   </data>
   <data name="Trash_TrashEmpty.Text" xml:space="preserve">
-    <value>Your trash is empty.</value>
+    <value>Dein Papierkorb ist leer.</value>
   </data>
   <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
-    <value>Are You Sure?</value>
+    <value>Bist Du sicher?</value>
   </data>
   <data name="Settings_BackDrop_AcrylicThin" xml:space="preserve">
     <value>Acrylic Thin</value>
@@ -344,7 +344,7 @@
     <value>Deleted Reminders</value>
   </data>
   <data name="Settings_AboutHeader.Text" xml:space="preserve">
-    <value>About Us</value>
+    <value>Über uns</value>
   </data>
   <data name="Reminders_PageHeader.Text" xml:space="preserve">
     <value>Reminders</value>
@@ -371,7 +371,7 @@
     <value>Your notes is empty, you can add one.</value>
   </data>
   <data name="Settings_Language.Title" xml:space="preserve">
-    <value>Language Selection</value>
+    <value>Sprachauswahl</value>
   </data>
   <data name="Settings_Language.Description" xml:space="preserve">
     <value>Change used language option for this app.</value>
@@ -395,7 +395,7 @@
     <value>Reminder Date</value>
   </data>
   <data name="ReminderEditor_OptionsHeader.Text" xml:space="preserve">
-    <value>Options</value>
+    <value>Optionen</value>
   </data>
   <data name="ReminderEditor_RepeatCheckBox.Content" xml:space="preserve">
     <value>Repeat</value>
@@ -404,7 +404,7 @@
     <value>Alarm</value>
   </data>
   <data name="ReminderEditor_IsActiveCheckBox.Content" xml:space="preserve">
-    <value>Active</value>
+    <value>Aktiv</value>
   </data>
   <data name="ReminderEditor_ClearNoteSelection.Content" xml:space="preserve">
     <value>Clear</value>
@@ -425,7 +425,7 @@
     <value>Alignment</value>
   </data>
   <data name="NoteEditor_BoldTooltip" xml:space="preserve">
-    <value>Bold</value>
+    <value>Fett</value>
   </data>
   <data name="NoteEditor_EditorPlaceholder" xml:space="preserve">
     <value>Enter Text</value>
@@ -437,7 +437,7 @@
     <value>Find:</value>
   </data>
   <data name="NoteEditor_FontColorTooltip" xml:space="preserve">
-    <value>Font Color</value>
+    <value>Zeichenfarbe</value>
   </data>
   <data name="NoteEditor_ItalicTooltip" xml:space="preserve">
     <value>Italic</value>
