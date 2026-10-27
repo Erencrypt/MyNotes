@@ -10,7 +10,7 @@ using Windows.ApplicationModel;
 using WinUI3Localizer;
 
 namespace MyNotes.Views;
-//TODO: add an otion for using system theme color or custom one with color picker
+//TODO: add an option for using system theme color or custom one with color picker
 public sealed partial class SettingsPage : Page
 {
     private readonly ILocalizer _localizer = Localizer.Get();
@@ -64,11 +64,11 @@ public sealed partial class SettingsPage : Page
         {
             "en-US" => 0,
             "tr-TR" => 1,
-            "de-DE" => 2,
-            "fr-FR" => 3,
-            "it-IT" => 4,
-            "nl-NL" => 5,
-            "uk-UA" => 6,
+            //"de-DE" => 2,
+            //"fr-FR" => 3,
+            //"it-IT" => 4,
+            //"nl-NL" => 5,
+            //"uk-UA" => 6,
             _ => 0
         };
 

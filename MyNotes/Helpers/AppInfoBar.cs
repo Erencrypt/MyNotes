@@ -6,7 +6,7 @@ namespace MyNotes.Helpers
     public static class AppInfoBar
     {
         public static readonly TimeSpan DefaultDuration = AlertInfoBar.DefaultDuration;
-
+        //TODO: localize evety instance its used
         public static void Show(
             string title,
             string message,

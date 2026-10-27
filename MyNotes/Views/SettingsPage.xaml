@@ -86,11 +86,11 @@
                         <ComboBox Name="LanguageCardCb" Margin="4,0,12,0" SelectionChanged="LanguageCardCb_SelectionChanged">
                             <ComboBoxItem Content="English" Tag="en-US"></ComboBoxItem>
                             <ComboBoxItem Content="Türkçe" Tag="tr-TR"></ComboBoxItem>
-                            <ComboBoxItem Content="Deutsch" Tag="de-DE"></ComboBoxItem>
+                            <!--<ComboBoxItem Content="Deutsch" Tag="de-DE"></ComboBoxItem>
                             <ComboBoxItem Content="Français" Tag="fr-FR"></ComboBoxItem>
                             <ComboBoxItem Content="Italiano" Tag="it-IT"></ComboBoxItem>
                             <ComboBoxItem Content="Nederlands" Tag="nl-NL"></ComboBoxItem>
-                            <ComboBoxItem Content="Українська" Tag="uk-UA"></ComboBoxItem>
+                            <ComboBoxItem Content="Українська" Tag="uk-UA"></ComboBoxItem>-->
                         </ComboBox>
                     </controls:SettingsCard>
 

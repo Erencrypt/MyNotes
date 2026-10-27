@@ -86,11 +86,11 @@
                 </Button>
 
                 <DropDownButton x:Name="ListButton" 
-                Background="Transparent"
-                BorderThickness="0" 
-                IsTabStop="False" 
-                RelativePanel.RightOf="StrikeButton"
-                                     RelativePanel.Below="TitleTextBox">
+                                Background="Transparent"
+                                BorderThickness="0" 
+                                IsTabStop="False" 
+                                RelativePanel.RightOf="StrikeButton"
+                                RelativePanel.Below="TitleTextBox">
                     <FontIcon Glyph="&#xE8FD;" />
                     <DropDownButton.Flyout>
                         <Flyout Placement="Bottom">

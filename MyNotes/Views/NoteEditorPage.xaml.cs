@@ -39,8 +39,7 @@ namespace MyNotes.Views
             ToolTipService.SetToolTip(ItalicButton, _Localizer.GetLocalizedString("NoteEditor_ItalicTooltip"));
             ToolTipService.SetToolTip(UnderlineButton, _Localizer.GetLocalizedString("NoteEditor_UnderlineTooltip"));
             ToolTipService.SetToolTip(StrikeButton, _Localizer.GetLocalizedString("NoteEditor_StrikethroughTooltip"));
-
-
+            //list related reminder count on bottom left of the page
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
