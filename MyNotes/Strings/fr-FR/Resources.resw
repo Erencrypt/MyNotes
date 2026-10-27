@@ -314,7 +314,7 @@
     <value>Votre corbeille est vide.</value>
   </data>
   <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
-    <value>Are You Sure?</value>
+    <value>Etes-vous sûr?</value>
   </data>
   <data name="Settings_BackDrop_AcrylicThin" xml:space="preserve">
     <value>Acrylic Thin</value>
