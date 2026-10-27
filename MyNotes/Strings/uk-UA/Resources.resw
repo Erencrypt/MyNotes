@@ -149,7 +149,7 @@
     <value>Успіх</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Зберегти</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Скасувати</value>
@@ -212,7 +212,7 @@
     <value>Запуск увімкнено правилами групи</value>
   </data>
   <data name="Settings_Exit.Title" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Закрити програму</value>
   </data>
   <data name="Settings_ExitButton.Content" xml:space="preserve">
     <value>Закрити</value>
@@ -287,10 +287,10 @@
     <value>90 days</value>
   </data>
   <data name="Settings_TrashRetention_Never.Content" xml:space="preserve">
-    <value>Never</value>
+    <value>Ніколи</value>
   </data>
   <data name="Settings_Theme.Title" xml:space="preserve">
-    <value>Theme</value>
+    <value>Тема</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Темна</value>
@@ -314,7 +314,7 @@
     <value>Your trash is empty.</value>
   </data>
   <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
-    <value>Are You Sure?</value>
+    <value>Ви впевнені?</value>
   </data>
   <data name="Settings_BackDrop_AcrylicThin" xml:space="preserve">
     <value>Acrylic Thin</value>
@@ -344,7 +344,7 @@
     <value>Deleted Reminders</value>
   </data>
   <data name="Settings_AboutHeader.Text" xml:space="preserve">
-    <value>About Us</value>
+    <value>Про нас</value>
   </data>
   <data name="Reminders_PageHeader.Text" xml:space="preserve">
     <value>Reminders</value>

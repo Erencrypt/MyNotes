@@ -239,7 +239,7 @@
     <value>Save automatically when exiting from a note.</value>
   </data>
   <data name="Settings_Startup.Title" xml:space="preserve">
-    <value>Open on startup</value>
+    <value>Open bij opstarten</value>
   </data>
   <data name="Settings_Startup.Description" xml:space="preserve">
     <value>This setting must be enabled for notifications to work properly.</value>
@@ -251,7 +251,7 @@
     <value>Repeat the alarm sound for alarm reminders.</value>
   </data>
   <data name="Settings_ReminderNotificationPriority.Title" xml:space="preserve">
-    <value>Reminder notification priority</value>
+    <value>Herinnering notificatie prioriteit</value>
   </data>
   <data name="Settings_ReminderNotificationPriority.Description" xml:space="preserve">
     <value>Choose the priority used for reminder notifications. (High is recommended)</value>
@@ -263,7 +263,7 @@
     <value>High</value>
   </data>
   <data name="Settings_TrashRetention.Title" xml:space="preserve">
-    <value>Trash retention</value>
+    <value>Prullenbak retentie</value>
   </data>
   <data name="Settings_TrashRetention.Description" xml:space="preserve">
     <value>Choose when deleted items are permanently removed.</value>
@@ -290,7 +290,7 @@
     <value>Never</value>
   </data>
   <data name="Settings_Theme.Title" xml:space="preserve">
-    <value>Theme</value>
+    <value>Thema</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
     <value>Donker</value>
@@ -311,7 +311,7 @@
     <value>Reminders</value>
   </data>
   <data name="Trash_TrashEmpty.Text" xml:space="preserve">
-    <value>Your trash is empty.</value>
+    <value>Je prullenmand is leeg.</value>
   </data>
   <data name="Settings_ExitFlyoutText.Text" xml:space="preserve">
     <value>Are You Sure?</value>
@@ -359,13 +359,13 @@
     <value>Your reminders is empty, you can add one.</value>
   </data>
   <data name="Notes_PageHeader.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Notities</value>
   </data>
   <data name="Notes_ListHeader.Text" xml:space="preserve">
-    <value>Title / Content</value>
+    <value>Titel / Inhoud</value>
   </data>
   <data name="Notes_ListDate.Text" xml:space="preserve">
-    <value>Updated Date</value>
+    <value>Uppdaterat datum</value>
   </data>
   <data name="Notes_EmptyText.Text" xml:space="preserve">
     <value>Your notes is empty, you can add one.</value>
@@ -395,16 +395,16 @@
     <value>Reminder Date</value>
   </data>
   <data name="ReminderEditor_OptionsHeader.Text" xml:space="preserve">
-    <value>Options</value>
+    <value>Opties</value>
   </data>
   <data name="ReminderEditor_RepeatCheckBox.Content" xml:space="preserve">
-    <value>Repeat</value>
+    <value>Herhalen</value>
   </data>
   <data name="ReminderEditor_AlarmCheckBox.Content" xml:space="preserve">
     <value>Alarm</value>
   </data>
   <data name="ReminderEditor_IsActiveCheckBox.Content" xml:space="preserve">
-    <value>Active</value>
+    <value>Actief</value>
   </data>
   <data name="ReminderEditor_ClearNoteSelection.Content" xml:space="preserve">
     <value>Clear</value>
@@ -416,16 +416,16 @@
     <value>Leave empty to create a standalone reminder</value>
   </data>
   <data name="ReminderEditor_NoteComboBoxPlaceholder" xml:space="preserve">
-    <value>Not Selected</value>
+    <value>Niet Geselecteerd</value>
   </data>
   <data name="ReminderEditor_PageHeader.Text" xml:space="preserve">
     <value>Reminder Editor</value>
   </data>
   <data name="NoteEditor_AlignmentTooltip" xml:space="preserve">
-    <value>Alignment</value>
+    <value>Uitlijning</value>
   </data>
   <data name="NoteEditor_BoldTooltip" xml:space="preserve">
-    <value>Bold</value>
+    <value>Dikgedrukt</value>
   </data>
   <data name="NoteEditor_EditorPlaceholder" xml:space="preserve">
     <value>Enter Text</value>
@@ -434,7 +434,7 @@
     <value>Enter Search Text</value>
   </data>
   <data name="NoteEditor_FindText.Text" xml:space="preserve">
-    <value>Find:</value>
+    <value>Zoek:</value>
   </data>
   <data name="NoteEditor_FontColorTooltip" xml:space="preserve">
     <value>Font Color</value>
