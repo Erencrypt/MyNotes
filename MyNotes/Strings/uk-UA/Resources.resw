@@ -650,7 +650,7 @@
     <value>Title is required.</value>
   </data>
   <data name="TaskListEditor_DeleteErrorMessage" xml:space="preserve">
-    <value>An error occurred while deleting the task list: {0}</value>
+    <value>An error occurred while deleting the list: {0}</value>
   </data>
   <data name="NoteEditor_SaveErrorMessage" xml:space="preserve">
     <value>An error occurred while saving the note: {0}</value>
