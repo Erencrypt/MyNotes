@@ -611,7 +611,7 @@
     <value>1 dakika</value>
   </data>
   <data name="AppNotification_Snooze_15Minutes" xml:space="preserve">
-    <value>15 dakika</value>
+    <value>15 Dakika</value>
   </data>
   <data name="AppNotification_Snooze_1Hour" xml:space="preserve">
     <value>1 saat</value>
@@ -623,13 +623,13 @@
     <value>1 gün</value>
   </data>
   <data name="ValidationError" xml:space="preserve">
-    <value>Doğrulama hatası</value>
+    <value>Doğrulama Hatası</value>
   </data>
   <data name="NoteEditor_TitleRequiredMessage" xml:space="preserve">
-    <value>Başlık gerekli.</value>
+    <value>Başlık gereklidir.</value>
   </data>
   <data name="NoteEditor_ContentRequiredMessage" xml:space="preserve">
-    <value>İçerik gerekli.</value>
+    <value>İçerik gereklidir.</value>
   </data>
   <data name="NoteEditor_SavedTitle" xml:space="preserve">
     <value>Kaydedildi</value>
@@ -638,16 +638,16 @@
     <value>Notunuz başarıyla kaydedildi.</value>
   </data>
   <data name="ReminderEditor_HeaderRequiredMessage" xml:space="preserve">
-    <value>Başlık gerekli.</value>
+    <value>Başlık gereklidir.</value>
   </data>
   <data name="ReminderEditor_TextRequiredMessage" xml:space="preserve">
-    <value>Metin gerekli.</value>
+    <value>Metin gereklidir.</value>
   </data>
   <data name="TaskListEditor_NameRequiredMessage" xml:space="preserve">
-    <value>Ad gerekli.</value>
+    <value>İsim gereklidir.</value>
   </data>
   <data name="TaskDialog_TitleRequiredMessage" xml:space="preserve">
-    <value>Başlık gerekli.</value>
+    <value>Başlık gereklidir.</value>
   </data>
   <data name="TaskListEditor_DeleteErrorMessage" xml:space="preserve">
     <value>Liste silinirken bir hata oluştu: {0}</value>
@@ -686,9 +686,9 @@
     <value>Hatırlatıcı silinirken bir hata oluştu: {0}</value>
   </data>
   <data name="Update_NotificationVersionAvailable" xml:space="preserve">
-    <value>MyNotes {0} sürümü kullanıma sunuldu.</value>
+    <value>MyNotes {0} kullanıma hazır.</value>
   </data>
   <data name="Update_ErrorMessage" xml:space="preserve">
-    <value>Güncelleme kontrol edilirken veya yüklenirken bir hata oluştu: {0}</value>
+    <value>Güncelleme denetlenirken veya yüklenirken bir hata oluştu: {0}</value>
   </data>
 </root>
