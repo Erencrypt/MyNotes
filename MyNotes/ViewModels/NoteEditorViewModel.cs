@@ -4,6 +4,7 @@ using MyNotes.Data.Services.Interfaces;
 using MyNotes.Helpers;
 using MyNotes.Views;
 using System.Diagnostics;
+using WinUI3Localizer;
 
 namespace MyNotes.ViewModels
 {
@@ -12,6 +13,7 @@ namespace MyNotes.ViewModels
     /// </summary>
     public partial class NoteEditorViewModel : BaseViewModel
     {
+        private readonly ILocalizer _Localizer = Localizer.Get();
         private readonly INoteService _noteService;
         private readonly ISettingService _settingService;
 
@@ -94,7 +96,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while saving the note: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("Error"),
+                    string.Format(_Localizer.GetLocalizedString("NoteEditor_SaveErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 System.Diagnostics.Debug.WriteLine($"Error saving note: {ex.Message}");
                 throw; // Re-throw to let the UI handle it
             }
@@ -129,7 +134,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the note: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("Error"),
+                    string.Format(_Localizer.GetLocalizedString("NoteEditor_LoadErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error loading note: {ex.Message}");
             }
             finally

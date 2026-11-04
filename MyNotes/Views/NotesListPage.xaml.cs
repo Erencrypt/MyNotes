@@ -43,7 +43,9 @@ namespace MyNotes.Views
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the notes: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("NotesList_LoadErrorMessage"), ex.Message), AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error loading notes: {ex.Message}");
             }
         }
@@ -96,7 +98,9 @@ namespace MyNotes.Views
                 }
                 catch (Exception ex)
                 {
-                    AppInfoBar.Show("Error", $"An error occurred while deleting the note: {ex.Message}", AlertInfoBarSeverity.Error);
+                    AppInfoBar.Show(
+                        _localizer.GetLocalizedString("Error"),
+                        string.Format(_localizer.GetLocalizedString("NotesList_DeleteErrorMessage"), ex.Message), AlertInfoBarSeverity.Error);
                     Debug.WriteLine($"Error deleting note: {ex.Message}");
                 }
             }

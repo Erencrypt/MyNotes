@@ -56,7 +56,9 @@ namespace MyNotes.Views
             var name = ListNameTextBox.Text?.Trim() ?? string.Empty;
             if (string.IsNullOrEmpty(name))
             {
-                AppInfoBar.Show("Validation Error", "Name is required", AlertInfoBarSeverity.Warning);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("ValidationError"),
+                    _Localizer.GetLocalizedString("TaskListEditor_NameRequiredMessage"), AlertInfoBarSeverity.Warning);
                 ListNameTextBox.Focus(Microsoft.UI.Xaml.FocusState.Programmatic);
                 return;
             }
@@ -83,7 +85,10 @@ namespace MyNotes.Views
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error deleting task list: {ex}");
-                AppInfoBar.Show("Error", $"An error occurred while deleting the task list: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("Error"),
+                    string.Format(_Localizer.GetLocalizedString("TaskListEditor_DeleteErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
             }
         }
     }

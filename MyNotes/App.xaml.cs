@@ -280,7 +280,8 @@ namespace MyNotes
 
                 try
                 {
-                    var notificationShown = await GetService<IAppNotificationService>().ShowUpdateAvailableMessage(updateTitle, $"MyNotes {version} is available.");
+                    var notificationMessage = localizer.GetLocalizedString("Update_NotificationVersionAvailable").Replace("{0}", version, StringComparison.Ordinal);
+                    var notificationShown = await GetService<IAppNotificationService>().ShowUpdateAvailableMessage(updateTitle, notificationMessage);
                     if (!notificationShown)
                     {
                         throw new InvalidOperationException("Windows did not accept the update notification.");
@@ -309,7 +310,10 @@ namespace MyNotes
             catch (Exception ex)
             {
                 LogWriter.Log($"Update check or installation failed: {ex}", LogWriter.LogLevel.Error);
-                AppInfoBar.Show(Localizer.Get().GetLocalizedString("Update_FailedTitle"), ex.Message, AlertInfoBarSeverity.Error);
+                var localizer = Localizer.Get();
+                AppInfoBar.Show(localizer.GetLocalizedString("Update_FailedTitle"),
+                    string.Format(localizer.GetLocalizedString("Update_ErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
             }
             finally
             {

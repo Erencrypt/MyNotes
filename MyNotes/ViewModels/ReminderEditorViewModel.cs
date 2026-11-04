@@ -6,6 +6,7 @@ using MyNotes.Helpers;
 using MyNotes.Services.Interfaces;
 using MyNotes.Views;
 using System.Collections.ObjectModel;
+using WinUI3Localizer;
 
 
 namespace MyNotes.ViewModels
@@ -15,6 +16,7 @@ namespace MyNotes.ViewModels
     /// </summary>
     public partial class ReminderEditorViewModel : BaseViewModel
     {
+        private readonly ILocalizer _localizer = Localizer.Get();
         private readonly IReminderService _reminderService;
         private readonly INoteService _noteService;
         private readonly IReminderScheduler _scheduler;
@@ -190,7 +192,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while saving the reminder: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("ReminderEditor_SaveErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 System.Diagnostics.Debug.WriteLine($"Error saving reminder: {ex.Message}");
                 throw; // Re-throw to let the UI handle it
             }
@@ -229,7 +234,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the reminder: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("ReminderEditor_LoadErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 System.Diagnostics.Debug.WriteLine($"Error loading reminder: {ex.Message}");
             }
             finally
@@ -255,7 +263,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the notes: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("ReminderEditor_LoadNotesErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 System.Diagnostics.Debug.WriteLine($"Error loading notes: {ex.Message}");
             }
         }

@@ -65,14 +65,14 @@ namespace MyNotes.Views
             var title = TitleTextBox.Text?.Trim() ?? string.Empty;
             if (string.IsNullOrEmpty(title))
             {
-                AppInfoBar.Show("Validation Error", "Title is required.", AlertInfoBarSeverity.Warning);
+                AppInfoBar.Show(_Localizer.GetLocalizedString("ValidationError"), _Localizer.GetLocalizedString("NoteEditor_TitleRequiredMessage"), AlertInfoBarSeverity.Warning);
                 TitleTextBox.Focus(FocusState.Programmatic);
                 return;
             }
             NoteEditor.Document.GetText(TextGetOptions.None, out string plainText);
             if (string.IsNullOrWhiteSpace(plainText.Trim('\r')))
             {
-                AppInfoBar.Show("Validation Error", "Content is required.", AlertInfoBarSeverity.Warning);
+                AppInfoBar.Show(_Localizer.GetLocalizedString("ValidationError"), _Localizer.GetLocalizedString("NoteEditor_ContentRequiredMessage"), AlertInfoBarSeverity.Warning);
                 NoteEditor.Focus(FocusState.Programmatic);
                 return;
             }
@@ -95,11 +95,15 @@ namespace MyNotes.Views
                     });
                 }, null, 2000, Timeout.Infinite);
 
-                AppInfoBar.Show("Saved", "Your note was saved successfully.", AlertInfoBarSeverity.Success);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("NoteEditor_SavedTitle"),
+                    _Localizer.GetLocalizedString("NoteEditor_SavedMessage"), AlertInfoBarSeverity.Success);
             }
             else
             {
-                AppInfoBar.Show("Saved", "Your note was saved successfully.", AlertInfoBarSeverity.Success);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("NoteEditor_SavedTitle"),
+                    _Localizer.GetLocalizedString("NoteEditor_SavedMessage"), AlertInfoBarSeverity.Success);
                 // Navigate back to notes list
                 NavigationHelper.GoBack();
             }

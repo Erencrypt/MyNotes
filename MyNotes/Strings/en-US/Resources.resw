@@ -607,4 +607,88 @@
   <data name="AppNotification_OpenNote" xml:space="preserve">
     <value>Open Note</value>
   </data>
+  <data name="AppNotification_Snooze_1Minute" xml:space="preserve">
+    <value>1 minute</value>
+  </data>
+  <data name="AppNotification_Snooze_15Minutes" xml:space="preserve">
+    <value>15 minutes</value>
+  </data>
+  <data name="AppNotification_Snooze_1Hour" xml:space="preserve">
+    <value>1 hour</value>
+  </data>
+  <data name="AppNotification_Snooze_4Hours" xml:space="preserve">
+    <value>4 hours</value>
+  </data>
+  <data name="AppNotification_Snooze_1Day" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Validation Error</value>
+  </data>
+  <data name="NoteEditor_TitleRequiredMessage" xml:space="preserve">
+    <value>Title is required.</value>
+  </data>
+  <data name="NoteEditor_ContentRequiredMessage" xml:space="preserve">
+    <value>Content is required.</value>
+  </data>
+  <data name="NoteEditor_SavedTitle" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="NoteEditor_SavedMessage" xml:space="preserve">
+    <value>Your note was saved successfully.</value>
+  </data>
+  <data name="ReminderEditor_HeaderRequiredMessage" xml:space="preserve">
+    <value>Header is required.</value>
+  </data>
+  <data name="ReminderEditor_TextRequiredMessage" xml:space="preserve">
+    <value>Text is required.</value>
+  </data>
+  <data name="TaskListEditor_NameRequiredMessage" xml:space="preserve">
+    <value>Name is required.</value>
+  </data>
+  <data name="TaskDialog_TitleRequiredMessage" xml:space="preserve">
+    <value>Title is required.</value>
+  </data>
+  <data name="TaskListEditor_DeleteErrorMessage" xml:space="preserve">
+    <value>An error occurred while deleting the task list: {0}</value>
+  </data>
+  <data name="NoteEditor_SaveErrorMessage" xml:space="preserve">
+    <value>An error occurred while saving the note: {0}</value>
+  </data>
+  <data name="NoteEditor_LoadErrorMessage" xml:space="preserve">
+    <value>An error occurred while loading the note: {0}</value>
+  </data>
+  <data name="NotesList_SearchErrorMessage" xml:space="preserve">
+    <value>An error occurred while searching notes: {0}</value>
+  </data>
+  <data name="NotesList_LoadErrorMessage" xml:space="preserve">
+    <value>An error occurred while loading the notes: {0}</value>
+  </data>
+  <data name="NotesList_DeleteErrorMessage" xml:space="preserve">
+    <value>An error occurred while deleting the note: {0}</value>
+  </data>
+  <data name="ReminderEditor_SaveErrorMessage" xml:space="preserve">
+    <value>An error occurred while saving the reminder: {0}</value>
+  </data>
+  <data name="ReminderEditor_LoadErrorMessage" xml:space="preserve">
+    <value>An error occurred while loading the reminder: {0}</value>
+  </data>
+  <data name="ReminderEditor_LoadNotesErrorMessage" xml:space="preserve">
+    <value>An error occurred while loading the notes: {0}</value>
+  </data>
+  <data name="RemindersList_SearchErrorMessage" xml:space="preserve">
+    <value>An error occurred while searching reminders: {0}</value>
+  </data>
+  <data name="RemindersList_LoadErrorMessage" xml:space="preserve">
+    <value>An error occurred while loading the reminders: {0}</value>
+  </data>
+  <data name="RemindersList_DeleteErrorMessage" xml:space="preserve">
+    <value>An error occurred while deleting the reminder: {0}</value>
+  </data>
+  <data name="Update_NotificationVersionAvailable" xml:space="preserve">
+    <value>MyNotes {0} is available.</value>
+  </data>
+  <data name="Update_ErrorMessage" xml:space="preserve">
+    <value>An error occurred while checking for or installing the update: {0}</value>
+  </data>
 </root>

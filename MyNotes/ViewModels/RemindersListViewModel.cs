@@ -6,6 +6,7 @@ using MyNotes.Services.Interfaces;
 using MyNotes.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using WinUI3Localizer;
 
 namespace MyNotes.ViewModels
 {
@@ -14,6 +15,7 @@ namespace MyNotes.ViewModels
     /// </summary>
     public partial class RemindersListViewModel : BaseViewModel
     {
+        private readonly ILocalizer _localizer = Localizer.Get();
         private readonly IReminderService _reminderService;
         private readonly IReminderScheduler _scheduler;
         private ObservableCollection<Reminder> _reminders = [];
@@ -140,7 +142,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while searching reminders: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("RemindersList_SearchErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error searching reminders: {ex.Message}");
             }
             finally
@@ -222,7 +227,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the reminders: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("RemindersList_LoadErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error loading reminders: {ex.Message}");
             }
             finally

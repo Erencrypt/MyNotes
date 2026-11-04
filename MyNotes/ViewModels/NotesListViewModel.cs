@@ -5,6 +5,7 @@ using MyNotes.Helpers;
 using MyNotes.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using WinUI3Localizer;
 
 namespace MyNotes.ViewModels
 {
@@ -13,6 +14,7 @@ namespace MyNotes.ViewModels
     /// </summary>
     public partial class NotesListViewModel : BaseViewModel
     {
+        private readonly ILocalizer _localizer = Localizer.Get();
         private readonly INoteService _noteService;
         private ObservableCollection<Note> _notes = [];
         private string _searchTerm = string.Empty;
@@ -113,7 +115,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while searching notes: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("NotesList_SearchErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error searching notes: {ex.Message}");
             }
             finally
@@ -179,7 +184,10 @@ namespace MyNotes.ViewModels
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the notes: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("NotesList_LoadErrorMessage"), ex.Message),
+                    AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error loading notes: {ex.Message}");
             }
             finally

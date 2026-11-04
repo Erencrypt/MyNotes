@@ -54,14 +54,18 @@ namespace MyNotes.Views
             var header = HeaderTextBox.Text?.Trim() ?? string.Empty;
             if (string.IsNullOrEmpty(header))
             {
-                AppInfoBar.Show("Validation Error", "Header is required.", AlertInfoBarSeverity.Warning);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("ValidationError"),
+                    _Localizer.GetLocalizedString("ReminderEditor_HeaderRequiredMessage"), AlertInfoBarSeverity.Warning);
                 HeaderTextBox.Focus(FocusState.Programmatic);
                 return;
             }
             var text = TextTextBox.Text?.Trim() ?? string.Empty;
             if (string.IsNullOrEmpty(text))
             {
-                AppInfoBar.Show("Validation Error", "Text is required.", AlertInfoBarSeverity.Warning);
+                AppInfoBar.Show(
+                    _Localizer.GetLocalizedString("ValidationError"),
+                    _Localizer.GetLocalizedString("ReminderEditor_TextRequiredMessage"), AlertInfoBarSeverity.Warning);
                 TextTextBox.Focus(FocusState.Programmatic);
                 return;
             }

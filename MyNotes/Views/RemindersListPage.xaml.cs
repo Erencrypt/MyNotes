@@ -41,7 +41,9 @@ namespace MyNotes.Views
             }
             catch (Exception ex)
             {
-                AppInfoBar.Show("Error", $"An error occurred while loading the reminders: {ex.Message}", AlertInfoBarSeverity.Error);
+                AppInfoBar.Show(
+                    _localizer.GetLocalizedString("Error"),
+                    string.Format(_localizer.GetLocalizedString("RemindersList_LoadErrorMessage"), ex.Message), AlertInfoBarSeverity.Error);
                 Debug.WriteLine($"Error loading reminders: {ex.Message}");
             }
         }
@@ -93,7 +95,9 @@ namespace MyNotes.Views
                 }
                 catch (Exception ex)
                 {
-                    AppInfoBar.Show("Error", $"An error occurred while deleting the reminder: {ex.Message}", AlertInfoBarSeverity.Error);
+                    AppInfoBar.Show(
+                        _localizer.GetLocalizedString("Error"),
+                        string.Format(_localizer.GetLocalizedString("RemindersList_DeleteErrorMessage"), ex.Message), AlertInfoBarSeverity.Error);
                     Debug.WriteLine($"Error deleting reminder: {ex.Message}");
                 }
             }

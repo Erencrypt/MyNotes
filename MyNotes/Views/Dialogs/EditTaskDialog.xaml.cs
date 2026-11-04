@@ -32,7 +32,7 @@ namespace MyNotes.Views.Dialogs
             {
                 args.Cancel = true;
                 errorTextBlock.Visibility = Visibility.Visible;
-                errorTextBlock.Text = _localizer.GetLocalizedString("Title is required");
+                errorTextBlock.Text = _localizer.GetLocalizedString("TaskDialog_TitleRequiredMessage");
             }
         }
 

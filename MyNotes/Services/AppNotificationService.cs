@@ -154,11 +154,11 @@ namespace MyNotes.Services
               </visual>
                 <actions>
                 <input id='snoozeTime' type='selection' defaultInput='15'>
-                  <selection id='1' content='1 minute'/>
-                  <selection id='15' content='15 minutes'/>
-                  <selection id='60' content='1 hour'/>
-                  <selection id='240' content='4 hours'/>
-                  <selection id='1440' content='1 day'/>
+                  <selection id='1' content='{EscapeXml(_localizer.GetLocalizedString("AppNotification_Snooze_1Minute"))}'/>
+                  <selection id='15' content='{EscapeXml(_localizer.GetLocalizedString("AppNotification_Snooze_15Minutes"))}'/>
+                  <selection id='60' content='{EscapeXml(_localizer.GetLocalizedString("AppNotification_Snooze_1Hour"))}'/>
+                  <selection id='240' content='{EscapeXml(_localizer.GetLocalizedString("AppNotification_Snooze_4Hours"))}'/>
+                  <selection id='1440' content='{EscapeXml(_localizer.GetLocalizedString("AppNotification_Snooze_1Day"))}'/>
                 </input>
                 {noteButton}
                 <action arguments='snooze:{reminderId}' hint-inputId='snoozeTime' content='{EscapeXml(SnoozeText)}'/>
