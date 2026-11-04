@@ -608,87 +608,87 @@
     <value>Notu Aç</value>
   </data>
   <data name="AppNotification_Snooze_1Minute" xml:space="preserve">
-    <value>1 dakika</value>
+    <value>1 minute</value>
   </data>
   <data name="AppNotification_Snooze_15Minutes" xml:space="preserve">
-    <value>15 dakika</value>
+    <value>15 minutes</value>
   </data>
   <data name="AppNotification_Snooze_1Hour" xml:space="preserve">
-    <value>1 saat</value>
+    <value>1 hour</value>
   </data>
   <data name="AppNotification_Snooze_4Hours" xml:space="preserve">
-    <value>4 saat</value>
+    <value>4 hours</value>
   </data>
   <data name="AppNotification_Snooze_1Day" xml:space="preserve">
-    <value>1 gün</value>
+    <value>1 day</value>
   </data>
   <data name="ValidationError" xml:space="preserve">
-    <value>Doğrulama hatası</value>
+    <value>Validation Error</value>
   </data>
   <data name="NoteEditor_TitleRequiredMessage" xml:space="preserve">
-    <value>Başlık gerekli.</value>
+    <value>Title is required.</value>
   </data>
   <data name="NoteEditor_ContentRequiredMessage" xml:space="preserve">
-    <value>İçerik gerekli.</value>
+    <value>Content is required.</value>
   </data>
   <data name="NoteEditor_SavedTitle" xml:space="preserve">
-    <value>Kaydedildi</value>
+    <value>Saved</value>
   </data>
   <data name="NoteEditor_SavedMessage" xml:space="preserve">
-    <value>Notunuz başarıyla kaydedildi.</value>
+    <value>Your note was saved successfully.</value>
   </data>
   <data name="ReminderEditor_HeaderRequiredMessage" xml:space="preserve">
-    <value>Başlık gerekli.</value>
+    <value>Header is required.</value>
   </data>
   <data name="ReminderEditor_TextRequiredMessage" xml:space="preserve">
-    <value>Metin gerekli.</value>
+    <value>Text is required.</value>
   </data>
   <data name="TaskListEditor_NameRequiredMessage" xml:space="preserve">
-    <value>Ad gerekli.</value>
+    <value>Name is required.</value>
   </data>
   <data name="TaskDialog_TitleRequiredMessage" xml:space="preserve">
-    <value>Başlık gerekli.</value>
+    <value>Title is required.</value>
   </data>
   <data name="TaskListEditor_DeleteErrorMessage" xml:space="preserve">
-    <value>Görev listesi silinirken bir hata oluştu: {0}</value>
+    <value>An error occurred while deleting the task list: {0}</value>
   </data>
   <data name="NoteEditor_SaveErrorMessage" xml:space="preserve">
-    <value>Not kaydedilirken bir hata oluştu: {0}</value>
+    <value>An error occurred while saving the note: {0}</value>
   </data>
   <data name="NoteEditor_LoadErrorMessage" xml:space="preserve">
-    <value>Not yüklenirken bir hata oluştu: {0}</value>
+    <value>An error occurred while loading the note: {0}</value>
   </data>
   <data name="NotesList_SearchErrorMessage" xml:space="preserve">
-    <value>Notlar aranırken bir hata oluştu: {0}</value>
+    <value>An error occurred while searching notes: {0}</value>
   </data>
   <data name="NotesList_LoadErrorMessage" xml:space="preserve">
-    <value>Notlar yüklenirken bir hata oluştu: {0}</value>
+    <value>An error occurred while loading the notes: {0}</value>
   </data>
   <data name="NotesList_DeleteErrorMessage" xml:space="preserve">
-    <value>Not silinirken bir hata oluştu: {0}</value>
+    <value>An error occurred while deleting the note: {0}</value>
   </data>
   <data name="ReminderEditor_SaveErrorMessage" xml:space="preserve">
-    <value>Hatırlatıcı kaydedilirken bir hata oluştu: {0}</value>
+    <value>An error occurred while saving the reminder: {0}</value>
   </data>
   <data name="ReminderEditor_LoadErrorMessage" xml:space="preserve">
-    <value>Hatırlatıcı yüklenirken bir hata oluştu: {0}</value>
+    <value>An error occurred while loading the reminder: {0}</value>
   </data>
   <data name="ReminderEditor_LoadNotesErrorMessage" xml:space="preserve">
-    <value>Notlar yüklenirken bir hata oluştu: {0}</value>
+    <value>An error occurred while loading the notes: {0}</value>
   </data>
   <data name="RemindersList_SearchErrorMessage" xml:space="preserve">
-    <value>Hatırlatıcılar aranırken bir hata oluştu: {0}</value>
+    <value>An error occurred while searching reminders: {0}</value>
   </data>
   <data name="RemindersList_LoadErrorMessage" xml:space="preserve">
-    <value>Hatırlatıcılar yüklenirken bir hata oluştu: {0}</value>
+    <value>An error occurred while loading the reminders: {0}</value>
   </data>
   <data name="RemindersList_DeleteErrorMessage" xml:space="preserve">
-    <value>Hatırlatıcı silinirken bir hata oluştu: {0}</value>
+    <value>An error occurred while deleting the reminder: {0}</value>
   </data>
   <data name="Update_NotificationVersionAvailable" xml:space="preserve">
-    <value>MyNotes {0} sürümü kullanıma sunuldu.</value>
+    <value>MyNotes {0} is available.</value>
   </data>
   <data name="Update_ErrorMessage" xml:space="preserve">
-    <value>Güncelleme kontrol edilirken veya yüklenirken bir hata oluştu: {0}</value>
+    <value>An error occurred while checking for or installing the update: {0}</value>
   </data>
 </root>
