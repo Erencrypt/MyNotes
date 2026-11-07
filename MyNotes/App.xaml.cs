@@ -336,6 +336,8 @@ namespace MyNotes
                 })
                 .Build();
 
+            LocalizationFallback.ApplyFallback(localizer, "en-US");
+
             string language = await GetService<ISettingService>().GetSettingAsync(DataKeys.Language, "en-US") ?? "en-US";
             ApplicationLanguages.PrimaryLanguageOverride = language;
             await localizer.SetLanguage(language);

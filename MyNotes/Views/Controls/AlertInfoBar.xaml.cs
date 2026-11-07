@@ -23,8 +23,9 @@ namespace MyNotes.Views.Controls
             AlertInfoBarSeverity severity = AlertInfoBarSeverity.Informational,
             TimeSpan? duration = null)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(title);
-            ArgumentException.ThrowIfNullOrWhiteSpace(message);
+            // Title-only bars are valid; callers go through AppInfoBar, which guarantees a title.
+            title = string.IsNullOrWhiteSpace(title) ? "Info" : title;
+            message ??= string.Empty;
 
             StopDismissTimer();
 

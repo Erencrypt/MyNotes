@@ -13,8 +13,25 @@ namespace MyNotes.Helpers
             AlertInfoBarSeverity severity = AlertInfoBarSeverity.Informational,
             TimeSpan? duration = null)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(title);
-            ArgumentException.ThrowIfNullOrWhiteSpace(message);
+            // Never throw here: a missing/empty translation shouldn't crash the caller.
+            bool titleBlank = string.IsNullOrWhiteSpace(title);
+            bool messageBlank = string.IsNullOrWhiteSpace(message);
+
+            if (titleBlank && messageBlank)
+            {
+                LogWriter.Log($"AppInfoBar.Show called with empty title and message (severity: {severity}). Likely a missing translation.", LogWriter.LogLevel.Warning);
+                return;
+            }
+            if (titleBlank)
+            {
+                LogWriter.Log($"AppInfoBar.Show called with empty title (message: {message}). Likely a missing translation.", LogWriter.LogLevel.Warning);
+                title = GetFallbackTitle(severity);
+            }
+            if (messageBlank)
+            {
+                LogWriter.Log($"AppInfoBar.Show called with empty message (title: {title}). Likely a missing translation.", LogWriter.LogLevel.Warning);
+                message = string.Empty;
+            }
 
             if (MainWindow.AppAlertInfoBar is null)
             {
@@ -35,6 +52,13 @@ namespace MyNotes.Helpers
                 infoBar.Show(title, message, severity, duration ?? DefaultDuration);
             });
         }
+        private static string GetFallbackTitle(AlertInfoBarSeverity severity) => severity switch
+        {
+            AlertInfoBarSeverity.Success => "Success",
+            AlertInfoBarSeverity.Warning => "Warning",
+            AlertInfoBarSeverity.Error => "Error",
+            _ => "Info"
+        };
     }
     public enum AlertInfoBarSeverity
     {
