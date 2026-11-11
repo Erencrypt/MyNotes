@@ -29,7 +29,14 @@ namespace MyNotes.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ViewModel.SubscribeToScheduler();
             await LoadReminders();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            ViewModel.UnsubscribeFromScheduler();
         }
 
         private async Task LoadReminders()

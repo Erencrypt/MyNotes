@@ -21,45 +21,72 @@ namespace MyNotes.ViewModels
         private ObservableCollection<Reminder> _reminders = [];
         private string _searchTerm = string.Empty;
         private CancellationTokenSource? _searchCts;
+        private bool _subscribedToScheduler;
 
         public RemindersListViewModel(IReminderService reminderService, IReminderScheduler scheduler)
         {
             _reminderService = reminderService;
             _scheduler = scheduler;
+        }
 
-            // Subscribe to scheduler events to keep UI in sync
-            _scheduler.ReminderSnoozed += (r) =>
+        /// <summary>
+        /// Subscribes to scheduler events to keep the list in sync. Call when the page is shown.
+        /// The scheduler is a singleton, so every subscribe must be paired with <see cref="UnsubscribeFromScheduler"/>.
+        /// </summary>
+        public void SubscribeToScheduler()
+        {
+            if (_subscribedToScheduler)
+            { return; }
+
+            _scheduler.ReminderSnoozed += OnReminderSnoozed;
+            _scheduler.ReminderDismissed += OnReminderDismissed;
+            _subscribedToScheduler = true;
+        }
+
+        /// <summary>
+        /// Removes the scheduler event handlers. Call when leaving the page.
+        /// </summary>
+        public void UnsubscribeFromScheduler()
+        {
+            if (!_subscribedToScheduler)
+            { return; }
+
+            _scheduler.ReminderSnoozed -= OnReminderSnoozed;
+            _scheduler.ReminderDismissed -= OnReminderDismissed;
+            _subscribedToScheduler = false;
+        }
+
+        private void OnReminderSnoozed(Reminder r)
+        {
+            // Update list with snoozed reminder to show snoozed indicator
+            if (App._mainWindow == null)
+            { return; }
+            App._mainWindow.DispatcherQueue.TryEnqueue(() =>
             {
-                // Update list with snoozed reminder to show snoozed indicator
-                if (App._mainWindow == null)
-                { return; }
-                App._mainWindow.DispatcherQueue.TryEnqueue(() =>
+                var existing = Reminders.FirstOrDefault(x => x.Id == r.Id);
+                if (existing != null)
                 {
-                    var existing = Reminders.FirstOrDefault(x => x.Id == r.Id);
-                    if (existing != null)
-                    {
-                        var idx = Reminders.IndexOf(existing);
-                        Reminders[idx] = r;
-                    }
-                });
-            };
-            _scheduler.ReminderDismissed += (r) =>
-            {
-                // Only remove non-repeating reminders from list on dismiss
-                if (!r.Repeat)
-                {
-                    if (App._mainWindow == null)
-                    { return; }
-                    App._mainWindow.DispatcherQueue.TryEnqueue(() =>
-                    {
-                        var existing = Reminders.FirstOrDefault(x => x.Id == r.Id);
-                        if (existing != null)
-                        {
-                            Reminders.Remove(existing);
-                        }
-                    });
+                    var idx = Reminders.IndexOf(existing);
+                    Reminders[idx] = r;
                 }
-            };
+            });
+        }
+
+        private void OnReminderDismissed(Reminder r)
+        {
+            // Only remove non-repeating reminders from list on dismiss
+            if (r.Repeat)
+            { return; }
+            if (App._mainWindow == null)
+            { return; }
+            App._mainWindow.DispatcherQueue.TryEnqueue(() =>
+            {
+                var existing = Reminders.FirstOrDefault(x => x.Id == r.Id);
+                if (existing != null)
+                {
+                    Reminders.Remove(existing);
+                }
+            });
         }
 
         /// <summary>

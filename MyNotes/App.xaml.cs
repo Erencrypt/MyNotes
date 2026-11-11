@@ -394,6 +394,7 @@ namespace MyNotes
         /// by the legacy migration tool). Runs on the UI thread because RTF decoding uses a RichEditBox.
         /// After the first run there is nothing left to fill, so this is just one cheap query.
         /// </summary>
+        /// Note: Remove after few versions
         private async Task FillMissingNotePlainTextAsync()
         {
             try
