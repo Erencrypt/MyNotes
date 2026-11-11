@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="MyNotes.Views.Dialogs.StatusDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    CornerRadius="8"
+    CloseButtonStyle="{StaticResource AccentButtonStyle}">
+    <TextBlock
+        x:Name="MessageTextBlock"
+        TextWrapping="Wrap" />
+</ContentDialog>

@@ -98,6 +98,9 @@
     <Page Update="Views\Dialogs\UpdateAvailableDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="Views\Dialogs\StatusDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\TaskListEditorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
