@@ -691,4 +691,19 @@
   <data name="Update_ErrorMessage" xml:space="preserve">
     <value>An error occurred while checking for or installing the update: {0}</value>
   </data>
+  <data name="Settings_AccentColor.Title" xml:space="preserve">
+    <value>Accent Color</value>
+  </data>
+  <data name="Settings_AccentColor.Description" xml:space="preserve">
+    <value>Use the Windows accent color or pick your own</value>
+  </data>
+  <data name="Settings_AccentColor_System.Content" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Settings_AccentColor_Custom.Content" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Settings_AccentColor_Apply.Content" xml:space="preserve">
+    <value>Apply</value>
+  </data>
 </root>
