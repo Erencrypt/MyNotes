@@ -1,66 +1,77 @@
 ﻿using System.Diagnostics;
+using System.Text;
 
 namespace MyNotes.Helpers
 {
-    internal class LogWriter
+    internal static class LogWriter
     {
-        private static readonly string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        private static readonly string myNotesFolderPath = Path.Combine(localAppDataPath, "MyNotes");
-        private static readonly string filePath = Path.Combine(myNotesFolderPath, "log.txt");
+        private static readonly string filePath = Path.Combine(AppConfig.MyNotesFolderPath, "log.txt");
+        // The reminder worker thread and the UI thread can log at the same time.
+        private static readonly Lock _lock = new();
+
         public enum LogLevel { Debug, Info, Warning, Error }
-        public LogWriter(string logMessage, LogLevel logLevel)
+
+        public static void Log(string logMessage, LogLevel logLevel)
         {
-            Log(logMessage, logLevel);
-        }
-        public static async void Log(string logMessage, LogLevel logLevel)
-        {
-            try
+            if (logLevel == LogLevel.Debug)
             {
-                if (logLevel == LogLevel.Debug)
-                {
 #if DEBUG
-                    Debug.Print("Debug Log: {0}", logMessage);
+                Debug.Print("Debug Log: {0}", logMessage);
 #endif
-                }
-                else
-                {
-                    StreamWriter writer = File.AppendText(filePath);
-                    Loger(logMessage, writer, logLevel);
-                    writer.Close();
-                }
+                return;
             }
-            catch (Exception ex)
-            {
-                await Console.Out.WriteLineAsync(ex.Message);
-            }
-        }
 
-        private static void Loger(string logMessage, TextWriter txtWriter, LogLevel logLevel)
-        {
             try
             {
-                txtWriter.Write("Log Entry : ");
-                txtWriter.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(), DateTime.Now.ToLongDateString());
-                txtWriter.WriteLine("Log Level : {0}", logLevel);
-                txtWriter.WriteLine("  :{0}", logMessage);
-                txtWriter.WriteLine("-------------------------------\r\n");
+                var entry = FormatEntry(logMessage, logLevel);
+                lock (_lock)
+                {
+                    Directory.CreateDirectory(AppConfig.MyNotesFolderPath);
+                    File.AppendAllText(filePath, entry);
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine($"Failed to write log entry: {ex.Message}");
             }
         }
 
+        private static string FormatEntry(string logMessage, LogLevel logLevel)
+        {
+            var now = DateTime.Now;
+            var sb = new StringBuilder();
+            sb.Append("Log Entry : ");
+            sb.AppendLine($"{now.ToLongTimeString()} {now.ToLongDateString()}");
+            sb.AppendLine($"Log Level : {logLevel}");
+            sb.AppendLine($"  :{logMessage}");
+            sb.AppendLine("-------------------------------\r\n");
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Trims the log file to the newest 500 lines once it reaches 1000 lines.
+        /// </summary>
         public static void CheckLogFile()
         {
-            if (!File.Exists(filePath))
+            try
             {
-                File.Create(filePath);
+                lock (_lock)
+                {
+                    if (!File.Exists(filePath))
+                    {
+                        return;
+                    }
+
+                    var lines = File.ReadAllLines(filePath);
+                    if (lines.Length >= 1000)
+                    {
+                        File.WriteAllLines(filePath, lines.Skip(lines.Length - 500));
+                    }
+                }
             }
-            var lines = File.ReadAllLines(filePath);
-            if (lines.Length >= 1000)
+            catch (Exception ex)
             {
-                File.WriteAllLines(filePath, lines.Skip(500).ToArray());
+                Debug.WriteLine($"Failed to trim log file: {ex.Message}");
             }
         }
     }

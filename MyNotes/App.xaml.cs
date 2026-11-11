@@ -38,6 +38,7 @@ namespace MyNotes
         public App()
         {
             AppConfig.EnsureMyNotesDirectoryExists();
+            LogWriter.CheckLogFile();
             ConfigureServices();
             InitializeDbAsync().Wait();
             InitializeComponent();
