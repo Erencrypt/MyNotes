@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppLifecycle;
 using Microsoft.Windows.Globalization;
 using MyNotes.Data.Context;
+using MyNotes.Data.Models.Enums;
 using MyNotes.Data.Services;
 using MyNotes.Data.Services.Interfaces;
 using MyNotes.Helpers;
@@ -31,6 +32,8 @@ namespace MyNotes
 
         //global variables
         public static bool HandleClosedEvents { get; set; } = true;
+        /// <summary>Cached time format setting, read by the date converters (loaded at launch, updated from Settings).</summary>
+        public static TimeFormat TimeFormat { get; set; } = TimeFormat.TwelveHour;
 
         public App()
         {
@@ -107,6 +110,7 @@ namespace MyNotes
             {
 
                 await InitializeLocalizer();
+                TimeFormat = await SettingService.GetSettingAsync(DataKeys.HourFormat, TimeFormat.TwelveHour);
 
                 _mainWindow = new MainWindow();
                 _mainWindow!.Closed += Window_Closed;

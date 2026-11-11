@@ -168,6 +168,7 @@ namespace MyNotes.ViewModels
         public async Task SetTimeFormatAsync(TimeFormat value)
         {
             TimeFormat = value;
+            App.TimeFormat = value;
             await SaveSettingAsync(DataKeys.HourFormat, value);
         }
         public async Task SetLanguageAsync(string value)
