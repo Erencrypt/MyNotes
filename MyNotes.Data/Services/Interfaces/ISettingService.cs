@@ -16,6 +16,8 @@ namespace MyNotes.Data.Services.Interfaces
         public static string SaveWhenExit = "SaveWhenExit";
         public static string Theme = "Theme";
         public static string Backdrop = "Backdrop";
+        public static string UseSystemAccentColor = "UseSystemAccentColor";
+        public static string CustomAccentColor = "CustomAccentColor";
         public static string HourFormat = "TimeFormat";
         public static string Language = "Language";
         public static string AlarmSoundLooping = "AlarmSoundLooping";

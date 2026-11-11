@@ -65,6 +65,41 @@
                         </ComboBox>
                     </controls:SettingsCard>
 
+                    <controls:SettingsCard Name="AccentColorCard" Icon="&#xE771;" l:Uids.Uid="Settings_AccentColor" Margin="0,0,0,4">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="4,0,12,0" VerticalAlignment="Center">
+                            <Button Name="AccentColorButton"
+                                    Padding="4"
+                                    MinWidth="0"
+                                    VerticalAlignment="Stretch"
+                                    Visibility="Collapsed">
+                                <Border Name="AccentColorSwatch"
+                                        Width="24" Height="20"
+                                        CornerRadius="2"/>
+                                <Button.Flyout>
+                                    <Flyout x:Name="AccentColorFlyout" Opening="AccentColorFlyout_Opening">
+                                        <StackPanel Spacing="12">
+                                            <ColorPicker Name="AccentColorPicker"
+                                                         IsAlphaEnabled="False"
+                                                         IsMoreButtonVisible="True"
+                                                         IsColorSliderVisible="True"
+                                                         IsColorChannelTextInputVisible="True"
+                                                         IsHexInputVisible="True"/>
+                                            <Button Name="AccentColorApplyButton"
+                                                    HorizontalAlignment="Right"
+                                                    Style="{StaticResource AccentButtonStyle}"
+                                                    l:Uids.Uid="Settings_AccentColor_Apply"
+                                                    Click="AccentColorApplyButton_Click"/>
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                            <ComboBox Name="AccentColorCb" SelectionChanged="AccentColorCb_SelectionChanged">
+                                <ComboBoxItem l:Uids.Uid="Settings_AccentColor_System" Content="System" Tag="System"/>
+                                <ComboBoxItem l:Uids.Uid="Settings_AccentColor_Custom" Content="Custom" Tag="Custom"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </controls:SettingsCard>
+
                     <controls:SettingsCard Name="BackdropCard" Icon="&#xEF1F;" l:Uids.Uid="Settings_BackDrop">
                         <ComboBox Name="BackdropCb"
                             Grid.Column="2"

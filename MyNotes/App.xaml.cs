@@ -355,6 +355,12 @@ namespace MyNotes
             await ThemeService.SetElementThemeWithoutSaveAsync(theme);
             await ThemeService.SetBackdropTypeWithoutSaveAsync(backdrop);
 
+            var useSystemAccent = await SettingService.GetSettingAsync(DataKeys.UseSystemAccentColor, true);
+            var customAccent = await SettingService.GetSettingAsync<string>(DataKeys.CustomAccentColor, null);
+            AccentColorHelper.Apply(
+                useSystemAccent || string.IsNullOrEmpty(customAccent) ? null : HexConverter.HexToColor(customAccent),
+                _mainWindow.Content as FrameworkElement);
+
             ThemeService.BackdropChanged += ThemeService_BackdropChanged;
             ThemeService.ThemeChanged += ThemeService_ThemeChanged;
         }

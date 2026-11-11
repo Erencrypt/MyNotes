@@ -1,4 +1,6 @@
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml;
+using Windows.UI;
 using Microsoft.Windows.AppNotifications;
 using MyNotes.Data.Models.Enums;
 using MyNotes.Data.Services.Interfaces;
@@ -26,6 +28,39 @@ namespace MyNotes.ViewModels
         private bool _startupToggleEnabled = true;
         private TimeFormat _timeFormat;
         private string _language = "en-US";
+        private bool _useSystemAccentColor = true;
+        private string? _customAccentColor;
+
+        public bool UseSystemAccentColor
+        {
+            get => _useSystemAccentColor;
+            set
+            {
+                if (SetProperty(ref _useSystemAccentColor, value))
+                {
+                    OnPropertyChanged(nameof(EffectiveAccentColor));
+                }
+            }
+        }
+
+        /// <summary>Custom accent color as "#AARRGGBB", or null if the user never picked one.</summary>
+        public string? CustomAccentColor
+        {
+            get => _customAccentColor;
+            set
+            {
+                if (SetProperty(ref _customAccentColor, value))
+                {
+                    OnPropertyChanged(nameof(EffectiveAccentColor));
+                }
+            }
+        }
+
+        /// <summary>The accent color currently in effect (system or custom).</summary>
+        public Color EffectiveAccentColor =>
+            !UseSystemAccentColor && !string.IsNullOrEmpty(CustomAccentColor)
+                ? HexConverter.HexToColor(CustomAccentColor)
+                : AccentColorHelper.SystemAccentColor;
 
         public string VersionDescription
         {
@@ -141,6 +176,34 @@ namespace MyNotes.ViewModels
             await _localizer.SetLanguage(value);
         }
 
+        public async Task SetUseSystemAccentColorAsync(bool value)
+        {
+            UseSystemAccentColor = value;
+            // First switch to custom: seed it with the current system accent so nothing jumps.
+            CustomAccentColor ??= HexConverter.ColorToHex(AccentColorHelper.SystemAccentColor);
+            await SaveAndApplyAccentAsync();
+        }
+
+        public async Task SetCustomAccentColorAsync(Color value)
+        {
+            CustomAccentColor = HexConverter.ColorToHex(value);
+            UseSystemAccentColor = false;
+            await SaveAndApplyAccentAsync();
+        }
+
+        private async Task SaveAndApplyAccentAsync()
+        {
+            await SaveSettingAsync(DataKeys.UseSystemAccentColor, UseSystemAccentColor);
+            if (CustomAccentColor is not null)
+            {
+                await SaveSettingAsync(DataKeys.CustomAccentColor, CustomAccentColor);
+            }
+
+            AccentColorHelper.Apply(
+                UseSystemAccentColor ? null : EffectiveAccentColor,
+                App._mainWindow?.Content as FrameworkElement);
+        }
+
         private async Task SaveSettingAsync<T>(string key, T value)
         {
             await _settingService.SetSettingAsync(key, value);
@@ -154,6 +217,8 @@ namespace MyNotes.ViewModels
             TrashRetentionDays = await _settingService.GetSettingAsync<int>(DataKeys.TrashRetentionDays, 30);
             TimeFormat = await _settingService.GetSettingAsync<TimeFormat>(DataKeys.HourFormat, TimeFormat.TwelveHour);
             Language = await _settingService.GetSettingAsync<string>(DataKeys.Language, "en-US")?? "en-US";
+            UseSystemAccentColor = await _settingService.GetSettingAsync(DataKeys.UseSystemAccentColor, true);
+            CustomAccentColor = await _settingService.GetSettingAsync<string>(DataKeys.CustomAccentColor, null);
 
             await _localizer.SetLanguage(Language);
         }

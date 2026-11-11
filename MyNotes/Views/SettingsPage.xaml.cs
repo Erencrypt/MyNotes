@@ -10,7 +10,7 @@ using Windows.ApplicationModel;
 using WinUI3Localizer;
 
 namespace MyNotes.Views;
-//TODO: add an option for using system theme color or custom one with color picker
+
 public sealed partial class SettingsPage : Page
 {
     private readonly ILocalizer _localizer = Localizer.Get();
@@ -90,8 +90,44 @@ public sealed partial class SettingsPage : Page
             _ => 0
         };
 
+        AccentColorCb.SelectedIndex = ViewModel.UseSystemAccentColor ? 0 : 1;
+        UpdateAccentColorControls();
+
         ViewModel.IsLoading = false;
     }
+
+    #region accent color
+
+    private void UpdateAccentColorControls()
+    {
+        AccentColorButton.Visibility = ViewModel.UseSystemAccentColor ? Visibility.Collapsed : Visibility.Visible;
+        AccentColorSwatch.Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(ViewModel.EffectiveAccentColor);
+    }
+
+    private async void AccentColorCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (ViewModel.IsLoading || AccentColorCb.SelectedItem is not ComboBoxItem item)
+        {
+            return;
+        }
+
+        await ViewModel.SetUseSystemAccentColorAsync(item.Tag?.ToString() != "Custom");
+        UpdateAccentColorControls();
+    }
+
+    private void AccentColorFlyout_Opening(object sender, object e)
+    {
+        AccentColorPicker.Color = ViewModel.EffectiveAccentColor;
+    }
+
+    private async void AccentColorApplyButton_Click(object sender, RoutedEventArgs e)
+    {
+        AccentColorFlyout.Hide();
+        await ViewModel.SetCustomAccentColorAsync(AccentColorPicker.Color);
+        UpdateAccentColorControls();
+    }
+
+    #endregion
 
     #region startup
 
