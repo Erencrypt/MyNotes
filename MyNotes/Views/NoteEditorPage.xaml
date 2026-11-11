@@ -58,10 +58,10 @@
 
                 <!-- Title -->
                 <TextBox x:Name="TitleTextBox"
-                             RelativePanel.AlignTopWithPanel="True"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             Margin="0,0,0,8"
+                         RelativePanel.AlignTopWithPanel="True"
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.AlignRightWithPanel="True"
+                         Margin="0,0,0,8"
                          Text="{x:Bind ViewModel.Title, Mode=TwoWay}"/>
 
                 <Button x:Name="BoldButton" IsTabStop="False" Click="BoldButton_Click" RelativePanel.Below="TitleTextBox">
@@ -85,13 +85,13 @@
                     </Button.Content>
                 </Button>
 
-                <DropDownButton x:Name="ListButton" 
+                <DropDownButton x:Name="ListButton"
                                 Background="Transparent"
-                                BorderThickness="0" 
-                                IsTabStop="False" 
+                                BorderThickness="0"
+                                IsTabStop="False"
                                 RelativePanel.RightOf="StrikeButton"
                                 RelativePanel.Below="TitleTextBox">
-                    <FontIcon Glyph="&#xE8FD;" />
+                    <FontIcon Glyph="&#xE8FD;"/>
                     <DropDownButton.Flyout>
                         <Flyout Placement="Bottom">
                             <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2">
@@ -258,20 +258,21 @@
                 </Button>
                 <!-- RichEditBox -->
                 <RichEditBox
-                x:Name="NoteEditor"
-                GettingFocus="NoteEditor_GettingFocus"
-                LosingFocus="NoteEditor_LosingFocus"
-                ProcessKeyboardAccelerators="NoteEditor_ProcessKeyboardAccelerators"
-                        VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                KeyboardAcceleratorPlacementMode="Hidden" 
-                Width="auto"
-                Height="auto"
-                RelativePanel.Below="BoldButton"
-                RelativePanel.Above="Search"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.AlignBottomWith="Search">
+                    x:Name="NoteEditor"
+                    GettingFocus="NoteEditor_GettingFocus"
+                    LosingFocus="NoteEditor_LosingFocus"
+                    ProcessKeyboardAccelerators="NoteEditor_ProcessKeyboardAccelerators"
+                    SelectionFlyout="{x:Null}"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    KeyboardAcceleratorPlacementMode="Hidden"
+                    Width="auto"
+                    Height="auto"
+                    RelativePanel.Below="BoldButton"
+                    RelativePanel.Above="Search"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignBottomWith="Search">
                     <RichEditBox.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="F" />
                     </RichEditBox.KeyboardAccelerators>
@@ -279,30 +280,30 @@
 
                 <!-- Search StackPanel -->
                 <StackPanel
-                Name="Search"
-                Orientation="Horizontal"
-                RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignBottomWithPanel="True"
-                Margin="0,0,0,8">
-                    <TextBlock x:Name="FindBoxLabel" l:Uids.Uid="NoteEditor_FindText" Height="20" />
+                    Name="Search"
+                    Orientation="Horizontal"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    Margin="0,0,0,8">
+                    <TextBlock x:Name="FindBoxLabel" l:Uids.Uid="NoteEditor_FindText" Height="20"/>
                     <TextBox
-                    x:Name="FindBox"
-                    Width="240"
-                    Margin="10,0,0,0"
-                    TextChanged="FindBox_TextChanged"
-                    GotFocus="FindBox_GotFocus"
-                    LostFocus="FindBox_LostFocus" />
+                        x:Name="FindBox"
+                        Width="240"
+                        Margin="10,0,0,0"
+                        TextChanged="FindBox_TextChanged"
+                        GotFocus="FindBox_GotFocus"
+                        LostFocus="FindBox_LostFocus"/>
                 </StackPanel>
 
                 <!-- Spell Check CheckBox -->
                 <CheckBox
-                l:Uids.Uid="NoteEditor_SpellCheck"
-                Name="SpellCheck"
-                Checked="SpellCheck_Checked"
-                Unchecked="SpellCheck_Unchecked"
-                RelativePanel.AlignBottomWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True"
-                Margin="0,0,0,8" />
+                    l:Uids.Uid="NoteEditor_SpellCheck"
+                    Name="SpellCheck"
+                    Checked="SpellCheck_Checked"
+                    Unchecked="SpellCheck_Unchecked"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Margin="0,0,0,8"/>
             </RelativePanel>
         </Border>
 

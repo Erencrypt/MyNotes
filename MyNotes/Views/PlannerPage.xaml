@@ -62,7 +62,7 @@
                                         x:Name="uniformGridLayout"
                                         Orientation="Horizontal"
                                         ItemsStretch="Fill"
-                                        MinItemWidth="273"
+                                        MinItemWidth="256"
                                         MinItemHeight="210"
                                         MinColumnSpacing="12"
                                         MinRowSpacing="12"/>
