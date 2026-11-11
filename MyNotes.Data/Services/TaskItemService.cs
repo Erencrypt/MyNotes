@@ -133,6 +133,7 @@ namespace MyNotes.Data.Services
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.TaskItems
+               .IgnoreQueryFilters()
                .Where(ti => ti.DeletedAt != null)
                .Where(ti => ti.Title.Contains(searchTerm) || ti.Text.Contains(searchTerm))
                .Include(ti => ti.TaskList)

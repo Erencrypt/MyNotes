@@ -171,10 +171,11 @@ namespace MyNotes.Data.Services
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Reminders
+                .IgnoreQueryFilters()
                 .Where(r => r.DeletedAt != null)
                 .Where(r => r.ReminderHeader.Contains(searchTerm) || r.ReminderText.Contains(searchTerm))
                 .Include(r => r.Note)
-                .OrderByDescending(r => r.CreatedAt)
+                .OrderByDescending(r => r.UpdatedAt)
                 .ToListAsync(ct);
         }
     }
