@@ -253,6 +253,8 @@ namespace MyNotes.Views
             ViewModel.Title = TitleTextBox.Text;
             NoteEditor.Document.GetText(TextGetOptions.FormatRtf, out string rtfContent);
             ViewModel.Content = rtfContent;
+            NoteEditor.Document.GetText(TextGetOptions.NoHidden, out string plainText);
+            ViewModel.PlainText = RtfHelper.Normalize(plainText);
         }
 
         /// <summary>

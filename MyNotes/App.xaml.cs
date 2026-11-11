@@ -113,6 +113,8 @@ namespace MyNotes
 
                 await InitializeLocalizer();
                 TimeFormat = await SettingService.GetSettingAsync(DataKeys.HourFormat, TimeFormat.TwelveHour);
+                // Must run before MainWindow is created: its constructor opens the notes list.
+                await FillMissingNotePlainTextAsync();
 
                 _mainWindow = new MainWindow();
                 _mainWindow!.Closed += Window_Closed;
@@ -387,6 +389,47 @@ namespace MyNotes
         #endregion
 
         #region Database initialization
+        /// <summary>
+        /// One-time fill of Note.PlainText for notes saved before the column existed (or imported
+        /// by the legacy migration tool). Runs on the UI thread because RTF decoding uses a RichEditBox.
+        /// After the first run there is nothing left to fill, so this is just one cheap query.
+        /// </summary>
+        private async Task FillMissingNotePlainTextAsync()
+        {
+            try
+            {
+                var noteService = GetService<INoteService>();
+                var notes = await noteService.GetNotesMissingPlainTextAsync();
+                if (notes.Count == 0)
+                {
+                    return;
+                }
+
+                var plainTexts = new Dictionary<Guid, string>();
+                foreach (var note in notes)
+                {
+                    try
+                    {
+                        var plainText = RtfHelper.ToPlainText(note.Content);
+                        if (plainText.Length > 0)
+                        {
+                            plainTexts[note.Id] = plainText;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogWriter.Log($"Failed to convert note {note.Id} to plain text: {ex.Message}", LogWriter.LogLevel.Warning);
+                    }
+                }
+
+                await noteService.SetPlainTextsAsync(plainTexts);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log($"Failed to fill note plain text: {ex}", LogWriter.LogLevel.Error);
+            }
+        }
+
         private async Task InitializeDbAsync()
         {
             if (_host != null)

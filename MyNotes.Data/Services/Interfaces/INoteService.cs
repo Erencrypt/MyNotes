@@ -18,5 +18,11 @@ namespace MyNotes.Data.Services.Interfaces
         Task PermanentlyDeleteNoteAsync(Guid id);
         Task<List<Note>> SearchNotesAsync(string searchTerm, CancellationToken ct = default);
         Task<List<Note>> SearchDeletedNotesAsync(string searchTerm, CancellationToken ct = default);
+
+        /// <summary>Notes (including trashed ones) that have content but no plain-text copy yet.</summary>
+        Task<List<Note>> GetNotesMissingPlainTextAsync();
+
+        /// <summary>Sets PlainText for the given notes without changing UpdatedAt.</summary>
+        Task SetPlainTextsAsync(IReadOnlyDictionary<Guid, string> plainTexts);
     }
 }

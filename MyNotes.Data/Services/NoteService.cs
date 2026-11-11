@@ -120,7 +120,7 @@ namespace MyNotes.Data.Services
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Notes
                 .Where(n => n.DeletedAt == null)
-                .Where(n => AppDbContext.ContainsIgnoreCase(n.Title, searchTerm) || AppDbContext.ContainsIgnoreCase(n.Content, searchTerm))
+                .Where(n => AppDbContext.ContainsIgnoreCase(n.Title, searchTerm) || AppDbContext.ContainsIgnoreCase(n.PlainText, searchTerm))
                 .Include(n => n.Reminders)
                 .OrderByDescending(n => n.UpdatedAt)
                 .ToListAsync(ct);
@@ -132,10 +132,42 @@ namespace MyNotes.Data.Services
             return await context.Notes
                 .IgnoreQueryFilters()
                 .Where(n => n.DeletedAt != null)
-                .Where(n => AppDbContext.ContainsIgnoreCase(n.Title, searchTerm) || AppDbContext.ContainsIgnoreCase(n.Content, searchTerm))
+                .Where(n => AppDbContext.ContainsIgnoreCase(n.Title, searchTerm) || AppDbContext.ContainsIgnoreCase(n.PlainText, searchTerm))
                 .Include(n => n.Reminders!.Where(r => r.DeletedAt == null))
                 .OrderByDescending(n => n.UpdatedAt)
                 .ToListAsync(ct);
+        }
+
+        public async Task<List<Note>> GetNotesMissingPlainTextAsync()
+        {
+            await using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Notes
+                .IgnoreQueryFilters()
+                .AsNoTracking()
+                .Where(n => n.PlainText == "" && n.Content != "")
+                .ToListAsync();
+        }
+
+        public async Task SetPlainTextsAsync(IReadOnlyDictionary<Guid, string> plainTexts)
+        {
+            if (plainTexts.Count == 0)
+            {
+                return;
+            }
+
+            await using var context = await _contextFactory.CreateDbContextAsync();
+            await using var transaction = await context.Database.BeginTransactionAsync();
+
+            // ExecuteUpdate only touches PlainText, so UpdatedAt (and the list order) stays as it was.
+            foreach (var (id, plainText) in plainTexts)
+            {
+                await context.Notes
+                    .IgnoreQueryFilters()
+                    .Where(n => n.Id == id)
+                    .ExecuteUpdateAsync(s => s.SetProperty(n => n.PlainText, plainText));
+            }
+
+            await transaction.CommitAsync();
         }
     }
 }

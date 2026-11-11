@@ -43,6 +43,7 @@ namespace MyNotes.Data.Context
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Content).IsRequired();
+                entity.Property(e => e.PlainText).IsRequired().HasDefaultValue(string.Empty);
                 entity.Property(e => e.CreatedAt).IsRequired();
                 entity.Property(e => e.UpdatedAt).IsRequired();
                 entity.Property(e => e.DeletedAt).IsRequired(false);

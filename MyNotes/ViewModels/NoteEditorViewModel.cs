@@ -49,6 +49,9 @@ namespace MyNotes.ViewModels
             set => SetProperty(ref _content, value);
         }
 
+        /// <summary>Plain-text copy of <see cref="Content"/>, set by the page before saving.</summary>
+        public string PlainText { get; set; } = string.Empty;
+
         public bool HasReminders
         {
             get => _hasReminders;
@@ -72,6 +75,7 @@ namespace MyNotes.ViewModels
                     {
                         Title = Title.Trim(),
                         Content = Content ?? string.Empty, // Store RTF content as-is
+                        PlainText = PlainText,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now
                     };
@@ -81,6 +85,7 @@ namespace MyNotes.ViewModels
                     note = (await _noteService.GetNoteByIdAsync(NoteId))!;
                     note.Title = Title.Trim();
                     note.Content = Content ?? string.Empty; // Store RTF content as-is
+                    note.PlainText = PlainText;
                     note.UpdatedAt = DateTime.Now;
                 }
 

@@ -9,7 +9,6 @@
     xmlns:l="using:WinUI3Localizer"
     mc:Ignorable="d">
     <Page.Resources>
-        <helpers:RtfToPlainTextConverter x:Key="RtfToPlainTextConverter" />
         <helpers:DateTimeConverter x:Key="DateTimeConverter"/>
         <helpers:DeletedTaskItemsCountConverter x:Key="DeletedTaskItemsCountConverter"/>
     </Page.Resources>
@@ -116,7 +115,7 @@
                                         <TextBlock Grid.Column="1"
                                              Grid.Row="1"
                                              Opacity="0.8"
-                                             Text="{Binding Content, Converter={StaticResource RtfToPlainTextConverter}}"
+                                             Text="{Binding PlainText}"
                                              Style="{ThemeResource BodyTextBlockStyle}"
                                              Height="18"
                                              Margin="12,0,0,6"/>
