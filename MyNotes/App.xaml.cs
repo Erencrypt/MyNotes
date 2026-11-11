@@ -205,7 +205,7 @@ namespace MyNotes
         #endregion
 
         #region Update checking and installation
-        private static async Task<XamlRoot> GetMainWindowXamlRootAsync()
+        internal static async Task<XamlRoot> GetMainWindowXamlRootAsync()
         {
             var rootFrame = MainWindow._rootFrame;
             if (rootFrame.XamlRoot is { } xamlRoot)

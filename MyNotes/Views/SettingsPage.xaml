@@ -147,6 +147,8 @@
 
                     <controls:SettingsCard Name="StartupCard" Icon="&#xE777;" l:Uids.Uid="Settings_Startup" Margin="0,0,0,4">
                         <ToggleSwitch Name="StartupTogle"
+                            IsOn="{x:Bind ViewModel.StartupEnabled, Mode=TwoWay}"
+                            IsEnabled="{x:Bind ViewModel.StartupToggleEnabled, Mode=OneWay}"
                             Toggled="StartupTogle_Toggled"
                             Grid.Column="2"
                             Grid.RowSpan="2"

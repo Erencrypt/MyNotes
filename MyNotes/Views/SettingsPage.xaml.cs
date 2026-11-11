@@ -5,8 +5,6 @@ using MyNotes.Data.Models.Enums;
 using MyNotes.Data.Services.Interfaces;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
-using System.Diagnostics;
-using Windows.ApplicationModel;
 using WinUI3Localizer;
 
 namespace MyNotes.Views;
@@ -14,7 +12,6 @@ namespace MyNotes.Views;
 public sealed partial class SettingsPage : Page
 {
     private readonly ILocalizer _localizer = Localizer.Get();
-    private StartupTask? _startupTask;
 
     public SettingsViewModel ViewModel { get; }
 
@@ -49,14 +46,7 @@ public sealed partial class SettingsPage : Page
             _ => 2
         };
 
-        if (Helpers.RuntimeHelper.IsMSIX)
-        {
-            await GetTaskAsync();
-        }
-        else
-        {
-            StartupTogle.IsOn = AppUtilities.StartupEntryExists(AppConfig.StartupRegistryValueName);
-        }
+        await ViewModel.LoadStartupStateAsync();
 
         AppDescription.Text = _localizer.GetLocalizedString("AppDescription");
         TimeFormatCb.SelectedIndex = (int)ViewModel.TimeFormat;
@@ -129,105 +119,14 @@ public sealed partial class SettingsPage : Page
 
     #endregion
 
-    #region startup
-
-    private async Task GetTaskAsync()
+    private async void StartupTogle_Toggled(object sender, RoutedEventArgs e)
     {
-        _startupTask = await StartupTask.GetAsync(AppConfig.StartupTaskId);
-
-        switch (_startupTask.State)
+        if (ViewModel.IsLoading)
         {
-            case StartupTaskState.Enabled:
-                StartupTogle.IsOn = true;
-                break;
-            case StartupTaskState.Disabled:
-                StartupTogle.IsOn = false;
-                break;
-            case StartupTaskState.DisabledByUser:
-                await ShowStatusDialogAsync(_localizer.GetLocalizedString("Settings_DisabledByUser"));
-                StartupTogle.IsOn = false;
-                break;
-            case StartupTaskState.DisabledByPolicy:
-                StartupTogle.IsOn = false;
-                StartupTogle.IsEnabled = false;
-                break;
-            case StartupTaskState.EnabledByPolicy:
-                StartupTogle.IsOn = true;
-                StartupTogle.IsEnabled = true;
-                break;
+            return;
         }
-    }
 
-    private async Task ShowStatusDialogAsync(string content)
-    {
-        var dialog = new ContentDialog
-        {
-            Title = "",
-            Content = content,
-            CloseButtonText = _localizer.GetLocalizedString("Ok")
-        };
-
-        await dialog.ShowAsync();
-    }
-
-    private async void EnableStartup()
-    {
-        if (Helpers.RuntimeHelper.IsMSIX)
-        {
-            if (_startupTask is null)
-            {
-                return;
-            }
-
-            var newState = await _startupTask.RequestEnableAsync();
-            Debug.WriteLine("Request to enable startup, result = {0}", newState);
-        }
-        else
-        {
-            if (AppUtilities.GetProcessPath() is string processPath)
-            {
-                AppUtilities.SetStartupEntry(AppConfig.StartupRegistryValueName, processPath);
-            }
-        }
-    }
-
-    private void DisableStartup()
-    {
-        if (Helpers.RuntimeHelper.IsMSIX)
-        {
-            if (_startupTask is null)
-            {
-                return;
-            }
-
-            switch (_startupTask.State)
-            {
-                case StartupTaskState.Enabled:
-                    _startupTask.Disable();
-                    Debug.WriteLine("Request to disable startup, result = {0}", _startupTask.State);
-                    break;
-                case StartupTaskState.EnabledByPolicy:
-                    Debug.WriteLine(_localizer.GetLocalizedString("Settings_EnabledByPolicy"));
-                    break;
-            }
-        }
-        else
-        {
-            AppUtilities.RemoveStartupEntry(AppConfig.StartupRegistryValueName);
-        }
-    }
-
-    #endregion
-    private void StartupTogle_Toggled(object sender, RoutedEventArgs e)
-    {
-        if (StartupTogle.IsOn)
-        {
-            EnableStartup();
-        }
-        else
-        {
-            DisableStartup();
-        }
+        await ViewModel.SetStartupEnabledAsync(StartupTogle.IsOn);
     }
 
     private async void SaveTogle_Toggled(object sender, RoutedEventArgs e)

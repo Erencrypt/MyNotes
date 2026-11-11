@@ -1,5 +1,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
+using MyNotes.Views.Dialogs;
+using System.Diagnostics;
 using Windows.UI;
 using Microsoft.Windows.AppNotifications;
 using MyNotes.Data.Models.Enums;
@@ -203,6 +205,113 @@ namespace MyNotes.ViewModels
                 UseSystemAccentColor ? null : EffectiveAccentColor,
                 App._mainWindow?.Content as FrameworkElement);
         }
+
+        #region startup
+
+        private StartupTask? _startupTask;
+
+        public async Task LoadStartupStateAsync()
+        {
+            if (!RuntimeHelper.IsMSIX)
+            {
+                StartupEnabled = AppUtilities.StartupEntryExists(AppConfig.StartupRegistryValueName);
+                return;
+            }
+
+            _startupTask = await StartupTask.GetAsync(AppConfig.StartupTaskId);
+
+            switch (_startupTask.State)
+            {
+                case StartupTaskState.Enabled:
+                    StartupEnabled = true;
+                    break;
+                case StartupTaskState.Disabled:
+                    StartupEnabled = false;
+                    break;
+                case StartupTaskState.DisabledByUser:
+                    await ShowStatusDialogAsync(_localizer.GetLocalizedString("Settings_DisabledByUser"));
+                    StartupEnabled = false;
+                    break;
+                case StartupTaskState.DisabledByPolicy:
+                    StartupEnabled = false;
+                    StartupToggleEnabled = false;
+                    break;
+                case StartupTaskState.EnabledByPolicy:
+                    StartupEnabled = true;
+                    StartupToggleEnabled = true;
+                    break;
+            }
+        }
+
+        public async Task SetStartupEnabledAsync(bool value)
+        {
+            StartupEnabled = value;
+
+            if (value)
+            {
+                await EnableStartupAsync();
+            }
+            else
+            {
+                DisableStartup();
+            }
+        }
+
+        private async Task EnableStartupAsync()
+        {
+            if (RuntimeHelper.IsMSIX)
+            {
+                if (_startupTask is null)
+                {
+                    return;
+                }
+
+                var newState = await _startupTask.RequestEnableAsync();
+                Debug.WriteLine("Request to enable startup, result = {0}", newState);
+            }
+            else if (AppUtilities.GetProcessPath() is string processPath)
+            {
+                AppUtilities.SetStartupEntry(AppConfig.StartupRegistryValueName, processPath);
+            }
+        }
+
+        private void DisableStartup()
+        {
+            if (RuntimeHelper.IsMSIX)
+            {
+                if (_startupTask is null)
+                {
+                    return;
+                }
+
+                switch (_startupTask.State)
+                {
+                    case StartupTaskState.Enabled:
+                        _startupTask.Disable();
+                        Debug.WriteLine("Request to disable startup, result = {0}", _startupTask.State);
+                        break;
+                    case StartupTaskState.EnabledByPolicy:
+                        Debug.WriteLine(_localizer.GetLocalizedString("Settings_EnabledByPolicy"));
+                        break;
+                }
+            }
+            else
+            {
+                AppUtilities.RemoveStartupEntry(AppConfig.StartupRegistryValueName);
+            }
+        }
+
+        private static async Task ShowStatusDialogAsync(string message)
+        {
+            var dialog = new StatusDialog(message)
+            {
+                XamlRoot = await App.GetMainWindowXamlRootAsync()
+            };
+
+            await dialog.ShowAsync();
+        }
+
+        #endregion
 
         private async Task SaveSettingAsync<T>(string key, T value)
         {

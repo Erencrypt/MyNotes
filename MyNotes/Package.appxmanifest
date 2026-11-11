@@ -55,6 +55,18 @@
 				<uap:LockScreen BadgeLogo="Assets\LockScreenLogo.scale-200.png"
 					Notification="badgeAndTileText" />
 			</uap:VisualElements>
+			<!--
+			Startup task for the packaged (MSIX) build. TaskId must match AppConfig.StartupTaskId.
+			Uncomment when the packaged build is needed; without it StartupTask.GetAsync throws in MSIX.
+			<Extensions>
+				<uap5:Extension Category="windows.startupTask">
+					<uap5:StartupTask
+						TaskId="8163264128256"
+						Enabled="false"
+						DisplayName="MyNotes" />
+				</uap5:Extension>
+			</Extensions>
+			-->
 		</Application>
 	</Applications>
 
