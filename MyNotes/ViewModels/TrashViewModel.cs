@@ -1,6 +1,9 @@
 using CommunityToolkit.Mvvm.Input;
 using MyNotes.Data.Models;
 using MyNotes.Data.Services.Interfaces;
+using MyNotes.Helpers;
+using MyNotes.Services.Interfaces;
+using MyNotes.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -14,6 +17,7 @@ namespace MyNotes.ViewModels
         private readonly INoteService _noteService;
         private readonly IReminderService _reminderService;
         private readonly ITaskListService _taskListService;
+        private readonly IReminderScheduler _scheduler;
         private ObservableCollection<Note> _deletedNotes = [];
         private ObservableCollection<Reminder> _deletedReminders = [];
         private ObservableCollection<TaskList> _deletedTaskLists = [];
@@ -27,11 +31,12 @@ namespace MyNotes.ViewModels
 
 
 
-        public TrashViewModel(INoteService noteService, IReminderService reminderService, ITaskListService taskListService)
+        public TrashViewModel(INoteService noteService, IReminderService reminderService, ITaskListService taskListService, IReminderScheduler scheduler)
         {
             _noteService = noteService;
             _reminderService = reminderService;
             _taskListService = taskListService;
+            _scheduler = scheduler;
         }
 
         /// <summary>
@@ -320,6 +325,22 @@ namespace MyNotes.ViewModels
             {
                 await _reminderService.RestoreReminderAsync(reminder.Id);
                 DeletedReminders.Remove(reminder);
+
+                var restored = await _reminderService.GetReminderByIdAsync(reminder.Id);
+                if (restored == null)
+                { return; }
+
+                if (restored.Repeat || restored.ReminderDateTime > DateTime.Now)
+                {
+                    // Repeating: an old date is moved to the next occurrence by the scheduler's missed check.
+                    _scheduler.Schedule(restored);
+                }
+                else
+                {
+                    // One-time whose time has passed: let the user pick a new time.
+                    // Saving in the editor schedules it; otherwise startup cleanup trashes it again.
+                    NavigationHelper.NavigateTo<ReminderEditorPage>(restored);
+                }
             }
         }
 
