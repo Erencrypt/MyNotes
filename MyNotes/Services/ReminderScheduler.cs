@@ -13,6 +13,9 @@ namespace MyNotes.Services
         private readonly IReminderService _reminderService;
         private readonly IAppNotificationService _notificationService;
         private readonly ConcurrentDictionary<Guid, Reminder> _scheduled = new();
+        // One-time reminders that have fired but the user hasn't snoozed or dismissed yet.
+        // Kept out of _scheduled so they don't fire again or get treated as missed.
+        private readonly ConcurrentDictionary<Guid, Reminder> _fired = new();
         // Original time of day for repeating reminders. Snoozing changes the in-memory
         // ReminderDateTime, so the next occurrence is always calculated from this instead.
         private readonly ConcurrentDictionary<Guid, TimeSpan> _repeatTimes = new();
@@ -82,6 +85,7 @@ namespace MyNotes.Services
         public void Unschedule(Guid reminderId)
         {
             _scheduled.TryRemove(reminderId, out _);
+            _fired.TryRemove(reminderId, out _);
             _repeatTimes.TryRemove(reminderId, out _);
         }
 
@@ -108,6 +112,12 @@ namespace MyNotes.Services
 
         public async Task SnoozeAsync(Guid reminderId, TimeSpan snoozeDuration)
         {
+            // A fired one-time reminder goes back into the schedule with its snoozed time.
+            if (_fired.TryRemove(reminderId, out var fired))
+            {
+                _scheduled[reminderId] = fired;
+            }
+
             if (_scheduled.TryGetValue(reminderId, out var reminder))
             {
                 // Update in-memory scheduled time only, do NOT update database
@@ -119,7 +129,7 @@ namespace MyNotes.Services
 
         public async Task DismissAsync(Guid reminderId)
         {
-            if (_scheduled.TryGetValue(reminderId, out var reminder))
+            if (_scheduled.TryGetValue(reminderId, out var reminder) || _fired.TryGetValue(reminderId, out reminder))
             {
                 if (reminder.Repeat)
                 {
@@ -133,6 +143,7 @@ namespace MyNotes.Services
                     // For non-repeating, delete from DB
                     await _reminderService.SoftDeleteReminderAsync(reminder.Id);
                     _scheduled.TryRemove(reminderId, out _);
+                    _fired.TryRemove(reminderId, out _);
                 }
                 ReminderDismissed?.Invoke(reminder);
             }
@@ -173,8 +184,12 @@ namespace MyNotes.Services
 
                             if (!r.Repeat)
                             {
-                                // Non-repeating: remove from schedule
-                                _scheduled.TryRemove(r.Id, out _);
+                                // Non-repeating: move out of the schedule but keep it until the user
+                                // snoozes or dismisses it from the notification.
+                                if (_scheduled.TryRemove(r.Id, out _))
+                                {
+                                    _fired[r.Id] = r;
+                                }
                             }
                             else
                             {
