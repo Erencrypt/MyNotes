@@ -13,6 +13,11 @@ namespace MyNotes.Services
         private readonly IReminderService _reminderService;
         private readonly IAppNotificationService _notificationService;
         private readonly ConcurrentDictionary<Guid, Reminder> _scheduled = new();
+        // Original time of day for repeating reminders. Snoozing changes the in-memory
+        // ReminderDateTime, so the next occurrence is always calculated from this instead.
+        private readonly ConcurrentDictionary<Guid, TimeSpan> _repeatTimes = new();
+        // How late a reminder can be and still count as "on time" (the loop ticks every 6 seconds).
+        private static readonly TimeSpan OnTimeWindow = TimeSpan.FromMinutes(1);
         private readonly CancellationTokenSource _cts = new();
         private Task? _workerTask;
 
@@ -43,21 +48,9 @@ namespace MyNotes.Services
 
             foreach (var r in repeating)
             {
-                // Calculate next occurrence based on time only (daily recurring)
-                var reminderTime = r.ReminderDateTime.TimeOfDay;
-                var todayOccurrence = DateTime.Now.Date.Add(reminderTime);
-
-                if (todayOccurrence <= DateTime.Now)
-                {
-                    // Time has passed today, schedule for tomorrow
-                    r.ReminderDateTime = DateTime.Now.Date.AddDays(1).Add(reminderTime);
-                }
-                else
-                {
-                    // Time hasn't passed, schedule for today
-                    r.ReminderDateTime = todayOccurrence;
-                }
-                _scheduled[r.Id] = r;
+                // Daily recurring: only the time of day matters, so schedule the next occurrence of it.
+                Schedule(r);
+                r.ReminderDateTime = NextOccurrence(_repeatTimes[r.Id], DateTime.Now);
                 AddedCount += 1;
             }
 
@@ -74,13 +67,36 @@ namespace MyNotes.Services
 
         public void Schedule(Reminder reminder)
         {
+            if (reminder.Repeat)
+            {
+                _repeatTimes[reminder.Id] = reminder.ReminderDateTime.TimeOfDay;
+            }
+            else
+            {
+                _repeatTimes.TryRemove(reminder.Id, out _);
+            }
+
             _scheduled[reminder.Id] = reminder;
         }
 
         public void Unschedule(Guid reminderId)
         {
             _scheduled.TryRemove(reminderId, out _);
+            _repeatTimes.TryRemove(reminderId, out _);
         }
+
+        /// <summary>
+        /// Next time a daily reminder at <paramref name="timeOfDay"/> should fire:
+        /// today if that time is still ahead, otherwise tomorrow.
+        /// </summary>
+        private static DateTime NextOccurrence(TimeSpan timeOfDay, DateTime now)
+        {
+            var today = now.Date.Add(timeOfDay);
+            return today > now ? today : today.AddDays(1);
+        }
+
+        private TimeSpan RepeatTimeOf(Reminder reminder) =>
+            _repeatTimes.TryGetValue(reminder.Id, out var time) ? time : reminder.ReminderDateTime.TimeOfDay;
         public void Reschedule(Reminder reminder)
         {
             // Always upsert: remove existing entry (if any) and re-add with the new data.
@@ -107,10 +123,8 @@ namespace MyNotes.Services
             {
                 if (reminder.Repeat)
                 {
-                    // Gets reminders from db to ensure correct time is used for rescheduling, in case it was snoozed before.
-                    var reminderForTime = await _reminderService.GetReminderByIdAsync(reminderId) ?? reminder;
-                    // For repeating reminders, reschedule for tomorrow
-                    reminder.ReminderDateTime = reminderForTime.ReminderDateTime.AddDays(1);
+                    // Use the original time of day (not the snoozed one) and move to its next occurrence.
+                    reminder.ReminderDateTime = NextOccurrence(RepeatTimeOf(reminder), DateTime.Now);
                     await _reminderService.UpdateReminderAsync(reminder);
                     // Keep it in scheduled with updated time
                 }
@@ -131,7 +145,9 @@ namespace MyNotes.Services
                 while (!ct.IsCancellationRequested)
                 {
                     var now = DateTime.Now;
-                    var due = _scheduled.Values.Where(r => r.ReminderDateTime <= now && r.ReminderDateTime >= now.AddMinutes(-1)).ToList();
+                    var due = _scheduled.Values.Where(r => r.ReminderDateTime <= now && r.ReminderDateTime >= now - OnTimeWindow).ToList();
+                    await HandleMissedRemindersAsync(now);
+
                     foreach (var r in due)
                     {
                         try
@@ -162,9 +178,9 @@ namespace MyNotes.Services
                             }
                             else
                             {
-                                // Repeating: reschedule for tomorrow (daily) in-memory only
-                                r.ReminderDateTime = r.ReminderDateTime.AddDays(1);
-                                // Keep in scheduled dict with updated time
+                                // Repeating: next occurrence of the original time (in-memory only),
+                                // so a snooze doesn't shift the daily time.
+                                r.ReminderDateTime = NextOccurrence(RepeatTimeOf(r), now);
                             }
                         }
                         catch (Exception ex)
@@ -177,6 +193,49 @@ namespace MyNotes.Services
                 }
             }
             catch (TaskCanceledException) { }
+        }
+
+        /// <summary>
+        /// Handles reminders whose time passed while they couldn't fire (e.g. the PC was asleep).
+        /// Repeating ones skip to their next occurrence. One-time ones are moved to the trash and
+        /// reported in a single summary notification, the same way expired reminders are at startup.
+        /// </summary>
+        private async Task HandleMissedRemindersAsync(DateTime now)
+        {
+            var missed = _scheduled.Values.Where(r => r.ReminderDateTime < now - OnTimeWindow).ToList();
+            if (missed.Count == 0)
+            {
+                return;
+            }
+
+            int expiredCount = 0;
+            foreach (var r in missed)
+            {
+                try
+                {
+                    if (r.Repeat)
+                    {
+                        r.ReminderDateTime = NextOccurrence(RepeatTimeOf(r), now);
+                        LogWriter.Log($"Repeating reminder {r.Id} was missed; moved to {r.ReminderDateTime:g}.", LogWriter.LogLevel.Info);
+                    }
+                    else
+                    {
+                        await _reminderService.SoftDeleteReminderAsync(r.Id);
+                        Unschedule(r.Id);
+                        ReminderDismissed?.Invoke(r);
+                        expiredCount++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log($"Failed to handle missed reminder {r.Id}: {ex}", LogWriter.LogLevel.Error);
+                }
+            }
+
+            if (expiredCount > 0)
+            {
+                await ShowNotificationsAsync(0, expiredCount);
+            }
         }
 
         private async Task ShowNotificationsAsync(int AddedCount, int DeletedCount)
