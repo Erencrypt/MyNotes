@@ -44,7 +44,7 @@ namespace MyNotes.Data.Services
                 .IgnoreQueryFilters()
                 .Where(n => n.DeletedAt != null)
                 // IgnoreQueryFilters also disables the filter on includes; only count live reminders.
-                .Include(n => n.Reminders.Where(r => r.DeletedAt == null))
+                .Include(n => n.Reminders!.Where(r => r.DeletedAt == null))
                 .OrderByDescending(n => n.UpdatedAt)
                 .ToListAsync();
         }
@@ -68,7 +68,7 @@ namespace MyNotes.Data.Services
         public async Task<Note> UpdateNoteAsync(Note note)
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
-            note.UpdatedAt = DateTime.UtcNow;
+            note.UpdatedAt = DateTime.Now;
             context.Notes.Update(note);
             await context.SaveChangesAsync();
             return note;
@@ -133,7 +133,7 @@ namespace MyNotes.Data.Services
                 .IgnoreQueryFilters()
                 .Where(n => n.DeletedAt != null)
                 .Where(n => n.Title.Contains(searchTerm) || n.Content.Contains(searchTerm))
-                .Include(n => n.Reminders.Where(r => r.DeletedAt == null))
+                .Include(n => n.Reminders!.Where(r => r.DeletedAt == null))
                 .OrderByDescending(n => n.UpdatedAt)
                 .ToListAsync(ct);
         }

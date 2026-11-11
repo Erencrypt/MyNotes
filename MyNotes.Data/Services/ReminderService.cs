@@ -98,7 +98,7 @@ namespace MyNotes.Data.Services
         public async Task<Reminder> UpdateReminderAsync(Reminder reminder)
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
-            reminder.UpdatedAt = DateTime.UtcNow;
+            reminder.UpdatedAt = DateTime.Now;
             context.Reminders.Update(reminder);
             await context.SaveChangesAsync();
             return reminder;

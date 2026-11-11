@@ -55,8 +55,8 @@ namespace MyNotes.Data.Services
                     Key = key,
                     Value = serializedValue,
                     Type = typeName,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
                 };
                 context.Settings.Add(setting);
             }
@@ -64,7 +64,7 @@ namespace MyNotes.Data.Services
             {
                 setting.Value = serializedValue;
                 setting.Type = typeName;
-                setting.UpdatedAt = DateTime.UtcNow;
+                setting.UpdatedAt = DateTime.Now;
                 context.Settings.Update(setting);
             }
 

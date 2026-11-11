@@ -347,6 +347,9 @@ namespace MyNotes
         #region Theme
         private async Task InitializeTheme()
         {
+            if (_mainWindow == null)
+            { return; }
+
             var theme = await SettingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
             var backdrop = await SettingService.GetSettingAsync(DataKeys.Backdrop, BackdropType.Mica);
 

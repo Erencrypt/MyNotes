@@ -65,7 +65,7 @@ namespace MyNotes.Data.Services
         public async Task<TaskItem> UpdateTaskItemAsync(TaskItem taskItem)
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
-            taskItem.UpdatedAt = DateTime.UtcNow;
+            taskItem.UpdatedAt = DateTime.Now;
             context.TaskItems.Update(taskItem);
             await context.SaveChangesAsync();
             return taskItem;
@@ -74,7 +74,7 @@ namespace MyNotes.Data.Services
         public async Task UpdateTaskItemOrdersAsync(IEnumerable<TaskItem> items)
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             foreach (var item in items)
             {
                 var existing = await context.TaskItems.FindAsync(item.Id);
