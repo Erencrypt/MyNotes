@@ -281,6 +281,7 @@ namespace MyNotes.ViewModels
         public async Task DeleteReminder(Guid id)
         {
             await _reminderService.SoftDeleteReminderAsync(id);
+            _scheduler.Unschedule(id);
             NavigationHelper.NavigateTo<RemindersListPage>();
         }
     }
