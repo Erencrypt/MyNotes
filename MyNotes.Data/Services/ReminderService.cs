@@ -161,7 +161,7 @@ namespace MyNotes.Data.Services
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Reminders
                 .Where(r => r.DeletedAt == null)
-                .Where(r => r.ReminderHeader.Contains(searchTerm) || r.ReminderText.Contains(searchTerm))
+                .Where(r => AppDbContext.ContainsIgnoreCase(r.ReminderHeader, searchTerm) || AppDbContext.ContainsIgnoreCase(r.ReminderText, searchTerm))
                 .Include(r => r.Note)
                 .OrderByDescending(r => r.UpdatedAt)
                 .ToListAsync(ct);
@@ -173,7 +173,7 @@ namespace MyNotes.Data.Services
             return await context.Reminders
                 .IgnoreQueryFilters()
                 .Where(r => r.DeletedAt != null)
-                .Where(r => r.ReminderHeader.Contains(searchTerm) || r.ReminderText.Contains(searchTerm))
+                .Where(r => AppDbContext.ContainsIgnoreCase(r.ReminderHeader, searchTerm) || AppDbContext.ContainsIgnoreCase(r.ReminderText, searchTerm))
                 .Include(r => r.Note)
                 .OrderByDescending(r => r.UpdatedAt)
                 .ToListAsync(ct);

@@ -16,6 +16,7 @@ using MyNotes.Services.Interfaces;
 using MyNotes.ViewModels;
 using MyNotes.Views.Dialogs;
 using System.Diagnostics;
+using System.Globalization;
 using Windows.Storage;
 using WinUI3Localizer;
 
@@ -345,6 +346,7 @@ namespace MyNotes
 
             string language = await GetService<ISettingService>().GetSettingAsync(DataKeys.Language, "en-US") ?? "en-US";
             ApplicationLanguages.PrimaryLanguageOverride = language;
+            AppDbContext.SearchCulture = CultureInfo.GetCultureInfo(language);
             await localizer.SetLanguage(language);
         }
         #endregion

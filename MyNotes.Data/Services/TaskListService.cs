@@ -157,7 +157,7 @@ namespace MyNotes.Data.Services
             return await context.TaskLists
                 .IgnoreQueryFilters()
                 .Where(tl => tl.DeletedAt != null)
-                .Where(tl => tl.Name.Contains(searchTerm))
+                .Where(tl => AppDbContext.ContainsIgnoreCase(tl.Name, searchTerm))
                 .Include(tl => tl.TaskItems)
                 .OrderByDescending(tl => tl.UpdatedAt)
                 .ToListAsync(ct);
@@ -168,7 +168,7 @@ namespace MyNotes.Data.Services
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.TaskLists
                 .Where(tl => tl.DeletedAt == null)
-                .Where(tl => tl.Name.Contains(searchTerm))
+                .Where(tl => AppDbContext.ContainsIgnoreCase(tl.Name, searchTerm))
                 .Include(tl => tl.TaskItems)
                 .OrderBy(tl => tl.Order)
                 .ThenByDescending(tl => tl.UpdatedAt)

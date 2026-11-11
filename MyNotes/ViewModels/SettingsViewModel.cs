@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using MyNotes.Views.Dialogs;
+using MyNotes.Data.Context;
+using System.Globalization;
 using System.Diagnostics;
 using Windows.UI;
 using Microsoft.Windows.AppNotifications;
@@ -176,6 +178,7 @@ namespace MyNotes.ViewModels
             Language = value;
             await SaveSettingAsync(DataKeys.Language, value);
             ApplicationLanguages.PrimaryLanguageOverride = value;
+            AppDbContext.SearchCulture = CultureInfo.GetCultureInfo(value);
             await _localizer.SetLanguage(value);
         }
 

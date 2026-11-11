@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MyNotes.Data.Models;
+using System.Globalization;
 
 namespace MyNotes.Data.Context
 {
@@ -16,9 +17,26 @@ namespace MyNotes.Data.Context
         public DbSet<TaskList> TaskLists { get; set; }
         public DbSet<TaskItem> TaskItems { get; set; }
 
+        /// <summary>
+        /// Culture used by <see cref="ContainsIgnoreCase"/>. Set by the app to the language the user picked,
+        /// so Turkish İ/i and I/ı match the Turkish way when the app is in Turkish.
+        /// </summary>
+        public static CultureInfo SearchCulture { get; set; } = CultureInfo.CurrentCulture;
+
+        /// <summary>
+        /// Case-insensitive, culture-aware "contains" for use in LINQ queries.
+        /// Translated to the SQL function registered by <see cref="SqliteFunctionsInterceptor"/>;
+        /// it cannot be called outside a query.
+        /// </summary>
+        public static bool ContainsIgnoreCase(string? text, string term)
+            => throw new NotSupportedException($"{nameof(ContainsIgnoreCase)} can only be used in database queries.");
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(ContainsIgnoreCase))!)
+                .HasName(SqliteFunctionsInterceptor.ContainsIgnoreCaseName);
 
             modelBuilder.Entity<Note>(entity =>
             {
@@ -139,6 +157,7 @@ namespace MyNotes.Data.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlite(DatabaseLocations.ConnectionString);
+                optionsBuilder.AddInterceptors(SqliteFunctionsInterceptor.Instance);
 
                 optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder =>
                 {
