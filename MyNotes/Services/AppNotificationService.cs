@@ -139,7 +139,8 @@ namespace MyNotes.Services
                 alarmtext = $"<audio src='ms-winsoundevent:Notification.Looping.Alarm' loop='{loopAlarmSound.ToString().ToLowerInvariant()}'/>";
             }
             string noteButton = string.Empty;
-            if (noteId.HasValue)
+            // Only offer "Open note" if the note still exists (trashed notes are filtered out).
+            if (noteId.HasValue && await _noteService.GetNoteByIdAsync(noteId.Value) != null)
             {
                 noteButton = $"<action arguments='opennote:{reminderId}:{noteId}' content='{EscapeXml(OpenNoteText)}'/>";
             }
