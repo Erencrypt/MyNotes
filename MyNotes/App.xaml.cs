@@ -41,7 +41,6 @@ namespace MyNotes
             AppConfig.EnsureMyNotesDirectoryExists();
             LogWriter.CheckLogFile();
             ConfigureServices();
-            InitializeDbAsync().Wait();
             InitializeComponent();
         }
 
@@ -110,7 +109,7 @@ namespace MyNotes
 
             if (mainInstance.IsCurrent)
             {
-
+                await InitializeDbAsync(); // must run first
                 await InitializeLocalizer();
                 TimeFormat = await SettingService.GetSettingAsync(DataKeys.HourFormat, TimeFormat.TwelveHour);
                 // Must run before MainWindow is created: its constructor opens the notes list.
