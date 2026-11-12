@@ -65,7 +65,7 @@ I simply wanted to create a good-looking notes and reminders app that utilizes t
 
 This app started as a side project that I aimed to use daily while continuing to develop it. <!-- Life had other plans, and --> I wasn't able to spend as much time on the project, but I never forgot about it or abandoned it.
 
-The original version was created with .NET 7 and Template Studio. I later tried upgrading it to .NET 8 for long-term support, but WinUI wasn't getting much attention at the time, and it was unstable. Some parts broke, and I encountered strange errors that were difficult to trace back to their causes, so I left it alone for a while. But I was determined to return someday and rewrite it. I started Rewriting it in a private repo on Nov 22, 2025, i didnt want to change this one so much, at the time i wasn't sure that i will be able to spare the time (that i didnt have much of) and rewrite it.
+The original version was created with .NET 7 and Template Studio. I later tried upgrading it to .NET 8 for long-term support, but WinUI wasn't getting much attention at the time, and it was unstable. Some parts broke, and I encountered strange errors that were difficult to trace back to their causes, so I left it alone for a while. But I was determined to return someday and rewrite it. I started rewriting it in a private repo on Nov 2025, i didnt want to change this one so much, at the time i wasn't sure that i will be able to spare the time (that i didnt have much of) and rewrite it.
 
 Now rewritten in .NET 10 and modernized.
 <!--
