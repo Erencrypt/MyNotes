@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.AppLifecycle;
@@ -15,7 +16,6 @@ using MyNotes.Services;
 using MyNotes.Services.Interfaces;
 using MyNotes.ViewModels;
 using MyNotes.Views.Dialogs;
-using System.Diagnostics;
 using System.Globalization;
 using Windows.Storage;
 using WinUI3Localizer;
@@ -104,68 +104,45 @@ namespace MyNotes
 
         protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            var mainInstance = AppInstance.FindOrRegisterForKey("MyNotes");
-            mainInstance.Activated += MainInstance_Activated;
+            await InitializeDbAsync(); // must run first
+            await InitializeLocalizer();
+            TimeFormat = await SettingService.GetSettingAsync(DataKeys.HourFormat, TimeFormat.TwelveHour);
+            // Must run before MainWindow is created: its constructor opens the notes list.
+            await FillMissingNotePlainTextAsync();
 
-            if (mainInstance.IsCurrent)
+            _mainWindow = new MainWindow();
+            _mainWindow!.Closed += Window_Closed;
+            if (App._mainWindow.Content == null)
             {
-                await InitializeDbAsync(); // must run first
-                await InitializeLocalizer();
-                TimeFormat = await SettingService.GetSettingAsync(DataKeys.HourFormat, TimeFormat.TwelveHour);
-                // Must run before MainWindow is created: its constructor opens the notes list.
-                await FillMissingNotePlainTextAsync();
-
-                _mainWindow = new MainWindow();
-                _mainWindow!.Closed += Window_Closed;
-                if (App._mainWindow.Content == null)
-                {
-                    App._mainWindow.Content = MainWindow._rootFrame;
-                }
-
-                await InitializeTheme();
-
-                try
-                {
-                    var retentionDays = await SettingService.GetSettingAsync<int>(DataKeys.TrashRetentionDays, 30);
-                    if (retentionDays != 0)
-                    {
-                        await GetService<ITrashCleanupService>().PermanentlyDeleteExpiredItemsAsync(retentionDays);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log($"Failed to clean up expired trash items: {ex.Message}", LogWriter.LogLevel.Error);
-                }
-
-                try
-                {
-                    await GetService<IAppNotificationService>().InitializeAsync();
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log($"Failed to initialize app notifications: {ex}", LogWriter.LogLevel.Error);
-                }
-
-                try
-                {
-                    await GetService<IReminderScheduler>().InitializeAsync();
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log($"Failed to initialize reminder scheduler: {ex}", LogWriter.LogLevel.Error);
-                }
-
-                base.OnLaunched(args);
-                App._mainWindow.Activate();
-                await CheckForUpdatesAsync(isManual: false);
+                App._mainWindow.Content = MainWindow._rootFrame;
             }
-            if (!mainInstance.IsCurrent)
+
+            await InitializeTheme();
+
+            try
             {
-                var activatedEventArgs = AppInstance.GetCurrent().GetActivatedEventArgs();
-                await mainInstance.RedirectActivationToAsync(activatedEventArgs);
-                Process.GetCurrentProcess().Kill();
-                return;
+                var retentionDays = await SettingService.GetSettingAsync<int>(DataKeys.TrashRetentionDays, 30);
+                if (retentionDays != 0)
+                {
+                    await GetService<ITrashCleanupService>().PermanentlyDeleteExpiredItemsAsync(retentionDays);
+                }
             }
+            catch (Exception ex)
+            { LogWriter.Log($"Failed to clean up expired trash items: {ex.Message}", LogWriter.LogLevel.Error); }
+
+            try
+            { await GetService<IAppNotificationService>().InitializeAsync(); }
+            catch (Exception ex)
+            { LogWriter.Log($"Failed to initialize app notifications: {ex}", LogWriter.LogLevel.Error); }
+
+            try
+            { await GetService<IReminderScheduler>().InitializeAsync(); }
+            catch (Exception ex)
+            { LogWriter.Log($"Failed to initialize reminder scheduler: {ex}", LogWriter.LogLevel.Error); }
+
+            base.OnLaunched(args);
+            App._mainWindow.Activate();
+            await CheckForUpdatesAsync(isManual: false);
         }
         private async Task ShutdownServicesAsync()
         {
@@ -182,11 +159,25 @@ namespace MyNotes
         }
 
         #region Window activation and closing
-        private void MainInstance_Activated(object? sender, AppActivationArguments e)
+        /// <summary>
+        /// Runs when a second launch redirects to this instance (subscribed in Program.Main).
+        /// The second instance has already granted us the foreground right, so Activate() can bring the window to the front.
+        /// </summary>
+        internal static void MainInstance_Activated(object? sender, AppActivationArguments e)
         {
-            if (_mainWindow == null)
+            var window = _mainWindow;
+            if (window == null)
             { return; }
-            _mainWindow.AppWindow.Show();
+
+            window.DispatcherQueue.TryEnqueue(() =>
+            {
+                window.AppWindow.Show();
+                if (window.AppWindow.Presenter is OverlappedPresenter { State: OverlappedPresenterState.Minimized } presenter)
+                {
+                    presenter.Restore();
+                }
+                window.Activate();
+            });
         }
         private async void Window_Closed(object sender, WindowEventArgs args)
         {
