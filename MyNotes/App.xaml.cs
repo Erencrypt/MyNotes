@@ -35,6 +35,8 @@ namespace MyNotes
         public static bool HandleClosedEvents { get; set; } = true;
         /// <summary>Cached time format setting, read by the date converters (loaded at launch, updated from Settings).</summary>
         public static TimeFormat TimeFormat { get; set; } = TimeFormat.TwelveHour;
+        /// <summary>Set when the "trash" notification is clicked, so the Trash page opens on the Reminders tab.</summary>
+        public static bool NtfInvoke { get; set; }
 
         public App()
         {

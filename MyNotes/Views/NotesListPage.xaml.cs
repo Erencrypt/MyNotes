@@ -23,6 +23,11 @@ namespace MyNotes.Views
             DataContext = ViewModel;
 
             EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        // Called on every visit: the page is cached, so the language may have changed since the last one
+        private void ApplyLocalizedStrings()
+        {
             NotesSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
             ToolTipService.SetToolTip(deleteNote, _localizer.GetLocalizedString("Delete"));
             ToolTipService.SetToolTip(newNote, _localizer.GetLocalizedString("Add"));
@@ -31,6 +36,13 @@ namespace MyNotes.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ApplyLocalizedStrings();
+            // Page is cached, clear the previous visit's search
+            if (NotesSearch.Text.Length > 0)
+            {
+                NotesSearch.Text = string.Empty;
+                ViewModel.SearchTerm = string.Empty;
+            }
             await LoadNotes();
         }
 

@@ -202,6 +202,8 @@ public sealed partial class SettingsPage : Page
         }
 
         await ViewModel.SetLanguageAsync(lang);
+        // Drop this cached page so the navigation below builds a new one in the new language
+        NavigationCacheMode = Microsoft.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         NavigationHelper.NavigateTo<SettingsPage>();
     }
 

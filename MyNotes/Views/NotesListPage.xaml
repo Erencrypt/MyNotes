@@ -9,6 +9,7 @@
     xmlns:helpers="using:MyNotes.Helpers"
     d:DataContext="{d:DesignInstance Type=viewmodels:NotesListViewModel}"
     xmlns:l="using:WinUI3Localizer"
+    NavigationCacheMode="Required"
     mc:Ignorable="d">
 
     <Page.Resources>

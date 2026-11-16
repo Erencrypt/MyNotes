@@ -109,7 +109,7 @@ namespace MyNotes.Services
             {
                 App._mainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
-                    TrashPage.NtfInvoke = true;
+                    App.NtfInvoke = true;
                     NavigationHelper.NavigateTo<TrashPage>();
                 });
             }

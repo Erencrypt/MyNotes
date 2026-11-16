@@ -14,10 +14,6 @@ namespace MyNotes.Views
     {
         public TrashViewModel ViewModel { get; set; }
         private readonly ILocalizer _localizer = Localizer.Get();
-        public static bool? NtfInvoke
-        {
-            get; set;
-        }
         public TrashPage()
         {
             InitializeComponent();
@@ -25,6 +21,18 @@ namespace MyNotes.Views
             DataContext = ViewModel;
             ViewModel.DeletedTaskLists.CollectionChanged += (_, _) => UpdateEmptyStates();
 
+            EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            EmptyText2.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            EmptyText3.Visibility = LstTaskLists.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+        }
+        private void PivotChange()
+        {
+            TrashPivot.SelectedItem = TrashPivot.Items[1];
+            TrashPivot.UpdateLayout();
+        }
+        // Called on every visit: the page is cached, so the language may have changed since the last one
+        private void ApplyLocalizedStrings()
+        {
             NotesSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
             RemindersSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
             TaskListSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
@@ -34,24 +42,34 @@ namespace MyNotes.Views
             ToolTipService.SetToolTip(RestoreReminder, _localizer.GetLocalizedString("Restore"));
             ToolTipService.SetToolTip(DeleteTaskList, _localizer.GetLocalizedString("Delete"));
             ToolTipService.SetToolTip(RestoreTaskList, _localizer.GetLocalizedString("Restore"));
-
-            EmptyText.Visibility = LstNotes.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
-            EmptyText2.Visibility = LstReminders.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
-            EmptyText3.Visibility = LstTaskLists.Items.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
-
-            if (NtfInvoke == true)
-            {
-                PivotChange();
-            }
         }
-        private void PivotChange()
-        {
-            TrashPivot.SelectedItem = TrashPivot.Items[1];
-            TrashPivot.UpdateLayout();
-        }
+
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ApplyLocalizedStrings();
+            // Opened from the "trash" notification: show the Reminders tab once
+            if (App.NtfInvoke)
+            {
+                App.NtfInvoke = false;
+                PivotChange();
+            }
+            // Page is cached, clear the previous visit's searches
+            if (NotesSearch.Text.Length > 0)
+            {
+                NotesSearch.Text = string.Empty;
+                ViewModel.NotesSearchTerm = string.Empty;
+            }
+            if (RemindersSearch.Text.Length > 0)
+            {
+                RemindersSearch.Text = string.Empty;
+                ViewModel.RemindersSearchTerm = string.Empty;
+            }
+            if (TaskListSearch.Text.Length > 0)
+            {
+                TaskListSearch.Text = string.Empty;
+                ViewModel.TaskListsSearchTerm = string.Empty;
+            }
             await ViewModel.Initialize();
             UpdateEmptyStates();
         }

@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Media.Animation;
 using MyNotes.Helpers;
 using MyNotes.Views;
 using MyNotes.Views.Controls;
-using System.Drawing.Imaging;
 using WinUI3Localizer;
 
 namespace MyNotes
@@ -40,11 +39,25 @@ namespace MyNotes
 
             AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
 
+            // Back stack is never needed deeper than one step (editor -> GoBack), so trim
+            // the oldest entries once it passes 20, keeping the 10 most recent
+            rootFrame.Navigated += (_, _) =>
+            {
+                if (rootFrame.BackStack.Count > 20)
+                {
+                    while (rootFrame.BackStack.Count > 10)
+                    {
+                        rootFrame.BackStack.RemoveAt(0);
+                    }
+                }
+            };
+
             NavView.SelectedItem = NavView.MenuItems[1];
 
             NavigationHelper.NavigateTo<NotesListPage>(new SuppressNavigationTransitionInfo { });
 
             Activated += MainWindow_Activated;
+            _localizer.LanguageChanged += (_, _) => MainWindowLocalization();
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)

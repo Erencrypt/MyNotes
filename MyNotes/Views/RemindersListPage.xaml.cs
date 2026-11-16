@@ -20,7 +20,11 @@ namespace MyNotes.Views
             InitializeComponent();
             ViewModel = App.GetService<RemindersListViewModel>();
             DataContext = ViewModel;
+        }
 
+        // Called on every visit: the page is cached, so the language may have changed since the last one
+        private void ApplyLocalizedStrings()
+        {
             RemindersSearch.PlaceholderText = _localizer.GetLocalizedString("Search");
             ToolTipService.SetToolTip(deleteReminder, _localizer.GetLocalizedString("Delete"));
             ToolTipService.SetToolTip(newReminder, _localizer.GetLocalizedString("Add"));
@@ -29,7 +33,14 @@ namespace MyNotes.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ApplyLocalizedStrings();
             ViewModel.SubscribeToScheduler();
+            // Page is cached, clear the previous visit's search
+            if (RemindersSearch.Text.Length > 0)
+            {
+                RemindersSearch.Text = string.Empty;
+                ViewModel.SearchTerm = string.Empty;
+            }
             await LoadReminders();
         }
 

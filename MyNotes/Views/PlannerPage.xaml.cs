@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Navigation;
 using MyNotes.Data.Models;
 using MyNotes.Helpers;
 using MyNotes.ViewModels;
@@ -27,9 +28,13 @@ namespace MyNotes.Views
 
             Loaded += PlannerPage_Loaded;
             SizeChanged += PlannerPage_SizeChanged;
+        }
 
+        // Page is cached: reload lists and localized strings on every visit
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
             ToolTipService.SetToolTip(AddTaskListButton, _Localizer.GetLocalizedString("Add"));
-
             _ = InitializeViewModelAsync();
         }
 
