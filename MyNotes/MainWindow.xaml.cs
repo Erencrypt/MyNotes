@@ -50,6 +50,12 @@ namespace MyNotes
                         rootFrame.BackStack.RemoveAt(0);
                     }
                 }
+
+                // WinUI frees a dropped page's native memory only after a full GC, and the
+                // managed heap is too small to trigger one on its own, so force it here
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
             };
 
             NavView.SelectedItem = NavView.MenuItems[1];
@@ -68,7 +74,7 @@ namespace MyNotes
         private void MainWindowLocalization()
         {
             Title = _localizer.GetLocalizedString("AppDisplayName");
-            AppTitleBar.Title= _localizer.GetLocalizedString("AppDisplayName");
+            AppTitleBar.Title = _localizer.GetLocalizedString("AppDisplayName");
             MenuHeader.Content = _localizer.GetLocalizedString("MainWindow_MenuHeader");
             NotesItem.Content = _localizer.GetLocalizedString("MainWindow_NotesItem");
             RemindersItem.Content = _localizer.GetLocalizedString("MainWindow_RemindersItem");
