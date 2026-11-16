@@ -42,8 +42,27 @@ namespace MyNotes
         {
             AppConfig.EnsureMyNotesDirectoryExists();
             LogWriter.CheckLogFile();
+            RegisterExceptionLogging();
             ConfigureServices();
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Logs exceptions nobody caught. The app still crashes as before; this only leaves a log entry.
+        /// </summary>
+        private void RegisterExceptionLogging()
+        {
+            // UI thread
+            UnhandledException += (_, e) =>
+                LogWriter.Log($"Unhandled UI exception: {e.Exception}", LogWriter.LogLevel.Error);
+
+            // Background threads
+            AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+                LogWriter.Log($"Unhandled exception: {e.ExceptionObject}", LogWriter.LogLevel.Error);
+
+            // Faulted tasks nobody awaited (doesn't crash the app)
+            TaskScheduler.UnobservedTaskException += (_, e) =>
+                LogWriter.Log($"Unobserved task exception: {e.Exception}", LogWriter.LogLevel.Error);
         }
 
         /// <summary>
