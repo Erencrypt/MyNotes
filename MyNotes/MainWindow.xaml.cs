@@ -68,6 +68,10 @@ namespace MyNotes
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
         {
+            // Closing the window raises a final Deactivated, and setting Title then throws
+            if (args.WindowActivationState == WindowActivationState.Deactivated)
+            { return; }
+
             MainWindowLocalization();
         }
 

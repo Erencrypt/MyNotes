@@ -21,6 +21,7 @@ namespace MyNotes.ViewModels
     public partial class SettingsViewModel : BaseViewModel
     {
         private readonly ISettingService _settingService;
+        private readonly DevWinUI.IThemeService _themeService;
         private readonly ILocalizer _localizer;
 
         private string _versionDescription = string.Empty;
@@ -34,6 +35,20 @@ namespace MyNotes.ViewModels
         private string _language = "en-US";
         private bool _useSystemAccentColor = true;
         private string? _customAccentColor;
+        private ElementTheme _theme = ElementTheme.Default;
+        private DevWinUI.BackdropType _backdrop = DevWinUI.BackdropType.Mica;
+
+        public ElementTheme Theme
+        {
+            get => _theme;
+            set => SetProperty(ref _theme, value);
+        }
+
+        public DevWinUI.BackdropType Backdrop
+        {
+            get => _backdrop;
+            set => SetProperty(ref _backdrop, value);
+        }
 
         public bool UseSystemAccentColor
         {
@@ -119,9 +134,10 @@ namespace MyNotes.ViewModels
             set => SetProperty(ref _startupToggleEnabled, value);
         }
 
-        public SettingsViewModel(ISettingService settingService)
+        public SettingsViewModel(ISettingService settingService, DevWinUI.IThemeService themeService)
         {
             _settingService = settingService;
+            _themeService = themeService;
             _localizer = Localizer.Get();
             _versionDescription = GetVersionDescription();
         }
@@ -180,6 +196,25 @@ namespace MyNotes.ViewModels
             ApplicationLanguages.PrimaryLanguageOverride = value;
             AppDbContext.SearchCulture = CultureInfo.GetCultureInfo(value);
             await _localizer.SetLanguage(value);
+        }
+
+        // ThemeService raises ThemeChanged/BackdropChanged, and App saves the new value from there
+        public async Task SetThemeAsync(ElementTheme value)
+        {
+            if (Theme == value)
+            { return; }
+
+            Theme = value;
+            await _themeService.SetElementThemeAsync(value);
+        }
+
+        public async Task SetBackdropAsync(DevWinUI.BackdropType value)
+        {
+            if (Backdrop == value)
+            { return; }
+
+            Backdrop = value;
+            await _themeService.SetBackdropTypeAsync(value);
         }
 
         public async Task SetUseSystemAccentColorAsync(bool value)
@@ -332,6 +367,8 @@ namespace MyNotes.ViewModels
             Language = await _settingService.GetSettingAsync<string>(DataKeys.Language, "en-US")?? "en-US";
             UseSystemAccentColor = await _settingService.GetSettingAsync(DataKeys.UseSystemAccentColor, true);
             CustomAccentColor = await _settingService.GetSettingAsync<string>(DataKeys.CustomAccentColor, null);
+            Theme = await _settingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
+            Backdrop = await _settingService.GetSettingAsync(DataKeys.Backdrop, DevWinUI.BackdropType.Mica);
 
             await _localizer.SetLanguage(Language);
         }

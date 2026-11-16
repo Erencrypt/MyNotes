@@ -132,7 +132,8 @@ namespace MyNotes
             await FillMissingNotePlainTextAsync();
 
             _mainWindow = new MainWindow();
-            _mainWindow!.Closed += Window_Closed;
+            _mainWindow!.AppWindow.Closing += AppWindow_Closing;
+            _mainWindow.Closed += Window_Closed;
             if (App._mainWindow.Content == null)
             {
                 App._mainWindow.Content = MainWindow._rootFrame;
@@ -200,25 +201,30 @@ namespace MyNotes
                 window.Activate();
             });
         }
+        /// <summary>
+        /// The X button (or Alt+F4) hides the window to the tray instead of closing it.
+        /// Cancelling here means Window.Closed never fires, so DevWinUI keeps tracking the window
+        /// (on Closed it drops the window and ThemeService stops applying theme/backdrop to it).
+        /// </summary>
+        private void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
+        {
+            if (HandleClosedEvents)
+            {
+                args.Cancel = true;
+                sender.Hide();
+            }
+        }
+
+        // Only reached on a real exit (tray "Exit", Settings "Exit"), see AppWindow_Closing
         private async void Window_Closed(object sender, WindowEventArgs args)
         {
-            if (_mainWindow == null)
-            { return; }
-            if (HandleClosedEvents == true)
+            try
             {
-                args.Handled = true;
-                _mainWindow.AppWindow.Hide();
+                await ShutdownServicesAsync();
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    await ShutdownServicesAsync();
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log($"Failed to shut down application services: {ex}", LogWriter.LogLevel.Error);
-                }
+                LogWriter.Log($"Failed to shut down application services: {ex}", LogWriter.LogLevel.Error);
             }
         }
         #endregion

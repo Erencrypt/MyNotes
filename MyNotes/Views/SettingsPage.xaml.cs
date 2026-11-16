@@ -62,16 +62,14 @@ public sealed partial class SettingsPage : Page
             _ => 0
         };
 
-        var currentTheme = await App.Current.SettingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
-        ThemeCb.SelectedIndex = currentTheme switch
+        ThemeCb.SelectedIndex = ViewModel.Theme switch
         {
             ElementTheme.Light => 0,
             ElementTheme.Dark => 1,
             _ => 2
         };
 
-        var currentBackdrop = await App.Current.SettingService.GetSettingAsync(DataKeys.Backdrop, DevWinUI.BackdropType.Mica);
-        BackdropCb.SelectedIndex = currentBackdrop switch
+        BackdropCb.SelectedIndex = ViewModel.Backdrop switch
         {
             DevWinUI.BackdropType.Mica => 0,
             DevWinUI.BackdropType.MicaAlt => 1,
@@ -218,11 +216,7 @@ public sealed partial class SettingsPage : Page
                 _ => ElementTheme.Default
             };
 
-            var currentTheme = await App.Current.SettingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);
-            if (currentTheme != theme)
-            {
-                await App.Current.ThemeService.SetElementThemeAsync(theme);
-            }
+            await ViewModel.SetThemeAsync(theme);
         }
     }
 
@@ -239,11 +233,7 @@ public sealed partial class SettingsPage : Page
                 _ => DevWinUI.BackdropType.Mica
             };
 
-            var currentBackdrop = await App.Current.SettingService.GetSettingAsync(DataKeys.Backdrop, DevWinUI.BackdropType.Mica);
-            if (currentBackdrop != backdrop)
-            {
-                await App.Current.ThemeService.SetBackdropTypeAsync(backdrop);
-            }
+            await ViewModel.SetBackdropAsync(backdrop);
         }
     }
 
