@@ -45,11 +45,7 @@ namespace MyNotes.ViewModels
         public string SearchTerm
         {
             get => _searchTerm;
-            set
-            {
-                SetProperty(ref _searchTerm, value);
-                _ = SearchNotesAsync();
-            }
+            set => SetProperty(ref _searchTerm, value);
         }
 
         /// <summary>

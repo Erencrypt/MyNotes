@@ -189,11 +189,12 @@ namespace MyNotes.Views
             }
         }
 
-        private void TaskListSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void TaskListSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 ViewModel.TaskListsSearchTerm = sender.Text;
+                await ViewModel.SearchDeletedTaskListsCommand.ExecuteAsync(null);
             }
         }
 

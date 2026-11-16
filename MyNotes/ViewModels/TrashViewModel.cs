@@ -50,30 +50,18 @@ namespace MyNotes.ViewModels
         public string NotesSearchTerm
         {
             get => _notesSearchTerm;
-            set
-            {
-                SetProperty(ref _notesSearchTerm, value);
-                _ = SearchDeletedNotesAsync();
-            }
+            set => SetProperty(ref _notesSearchTerm, value);
         }
         public string RemindersSearchTerm
         {
             get => _remindersSearchTerm;
-            set
-            {
-                SetProperty(ref _remindersSearchTerm, value);
-                _ = SearchDeletedRemindersAsync();
-            }
+            set => SetProperty(ref _remindersSearchTerm, value);
         }
 
         public string TaskListsSearchTerm
         {
             get => _taskListsSearchTerm;
-            set
-            {
-                SetProperty(ref _taskListsSearchTerm, value);
-                _ = SearchDeletedTaskListsAsync();
-            }
+            set => SetProperty(ref _taskListsSearchTerm, value);
         }
 
         /// <summary>
