@@ -80,8 +80,7 @@ namespace MyNotes.Data.Services
 
             if (setting != null)
             {
-                setting.DeletedAt = DateTime.Now;
-                setting.UpdatedAt = DateTime.Now;
+                context.Settings.Remove(setting);
                 await context.SaveChangesAsync();
             }
         }
