@@ -130,34 +130,7 @@ namespace MyNotes.ViewModels
                 var filteredReminders = await _reminderService.SearchRemindersAsync(SearchTerm, ct);
                 ct.ThrowIfCancellationRequested();
 
-                // O(1) lookups by Reminder.Id rather than O(n) list scans
-                var filteredById = filteredReminders.ToDictionary(n => n.Id);
-                var currentById = Reminders.ToDictionary(n => n.Id);
-
-                // Remove reminders that are no longer in the results
-                for (int i = Reminders.Count - 1; i >= 0; i--)
-                {
-                    if (!filteredById.ContainsKey(Reminders[i].Id))
-                        Reminders.RemoveAt(i);
-                }
-
-                // Insert or move each reminder so the collection matches filteredReminders exactly
-                for (int i = 0; i < filteredReminders.Count; i++)
-                {
-                    var reminder = filteredReminders[i];
-                    if (!currentById.ContainsKey(reminder.Id))
-                    {
-                        // Brand-new result — insert at the correct position
-                        Reminders.Insert(i, reminder);
-                    }
-                    else if (Reminders.IndexOf(Reminders.FirstOrDefault(n => n.Id == reminder.Id)!) != i)
-                    {
-                        // Already in the collection but in the wrong position — move it
-                        var current = Reminders.First(n => n.Id == reminder.Id);
-                        Reminders.Move(Reminders.IndexOf(current), i);
-                    }
-                }
-
+                Reminders.SyncWith(filteredReminders, r => r.Id);
             }
             catch (OperationCanceledException)
             {

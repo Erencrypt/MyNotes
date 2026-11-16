@@ -101,33 +101,7 @@ namespace MyNotes.ViewModels
 
                 ctNote.ThrowIfCancellationRequested();
 
-                // O(1) lookups by Note.Id rather than O(n) list scans
-                var filteredById = filteredNotes.ToDictionary(n => n.Id);
-                var currentById = DeletedNotes.ToDictionary(n => n.Id);
-
-                // Remove notes that are no longer in the results
-                for (int i = DeletedNotes.Count - 1; i >= 0; i--)
-                {
-                    if (!filteredById.ContainsKey(DeletedNotes[i].Id))
-                        DeletedNotes.RemoveAt(i);
-                }
-
-                // Insert or move each note so the collection matches filteredNotes exactly
-                for (int i = 0; i < filteredNotes.Count; i++)
-                {
-                    var note = filteredNotes[i];
-                    if (!currentById.ContainsKey(note.Id))
-                    {
-                        // Brand-new result — insert at the correct position
-                        DeletedNotes.Insert(i, note);
-                    }
-                    else if (DeletedNotes.IndexOf(DeletedNotes.FirstOrDefault(n => n.Id == note.Id)!) != i)
-                    {
-                        // Already in the collection but in the wrong position — move it
-                        var current = DeletedNotes.First(n => n.Id == note.Id);
-                        DeletedNotes.Move(DeletedNotes.IndexOf(current), i);
-                    }
-                }
+                DeletedNotes.SyncWith(filteredNotes, n => n.Id);
             }
             catch (OperationCanceledException)
             {
@@ -164,34 +138,7 @@ namespace MyNotes.ViewModels
                 var filteredReminders = await _reminderService.SearchDeletedRemindersAsync(RemindersSearchTerm, ctReminder);
                 ctReminder.ThrowIfCancellationRequested();
 
-                // O(1) lookups by Note.Id rather than O(n) list scans
-                var filteredById = filteredReminders.ToDictionary(n => n.Id);
-                var currentById = DeletedReminders.ToDictionary(n => n.Id);
-
-                // Remove notes that are no longer in the results
-                for (int i = DeletedReminders.Count - 1; i >= 0; i--)
-                {
-                    if (!filteredById.ContainsKey(DeletedReminders[i].Id))
-                        DeletedReminders.RemoveAt(i);
-                }
-
-                // Insert or move each note so the collection matches filteredNotes exactly
-                for (int i = 0; i < filteredReminders.Count; i++)
-                {
-                    var note = filteredReminders[i];
-                    if (!currentById.ContainsKey(note.Id))
-                    {
-                        // Brand-new result — insert at the correct position
-                        DeletedReminders.Insert(i, note);
-                    }
-                    else if (DeletedReminders.IndexOf(DeletedReminders.FirstOrDefault(n => n.Id == note.Id)!) != i)
-                    {
-                        // Already in the collection but in the wrong position — move it
-                        var current = DeletedReminders.First(n => n.Id == note.Id);
-                        DeletedReminders.Move(DeletedReminders.IndexOf(current), i);
-                    }
-                }
-
+                DeletedReminders.SyncWith(filteredReminders, r => r.Id);
             }
             catch (OperationCanceledException)
             {
@@ -226,28 +173,7 @@ namespace MyNotes.ViewModels
                 var filteredTaskLists = await _taskListService.SearchDeletedTaskListsAsync(TaskListsSearchTerm, ctTaskList);
                 ctTaskList.ThrowIfCancellationRequested();
 
-                var filteredById = filteredTaskLists.ToDictionary(tl => tl.Id);
-                var currentById = DeletedTaskLists.ToDictionary(tl => tl.Id);
-
-                for (int i = DeletedTaskLists.Count - 1; i >= 0; i--)
-                {
-                    if (!filteredById.ContainsKey(DeletedTaskLists[i].Id))
-                        DeletedTaskLists.RemoveAt(i);
-                }
-
-                for (int i = 0; i < filteredTaskLists.Count; i++)
-                {
-                    var taskList = filteredTaskLists[i];
-                    if (!currentById.ContainsKey(taskList.Id))
-                    {
-                        DeletedTaskLists.Insert(i, taskList);
-                    }
-                    else if (DeletedTaskLists.IndexOf(DeletedTaskLists.FirstOrDefault(tl => tl.Id == taskList.Id)!) != i)
-                    {
-                        var current = DeletedTaskLists.First(tl => tl.Id == taskList.Id);
-                        DeletedTaskLists.Move(DeletedTaskLists.IndexOf(current), i);
-                    }
-                }
+                DeletedTaskLists.SyncWith(filteredTaskLists, tl => tl.Id);
             }
             catch (OperationCanceledException)
             {

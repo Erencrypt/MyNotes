@@ -77,33 +77,7 @@ namespace MyNotes.ViewModels
 
                 ct.ThrowIfCancellationRequested();
 
-                // O(1) lookups by Note.Id rather than O(n) list scans
-                var filteredById = filteredNotes.ToDictionary(n => n.Id);
-                var currentById = Notes.ToDictionary(n => n.Id);
-
-                // Remove notes that are no longer in the results
-                for (int i = Notes.Count - 1; i >= 0; i--)
-                {
-                    if (!filteredById.ContainsKey(Notes[i].Id))
-                        Notes.RemoveAt(i);
-                }
-
-                // Insert or move each note so the collection matches filteredNotes exactly
-                for (int i = 0; i < filteredNotes.Count; i++)
-                {
-                    var note = filteredNotes[i];
-                    if (!currentById.ContainsKey(note.Id))
-                    {
-                        // Brand-new result — insert at the correct position
-                        Notes.Insert(i, note);
-                    }
-                    else if (Notes.IndexOf(Notes.FirstOrDefault(n => n.Id == note.Id)!) != i)
-                    {
-                        // Already in the collection but in the wrong position — move it
-                        var current = Notes.First(n => n.Id == note.Id);
-                        Notes.Move(Notes.IndexOf(current), i);
-                    }
-                }
+                Notes.SyncWith(filteredNotes, n => n.Id);
             }
             catch (OperationCanceledException)
             {
