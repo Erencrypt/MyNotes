@@ -83,7 +83,7 @@
                             </ListView.ItemContainerTransitions>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid BorderThickness="0,0,0,1" BorderBrush="{StaticResource ControlFillColorDefaultBrush}">
+                                    <Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ControlFillColorDefaultBrush}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>
@@ -102,7 +102,7 @@
                                             HorizontalAlignment="Center"/>
                                         <FontIcon Glyph="&#xEDAC;"
                                             Grid.RowSpan="2"
-                                            Foreground="{StaticResource AccentFillColorTertiaryBrush}"
+                                            Foreground="{ThemeResource AccentFillColorTertiaryBrush}"
                                             Visibility="{Binding HasReminders}"
                                             FontSize="16"
                                             Width="16" Height="16"
@@ -232,7 +232,7 @@
                             </ListView.ItemContainerTransitions>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid BorderThickness="0,0,0,1" BorderBrush="{StaticResource ControlFillColorDefaultBrush}">
+                                    <Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ControlFillColorDefaultBrush}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>
@@ -250,7 +250,7 @@
                                           HorizontalAlignment="Center"/>
                                         <FontIcon Glyph="&#xEDAC;"
                                                 Grid.RowSpan="2"
-                                                Foreground="{StaticResource AccentFillColorTertiaryBrush}"
+                                                Foreground="{ThemeResource AccentFillColorTertiaryBrush}"
                                                 Visibility="{Binding Alarm}"
                                                 FontSize="16"
                                                 Width="14" Height="14"
@@ -381,7 +381,7 @@
                             </ListView.ItemContainerTransitions>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid BorderThickness="0,0,0,1" BorderBrush="{StaticResource ControlFillColorDefaultBrush}">
+                                    <Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ControlFillColorDefaultBrush}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="*"/>

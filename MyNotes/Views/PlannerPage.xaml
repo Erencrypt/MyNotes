@@ -76,8 +76,8 @@
                                   VerticalAlignment="Stretch"
                                   CornerRadius="{StaticResource ControlCornerRadius}"
                                   BorderThickness="1"
-                                  BorderBrush="{StaticResource SurfaceStrokeColorDefaultBrush}"
-                                  Background="{StaticResource CardBackgroundFillColorDefaultBrush}"
+                                  BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
+                                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                   AllowDrop="True"
                                   Drop="OnColumnDrop"
                                   DragOver="OnDragOver"
@@ -189,7 +189,7 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="models:TaskItem">
                                             <Grid BorderThickness="0,0,0,1"
-                                                  BorderBrush="{StaticResource ControlFillColorDefaultBrush}"
+                                                  BorderBrush="{ThemeResource ControlFillColorDefaultBrush}"
                                                   PointerEntered="TaskItemGrid_PointerEntered"
                                                   PointerExited="TaskItemGrid_PointerExited">
                                                 <Grid.ColumnDefinitions>
