@@ -18,7 +18,6 @@ namespace MyNotes.Data.Services
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.TaskItems
-                .Where(ti => ti.DeletedAt == null)
                 .OrderBy(ti => ti.Order)
                 .ThenByDescending(ti => ti.UpdatedAt)
                 .ToListAsync();
@@ -145,7 +144,6 @@ namespace MyNotes.Data.Services
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.TaskItems
-                .Where(ti => ti.DeletedAt == null)
                 .Where(ti => AppDbContext.ContainsIgnoreCase(ti.Title, searchTerm) || AppDbContext.ContainsIgnoreCase(ti.Text, searchTerm))
                 .Include(ti => ti.TaskList)
                 .OrderBy(ti => ti.Order)

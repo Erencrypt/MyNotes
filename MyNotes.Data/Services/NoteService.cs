@@ -30,7 +30,6 @@ namespace MyNotes.Data.Services
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
             var notes = await context.Notes
-                .Where(n => n.DeletedAt == null)
                 .Include(n => n.Reminders)
                 .OrderByDescending(n => n.UpdatedAt)
                 .ToListAsync();
@@ -119,7 +118,6 @@ namespace MyNotes.Data.Services
         {
             await using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Notes
-                .Where(n => n.DeletedAt == null)
                 .Where(n => AppDbContext.ContainsIgnoreCase(n.Title, searchTerm) || AppDbContext.ContainsIgnoreCase(n.PlainText, searchTerm))
                 .Include(n => n.Reminders)
                 .OrderByDescending(n => n.UpdatedAt)

@@ -138,8 +138,8 @@
                     </controls:SettingsCard>
 
                     <controls:SettingsCard Name="SaveCard" Icon="&#xE74E;" l:Uids.Uid="Settings_Save" Margin="0,0,0,4">
-                        <ToggleSwitch Name="SaveTogle"
-                            Toggled="SaveTogle_Toggled"
+                        <ToggleSwitch Name="SaveToggle"
+                            Toggled="SaveToggle_Toggled"
                             Grid.Column="2"
                             Grid.RowSpan="2"
                             VerticalAlignment="Center"
@@ -147,10 +147,10 @@
                     </controls:SettingsCard>
 
                     <controls:SettingsCard Name="StartupCard" Icon="&#xE777;" l:Uids.Uid="Settings_Startup" Margin="0,0,0,4">
-                        <ToggleSwitch Name="StartupTogle"
+                        <ToggleSwitch Name="StartupToggle"
                             IsOn="{x:Bind ViewModel.StartupEnabled, Mode=TwoWay}"
                             IsEnabled="{x:Bind ViewModel.StartupToggleEnabled, Mode=OneWay}"
-                            Toggled="StartupTogle_Toggled"
+                            Toggled="StartupToggle_Toggled"
                             Grid.Column="2"
                             Grid.RowSpan="2"
                             VerticalAlignment="Center"

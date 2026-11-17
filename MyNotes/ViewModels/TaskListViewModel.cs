@@ -23,7 +23,6 @@ namespace MyNotes.ViewModels
             TaskList = taskList;
 
             foreach (var item in taskList.TaskItems
-                         .Where(ti => ti.DeletedAt == null)
                          .OrderBy(ti => ti.Order)
                          .ThenByDescending(ti => ti.UpdatedAt))
             {

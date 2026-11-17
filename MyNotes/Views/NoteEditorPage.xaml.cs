@@ -15,6 +15,8 @@ namespace MyNotes.Views
     /// <summary>
     /// Note editor page for adding/editing notes
     /// </summary>
+    /// TODO: future note -> if memory leak is not fixed,
+    /// check the editor pages and make them cached like main list pages
     public sealed partial class NoteEditorPage : Page
     {
         private readonly ILocalizer _Localizer = Localizer.Get();

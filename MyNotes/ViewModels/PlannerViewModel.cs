@@ -40,7 +40,7 @@ namespace MyNotes.ViewModels
                 var lists = await _taskListService.GetAllTaskListsAsync();
 
                 TaskLists.Clear();
-                foreach (var list in lists.Where(tl => tl.DeletedAt == null))
+                foreach (var list in lists)
                 {
                     TaskLists.Add(new TaskListViewModel(list));
                 }

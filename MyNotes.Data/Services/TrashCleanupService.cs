@@ -41,11 +41,6 @@ namespace MyNotes.Data.Services
                 .Where(note => note.DeletedAt != null && note.DeletedAt < cutoff)
                 .ExecuteDeleteAsync(cancellationToken);
 
-            //await context.Settings
-            //    .IgnoreQueryFilters()
-            //    .Where(setting => setting.DeletedAt != null && setting.DeletedAt < cutoff)
-            //    .ExecuteDeleteAsync(cancellationToken);
-
             await transaction.CommitAsync(cancellationToken);
         }
     }

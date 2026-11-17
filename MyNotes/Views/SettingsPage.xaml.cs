@@ -31,7 +31,7 @@ public sealed partial class SettingsPage : Page
         ViewModel.IsLoading = true;
 
         await ViewModel.Initialize();
-        SaveTogle.IsOn = ViewModel.SaveWhenExit;
+        SaveToggle.IsOn = ViewModel.SaveWhenExit;
         AlarmSoundLoopingToggle.IsOn = ViewModel.AlarmSoundLooping;
         ReminderNotificationPriorityCb.SelectedIndex = ViewModel.ReminderNotificationPriority == AppNotificationPriority.High ? 1 : 0;
         TrashRetentionCb.SelectedIndex = ViewModel.TrashRetentionDays switch
@@ -117,19 +117,19 @@ public sealed partial class SettingsPage : Page
 
     #endregion
 
-    private async void StartupTogle_Toggled(object sender, RoutedEventArgs e)
+    private async void StartupToggle_Toggled(object sender, RoutedEventArgs e)
     {
         if (ViewModel.IsLoading)
         {
             return;
         }
 
-        await ViewModel.SetStartupEnabledAsync(StartupTogle.IsOn);
+        await ViewModel.SetStartupEnabledAsync(StartupToggle.IsOn);
     }
 
-    private async void SaveTogle_Toggled(object sender, RoutedEventArgs e)
+    private async void SaveToggle_Toggled(object sender, RoutedEventArgs e)
     {
-        await ViewModel.SetSaveWhenExitAsync(SaveTogle.IsOn);
+        await ViewModel.SetSaveWhenExitAsync(SaveToggle.IsOn);
     }
 
     private async void AlarmSoundLoopingToggle_Toggled(object sender, RoutedEventArgs e)

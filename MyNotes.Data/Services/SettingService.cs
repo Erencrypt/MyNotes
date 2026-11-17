@@ -46,7 +46,7 @@ namespace MyNotes.Data.Services
                 .FirstOrDefaultAsync(s => s.Key == key);
 
             var serializedValue = JsonSerializer.Serialize(value);
-            var typeName = typeof(T).FullName ?? typeof(T).Name;
+            var typeName = typeof(T).Name;
 
             if (setting == null)
             {
