@@ -706,4 +706,10 @@
   <data name="Settings_AccentColor_Apply.Content" xml:space="preserve">
     <value>Uygula</value>
   </data>
+  <data name="Settings_AccentColor_RestartTitle" xml:space="preserve">
+    <value>Yeniden başlatma gerekli</value>
+  </data>
+  <data name="Settings_AccentColor_RestartMessage" xml:space="preserve">
+    <value>Yeni vurgu rengini uygulamak için MyNotes'u yeniden başlatın.</value>
+  </data>
 </root>

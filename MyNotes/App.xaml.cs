@@ -130,6 +130,11 @@ namespace MyNotes
             TimeFormat = await SettingService.GetSettingAsync(DataKeys.HourFormat, TimeFormat.TwelveHour);
             // Must run before MainWindow is created: its constructor opens the notes list.
             await FillMissingNotePlainTextAsync();
+            // Must run before any window exists: accent colors are only read when brushes are created.
+            var useSystemAccent = await SettingService.GetSettingAsync(DataKeys.UseSystemAccentColor, true);
+            var customAccent = await SettingService.GetSettingAsync<string>(DataKeys.CustomAccentColor, null);
+            AccentColorHelper.Apply(
+                useSystemAccent || string.IsNullOrEmpty(customAccent) ? null : HexConverter.HexToColor(customAccent));
 
             _mainWindow = new MainWindow();
             _mainWindow!.AppWindow.Closing += AppWindow_Closing;
@@ -383,12 +388,6 @@ namespace MyNotes
             ThemeService.Initialize(_mainWindow);
             await ThemeService.SetElementThemeWithoutSaveAsync(theme);
             await ThemeService.SetBackdropTypeWithoutSaveAsync(backdrop);
-
-            var useSystemAccent = await SettingService.GetSettingAsync(DataKeys.UseSystemAccentColor, true);
-            var customAccent = await SettingService.GetSettingAsync<string>(DataKeys.CustomAccentColor, null);
-            AccentColorHelper.Apply(
-                useSystemAccent || string.IsNullOrEmpty(customAccent) ? null : HexConverter.HexToColor(customAccent),
-                _mainWindow.Content as FrameworkElement);
 
             ThemeService.BackdropChanged += ThemeService_BackdropChanged;
             ThemeService.ThemeChanged += ThemeService_ThemeChanged;

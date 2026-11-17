@@ -222,17 +222,18 @@ namespace MyNotes.ViewModels
             UseSystemAccentColor = value;
             // First switch to custom: seed it with the current system accent so nothing jumps.
             CustomAccentColor ??= HexConverter.ColorToHex(AccentColorHelper.SystemAccentColor);
-            await SaveAndApplyAccentAsync();
+            await SaveAccentAsync();
         }
 
         public async Task SetCustomAccentColorAsync(Color value)
         {
             CustomAccentColor = HexConverter.ColorToHex(value);
             UseSystemAccentColor = false;
-            await SaveAndApplyAccentAsync();
+            await SaveAccentAsync();
         }
 
-        private async Task SaveAndApplyAccentAsync()
+        // The accent is applied at startup only (see AccentColorHelper.Apply), so ask for a restart.
+        private async Task SaveAccentAsync()
         {
             await SaveSettingAsync(DataKeys.UseSystemAccentColor, UseSystemAccentColor);
             if (CustomAccentColor is not null)
@@ -240,9 +241,11 @@ namespace MyNotes.ViewModels
                 await SaveSettingAsync(DataKeys.CustomAccentColor, CustomAccentColor);
             }
 
-            AccentColorHelper.Apply(
-                UseSystemAccentColor ? null : EffectiveAccentColor,
-                App._mainWindow?.Content as FrameworkElement);
+            AppInfoBar.Show(
+                _localizer.GetLocalizedString("Settings_AccentColor_RestartTitle"),
+                _localizer.GetLocalizedString("Settings_AccentColor_RestartMessage"),
+                AlertInfoBarSeverity.Warning,
+                TimeSpan.FromSeconds(6));
         }
 
         #region startup
@@ -364,7 +367,7 @@ namespace MyNotes.ViewModels
             ReminderNotificationPriority = await _settingService.GetSettingAsync<AppNotificationPriority>(DataKeys.ReminderNotificationPriority, AppNotificationPriority.High);
             TrashRetentionDays = await _settingService.GetSettingAsync<int>(DataKeys.TrashRetentionDays, 30);
             TimeFormat = await _settingService.GetSettingAsync<TimeFormat>(DataKeys.HourFormat, TimeFormat.TwelveHour);
-            Language = await _settingService.GetSettingAsync<string>(DataKeys.Language, "en-US")?? "en-US";
+            Language = await _settingService.GetSettingAsync<string>(DataKeys.Language, "en-US") ?? "en-US";
             UseSystemAccentColor = await _settingService.GetSettingAsync(DataKeys.UseSystemAccentColor, true);
             CustomAccentColor = await _settingService.GetSettingAsync<string>(DataKeys.CustomAccentColor, null);
             Theme = await _settingService.GetSettingAsync(DataKeys.Theme, ElementTheme.Default);

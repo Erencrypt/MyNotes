@@ -1,5 +1,4 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 
@@ -22,24 +21,6 @@ namespace MyNotes.Helpers
             "SystemAccentColorDark1",
             "SystemAccentColorDark2",
             "SystemAccentColorDark3",
-        ];
-
-        // Palette indices: 0 = base, 1-3 = Light1-3, 4-6 = Dark1-3.
-        // Mirrors which SystemAccentColor* shade WinUI uses for each brush in Light vs Dark themes.
-        private static readonly (string Key, int Light, int Dark)[] _brushMap =
-        [
-            ("AccentFillColorDefaultBrush", 4, 2),
-            ("AccentFillColorSecondaryBrush", 4, 2),
-            ("AccentFillColorTertiaryBrush", 4, 2),
-            ("AccentFillColorSelectedTextBackgroundBrush", 0, 0),
-            ("AccentTextFillColorPrimaryBrush", 5, 3),
-            ("AccentTextFillColorSecondaryBrush", 6, 3),
-            ("AccentTextFillColorTertiaryBrush", 4, 2),
-            ("SystemControlHighlightAccentBrush", 0, 0),
-            ("SystemControlBackgroundAccentBrush", 0, 0),
-            ("SystemControlForegroundAccentBrush", 0, 0),
-            ("SystemControlHighlightAltAccentBrush", 0, 0),
-            ("SystemControlDisabledAccentBrush", 0, 0),
         ];
 
         public static Color SystemAccentColor => _uiSettings.GetColorValue(UIColorType.Accent);
@@ -65,10 +46,10 @@ namespace MyNotes.Helpers
 
         /// <summary>
         /// Applies the accent palette. Pass null to use the system accent color.
-        /// When <paramref name="refreshRoot"/> is set, the element tree is forced to re-resolve
-        /// its theme resources so the change is visible immediately.
+        /// Call once at startup, before any window is created: brushes pick up the colors when they are
+        /// first created. Changing them at runtime leaves controls with stale or wrong-theme values.
         /// </summary>
-        public static void Apply(Color? customColor, FrameworkElement? refreshRoot = null)
+        public static void Apply(Color? customColor)
         {
             var palette = customColor is Color c ? BuildPalette(c) : GetSystemPalette();
             var resources = Application.Current.Resources;
@@ -78,9 +59,8 @@ namespace MyNotes.Helpers
                 resources[_keys[i]] = palette[i];
             }
 
-            // XamlControlsResources defines the accent brushes (and the control brushes that alias them)
-            // inside its own theme dictionaries, resolving SystemAccentColor* locally. App-level overrides
-            // never reach those, so update the colors and the existing brush instances in place.
+            // XamlControlsResources resolves SystemAccentColor* inside its own theme dictionaries,
+            // so the app-level values above don't reach its brushes; set them there too.
             foreach (var (themeKey, dictionary) in EnumerateThemeDictionaries(resources))
             {
                 if (themeKey == "HighContrast")
@@ -88,25 +68,10 @@ namespace MyNotes.Helpers
                     continue;
                 }
 
-                var isLight = themeKey == "Light";
-
                 for (int i = 0; i < _keys.Length; i++)
                 {
                     dictionary[_keys[i]] = palette[i];
                 }
-
-                foreach (var (brushKey, lightIndex, darkIndex) in _brushMap)
-                {
-                    if (dictionary.TryGetValue(brushKey, out var value) && value is SolidColorBrush brush)
-                    {
-                        brush.Color = palette[isLight ? lightIndex : darkIndex];
-                    }
-                }
-            }
-
-            if (refreshRoot is not null)
-            {
-                RefreshTheme(refreshRoot);
             }
         }
 
@@ -134,19 +99,6 @@ namespace MyNotes.Helpers
                 HslToRgb(h, s, l * 0.60),
                 HslToRgb(h, s, l * 0.40),
             ];
-        }
-
-        /// <summary>
-        /// ThemeResource references only re-resolve on a theme change, so flip the requested
-        /// theme to the opposite of the current one and back again.
-        /// </summary>
-        private static void RefreshTheme(FrameworkElement root)
-        {
-            var original = root.RequestedTheme;
-            var actual = root.ActualTheme;
-            root.RequestedTheme = actual == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;
-            root.RequestedTheme = actual;
-            root.RequestedTheme = original;
         }
 
 
