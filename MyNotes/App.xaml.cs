@@ -328,7 +328,7 @@ namespace MyNotes
                     XamlRoot = await GetMainWindowXamlRootAsync()
                 };
 
-                if (await updateDialog.ShowAsync() != ContentDialogResult.Primary)
+                if (await updateDialog.ShowThemedAsync() != ContentDialogResult.Primary)
                 { return; }
 
                 AppInfoBar.Show(localizer.GetLocalizedString("Update_DownloadingTitle"), localizer.GetLocalizedString("Update_Downloading"));

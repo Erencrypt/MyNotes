@@ -350,7 +350,7 @@ namespace MyNotes.ViewModels
                 XamlRoot = await App.GetMainWindowXamlRootAsync()
             };
 
-            await dialog.ShowAsync();
+            await dialog.ShowThemedAsync();
         }
 
         #endregion

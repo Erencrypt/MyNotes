@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using MyNotes.Data.Models;
 using MyNotes.Data.Services.Interfaces;
+using MyNotes.Helpers;
 using MyNotes.Views.Dialogs;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -121,7 +122,7 @@ namespace MyNotes.ViewModels
         public async Task AddTaskItemAsync(TaskListViewModel targetColumn, XamlRoot xamlRoot)
         {
             AddTaskDialog taskDialog = new() { XamlRoot = xamlRoot };
-            var result = await taskDialog.ShowAsync();
+            var result = await taskDialog.ShowThemedAsync();
             if (result == ContentDialogResult.Primary)
             {
                 var newTask = new TaskItem
@@ -227,7 +228,7 @@ namespace MyNotes.ViewModels
         public async Task EditTaskItemAsync(TaskItem task, XamlRoot xamlRoot)
         {
             EditTaskDialog editDialog = new(task) { XamlRoot = xamlRoot };
-            var result = await editDialog.ShowAsync();
+            var result = await editDialog.ShowThemedAsync();
             if (result == ContentDialogResult.Primary)
             {
                 task.Title = editDialog.TaskTitle;
