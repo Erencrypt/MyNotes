@@ -706,4 +706,10 @@
   <data name="Settings_AccentColor_Apply.Content" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Settings_AccentColor_RestartTitle" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="Settings_AccentColor_RestartMessage" xml:space="preserve">
+    <value>Restart MyNotes to apply the new accent color.</value>
+  </data>
 </root>
