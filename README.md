@@ -65,7 +65,7 @@ I simply wanted to create a good-looking notes and reminders app that utilizes t
 
 This app started as a side project that I aimed to use daily while continuing to develop it. <!-- Life had other plans, and --> I wasn't able to spend as much time on the project, but I never forgot about it or abandoned it.
 
-The original version was created with .NET 7 and Template Studio. I later tried upgrading it to .NET 8 for long-term support, but WinUI wasn't getting much attention at the time, and it was unstable. Some parts broke, and I encountered strange errors that were difficult to trace back to their causes, so I left it alone for a while. But I was determined to return someday and rewrite it. I started rewriting it in a private repo on Nov 2025, i didnt want to change this one so much, at the time i wasn't sure that i will be able to spare the time (that i didnt have much of) and rewrite it.
+The original version was created with .NET 7 and Template Studio. I later tried upgrading it to .NET 8 for long-term support, but WinUI wasn't getting much attention at the time, and it was unstable. Some parts broke, and I encountered strange errors that were difficult to trace back to their causes, so I left it alone for a while. But I was determined to return someday and rewrite it. I started rewriting it in a private repo in Nov 2025. I didn't want to change this one too much, because at the time I wasn't sure I would be able to spare the time (which I didn't have much of) to rewrite it.
 
 Now rewritten in .NET 10 and modernized.
 <!--
@@ -77,15 +77,15 @@ Now rewritten in .NET 10 and modernized.
 - The notification service and reminders are more reliable.
 - A tray icon provides quick access while the app runs in the background. Double-click it to bring the app to the foreground, or right-click it to open the menu.
 - Settings include:
+  - Theme, backdrop, and accent color (system accent or a custom color)
   - Language selection (currently English and Turkish)
   - 12-hour or 24-hour time format
   - Looping alarm sound for alarm reminders; when disabled, the sound plays once
   - **Notification priority:** High priority is the recommended setting for reminders that need to appear over full-screen apps. Back when I played CS, these notifications could steal focus and play the alarm sound over the game, sometimes costing me a round :D. Normal priority respects Windows notification settings and restrictions.
   - **Trash retention:** Items are permanently deleted after 30 days by default. The retention period can be changed to 5, 15, 45, 60, or 90 days, or set to Never. Each item's own deletion date is considered.
+  - Manual update check
 
-Version 2.0 includes many other changes and improvements. Rather than trying to list every difference, I encourage you to explore the new version and see what's changed.
-
-Also i did move new version to this repo but some things needs fixing (like crowdin integration and installer) so it may take some time but i will add a release as soon as possible.
+Version 2.0 includes many other changes and improvements. Rather than trying to list every difference, I encourage you to explore the new version and see what's changed. Changes in later 2.x versions are listed in the [release notes](https://github.com/Erencrypt/MyNotes/releases).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -136,6 +136,10 @@ MyNotes is designed to be straightforward to use, with tooltips and visual guida
 2. Write and format your note in the Note Editor.
 3. Save your changes. Your note will then be available from the Notes page.
 
+### Search
+
+The **Notes**, **Reminders**, and **Trash** pages each have a search box. Search is case-insensitive and follows the casing rules of the app's language. Inside the Note Editor, use the find box at the bottom to highlight text in the current note.
+
 ### Reminders
 
 When creating a reminder, configure the following fields:
@@ -147,7 +151,7 @@ When creating a reminder, configure the following fields:
 - **Repeat:** Enable this to repeat the reminder daily at the selected time. Optional; disabled by default.
 - **Active:** Determines whether the reminder will trigger. Disable this to keep a reminder saved without it running.
 - **Alarm:** Choose between a normal Windows notification with its notification sound and an alarm notification with the alarm sound.
-- **Note:** A note-selection option is available in the interface, but linking reminders to notes is not yet implemented.
+- **Note:** Optionally link the reminder to one of your notes. When the reminder triggers, its notification shows an **Open Note** button that opens the linked note and dismisses the reminder.
 
 You can manage reminders from the **Reminders** page. When a reminder triggers, you can snooze or dismiss its notification. Dismissing a one-time reminder moves it to Trash.
 
@@ -176,7 +180,7 @@ MyNotes adds itself to your Windows startup apps on its first launch after insta
 <!-- ROADMAP -->
 ## Roadmap
 - [x] Recreation and modernization
-- [ ] Connect notes to reminders, so clicking a reminder notification opens its associated note (initial groundwork is in place; implementation is still needed)
+- [x] Connect notes to reminders, so clicking a reminder notification opens its associated note
 - [ ] Add list ordering and filtering options
 - [ ] Add speech-to-text for notes
 - [ ] Add an option to export notes as files
@@ -188,7 +192,7 @@ MyNotes adds itself to your Windows startup apps on its first launch after insta
   - [x] English
   - [x] Turkish
   - [ ] Additional languages may be added in the future
-  - [x] Contributions to translations are welcome; open a feature request if you'd like to help / [Crowdin Invite](https://crowdin.com/project/mynotes/invite?h=20ff76b875d52eab71cd15b7170cfedf2084788)
+  - [x] Contributions to translations are welcome; join the project on Crowdin if you'd like to help / [Crowdin Invite](https://crowdin.com/project/mynotes/invite?h=20ff76b875d52eab71cd15b7170cfedf2084788)
 
 See the [open issues](https://github.com/Erencrypt/MyNotes/issues) for a full list of proposed features and known issues.
 
@@ -202,7 +206,7 @@ Contributions, suggestions, and feedback are welcome!
 - **Report a bug:** Open an issue on [GitHub Issues](https://github.com/Erencrypt/MyNotes/issues) and describe the problem you encountered.
 - **Request a feature:** Open an issue to suggest an improvement or discuss a new feature before starting work on it.
 - **Contribute code:** Fork the repository, make your changes, and submit a pull request.
-- **Help with translations:** Contributions to existing translations or new languages are welcome. Open a feature request if you'd like to help.
+- **Help with translations:** Contributions to existing translations or new languages are welcome. Join the project on [Crowdin](https://crowdin.com/project/mynotes/invite?h=20ff76b875d52eab71cd15b7170cfedf2084788) if you'd like to help.
 
 If you find MyNotes useful, consider giving the project a star. Thanks for your interest and support!
 
@@ -251,5 +255,5 @@ These are the resources that helped me during development and that I'd like to g
 [win3-url]: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
 [devwinui]: https://img.shields.io/badge/DevWinUI-2e63ba?style=for-the-badge&logo=windows11&logoColor=white
 [devwinui-url]: https://github.com/ghost1372/DevWinUI
-[notifyicon]:https://img.shields.io/badge/wpf_notifyicon-2e63ba?style=for-the-badge&logo=windows11&logoColor=white
-[notifyicon-url]:https://github.com/hardcodet/wpf-notifyicon 
+[notifyicon]:https://img.shields.io/badge/H.NotifyIcon-2e63ba?style=for-the-badge&logo=windows11&logoColor=white
+[notifyicon-url]:https://github.com/HavenDV/H.NotifyIcon
