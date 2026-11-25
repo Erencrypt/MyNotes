@@ -15,6 +15,7 @@ namespace MyNotes
     public sealed partial class MainWindow : Window
     {
         private readonly ILocalizer _localizer = Localizer.Get();
+        private readonly Microsoft.UI.Dispatching.DispatcherQueueTimer _gcTimer;
         public static Frame _rootFrame { get; private set; } = new();
         public static NavigationView _navigationView { get; set; } = new();
         public static AlertInfoBar? AppAlertInfoBar { get; private set; }
@@ -39,6 +40,19 @@ namespace MyNotes
 
             AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
 
+            // WinUI frees a dropped page's native memory only after a full GC, and the
+            // managed heap is too small to trigger one on its own, so force one once
+            // navigation has been idle for a moment instead of on every navigation
+            _gcTimer = DispatcherQueue.CreateTimer();
+            _gcTimer.Interval = TimeSpan.FromSeconds(2);
+            _gcTimer.IsRepeating = false;
+            _gcTimer.Tick += (_, _) =>
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+            };
+
             // Back stack is never needed deeper than one step (editor -> GoBack), so trim
             // the oldest entries once it passes 20, keeping the 10 most recent
             rootFrame.Navigated += (_, _) =>
@@ -51,11 +65,9 @@ namespace MyNotes
                     }
                 }
 
-                // WinUI frees a dropped page's native memory only after a full GC, and the
-                // managed heap is too small to trigger one on its own, so force it here
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.Collect();
+                // Restart the countdown so rapid navigation results in a single collection
+                _gcTimer.Stop();
+                _gcTimer.Start();
             };
 
             NavView.SelectedItem = NavView.MenuItems[1];
